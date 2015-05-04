@@ -1,128 +1,232 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
     <title>Simple</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/loading.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="template/css/entry.css">
-    <link rel="stylesheet" type="text/css" href="template/css/prism.css">
-    <script src="lib/jquery.js"></script>
-    <script src="lib/underscore.js"></script>
-    <script src="lib/base64.js"></script>
-    <script src="lib/github.js"></script>
-    <script src="lib/spine.js"></script>
-    <script src="lib/route.js"></script>
-    <script src="lib/manager.js"></script>
-    <script src="template/js/hogan.min.js"></script>
-    <script src="lib/showdown.js"></script>
-    <script src="template/js/prism.js"></script>
-    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    <script src="app.js"></script>
-
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-<div class="container">
-<div id="views">
-    <div id="login">
-        <a id="fork" href="https://github.com/isnowfy/simple" target="_blank"><img src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label>Github username</label>
-                <div>
-                    <input type="text" name="user" class="form-control" id="loginuser">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <div>
-                    <input type="password" name="pass" class="form-control" id="loginpass">
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <input type="submit" class="btn btn-default" value="Sign in" id="loginsubmit">
-                    <span class="label label-danger" id="loginerror" style="display: none;">Something error!</span>
-                </div>
-            </div>
-        </form>
+<div class="main">
+    <div class="header">
+        <ul id="pages">
+            <li>
+                <a href="/">home</a>
+            </li>
+            <li>
+                <a href="/#/tags">tags</a>
+            </li>
+            <li>
+                <a href="/#/archive">archive</a>
+            </li>
+        </ul>
     </div>
-    <div id="main">
-        <div class="block">
-        <h2>Create a repository</h2>
-        <p>Head over to <a href="https://github.com">GitHub</a> and <a href="https://github.com/new">create a new repository</a> named username.github.io, where username is your username on GitHub.(Please selected the "<span style="color:red">Initialize this repository with a README</span>" when creating the repo.)</p>
-        </div>
-        <div class="block">
-        <h2>Initialize the repository (just the first)</h2>
-        <p><a class="btn btn-primary" id="init">Initialize</a></p>
-        <p><span class="label label-danger" id="initerror" style="display: none;">Error! Please try again!</span></p>
-        <p><span class="label label-success" id="initok" style="display: none;">Initialzition has completed!</span></p>
-        </div>
-        <div class="block">
-        <h2>Go to write</h2>
-        <p>If you had initialized the repository you can go to next page directly.</p>
-        <p><a class="btn btn-primary" id="go">Go</a></p>
-        </div>
-        </p>
+    <div class="wrap-header">
+        <h1>
+        <a href="/" id="title"></a>
+        </h1>
     </div>
-    <div id="posts" class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-3 sidebar">
-                <a class="nav-btn btn btn-default" href="#/posts/newpost">New post</a>
-                <ul class="nav nav-sidebar" id="postItems">
-                </ul>
-                <a class="nav-btn btn btn-default" href="#/posts/newpage">New page</a>
-                <ul class="nav nav-sidebar" id="pageItems">
-                </ul>
-            </div>
-            <div class="post-content col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3">
-                <div class="post-wrap-header">
-                <div class="page-header">
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="posttitle" placeholder="Title">
-                            <input type="text" class="form-control" id="postpath" placeholder="Url like intro.html">
-                            <input type="text" class="form-control" id="postdate" placeholder="2014-02-01">
-                            <input type="text" class="form-control" id="posttags" placeholder="Tags split with space">
-                            <a class="btn btn-default" href="#/posts/savepost" id="postSave">save</a>
-                            <a class="btn btn-danger" href="#" id="postDelete">delete</a>
-                            <span class="label label-danger" style="display:none;" id="saveerror">Save error</span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="post-wrap-edit">
-                <div id="editContent">
-                    <textarea id="editmd"></textarea>
-                    <div id="edithtml" class="entry"></div>
-                </div>
-                </div>
-            </div>
-        </div>
+    <div class="innermain" id="main">
+    </div>
+    <div class="footer">
+        <p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
     </div>
 </div>
-<div id="loading" style="display: none;">
-    <div class="spinner">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
+<script src="main.js"></script>
+<script id="itemTemplate" type="text/mustache">
+    {{#posts}}
+    <div class="item">
+        <div class="date">
+            <div class="little">
+            </div>
+            {{date}}
+        </div>
+        <div class="title">
+            <h2>
+                <a href="{{path}}">{{title}}</a>
+            </h2>
+        </div>
     </div>
-</div>
-</div>
-<script id="postsItem" type="text/mustache">
-{{#items}}
-{{#active}}
-<li class="nav-active">
-{{/active}}
-{{^active}}
-<li>
-{{/active}}
-    <a href="#/posts/{{type}}/{{num}}">{{title}}</a>
-</li>
-{{/items}}
+    {{/posts}}
+    <ul class="pages">
+        Pages:
+        {{#pages}}
+            <li>
+            {{#select}}
+                <span class="selected">{{num}}</span>
+            {{/select}}
+            {{^select}}
+                <a href="{{path}}">{{num}}</a>
+            {{/select}}
+            </li>
+        {{/pages}}
+    </ul>
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true } });
+<script id="archiveTemplate" type="text/mustache">
+    {{#group}}
+    {{name}}
+    {{#posts}}
+    <div class="archive">
+    <span>{{date}}</span>
+    <a href="{{path}}">{{title}}</a>
+    </div>
+    {{/posts}}
+    {{/group}}
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script id="tagsTemplate" type="text/mustache">
+    <ul style="list-style: none">
+        {{#tags}}
+        <li style="display:inline; margin: 15px;">
+            <a href="{{path}}" style="font-size: {{size}}%">{{name}}</a>
+        </li>
+        {{/tags}}
+    </ul>
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            data.posts.sort(function(a, b){
+                if (a.date > b.date)
+                    return -1;
+                if (a.date < b.date)
+                    return 1;
+                return 0;
+            });
+            console.log(data.posts);
+            var per = data.number_of_posts_per_page;
+            var n = data.posts.length;
+            var num = Math.floor((n-1)/per)+1;
+            var arr = [];
+            var tmp = [];
+            for (var i = 0; i < n; ++i) {
+                if (i != 0 && i % per == 0) {
+                    arr.push(tmp)
+                    tmp = [];
+                }
+                tmp.push(data.posts[i]);
+            }
+            if (tmp.length > 0)
+                arr.push(tmp);
+            var pages = [{"select": true, "num": 1, "path": "#/page/1"}];
+            for (var i = 1; i < num; ++i)
+                pages.push({"select": false, "num": i+1, "path": "#/page/"+(i+1)});
+            var itemTemplate = Hogan.compile($("#itemTemplate").html());
+            var itemHtml = itemTemplate.render({"posts": arr[0], "pages": pages});
+            $("#main").html(itemHtml);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            var App = Spine.Controller.sub({
+                el: $("#main"),
+                init: function() {
+                    this.routes({
+                        "/page/:page": function(page) {this.go(page);},
+                        "/tags": function() {this.tags();},
+                        "/tag/:tag": function(param) {this.tag(param);},
+                        "/archive": function() {this.archive();}
+                    });
+                    Spine.Route.setup();
+                },
+                go: function(page) {
+                    page = Math.floor(page.page);
+                    for (var i = 0; i < pages.length; ++i)
+                        pages[i].select = false;
+                    pages[page-1].select = true;
+                    var tmppages = pages;
+                    if (page > 2 && pages.length > 4)
+                        tmppages = pages.slice(page-3);
+                    if (tmppages.length > 5)
+                        tmppages = tmppages.slice(0, 5);
+                    if (pages.length > 4 && tmppages.length < 5)
+                        tmppages = pages.slice(-5);
+                    itemHtml = itemTemplate.render({"posts": arr[page-1], "pages": tmppages});
+                    $("#main").html(itemHtml);
+                },
+                tags: function() {
+                    var ts = {};
+                    var posts = data.posts;
+                    var tf = function() {
+                        for (var i = 0; i < posts.length; ++i) {
+                            var tmp = posts[i].tags.split(" ");
+                            for (var j = 0; j < tmp.length; ++j) {
+                                if (tmp[j].length == 0)
+                                    continue;
+                                if (!(tmp[j] in ts))
+                                    ts[tmp[j]] = 0;
+                                ts[tmp[j]]++;
+                            }
+                        }
+                    }
+                    tf();
+                    posts = data.pages;
+                    tf();
+                    var ans = [];
+                    for (var k in ts) {
+                        ans.push({"name": "#"+k, "size": 100+Math.sqrt(ts[k]-1)*30, "path": "#/tag/"+k});
+                    }
+                    var tagsTemplate = Hogan.compile($("#tagsTemplate").html());
+                    var tagsHtml = tagsTemplate.render({"tags": ans});
+                    $("#main").html(tagsHtml);
+                },
+                tag: function(param) {
+                    var tag = param.tag;
+                    var group = [{"name": "#"+tag}];
+                    var posts = [];
+                    for (var i = 0; i < data.posts.length; ++i) {
+                        var tmp = data.posts[i].tags.split(" ");
+                        if (tmp.indexOf(tag) != -1)
+                            posts.push(data.posts[i]);
+                    }
+                    for (var i = 0; i < data.pages.length; ++i) {
+                        var tmp = data.pages[i].tags.split(" ");
+                        if (tmp.indexOf(tag) != -1)
+                            posts.push(data.pages[i]);
+                    }
+                    group[0].posts = posts;
+                    var tmpTemplate = Hogan.compile($("#archiveTemplate").html());
+                    var tmpHtml = tmpTemplate.render({"group": group});
+                    $("#main").html(tmpHtml);
+                },
+                archive: function() {
+                    var group = [];
+                    var posts = data.posts;
+                    var now = -1;
+                    var name = "";
+                    for (var i = 0; i < posts.length; ++i) {
+                        if (name != posts[i].date.slice(0,4)) {
+                            name = posts[i].date.slice(0,4);
+                            group.push({"name": name, "posts": []});
+                            now++;
+                        }
+                        group[now].posts.push(posts[i]);
+                    }
+                    var tmpTemplate = Hogan.compile($("#archiveTemplate").html());
+                    var tmpHtml = tmpTemplate.render({"group": group});
+                    $("#main").html(tmpHtml);
+                }
+            });
+            new App();
+        },
+        error: function(e) {
+            console.log("init error");
+        }
+    });    
+});
 </script>
 </body>
+</html>
