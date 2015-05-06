@@ -14,6 +14,7 @@ tags: 博客 GitHub Jekyll Markdown
 
 我想，不懂编程的人是体会不到 **Hello World** 的伟大的。
 
+
 我写的第一个程序是这个样子的：
 {% highlight ruby %}
 // hello.c
@@ -28,7 +29,7 @@ int main(void)
 {% endhighlight %}
 
 接着是这样子的：
-```python
+{% highlight python %}
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -36,10 +37,10 @@ if __name__ == '__main__':
     print 'hello world'
     
 # Script starts from here
-```
+{% endhighlight %}
 
 再接着是这样子的：
-```php
+{% highlight php %}
 <?php  # Script -- php.php
 
 /* 
@@ -49,5 +50,4 @@ if __name__ == '__main__':
 echo "Hello World!";
 
 ?>
-
-```
+{% endhighlight %}
