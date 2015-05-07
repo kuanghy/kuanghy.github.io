@@ -275,3 +275,43 @@ color: white;
 background: #83BF73;
 }
 
+/*
+ * 返回顶部和底部的相关样式
+ */
+#updown
+{
+    _top: expression(eval((document.compatMode&&document.compatMode=="CSS1Compat")?documentElement.scrollTop+documentElement.clientHeight-this.clientHeight-1:document.body.scrollTop+document.body.clientHeight-this.clientHeight-1));
+    position: fixed;
+    _position: absolute;
+    top: 200px;
+    right: 30px;
+    display: none;
+}
+
+#updown span
+{
+    cursor: pointer;
+    width: 48px;
+    height: 50px;
+    display: block;
+}
+
+#updown .up
+{
+    background: url(/assets/imgs/updown.png) no-repeat;
+}
+
+#updown .up:hover
+{
+    background: url(/assets/imgs/updown.png) top right no-repeat;
+}
+
+#updown .down
+{
+    background: url(/assets/imgs/updown.png) bottom left no-repeat;
+}
+
+#updown .down:hover
+{
+    background: url(/assets/imgs/updown.png) bottom right no-repeat;
+}
