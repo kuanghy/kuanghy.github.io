@@ -60,16 +60,16 @@ if __name__ == '__main__':
 <!DOCTYPE html>
 <html>
     <head>
-    ¦   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    ¦   <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
-    ¦   <meta name="description" content="Test on HTML and CSS">
-    ¦   <meta name="author" content="Huoty">
-    ¦   <meta http-equiv="refresh" content="30">
-    ¦   <title>Web 设计</title>
-    ¦   <link rel="shortcut icon" href="/htmls/images/favicon.ico" type="image/x-icon" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+        <meta name="description" content="Test on HTML and CSS">
+        <meta name="author" content="Huoty">
+        <meta http-equiv="refresh" content="30">
+        <title>Web 设计</title>
+        <link rel="shortcut icon" href="/htmls/images/favicon.ico" type="image/x-icon" />
     </head>
     <body>
-		<h1>Hello world!</h1>
+       	<h1>Hello world!</h1>
     </body>
 </html> 
 {% endhighlight %}
@@ -97,7 +97,7 @@ echo "Hello World!";
 </script>
 {% endhighlight %}
 
-啊，搞得好像我满脑子都是**Hello World**似的。一下子罗列了不少的代码，就当我是在测试博客的代码语法效果吧。我不确定在以后的生涯中，我还会遇到多少的**Hello World**,我只觉得见到它，我有一些莫名的感觉。写到这里，突然不知道该说什么了，我明明记得我有很多话要说的。想要搭建独立博客的心郁积了很久，现在终于舒了一口气，当然是应该好好抒发一下心情的。其实，当一切平静下来的时候，很多东西都不在重要了。
+啊，搞得好像我满脑子都是 **Hello World** 似的。一下子罗列了不少的代码，就当我是在测试博客的代码语法效果吧。我不确定在以后的生涯中，我还会遇到多少的 **Hello World**,我只觉得见到它，我有一些莫名的感觉。写到这里，突然不知道该说什么了，我明明记得我有很多话要说的。想要搭建独立博客的心郁积了很久，现在终于舒了一口气，当然是应该好好抒发一下心情的。其实，当一切平静下来的时候，很多东西都不在重要了。
 
 今天终于把博客的基本模型搭建完成，作为一名 **Coder**，第一篇文章也就用了 **Hello World** 开篇。
 
