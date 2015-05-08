@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="keywords" content="huoty's blog, huoty, konghy，计算机技术，感悟">
+  <meta name="description" content="huoty's blog，专注于各类计算机技术，记录所感所想所思">
+  <meta name="author" content="Huoty">
+  <title>我的相册</title>
+  <style type="text/css" media="screen">
+#container {
+	min-height: 1000px;
+	width:800px;
+	margin:0 auto;
+	text-align:center;
+	margin-top:100px;
+}
+img{border:0;}
+</style>
+  <link rel="stylesheet" href="css/jquery-fullsizable.css" />
+  <link rel="stylesheet" href="css/jquery-fullsizable-theme.css" />
+  <script src="js/jquery-1.7.2.js"></script>
+  <script src="js/jquery.touchSwipe.min.js"></script>
+  <script src="js/jquery.fullsizable.js"></script>
+  <script>
+    $(function() {
+      $('a').fullsizable({
+        detach_id: 'container'
+      });
+
+      $(document).on('fullsizable:opened', function(){
+        $("#jquery-fullsizable").swipe({
+          swipeLeft: function(){
+            $(document).trigger('fullsizable:next')
+          },
+          swipeRight: function(){
+            $(document).trigger('fullsizable:prev')
+          },
+          swipeUp: function(){
+            $(document).trigger('fullsizable:close')
+          }
+        });
+      });
+    });
+  </script>
+  </head>
+
+<body>
+<div id="container">
+<a href="images/1_big.jpg"><img title="Locomotives Roundhouse" alt="Huoty's blog" src="images/1_small.jpg"></a>
+<a href="images/2_big.jpg"><img title="Locomotives Roundhouse" alt="Huoty's blog" src="images/2_small.jpg"></a>
+</div>
+<div style="text-align:center;">
+<p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+</body>
+</html>
