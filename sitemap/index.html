@@ -1,8 +1,15 @@
 ---
 layout: none
 ---
-       {% for post in site.posts %}
-       {{ post.title }} - (url){{ site.url }}{{ post.url }} - (data){{ post.date | date_to_utc | date: '%Y-%m-%d'}}
-       <br>
-       {% endfor %}
 
+站点地图
+========
+
+{% for post in site.posts %}
+{{ site.url }}{{ post.url }} <br>
+{% endfor %}
+
+--------
+By huoty
+
+{{ post.date | date_to_utc | date: '%Y-%m-%d'}}

@@ -86,7 +86,7 @@ echo "Hello World!";
 {% endhighlight %}
 
 再再然后是这样子的：
-{% highlight javascript linenos %}
+{% highlight javascript %}
 <script type="text/javascript">
 	function button_clicked()
 	{
