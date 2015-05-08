@@ -9,15 +9,4 @@
 		<lastmod>2015-05-08</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
-	{% for post in site.posts %}
-    <url>
-        <!--必填标签,这是具体某一个链接的定义入口，每一条数据都要用<url>和</url>包含在里面，这是必须的 -->
-        <loc>{{ site.url }}{{ post.url }}</loc>
-        <!--必填,URL链接地址,长度不得超过256字节-->
-        <lastmod>{{ post.date | date_to_utc | date: '%Y-%m-%d'}}</lastmod>
-        <!--可以不提交该标签,用来指定该链接的最后更新时间-->
-        <changefreq>daily</changefreq>
-        <!--可以不提交该标签,用这个标签告诉此链接可能会出现的更新频率 -->
-    </url>
-    {% endfor %}
 </urlset>
