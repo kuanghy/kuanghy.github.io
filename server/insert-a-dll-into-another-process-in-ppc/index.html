@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="Huoty" />
+    <meta name="baidu-site-verification" content="3sjUdBOU2L" />
+    <title>PPC 中向其它进程中插入DLL的方法及通用代码</title>
+    <link rel="shortcut icon" href="/assets/imgs/favicon.ico" />
+    <link href="/feed/" rel="alternate" title="Huoty" type="application/atom+xml" />
+    <link rel="stylesheet" href="/assets/media/css/style.css" />
+    <link rel="stylesheet" href="/assets/media/css/highlight.css" />
+    <script type="text/javascript" src="/assets/media/js/jqury-1.11.1.js"></script>
+	<script type="text/javascript" src="/assets/media/js/main.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="main" role="main">
+        <header>
+        <h1>PPC 中向其它进程中插入DLL的方法及通用代码</h1>
+        </header>
+        <nav>
+        <span><a title="网站首页" class="" href="/">首页</a></span>
+        <span><a title="搜索本站" class="" href="/search/">搜索</a></span>
+        <span><a title="文章分类" class="" href="/categories/">分类</a></span>
+        <span><a title="标签索引" class="" href="/tags/">标签</a></span>
+        <!--<span><a title="友情链接" class="" href="/links/">链接</a></span>-->
+        <span><a title="留言交流" class="" href="/guestbook/">留言</a></span>
+        <span><a title="关于站长" class="" href="/about/">关于</a></span>
+        <span><a title="种子订阅" class="" href="/feed/" target="_blank">订阅</a></span>
+        </nav>
+        <article class="content">
+        <section class="meta">
+<span class="time">
+  <time datetime="2009-03-24">2009-03-24</time>
+</span>
+
+ | 
+<span class="categories">
+  分类
+  
+  <a href="/categories/#文档" title="文档">文档</a>&nbsp;
+  
+</span>
+
+
+ | 
+<span class="tags">
+  标签
+  
+  <a href="/tags/#WM" title="WM">WM</a>&nbsp;
+  
+  <a href="/tags/#编程" title="编程">编程</a>&nbsp;
+  
+</span>
+
+</section>
+<section class="post">
+<p>大家都知道 PC 中写破解补丁的其中一个方法是 Loader，通常的做法是CreateProcess后用CreateRemoteThread来Load我们的DLL。但这个方法在WM中显然不可行（压根没这个API）。</p>
+
+<p>WM中要在指定的进程中执行我们的代码，可以用一个未公开的 PerformCallBack4 API。利用这个API，可以在目标进程中执行我们的代码。<!-- more --></p>
+
+<p>首先声明：这个方法仅对于SP2003及所有PPC有效，对于SP5及其以上系统非常可能失效，因为SP的权限要求比PPC高。为了在SP5/6中具备同样的功能，需要做一系列非常复杂的操作，我也已经琢磨出相关的方案可通用的代码，说起来比较啰嗦，暂且按下不表，以后再叙吧。</p>
+
+<p>废话不多说，直接看代码：<br/>
+ STATIC HMODULE RemoteLoadLibrary(HANDLE hProcess, PCTSTR ptzPath)<br/>
+ {<br/>
+   BOOL bMode = SetKMode(TRUE);<br/>
+   DWORD dwPerm = SetProcPermissions(0xFFFFFFFF);</p>
+
+<p>   CALLBACKINFO ci;<br/>
+   ci.hProc= hProcess;<br/>
+   ci.pFunc = (FARPROC) MapPtrToProcess(GetProcAddress(GetModuleHandle(TEXT("COREDLL")), TEXT("LoadLibraryW")), hProcess);;<br/>
+   ci.pvArg0 = MapPtrToProcess((PVOID) ptzPath, GetCurrentProcess());<br/>
+   HMODULE hModule = (HMODULE) PerformCallBack4(&ci;, 0, 0, 0);</p>
+
+<p>   SetKMode(bMode);<br/>
+   SetProcPermissions(dwPerm);<br/>
+   return hModule;<br/>
+ }</p>
+
+<p>上面的函数中，首先设置权限，然后映射LoadLibraryW的地址到目标进程，然后在目标进程中执行LoadLibraryW装载我们的DLL。OK，既然我们的DLL都被Load到目标进城了，要干什么，请随意（一般来说，DllMain函数中创建一个线程后，立即返回。在线程中做你想做的事）。</p>
+
+<p>使用例子（执行一个目标进程并运行直接运行一个EXE（如果没运行，运行了则直接操作）并运行我们的DLL）：</p>
+
+<p> HMODULE hModule = CCodeInj::RemoteLoadLibrary(TEXT("cprog.exe"), tzDllPath);<br/>
+ if (hModule == NULL)<br/>
+ {<br/>
+   Sleep(500);<br/>
+   PROCESS_INFORMATION pi;<br/>
+   if (CreateProcess(TEXT("cprog.exe"),, NULL, NULL, NULL, FALSE, 0, NULL, NULL, NULL, π))<br/>
+   {</p>
+
+<pre><code> Sleep(2000);  
+
+ hModule = CCodeInj::RemoteLoadLibrary(pi.hProcess, tzDllPath);  
+
+ CloseHandle(pi.hThread);  
+ CloseHandle(pi.hProcess);  
+</code></pre>
+
+<p>   }<br/>
+ }</p>
+
+<p>为了更好地使用，我提供了更多的功能，请参看附件。</p>
+
+<p>下载附件请到：http://bbs.pediy.com/showthread.php?p=595544#post595544<br/>
+或者来信至 Yonsm@msn.cm</p>
+
+<p>1.你得准备一个 DLL，假设是 MyHook.dll<br/>
+2 另有一个代码执行的空间（无论是EXE还是DLL，也可以在 MyHook.dll），然后在这个代码空间执行：RemoteLoadLibrary<br/>
+  指定远程进程（比如 cprog.exe，就是你要插入的进程），和DLL路径（就是MyHook.dll的路径）<br/>
+3. 那么，RemoteLoadLibrary就会让 crpog.exe 来 LoadLibrary(MyHook.dll)，你在MyHook.dll里面就可以做你想做的事。</p>
+
+</section>
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone">QQ空间</a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina">新浪微博</a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq">腾讯微博</a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren">人人网</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["qzone","tsina","tqq","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<section align="right">
+<span>
+	<a  href="/frightened-the-server/" class="pageNav"  >上一篇</a>
+	&nbsp;&nbsp;&nbsp;
+	<a  href="/using-china-unicom-network-for-a-month/" class="pageNav"  >下一篇</a>
+</span>
+</section>
+
+	
+	<div class="ds-thread" data-thread-key="453" data-url="http://kuanghy.github.io/insert-a-dll-into-another-process-in-ppc/" data-title="PPC 中向其它进程中插入DLL的方法及通用代码" />
+		
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"huoty"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+
+
+        </article>
+      </div>
+
+    <footer>
+        <p><small>
+            <a href="http://github.com/kuanghy/kuanghy.github.io/new/master/_posts" target="_blank" title="撰写文章">Po</a>wer<a href="http://github.com/kuanghy/kuanghy.github.io/edit/master/" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyll.bootcss.com/" target="_blank">Jekyll</a> @ <a href="http://github.com/kuanghy/kuanghy.github.io" target="_blank" title="项目主页">GitHub</a>
+             | Copyright &copy; 2015 <a href="/about/">Huoty</a>
+             | <a href="/" title="我的博客">Huoty's Blog</a>
+         </small></p>
+    </footer>
+
+    </div>
+	<!-- 返回顶部和底部 -->
+	<div id="updown"><span class="up"></span><span class="down"></span></div>
+  </body>
+</html>

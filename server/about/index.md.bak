@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="{{ site.keywords }}">
-    <meta name="description" content="{{ site.description }}">
-    <meta name="author" content="{{ site.author }}" />
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="Huoty" />
     <meta name="baidu-site-verification" content="3sjUdBOU2L" />
-    <title>{% if page.path == 'index.html' %}{{ site.name }}{% else %}{% unless page.id %}{{ site.name }} - {% endunless %}{{ page.title }}{% endif %}</title>
+    <title>Huoty's Blog - 关于</title>
     <link rel="shortcut icon" href="/assets/imgs/favicon.ico" />
-    <link href="/feed/" rel="alternate" title="{{ site.author }}" type="application/atom+xml" />
+    <link href="/feed/" rel="alternate" title="Huoty" type="application/atom+xml" />
     <link rel="stylesheet" href="/assets/media/css/style.css" />
     <link rel="stylesheet" href="/assets/media/css/highlight.css" />
     <script type="text/javascript" src="/assets/media/js/jqury-1.11.1.js"></script>
@@ -18,7 +18,7 @@
     <div id="container">
       <div id="main" role="main">
         <header>
-        <h1>{{ page.title }}</h1>
+        <h1>关于</h1>
         </header>
         <nav>
         <span><a title="网站首页" class="" href="/">首页</a></span>
@@ -31,15 +31,40 @@
         <span><a title="种子订阅" class="" href="/feed/" target="_blank">订阅</a></span>
         </nav>
         <article class="content">
-        {{ content }}
+        <section class="post">
+
+
+----
+
+###联系方式：
+
+
+ＱＱ：[1346632121](tencent://message/?uin=1346632121)
+
+网站：[Huoty's Blog](http://kuanghy.github.io)
+
+邮箱：[sudohuoty@163.com](mailto:sudohuoty@163.com)
+
+GitHub : [http://github.com/kuanghy](http://github.com/kuanghy)
+
+----
+
+
+[![新浪微博](http://service.t.sina.com.cn/widget/qmd/loveqing2013/f78fbcd2/1.png)](http://weibo.com/u/loveqing2013)
+
+
+</section>
+
+
+
         </article>
       </div>
 
     <footer>
         <p><small>
-            <a href="http://github.com/{{ site.github }}/kuanghy.github.io/new/master/_posts" target="_blank" title="撰写文章">Po</a>wer<a href="http://github.com/{{ site.github }}/kuanghy.github.io/edit/master/{{ page.path }}" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyll.bootcss.com/" target="_blank">Jekyll</a> @ <a href="http://github.com/{{ site.github }}/kuanghy.github.io" target="_blank" title="项目主页">GitHub</a>
-             | Copyright &copy; {{site.time | date:"%Y"}} <a href="/about/">{{ site.author }}</a>
-             | <a href="/" title="我的博客">{{site.name}}</a>
+            <a href="http://github.com/kuanghy/kuanghy.github.io/new/master/_posts" target="_blank" title="撰写文章">Po</a>wer<a href="http://github.com/kuanghy/kuanghy.github.io/edit/master/" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyll.bootcss.com/" target="_blank">Jekyll</a> @ <a href="http://github.com/kuanghy/kuanghy.github.io" target="_blank" title="项目主页">GitHub</a>
+             | Copyright &copy; 2015 <a href="/about/">Huoty</a>
+             | <a href="/" title="我的博客">Huoty's Blog</a>
          </small></p>
     </footer>
 
