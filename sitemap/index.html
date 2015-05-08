@@ -2,14 +2,11 @@
 layout: none
 ---
 
-站点地图
-========
+#站点地图
 
 {% for post in site.posts %}
 {{ site.url }}{{ post.url }} <br>
 {% endfor %}
 
---------
-By huoty
-
-{{ post.date | date_to_utc | date: '%Y-%m-%d'}}
+> By huoty
+> {{ post.date | date_to_utc | date: '%Y-%m-%d'}}
