@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
-        <meta name="description" content="Test on HTML and CSS">
-        <meta name="author" content="Huoty">
-        <title>站点地图</title>
-        <link rel="shortcut icon" href="/assets/imgs/favicon.ico" />
-    </head>
-    <body>
+---
+layout: none
+---
        {% for post in site.posts %}
        {{ post.title }} - (url){{ site.url }}{{ post.url }} - (data){{ post.date | date_to_utc | date: '%Y-%m-%d'}}
        <br>
        {% endfor %}
-    </body>
-</html> 
 
