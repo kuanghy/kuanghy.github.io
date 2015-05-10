@@ -29,6 +29,7 @@ tags: 博客 GitHub Jekyll Markdown
 
 Github Pages 是面向用户、组织和项目开放的公共静态页面搭建托管服 务，站点可以被免费托管在 Github 上，你可以选择使用 Github Pages 默 认提供的域名 github.io 或者自定义域名来发布站点。Github Pages 支持 自动利用 Jekyll 生成站点，也同样支持纯 HTML 文档。Github pages 有两种模式，一种是 User/Organization Pages 个人或公司站点，即个人主页；另一种是 Project Pages 项目站点，即用于给项目创建主页。至于搭建博客，采用两种模式均可。下面是我在 Github 上搭建博客的过程。
 
+
 #### 1. 创建个人站点项目
 创建一个新的GitHub仓库，命名为yourusername.github.io。例如，我的GitHub账号是kuanghy，所以我的仓库命名为kuanghy.github.io。然后在本地安装 jekyll，这主要用于本地测试，也可以不用安装。安装方法：
 
@@ -68,12 +69,14 @@ Github Pages 是面向用户、组织和项目开放的公共静态页面搭建�
 
 **其实在 github pages 上搭博客，我所了解的还有另外一种方法，就是[Hexo](http://hexo.io/)，如果你感兴趣的话，可以看看这篇文章：[简明Github Pages与Hexo教程](http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/)。但是我觉得这个方法的配置过于繁琐，所以最后放弃了。还有一个更简单的方法：[用静态页面生成静态博客](http://isnowfy.github.io/about-simple-cn.html)。作者已经用 js 做好了所有的接口，傻瓜式操作。我本来也打算用这个的，但是作者将所有的文章页面文件全放在了根目录下，如果有上百篇文章，那个在根目录下岂不是有上百个文件，这样看着是不是很不爽。而且其他目录的布局也不太合理。本来打算改改他的 js 的，但是后来没有，也就放弃了。其实，如果你不关心项目本身，只在乎博客索呈现的页面，那么这是一个不错的选择，比如你不懂任何计算机技术，只是想写博客。该作者提供了在线编辑 markdown 文档方法，而且有实时预览。我最终选择 jekyll，是因为看到了这篇文章：[github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)。**
 
+
 #### 2. 挑选主题
 博客的基本框架搭建完成之后，下一步当然是要挑选一个合适的主题了。同样的，我搜索了很多了主题，如果你也在搜索主题，那么可以去这里找找：[Jekyll wiki Sites](https://github.com/jekyll/jekyll/wiki/Sites), [Jekyllthemes](http://jekyllthemes.org/).
 
 搜索并尝试了很多主题，都觉得没有合适的。有的做得太花哨，有的功能我不满足，有的页面实在是入不了我的法眼。哎，失望至极之后，我决定自己写一个主题。我是一个极简主义者，一切的一切都崇尚简单，认为**简单，才是这个世界上最美的艺术**。所以我的博客不需要太花哨，那样就显得繁重。我只希望能够单纯的呈现文字。
 
 在我准备动手决定自己写一个主题时，我转念一想，我希望做的，肯定有人已经做了。于是又去搜索，果然就找到了一个称心的主题，它的简单正和我意。在这里感谢原作者 [webfrogs](https://github.com/webfrogs/webfrogs.github.com) 的提供，我现在所采用的主题是 [Yonsm](https://github.com/Yonsm/NET) 的修改版，然后我又在此基础上进行了修改。
+
 
 #### 3. 对原主题的修改
 * **独立关于页面**
