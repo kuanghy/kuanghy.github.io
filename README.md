@@ -1,10 +1,13 @@
 Huoty's blog
 ============
 
-这是[我的博客](http://kuanghy.github.io/)程序项目，本博客运行于 [Jekyll](http://jekyllrb.com) @ [GitHub](http://github.com/kuanghy/kuanghy.github.io)，博客模板修改自 [WebFrog](http://webfrogs.me/) 的博客。
+这是[我的博客](http://kuanghy.github.io/)程序项目，本博客运行于 [Jekyll](http://jekyllrb.com) @ [GitHub](http://github.com/kuanghy/kuanghy.github.io)，博客模板修改自 [Yonsm.NET](https://github.com/Yonsm/NET) 的个人博客项目。原博客模板由 [webfrogs](https://github.com/webfrogs/webfrogs.github.com) 提供
 
 ------------
 
+
+## 克隆本项目
+欢迎克隆本项目，点击链接可直接克隆：[https://github.com/kuanghy/kuanghy.github.io](https://github.com/kuanghy/kuanghy.github.io/fork)。
 
 ## 博客配置
 所有个人相关的配置都在 _config.yml 中，修改其中内容：
@@ -32,6 +35,24 @@ Huoty's blog
 
 * 点击 Powered by 里面的 **Po** 撰写新文章；点击 **ed** 编辑当前页面。
 * 虽然可以用在线的编辑器来编辑和发布文章，但为了批量修改方便，还是推荐 Check Out 后修改。
+
+## 对原主题的修改
+* **独立关于页面**
+我把关于页面独立出来，写成了一个独立的页面，因为我想在其中展现另外的一些东西。
+
+* **添加搜索本站功能**
+这个功能是我一直所需要，但是原主题中没有提供，于是我添加了这个功能。如果把搜索功能添加到主页面上，感觉有些画蛇添足，影响原页面的美观。于是我把搜索功能独立出来，也写成了一个独立的页面。，目前的搜索功能只支持文章标题搜索，不支持全文搜索，但我觉得已经足够了。
+
+* **添加相册页面**
+我做了一个相册页面，链接放在了关于页面。
+
+* **添加返回顶部和底部按钮**
+如果文章太长，要想快速的回到页面顶部或者底部实在是太难了，所以我增加了此功能。
+
+* **做一些简单的SEO**
+    - 配置文件中添加 keywords，description 两个字段，分别用于网站关键字和网站描述。
+    - 添加站点地图，即根目录下的 sitemap.txt 文件，以便于搜索引擎收录
+    - 添加 robots.txt 文件 
 
 huoty
 
