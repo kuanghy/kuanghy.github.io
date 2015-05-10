@@ -81,7 +81,7 @@ blockquote p {
 }
 
 #container {
-    width:600px;
+    width:800px;
     margin:2em auto;
     display:block;
     padding:0 2em;
@@ -89,7 +89,7 @@ blockquote p {
 
 .content{
     font-size:16px;
-    line-height:40px;
+    line-height:26px;
 }
 
 .content h1 {
