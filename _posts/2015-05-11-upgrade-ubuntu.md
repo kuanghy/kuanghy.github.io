@@ -27,7 +27,7 @@ tags: ubuntu ugrade
 
 然后：
 
-> do-release-upgrade --help
+> $ do-release-upgrade --help
 
 嗯， 属于可用状态。开始升级：
 
