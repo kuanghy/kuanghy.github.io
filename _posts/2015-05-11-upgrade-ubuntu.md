@@ -1,9 +1,9 @@
-----------
+---
 layout: post
 title: 浅谈Ubuntu系统的升级
 category: Linux
 tags: ubuntu ugrade
-----------
+---
 
 前段时间 Ubuntu 15.04 发布，可是我的系统还是 14.04, 于是决定升级到 15.04。就这样，有开始了折腾。按照往常的记忆，升级系统应该是这样的：
 
