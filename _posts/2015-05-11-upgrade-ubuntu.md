@@ -1,6 +1,6 @@
 ----------
 layout: post
-titile: 浅谈Ubuntu系统的升级
+title: 浅谈Ubuntu系统的升级
 category: Linux
 tags: ubuntu ugrade
 ----------
