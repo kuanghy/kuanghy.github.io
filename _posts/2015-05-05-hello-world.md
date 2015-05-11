@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 你好，世界
-category: 日志
-tags: 博客 GitHub Jekyll Markdown
+category: 我的日志
+tags: 博客 HelloWorld
 ---
 
 虽然毕业参加工作以来还不到一年的时间，但想想自己现在也已经是奔三的年纪。回想自己开始学编程时，已经18岁了。这岂不是远远的被别人落在了起跑线上。
