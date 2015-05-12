@@ -9,18 +9,18 @@ tags: ubuntu apt
 
 
 1. 更新或升级操作：
-```
+{% highlight ruby %}
     apt-get update                   # 更新源  
     apt-get upgrade                 # 更新所有已安装的包  
     apt-get dist-upgrade        # 发行版升级（如，从10.10到11.04）  
-```
+{% endhighlight %}
 
 2. 安装或重装类操作：
-```
+{% highlight ruby %}
     apt-get install <pkg>         # 安装软件包<pkg>，多个软件包用空格隔开  
     apt-get install --reinstall <pkg> # 重新安装软件包<pkg>  
     apt-get install -f <pkg>          # 修复安装（破损的依赖关系）软件包<pkg>  
-```
+{% endhighlight %}
 
 3. 卸载类操作： 
 ```
