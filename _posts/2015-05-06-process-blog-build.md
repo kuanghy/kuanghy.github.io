@@ -53,17 +53,17 @@ Github Pages 是面向用户、组织和项目开放的公共静态页面搭建�
 
 然后将该项目 push 到 github 上。哦，对了，你应该得会一些 git 的知识。那么这里简单的介绍下步骤吧：
 
-> cd myblog **进入项目目录**
+> $ cd myblog **进入项目目录**
 
-> git init           **初始化项目**
+> $ git init           **初始化项目**
 
-> git add .        **添加当前目录下额所有文件到项目**
+> $ git add .        **添加当前目录下额所有文件到项目**
 
-> git commit -m "first commit" **提交到版本库**
+> $ git commit -m "first commit" **提交到版本库**
 
-> git remote add origin https://github.com/username/username.github.io.git **添加远程仓库地址**
+> $ git remote add origin https://github.com/username/username.github.io.git **添加远程仓库地址**
 
-> git push -u origin master **提交到远程仓库**
+> $ git push -u origin master **提交到远程仓库**
 
 提交完成之后，在浏览器中输入： http://kuanghy.github.io/ 就可以看到博客的效果。
 
