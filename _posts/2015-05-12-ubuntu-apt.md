@@ -9,7 +9,7 @@ tags: ubuntu apt
 
 
 **1. 更新或升级操作：**
-{% highlight c %}
+{% highlight python %}
 apt-get update              # 更新源  
 apt-get upgrade             # 更新所有已安装的包  
 apt-get dist-upgrade        # 发行版升级（如，从10.10到11.04）  
@@ -17,7 +17,7 @@ apt-get dist-upgrade        # 发行版升级（如，从10.10到11.04）
 
 
 **2. 安装或重装类操作：**
-{% highlight c %}
+{% highlight python %}
 apt-get install <pkg>         # 安装软件包<pkg>，多个软件包用空格隔开  
 apt-get install --reinstall <pkg> # 重新安装软件包<pkg>  
 apt-get install -f <pkg>          # 修复安装（破损的依赖关系）软件包<pkg>  
@@ -25,18 +25,18 @@ apt-get install -f <pkg>          # 修复安装（破损的依赖关系）软�
 
 
 **3. 卸载类操作：** 
-{% highlight c %}
+{% highlight python %}
 apt-get remove <pkg>        # 删除软件包<pkg>（不包括配置文件）  
 apt-get purge <pkg>         # 删除软件包<pkg>（包括配置文件）  
 {% endhighlight %}}
 
 
 **4. 下载清除类操作：**
-{% highlight c %}
+{% highlight python %}
 apt-get source <pkg>         # 下载pkg包的源代码到当前目录  
 apt-get download <pkg>       # 下载pkg包的二进制包到当前目录  
 apt-get source -d <pkg>      # 下载完源码包后，编译  
-apt-get build-dep   <pkg>    # 构建pkg源码包的依赖环境（编译环境？）  
+apt-get build-dep <pkg>      # 构建pkg源码包的依赖环境（编译环境？）  
 apt-get clean         # 清除缓存(/var/cache/apt/archives/{,partial}下)中所有已下载的包  
 apt-get autoclean     # 类似于clean，但清除的是缓存中过期的包（即已不能下载或者是无用的包）  
 apt-get autoremove    # 删除因安装软件自动安装的依赖，而现在不需要的依赖包  
@@ -44,10 +44,10 @@ apt-get autoremove    # 删除因安装软件自动安装的依赖，而现在�
 
 
 **5. 查询类操作：**
-{% highlight c %}
-    apt-cache stats               # 显示系统软件包的统计信息  
-    apt-cache search <pkg>        # 使用关键字pkg搜索软件包  
-    apt-cache show   <pkg_name>   # 显示软件包pkg_name的详细信息  
-    apt-cache depends <pkg>       # 查看pkg所依赖的软件包  
-    apt-cache rdepends <pkg>      # 查看pkg被那些软件包所依赖  
+{% highlight python %}
+apt-cache stats               # 显示系统软件包的统计信息  
+apt-cache search <pkg>        # 使用关键字pkg搜索软件包  
+apt-cache show   <pkg_name>   # 显示软件包pkg_name的详细信息  
+apt-cache depends <pkg>       # 查看pkg所依赖的软件包  
+apt-cache rdepends <pkg>      # 查看pkg被那些软件包所依赖  
 {% endhighlight %}
