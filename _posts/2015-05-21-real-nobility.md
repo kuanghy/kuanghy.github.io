@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 真正的高贵
-category: 美文收藏
+category: 美文收录
 tags: 高贵
 ---
 
