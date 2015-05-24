@@ -5,7 +5,7 @@ category: 学习札记
 tags: adduser vim shell
 ---
 
-1、 `Linux`
+1、 `Linux`<br/>
 在 ubuntu 下添加用户名最好用 **adduser** 命令，例如：
 > $ sudo adduser git
 
