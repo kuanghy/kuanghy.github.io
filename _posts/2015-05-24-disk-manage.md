@@ -18,6 +18,7 @@ tags: du df hdparm
 > $ df -TH
 
 结果：
+
 ```python
 文件系统       1K-blocks     已用     可用 已用% 挂载点
 /dev/sda8      100658932 11934424 83588212   13% /
@@ -41,13 +42,13 @@ none              102400       24   102376    1% /run/user
 > $ du -hs temp 图片 下载 音乐 桌面
 
 结果：
+
 ```python
 1.6G	temp
 980K	图片
 764M	下载
 75M	音乐
 80K	桌面
-
 ```
 
 #### 磁盘维护：`hdparm`
@@ -85,6 +86,7 @@ none              102400       24   102376    1% /run/user
 > $ sudo hdparm -T /dev/sda8
 
 结果：
+
 ```python
 /dev/sda8:
  Timing cached reads:   8466 MB in  2.00 seconds = 4236.29 MB/sec
