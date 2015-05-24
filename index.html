@@ -6,9 +6,11 @@ layout: page
 <ul class="listing">
 {% for post in paginator.posts %}
   {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-  {% if year != y %}
+  {% capture m %}{{post.date | date:"%m"}}{% endcapture %}
+  {% if year != y and month != m %}
     {% assign year = y %}
-    <li class="listing-seperator">{{ y }}</li>
+    {% assign month = m %}
+    <li class="listing-seperator">{{ y m }}</li>
   {% endif %}
   <li class="listing-item">
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
