@@ -322,3 +322,21 @@ background: #83BF73;
 {
     background: url(/assets/imgs/updown.png) bottom right no-repeat;
 }
+
+/**
+ * 以下为自定义 div 样式
+ */
+.imgtag {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.emphasis {
+   display:inline; 
+   background: #CCB399; 
+   text-indent: 1em; 
+   font-weight:500; 
+   font-style:oblique; 
+}
+
