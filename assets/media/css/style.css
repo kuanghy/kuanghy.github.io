@@ -67,13 +67,20 @@ pre code {
 blockquote {
     display:block;
     text-align:justify;
-    border-left:4px solid #eeeeee;
+    margin:0.2em 0em;
+    padding-top:5px;
+    padding-left:20px;
+    padding-bottom:5px;
+    padding-right:5px;
+    background:#636363;
+    color:#BABABA;
+    font-weight:500;
+    border-left:6px solid #c00909;
+    border-top:1px solid #c00909;
+    border-right:1px solid #c00909;
+    border-bottom:1px solid #c00909;
 }
 
-blockquote {
-    margin:1em 0em;
-    padding-left:1.5em;
-}
 
 blockquote p {
     margin:0;
