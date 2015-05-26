@@ -18,12 +18,15 @@ tags: grep
 #### 2、显示匹配行附近的多行：
 
 * -A 显示匹配行之后的n行
+
 > $ grep -A n "string" filename
 
 * -B 显示匹配行之前的n行
+
 > $ grep -B n "string" filename
 
 * -C 显示匹配行前后的n行
+
 > $ grep -C n "string" filename
 
 <br/>
