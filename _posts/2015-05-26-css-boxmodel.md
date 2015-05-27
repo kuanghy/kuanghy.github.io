@@ -45,6 +45,7 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 ![盒子模型详细图解](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel3.png)
 <div class="imgtag">图4 盒子模型详细图解</div>
 
+
 *   **border（边框）：** border-top，border-bottom， border-left，border-right
 
      * 1、border-color（边框颜色）；
@@ -56,10 +57,12 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
      *4、边框简写属性格式：`border: border-width border-style (required)  border-color`
 
 
- *  **padding（内边距）：** padding-top，padding-bottom ，padding-left，padding-rightborder
-    
+*  **padding（内边距）：** padding-top，padding-bottom ，padding-left，padding-rightborder
+
+
 *  **margin（外边距）：** margin-top，margin-bottom ，margin-left，margin-right
     <span class="emphasis">当margin设为负数时，会使被设为负数的块向相反的方向移动，甚至覆盖在另外的块上。当块之间是父子关系时，通过设置子块的margin参数为负数，可以将子块从父块中“分离”出来。 </div>
+
 
 *  **盒子的浮动：**
 
@@ -75,6 +78,7 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
      * 3、如果给出4个属性值，依次表示上、右、下、左的属性，即顺时针排序。
 
+<br/>
 注：<span class="emphasis">本文中所引用的图片均收集自网络，内容也整理自各大学习网站，如涉及侵权问题，请留言告知！<span>
 
 <br/>
