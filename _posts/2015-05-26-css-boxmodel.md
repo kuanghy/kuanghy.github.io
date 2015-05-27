@@ -45,38 +45,37 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 ![盒子模型详细图解](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel3.png)
 <div class="imgtag">图4 盒子模型详细图解</div>
 
-
+<br/>
 *   **border（边框）：** border-top，border-bottom， border-left，border-right
 
-     * 1、border-color（边框颜色）；
+  1、border-color（边框颜色）；
 
-     * 2、border-width（边框粗细）：medium|thin| thick|数值；
+  2、border-width（边框粗细）：medium|thin| thick|数值；
 
-     * 3、border-style（边框样式）：none|hidden（隐藏）|dotted（虚线）|dashed（点线）|solid（实线）|double（双实线）|groove（IE不支持）|ridge（IE不支持）|inset（IE不支持）|outset（IE不支持）。
+  3、border-style（边框样式）：none|hidden（隐藏）|dotted（虚线）|dashed（点线）|solid（实线）|double（双实线）|groove（IE不支持）|ridge（IE不支持）|inset（IE不支持）|outset（IE不支持）。
 
-     *4、边框简写属性格式：`border: border-width border-style (required)  border-color`
+  4、边框简写属性格式：`border: border-width border-style (required)  border-color`
 
-
+<br/>
 *  **padding（内边距）：** padding-top，padding-bottom ，padding-left，padding-rightborder
 
-
+<br/>
 *  **margin（外边距）：** margin-top，margin-bottom ，margin-left，margin-right
-    <span class="emphasis">当margin设为负数时，会使被设为负数的块向相反的方向移动，甚至覆盖在另外的块上。当块之间是父子关系时，通过设置子块的margin参数为负数，可以将子块从父块中“分离”出来。 </div>
+  <span class="emphasis">当margin设为负数时，会使被设为负数的块向相反的方向移动，甚至覆盖在另外的块上。当块之间是父子关系时，通过设置子块的margin参数为负数，可以将子块从父块中“分离”出来。 </div>
 
 
 *  **盒子的浮动：**
 
-     * 1、设置浮动：float:none|left|right
+  1、设置浮动：float:none|left|right
 
-     * 2、清除浮动：clear:none|left|right|both
+  2、清除浮动：clear:none|left|right|both
 
- *  **属性值的简写形式说明：** 
+*  **属性值的简写形式说明：** 
+  1、如果给出2个属性值，前者表示上下的属性，后者表示左右的属性；
 
-     * 1、如果给出2个属性值，前者表示上下的属性，后者表示左右的属性；
+  2、如果给出3个属性值，前者表示上的属性，中间的数值表示左右的属性，后者表示下的属性；
 
-     * 2、如果给出3个属性值，前者表示上的属性，中间的数值表示左右的属性，后者表示下的属性；
-
-     * 3、如果给出4个属性值，依次表示上、右、下、左的属性，即顺时针排序。
+  3、如果给出4个属性值，依次表示上、右、下、左的属性，即顺时针排序。
 
 <br/>
 注：<span class="emphasis">本文中所引用的图片均收集自网络，内容也整理自各大学习网站，如涉及侵权问题，请留言告知！<span>
