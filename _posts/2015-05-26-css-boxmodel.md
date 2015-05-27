@@ -53,23 +53,24 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
  > 3、border-style（边框样式）：none|hidden（隐藏）|dotted（虚线）|dashed（点线）|solid（实线）|double（双实线）|groove（IE不支持）|ridge（IE不支持）|inset（IE不支持）|outset（IE不支持）。
 
- > 4、边框简写属性格式：`border: border-width border-style (required)  border-color`
+ > 4、边框简写属性格式：border: border-width border-style (required)  border-color
 
-
+<br/>
 *  **padding（内边距）：** padding-top，padding-bottom ，padding-left，padding-rightborder
 
-
+<br>
 *  **margin（外边距）：** margin-top，margin-bottom ，margin-left，margin-right
 
 > 当margin设为负数时，会使被设为负数的块向相反的方向移动，甚至覆盖在另外的块上。当块之间是父子关系时，通过设置子块的margin参数为负数，可以将子块从父块中“分离”出来。
 
+<br/>
 *  **盒子的浮动：**
 
 > 1、设置浮动：float:none|left|right
 
 > 2、清除浮动：clear:none|left|right|both
 
-
+<br/>
 *  **属性值的简写形式说明：** 
 
 > 1、如果给出2个属性值，前者表示上下的属性，后者表示左右的属性；
