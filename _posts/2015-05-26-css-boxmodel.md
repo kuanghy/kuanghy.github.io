@@ -88,5 +88,5 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
 <br/>
 #### 参考资料
-http://www.w3school.com.cn/css/css_border.asp
+http://www.w3school.com.cn/css/css_border.asp<br/>
 http://www.cnblogs.com/shuz/archive/2010/01/24/1655205.html
