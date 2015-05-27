@@ -87,6 +87,6 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 注：<span class="emphasis">本文中所引用的图片均收集自网络，内容也整理自各大学习网站，如涉及侵权问题，请留言告知！<span>
 
 <br/>
-#### 参考资料
+#### 参考资料:
 http://www.w3school.com.cn/css/css_border.asp<br/>
 http://www.cnblogs.com/shuz/archive/2010/01/24/1655205.html
