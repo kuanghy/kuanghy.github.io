@@ -304,7 +304,7 @@ table {
     font:12px/15px "Helvetica Neue",Arial, Helvetica, sans-serif;
 }
 
-th, td {padding:18px 28px 18px; text-align:center; }
+th, td {padding:10px 18px; text-align:center;}
 
 th {padding-top:22px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
 
