@@ -149,7 +149,7 @@ print "There are %(howmany)d %(lang)s Quotation Symbols" % {'lang': 'Python', 'h
 {% endhighlight %}
 
 输出结果：
-<span class="emphasis">
+{% highlight python %}
 十六进制输出：
 6c
 6C
@@ -174,14 +174,14 @@ Host: mars	Port:80
 dec: 123/oct: 0173/hex: 0X7B
 MM/DD/YY = 02/15/67
 There are 3 Python Quotation Symbols
-</span>
+{% endhighlight %}
 
 在使用格式化操作符对字符串进行格式化时，有时候可能并不能满足我们的需求。在 Python2.4 之后，更加了新式的字符串模板。新式的字符串模板的优势是不用去记住所有的转换类型相关的细节，而是像现在 shell 风格的脚本语言里面那样使用美元符号($)。
 
 由于新式的字符串 Template 对象的引进使得 string 模块又重新活了过来，Template 对象有两个方法，substitute()和safe_substitute()。前者更为严谨，在key缺少的情况下它会报一个 KeyError 的异常出来，而后者在缺少 key 时，直接原封不动的把字符串显示出来.。
 
 示例：
-<span class="emphasis">
+{% highlight python %}
 &gt;&gt;&gt; from string import Template
 &gt;&gt;&gt; s = Template('There are ${howmany} ${lang} Quotation Symbols') 
 &gt;&gt;&gt; print s.substitute(lang='Python', howmany=3)
@@ -196,7 +196,7 @@ Traceback (most recent call last):
 KeyError: 'howmany'
 &gt;&gt;&gt; print s.safe_substitute(lang='Python')
 There are ${howmany} Python Quotation Symbols
-</span>
+{% endhighlight %}
 
 <br/>
 ***本文内容摘自《Python核心编程》一书，仅供学习参考。***
