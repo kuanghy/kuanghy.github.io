@@ -8,10 +8,10 @@ tags: css 盒子模型
 CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素框处理元素内容（element content）、内边距（padding）、边框（border） 和 外边距（margin） 的方式。在HTML文档中，每个元素（element）都有盒子模型，所以说在Web世界里（特别是页面布局），Box Model无处不在。下图是CSS盒子模型的示意图：
 
 ![CSS2.0 盒子模型的层次3D示意图](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel.png)
-<div class="imgtag">图1 CSS2.0盒子模型的层次3D示意图</div>
+<div class="mark">图1 CSS2.0盒子模型的层次3D示意图</div>
 
 ![CSS 二维盒子模型示意图](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel2.png)
-<div class="imgtag">图2 CSS 二维盒子模型示意图</div>
+<div class="mark">图2 CSS 二维盒子模型示意图</div>
 
 元素框的最内部分是实际的内容，直接包围内容的是内边距。内边距呈现了元素的背景。内边距的边缘是边框。边框以外是外边距，外边距默认是透明的，因此不会遮挡其后的任何元素。背景可以应用于由内容和内边距、边框组成的区域。
 
@@ -27,7 +27,7 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
 假设框的每个边上有 10 个像素的外边距和 5 个像素的内边距。如果希望这个元素框达到 100 个像素，就需要将内容的宽度设置为 70 像素，请看下图：
 ![css boxmodel example](http://7xixhp.com1.z0.glb.clouddn.com/ct_css_boxmodel_example.gif)
-<div class="imgtag">图3 CSS盒子模型示例</div>
+<div class="mark">图3 CSS盒子模型示例</div>
 
 代码如下所示：
 {% highlight css %}
@@ -43,7 +43,7 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 <br/>
 #### 盒子模型各属性详解：
 ![盒子模型详细图解](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel3.png)
-<div class="imgtag">图4 盒子模型详细图解</div>
+<div class="mark">图4 盒子模型详细图解</div>
 
 *   **border（边框）：** border-top，border-bottom， border-left，border-right
 
