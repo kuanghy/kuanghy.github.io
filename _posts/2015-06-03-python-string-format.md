@@ -182,11 +182,11 @@ There are 3 Python Quotation Symbols
 
 示例：
 {% highlight python %}
-&gt;&gt;&gt; from string import Template
-&gt;&gt;&gt; s = Template('There are ${howmany} ${lang} Quotation Symbols') 
-&gt;&gt;&gt; print s.substitute(lang='Python', howmany=3)
+>>> from string import Template
+>>> s = Template('There are ${howmany} ${lang} Quotation Symbols') 
+>>> print s.substitute(lang='Python', howmany=3)
 There are 3 Python Quotation Symbols
-&gt;&gt;&gt; print s.substitute(lang='Python')
+>>> print s.substitute(lang='Python')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "/usr/lib/python2.7/string.py", line 176, in substitute
@@ -194,7 +194,7 @@ Traceback (most recent call last):
   File "/usr/lib/python2.7/string.py", line 166, in convert
     val = mapping[named]
 KeyError: 'howmany'
-&gt;&gt;&gt; print s.safe_substitute(lang='Python')
+>>> print s.safe_substitute(lang='Python')
 There are ${howmany} Python Quotation Symbols
 {% endhighlight %}
 
