@@ -422,3 +422,16 @@ tr:last-child td.last {
    font-style:oblique; 
 }
 
+.hblock{
+    white-space: normal; 
+    text-align:justify;
+    margin:0.2em 0em;
+    padding-top:5px;
+    padding-left:20px;
+    padding-bottom:5px;
+    padding-right:5px;
+    background:#636363;
+    color:#BABABA;
+    border-radius:20px;
+}
+
