@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python模块简介: random
+title: Python模块简介 -- random
 category: python
 tags: python random
 ---
