@@ -25,29 +25,35 @@ print hashlib.sha384(a).hexdigest()
 print hashlib.sha512(a).hexdigest()
 {% endhighlight %}
 
+<br/>
 #### hashlib 属性和方法简介
 
 <div class="hblock"><pre>
-hashlib.algorithms      列出所有加密算法 ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')   
-digest_size       16 产生的散列的字节大小。 
-block_size         64 The internal block size of the hash algorithm in bytes.
+hashlib.algorithms    
+    列出所有加密算法 ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
+
+digesti_size    
+    16 产生的散列的字节大小。
+
+block_size    
+    64 The internal block size of the hash algorithm in bytes.
 
 new(name, string='')  
- 创建指定加密模式的hash对象，例如：
+    创建指定加密模式的hash对象，例如：
 h = hashlib.new('md5')
 h2 = hashlib.new('ripemd160','what')
 
 update(arg)
-更新哈希对象以字符串参数,如果同一个hash对象重复调用该方法，则m.update(a); m.update(b) is equivalent to m.update(a+b).
+    更新哈希对象以字符串参数,如果同一个hash对象重复调用该方法，则m.update(a); m.update(b) is equivalent to m.update(a+b).
 
 digest()
-返回摘要，作为二进制数据字符串值
+    返回摘要，作为二进制数据字符串值
 
 hexdigest()
-返回摘要，作为十六进制数据字符串值
+    返回摘要，作为十六进制数据字符串值
 
 copy()
-复制
+    复制
 </pre></div>
 
 **摘要算法主要用于保存用户名和密码，以及数据校验等。**
