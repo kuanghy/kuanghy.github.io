@@ -27,7 +27,7 @@ print hashlib.sha512(a).hexdigest()
 
 #### hashlib 属性和方法简介
 
-<div class="hblock">
+<div class="hblock"><pre>
 hashlib.algorithms      列出所有加密算法 ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')   
 digest_size       16 产生的散列的字节大小。 
 block_size         64 The internal block size of the hash algorithm in bytes.
@@ -48,7 +48,7 @@ hexdigest()
 
 copy()
 复制
-</div>
+</pre></div>
 
 **摘要算法主要用于保存用户名和密码，以及数据校验等。**
 
