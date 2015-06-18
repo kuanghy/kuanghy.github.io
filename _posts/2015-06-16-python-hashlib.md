@@ -84,6 +84,6 @@ if __name__ == '__main__':
 
 <br/>
 #### 参考资料：
-https://docs.python.org/2/library/hashlib.html
-http://www.cnblogs.com/BeginMan/p/3328172.html
-http://blog.chinaunix.net/uid-631981-id-3774992.html
+https://docs.python.org/2/library/hashlib.html<br/>
+http://www.cnblogs.com/BeginMan/p/3328172.html<br/>
+http://blog.chinaunix.net/uid-631981-id-3774992.html<br/>
