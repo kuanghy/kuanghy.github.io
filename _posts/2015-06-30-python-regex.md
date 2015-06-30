@@ -21,20 +21,20 @@ tags: regex re 正则表达式
 ^ 	匹配字符串的开始，位置控制
 $ 	匹配字符串的结束， 位置控制
 </pre></div>
-**举例：**
-\ba\w*\b 以字母a开头的单词（仅匹配一个单词）
-\bks 以ks开头的内容
-huoty\b 以huoty结束的内容
+**举例：** <br/>
+\ba\w*\b 以字母a开头的单词（仅匹配一个单词）<br/>
+\bks 以ks开头的内容 <br/>
+huoty\b 以huoty结束的内容 <br/>
 ^\d{5, 12}$ 匹配5-12位的QQ号
 
 **注：**\b......\b 与 ^......$ 等价，都用于匹配一个单词。
 
 #### 2. 重复
 <div class="hblock"><pre>
-* 	        重复零次或更多次，即任意次数
-+ 	        重复一次或更多次，即至少一次
-? 	        重复零次或一次，即最多一次
-{n} 	        重复n次
+* 	    重复零次或更多次，即任意次数
++ 	    重复一次或更多次，即至少一次
+? 	    重复零次或一次，即最多一次
+{n} 	重复n次
 {n,} 	重复n次或更多次
 {n,m} 	重复n到m次
 </pre></div>
@@ -57,17 +57,17 @@ huoty\b 以huoty结束的内容
 所谓的反义匹配，其实就是对元字符的取反引用。
 
 <div class="hblock"><pre>
-\W 	                匹配任意不是字母，数字，下划线，汉字的字符
-\S 	                匹配任意不是空白符的字符
-\D 	                匹配任意非数字的字符
-\B 	                匹配不是单词开头或结束的位置
-[^x] 	        匹配除了x以外的任意字符
+\W 	        匹配任意不是字母，数字，下划线，汉字的字符
+\S 	        匹配任意不是空白符的字符
+\D 	        匹配任意非数字的字符
+\B 	        匹配不是单词开头或结束的位置
+[^x] 	    匹配除了x以外的任意字符
 [^aeiou] 	匹配除了aeiou这几个字母以外的任意字符
 </pre></div>
 
-举例：
-\S+ 匹配不包含空白符的字符串。
-[a[^>]+\ 匹配用方括号括起来的以a开头的字符串。
+举例：<br/>
+\S+ 匹配不包含空白符的字符串。<br/>
+[a[^>]+\ 匹配用方括号括起来的以a开头的字符串。<br/>
 
 #### 6. 反向引用
 使用小括号指定一个子表达式后，匹配这个子表达式的文本（也就是此分组捕获的内容）可以在表达式或其他程序中作进一步处理（例如Python的re模块中的group和groups方法）。默认情况下每个分组拥有一个组号，规则是，从左到右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，一次类推。**分组号为0对应整个正则表达式**。
@@ -82,8 +82,8 @@ huoty\b 以huoty结束的内容
 
 **分组的组号可以自定义，也可以为分组指定名字，这里不做详细说明。**
 
-#### 贪婪和非贪婪
-**贪婪模式：**匹配尽可能多的字符
+#### 7. 贪婪和非贪婪
+**贪婪模式：**匹配尽可能多的字符 <br/>
 **非贪婪模式：**匹配尽可能少的字符
 
 默认为贪婪模式，需要用到非贪婪模式时，只需要在限定符后加上“？”即可：
@@ -96,10 +96,11 @@ huoty\b 以huoty结束的内容
 {n,}? 	重复n次以上，但尽可能少重复
 </pre></div>
 
+<br/>
 ## Python 中比较详细的正则表达式匹配规则（图片资料来自CSDN）
 ![Python regex](http://7xixhp.com1.z0.glb.clouddn.com/python-regex.png)
 
-
+<br/>
 ## Python的正则表达式 re 模块
 <div class="hblock"><pre>
 This module exports the following functions:
@@ -119,43 +120,53 @@ This module exports the following functions:
 这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。 第二个参数flag是匹配模式，取值可以使用按位或运算符'|'表示同时生效，比如re.I | re.M。另外，你也可以在regex字符串中指定模式，比如re.compile('pattern', re.I | re.M)与re.compile('(?im)pattern')是等价的。 flag 的可选值有：
 
 **re.I**(全拼：IGNORECASE): 忽略大小写（括号内是完整写法，下同）
+
 **re.M**(全拼：MULTILINE): 多行模式，改变'^'和'$'的行为（参见上图）
+
 **re.S**(全拼：DOTALL): 点任意匹配模式，改变'.'的行为
+
 **re.L**(全拼：LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定
+
 **re.U**(全拼：UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性
+
 **re.X**(全拼：VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。
 
 #### 2. re.match(string[, pos[, endpos]]) | re.match(pattern, string[, flags])
 这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 
 
 #### 3. Pattern对象属性：
-1.**string**: 匹配时使用的文本。
-2.**re**: 匹配时使用的Pattern对象。
-3.**pos**: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。
-4.**endpos**: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。
-5.**lastindex**: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。
-6.**lastgroup**: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。
+(1)**string**: 匹配时使用的文本。
+
+(2)**re**: 匹配时使用的Pattern对象。
+
+(3)**pos**: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。
+
+(4)**endpos**: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。
+
+(5)**lastindex**: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。
+
+(6)**lastgroup**: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。
 
 #### 4. Pattern对象方法
-**1.group([group1, …]):**
+(1)**group([group1, …]):**
 获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。group1可以使用编号也可以使用别名；编号0代表整个匹配的子串；不填写参数时，返回group(0)；没有截获字符串的组返回None；截获了多次的组返回最后一次截获的子串。
 
-**2.groups([default]):**
+(2)**groups([default]):**
 以元组形式返回全部分组截获的字符串。相当于调用group(1,2,…last)。default表示没有截获字符串的组以这个值替代，默认为None。
 
-**3.groupdict([default]):**
+(3)**groupdict([default]):**
 返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。default含义同上。
 
-**4.start([group]):**
+(4)**start([group]):**
 返回指定的组截获的子串在string中的起始索引（子串第一个字符的索引）。group默认值为0。
 
-**5.end([group]):**
+(5)**end([group]):**
 返回指定的组截获的子串在string中的结束索引（子串最后一个字符的索引+1）。group默认值为0。
 
-**6.span([group]):**
+(6)**span([group]):**
 返回(start(group), end(group))。
 
-**7.expand(template):**
+(7)**expand(template):**
 将匹配到的分组代入template中然后返回。template中可以使用\id或\g、\g引用分组，但不能使用编号0。\id与\g是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符’0’，只能使用\g0。
 
 #### 5. re.search(string[, pos[, endpos]]) | re.search(pattern, string[, flags])
@@ -176,6 +187,7 @@ This module exports the following functions:
 #### 9. subn(repl, string[, count]) |re.sub(pattern, repl, string[, count])
 返回 (sub(repl, string[, count]), 替换次数)
 
+<br/>
 ## Python Re模块的另一种使用方式
 以上在介绍 re 模块的方法时，都是采用 re.match，re.search 的方式调用。其实还有另外一种调用方式，可以通过pattern.match，pattern.search调用，这样 调用便不用将pattern作为第一个参数传入了。
 
@@ -194,4 +206,4 @@ This module exports the following functions:
 
 >    subn(repl, string[, count]) |re.sub(pattern, repl, string[, count])
 
-<span id="emphasis">以上在介绍 re模块的方法时都没有举例，之后会补上例子。</span>
+<span class="emphasis">以上在介绍 re模块的方法时都没有举例，之后会补上例子。</span>
