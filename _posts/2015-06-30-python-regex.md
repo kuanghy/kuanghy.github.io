@@ -3,7 +3,7 @@ layout: post
 title: Python 正则表达式简介
 category: python
 tags: regex re 正则表达式
---
+---
 
 **正则表达式**，又称**正规表示法**、**常规表示法**（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。
 
