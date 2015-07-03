@@ -34,6 +34,7 @@ geturl()：返回请求的url；
 <br/>
 #### urlretrieve方法
 > urllib.urlretrieve(url[, filename[, reporthook[, data]]])
+
 直接将远程数据下载到本地。该方法返回一个包含两个元素的元组(filename, headers)，filename表示保存到本地的路径，header表示服务器的响应头。
 
 **参数说明：**
@@ -45,6 +46,7 @@ data：指post到服务器的数据。
 <br/>
 #### urlcleanup方法
 > urllib.urlcleanup()
+
 清除由于urllib.urlretrieve()所产生的缓存
 
 <br/>
