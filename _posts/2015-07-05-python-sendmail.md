@@ -75,7 +75,7 @@ MIMEBase的一个子类，多个MIME对象的集合，_subtype默认值为mixed�
 
 MIMEMultipart的一个子类。
 
-> class email.mime.audio. MIMEAudio(_audiodata[, _subtype[, _encoder[, **_params]]])
+> class email.mime.audio.MIMEAudio(_audiodata[, _subtype[, _encoder[, **_params]]])
 
 MIME音频对象
 
