@@ -12,7 +12,7 @@ SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议,它是一组�
 <br/>
 #### smtplib模块
 
-> smtplib.SMTP(self, host='', port=0, local_hostname=None, timeout=<object object>)
+> smtplib.SMTP(self, host='', port=0, local_hostname=None, timeout=&lt;object object&gt;)
 
 SMTP类构造函数，表示与SMTP服务器之间的连接，通过这个连接可以向smtp服务器发送指令，执行相关操作（如：登陆、发送邮件）。所有参数都是可选的。其中host参数表示smtp服务器主机名；port表示smtp服务的端口，默认是25；如果在创建SMTP对象的时候提供了这两个参数，在初始化的时候会自动调用connect方法去连接服务器。
 
