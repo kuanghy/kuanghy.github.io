@@ -6,7 +6,7 @@ tags: linux rpm rpm2cpio cpio
 ---
 
 ## rpm 命令
-RPM[1] 是RPM Package Manager（RPM软件包管理器, 愿意为Red Hat Package Manager，现在是一个递归缩写）的缩写，这一文件格式名称虽然打上了RedHat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用，可以算是公认的行业标准了。
+RPM 是RPM Package Manager（RPM软件包管理器, 愿意为Red Hat Package Manager，现在是一个递归缩写）的缩写，这一文件格式名称虽然打上了RedHat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用，可以算是公认的行业标准了。
 
 **rpm 命令参数：**
 <div class="hblock"><pre>
@@ -32,7 +32,7 @@ RPM[1] 是RPM Package Manager（RPM软件包管理器, 愿意为Red Hat Package 
 --nodeps 不验证软件包的依赖关系
 --whatrequires 查询/验证需要一个依赖性的软件包
 --whatprovides 查询/验证提供一个依赖性的软件包
-</pre><div>
+</pre></div>
 
 **rmp常用命令组合：**
 <div class="hblock"><pre>
