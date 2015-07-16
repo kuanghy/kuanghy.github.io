@@ -1,3 +1,10 @@
+---
+layout: post
+title: Linux 下查看大文件的方法总结
+category: linux
+tags: vim LargeFile glogg joe
+---
+
 1. 用 Linux 自带的工具：`more`、`less`
 
 2. 安装vim和vim插件[LargFile](http://www.vim.org/scripts/script.php?script_id=1506)
