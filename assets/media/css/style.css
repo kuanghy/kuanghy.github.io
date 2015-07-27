@@ -200,6 +200,12 @@ pre,code {
 
 code {
     background-color:#D0D0D0;
+    font-weight:normal;
+    font-size:15px;
+    padding:1px 6px;
+    color:#B88A00;
+    border:1px solid #e1e1e8;
+
 }
 
 embed,object,iframe {
