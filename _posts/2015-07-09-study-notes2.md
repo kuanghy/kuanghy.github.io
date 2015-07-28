@@ -28,7 +28,7 @@ Linux上进程的5种状态为：
 对应的 ps 工具标识为： R、S、D、Z、T
 
 **常用选项说明：**
-<div class="hblock"></pre>
+<div class="hblock"><pre>
 -e 显示所有进程。
 -f 全格式。
 -h 不显示标题。
@@ -48,7 +48,7 @@ x 显示所有程序，不以终端机来区分。
 > ps aux 或者 ps -aux （加“-”与不加一样）
 
 该命令列出进程信息的格式为：
-<div class="hblock"></pre>
+<div class="hblock"><pre>
 USER  PID  %CPU  %MEM  VSZ  RSS  TTY  STAT  START  TIME  COMMAND
 </pre></div>
 
@@ -57,12 +57,12 @@ USER  PID  %CPU  %MEM  VSZ  RSS  TTY  STAT  START  TIME  COMMAND
 > ps -ef
 
 该命令列出进程信息的格式为：
-<div class="hblock"></pre>
+<div class="hblock"><pre>
 UID  PID  PPID  C  STIME  TTY  TIME CMD
 </pre></div>
 
 显示信息各列含义：
-<div class="hblock"></pre>
+<div class="hblock"><pre>
 UID 用户ID
 PID 进程ID
 PPID 父进程ID
