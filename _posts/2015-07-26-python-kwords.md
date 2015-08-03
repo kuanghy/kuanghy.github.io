@@ -80,14 +80,30 @@ foo(100, name = "huoty", age = "24", addr = "beijing.haidian")
 最后来一个终极的例子：
 
 {% highlight python %}
-ef foo(aa, *args, **kwargs):
+def foo(aa, *args, **kwargs):
     print aa
     print "------- split -------"
     print args
     print "------- split -------"
     print kwargs
     
-foo(1, 2, 4, x = 5, y = 5, *[1, 2, 3], **{'a':1; 'b': 2})
+foo(1, 2, 3, x = 4, y = 5, *[1, 2, 3], **{'a':1,'b': 2})
 {% endhighlight %}
 
-http://www.360doc.com/content/15/0526/11/10072361_473337423.shtml
+运行结果：
+
+<div class="hblock"><pre>
+1
+------- split -------
+(2, 3, 1, 2, 3)
+------- split -------
+{'a': 1, 'y': 5, 'b': 2, 'x': 4}
+</pre></div>
+
+<br/>
+### 总结
+**1：**函数在接收参数事，先将非变长参数赋值完毕，再分配变长参数
+
+**2：**元组和字典参数仅仅是被调函数中最终接收的元组和字典的子集，额外的非关键字及关键字也会分别被包含在最终的元组与字典当中 
+
+**3：**元组和字典参数的位置位于最后且字典参数在元组参数后面，非元组与字典参数中，非关键字参数一定要排在关键字参数前面
