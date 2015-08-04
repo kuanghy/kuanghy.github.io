@@ -57,7 +57,7 @@ Listen 8888
 **【 6 】** 如果页面无法正常显示，并提示 403  Forbidden 错误：You don't have permission to access / on this server.
 解决办法： 打开/etc/apache2/apache2.conf文件，添加一下内容：
 <div class="hblock"><pre>
-&lt;Directory /home/konghy/www&gt;
+&lt;Directory /home/konghy&gt;
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
@@ -74,7 +74,7 @@ huoty为当前用户的用户组。
 
 ![apache](http://ww3.sinaimg.cn/mw690/c3c88275jw1euptdkg7g1j20eu0cuab3.jpg)
 
-也就是说即使指定用户对系统中的文件有访问权限，而 apache 本身对齐没有访问权限，用户也无法正常访问文件。Apache 使用&lt;Directory&gt;… &lt;/Directory&gt;来设置指定目录的访问权限，其中可包含五个属性：
+也就是说即使指定用户对系统中的文件有访问权限，而 apache 本身对齐没有访问权限，用户也无法正常访问文件。Apache 使用&lt;Directory&gt;… &lt;/Directory&gt;来设置指定目录的访问权限，该设置对子目录同样有效，其中可包含五个属性：
 <div class="hblock"><pre>
 Options
 AllowOverride
