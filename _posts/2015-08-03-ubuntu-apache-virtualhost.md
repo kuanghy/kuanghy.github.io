@@ -24,13 +24,13 @@ tags: ubuntu apache 虚拟主机
 Listen 80
 Listen 8888
 
- &lt;IfModule ssl_module&gt;
+&lt;IfModule ssl_module&gt;
     Listen 443 
- &lt;/IfModule&gt;
+&lt;/IfModule&gt;
 
- &lt;IfModule mod_gnutls.c&gt;
+&lt;IfModule mod_gnutls.c&gt;
     Listen 443 
- &lt;/IfModule&gt;
+&lt;/IfModule&gt;
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 </pre></div>
@@ -92,7 +92,7 @@ Indexes：服务器可生成此目录的文件列表。
 None：不允许访问此目录。
 </pre></div>
 
-**AllowOverride**会根据设定的值决定是否读取目录中的.htaccess文件，来改变原来所设置的权限:
+**AllowOverride** 会根据设定的值决定是否读取目录中的.htaccess文件，来改变原来所设置的权限:
 <div class="hblock"><pre>
 All：读取.htaccess文件的内容，修改原来的访问权限。
 None：不读取.htaccess文件
@@ -100,7 +100,7 @@ None：不读取.htaccess文件
 
 为避免用户自行建立.htaccess文件修改访问权限，apache2.conf文件中默认设置每个目录为： AllowOverride None。
 
-**Allow**用于设定允许访问Apache服务器的主机，例如：
+**Allow** 用于设定允许访问Apache服务器的主机，例如：
 <div class="hblock"><pre>
 Allow from all  # 允许所有主机的访问
 Allow from 202.96.0.97 202.96.0.98  # 允许来自指定IP地址主机的访问
