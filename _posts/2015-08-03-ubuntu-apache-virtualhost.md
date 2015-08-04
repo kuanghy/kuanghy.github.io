@@ -24,13 +24,13 @@ tags: ubuntu apache 虚拟主机
 Listen 80
 Listen 8888
 
-<IfModule ssl_module>
+ &lt;IfModule ssl_module&gt;
     Listen 443 
-</IfModule>
+ &lt;/IfModule&gt;
 
-<IfModule mod_gnutls.c>
+ &lt;IfModule mod_gnutls.c&gt;
     Listen 443 
-</IfModule>
+ &lt;/IfModule&gt;
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 </pre></div>
@@ -57,24 +57,24 @@ Listen 8888
 **【 6 】** 如果页面无法正常显示，并提示 403  Forbidden 错误：You don't have permission to access / on this server.
 解决办法： 打开/etc/apache2/apache2.conf文件，添加一下内容：
 <div class="hblock"><pre>
-<Directory /home/konghy/www>
+&lt;Directory /home/konghy/www&gt;
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
-</Directory>
+&lt;/Directory&gt;
 </pre></div>
 
 **【 7 】** 为了保证 apache 由权限访问你所配置的目录，可以将 apache 用户添加到自己的用户组中，apache 的默认用户名为 www-data，修改方法为：
 
 > $ sudo usermod -a -G huoty www-data 
 
-huoty为当前用户的用户组
+huoty为当前用户的用户组。
 
 **【 最后 】**对第 6 步的配置做一下说明。在apache中，对目录的访问是由两方面来结合起来共同控制的，一方面是apache本身，另一方面是Linux系统本身。如下图所示：
 
 ![apache](http://ww3.sinaimg.cn/mw690/c3c88275jw1euptdkg7g1j20eu0cuab3.jpg)
 
-也就是说即使指定用户对系统中的文件有访问权限，而 apache 本身对齐没有访问权限，用户也无法正常访问文件。Apache 使用<Directory>… </Directory>来设置指定目录的访问权限，其中可包含五个属性：
+也就是说即使指定用户对系统中的文件有访问权限，而 apache 本身对齐没有访问权限，用户也无法正常访问文件。Apache 使用&lt;Directory&gt;… &lt;/Directory&gt;来设置指定目录的访问权限，其中可包含五个属性：
 <div class="hblock"><pre>
 Options
 AllowOverride
