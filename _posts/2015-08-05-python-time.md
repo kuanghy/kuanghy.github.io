@@ -19,10 +19,12 @@ Julian day (day in the year, 1-366)
 DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 </pre></div>
 
+<br/>
 ## UTC与DST时间标准简介
 **UTC**（Coordinated Universal Time，世界协调时）亦即格林威治天文时间，世界标准时间。在中国为UTC+8。
 **DST**（Daylight Saving Time）即夏令时。是一种为节约能源而人为规定地方时间的制度，一般在天亮早的夏季人为将时间提前一小时。
 
+<br/>
 ## 模块变量
 #### timezone
 当地时间与标准UTC时间的误差，以秒计
@@ -36,6 +38,7 @@ DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 #### tzname
 关于(标准时区名称, 夏令时时区名称)的元组
 
+<br/>
 ## 模块方法
 #### asctime([tuple])
 将时间元组（默认为本地时间）格式转换为字符串形式。接受一个时间元组，其默认值为localtime()返回值
@@ -79,6 +82,7 @@ time.struct_time(tm_year=2015, tm_mon=8, tm_mday=5, tm_hour=22, tm_min=8, tm_sec
 #### tzset()
 改变本地时区。
 
+<br/>
 ## 时间字符串支持的格式
 <div class="hblock"><pre>
 	%a	本地（locale）简化星期名称	 
@@ -106,9 +110,10 @@ time.struct_time(tm_year=2015, tm_mon=8, tm_mday=5, tm_hour=22, tm_min=8, tm_sec
 </pre></div>
 
 *注：* <br/>
-1、“%p”只有与“%I”配合使用才有效果。
-2、文档中强调确实是0 - 61，而不是59，闰年秒占两秒（汗一个）。
-3、当使用strptime()函数时，只有当在这年中的周数和天数被确定的时候%U和%W才会被计算。
+1、“%p”只有与“%I”配合使用才有效果。<br>
+2、文档中强调确实是0 - 61，而不是59，闰年秒占两秒（汗一个）。<br>
+3、当使用strptime()函数时，只有当在这年中的周数和天数被确定的时候%U和%W才会被计算。<br>
 
+<br/>
 ## 各种时间表示的转化
 ![ptyhon time model](http://ww4.sinaimg.cn/mw690/c3c88275jw1eus3jj1zb3j20m20v7dhi.jpg)
