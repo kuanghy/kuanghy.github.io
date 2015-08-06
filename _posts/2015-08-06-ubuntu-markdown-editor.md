@@ -61,7 +61,7 @@ clean:
 {% endhighlight %}
     
 如果转换的文档出现中文乱码，可以通过在 markdown 文档中嵌入 html 的方法来改变文档的编码方式。即在文档的开头加上meta标记，指明编码格式。如果文档已经编写完成，可以用如下方法批量修改：
-sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' \*.md
+> sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' \*.md
 
 
 
