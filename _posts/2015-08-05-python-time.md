@@ -21,7 +21,7 @@ DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 
 <br/>
 ## UTC与DST时间标准简介
-**UTC**（Coordinated Universal Time，世界协调时）亦即格林威治天文时间，世界标准时间。在中国为UTC+8。
+**UTC**（Coordinated Universal Time，世界协调时）亦即格林威治天文时间，世界标准时间。在中国为UTC+8。<br/>
 **DST**（Daylight Saving Time）即夏令时。是一种为节约能源而人为规定地方时间的制度，一般在天亮早的夏季人为将时间提前一小时。
 
 <br/>
