@@ -34,14 +34,14 @@ Markdown  文档编辑器推荐：*Remarkable*、*Retext*。这两款编辑器�
 > xhtml2pdf --html Release-Notes.html Release-Notes.pdf
 
 为了方便，可以编写一个 Makefile 来批量转化 markdown 文档：
-<div class="hblok"><pre>
+{% highlight makefile %}
 MD = markdown
 MDFLAGS = -T
 H2P = xhtml2pdf
 H2PFLAGS = --html
-SOURCES := $(wildcard \*.md)
-OBJECTS := $(patsubst %.md, %.html, $(wildcard \*.md))
-OBJECTS_PDF := $(patsubst %.md, %.pdf, $(wildcard \*.md))
+SOURCES := $(wildcard *.md)
+OBJECTS := $(patsubst %.md, %.html, $(wildcard *.md))
+OBJECTS_PDF := $(patsubst %.md, %.pdf, $(wildcard *.md))
 
 all: build
 
@@ -52,16 +52,16 @@ pdf: $(OBJECTS_PDF)
 html: $(OBJECTS)
 
 $(OBJECTS_PDF): %.pdf: %.html
-    $(H2P) $(H2PFLAGS) $&lt; &gt; $@ 
+    $(H2P) $(H2PFLAGS) $< > $@ 
 
 $(OBJECTS): %.html: %.md
-    $(MD) $(MDFLAGS) -o $@ $ &lt;
+    $(MD) $(MDFLAGS) -o $@ $<
 clean:
     rm -f $(OBJECTS)
-</pre></div> 
+{% endhighlight %}
     
 如果转换的文档出现中文乱码，可以通过在 markdown 文档中嵌入 html 的方法来改变文档的编码方式。即在文档的开头加上meta标记，指明编码格式。如果文档已经编写完成，可以用如下方法批量修改：
-sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' \*.md
+> sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' \*.md
 
 
 
