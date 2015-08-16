@@ -143,7 +143,7 @@ ROWID          描述 “row ID” 列的对象
 <br/>
 ## DB-API 操作数据库流程
 
-[db-api works](http://ww4.sinaimg.cn/mw690/c3c88275jw1ev3oaz0xt4j20lm0awjsh.jpg)
+![db-api works](http://ww4.sinaimg.cn/mw690/c3c88275jw1ev3oaz0xt4j20lm0awjsh.jpg)
 
 <br/>
 ## 数据库操作示例
