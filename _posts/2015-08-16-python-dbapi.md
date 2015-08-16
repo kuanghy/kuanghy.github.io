@@ -2,7 +2,7 @@
 layout: post
 title: Python数据库接口规范简介
 category: python
-tags python DB-API
+tags python
 ---
 
 在没有 Python DB-API 之前，各数据库之间的应用接口非常混乱，实现各不相同。如果项目需要更换数据库时，则需要做大量的修改，非常不便。Python DB-API 的出现就是为了解决这样的问题。
