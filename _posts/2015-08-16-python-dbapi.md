@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python数据库接口规范简介
+title: Python数据库接口规范简介 -- DB-API
 category: python
 tags: python 数据库
 ---
@@ -138,7 +138,7 @@ BINARY        描述二进制长列的对象 比如 RAW, BLOB
 NUMBER        描述数字列的对象 
 DATETIME      描述日期时间列的对象 
 ROWID          描述 “row ID” 列的对象 
-</pre><div>
+</pre></div>
 
 <br/>
 ## DB-API 操作数据库流程
