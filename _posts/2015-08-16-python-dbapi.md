@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python数据库接口规范简介 -- DB-API
+title: Python数据库接口规范简介--DB-API
 category: python
 tags python DB-API
 ---
