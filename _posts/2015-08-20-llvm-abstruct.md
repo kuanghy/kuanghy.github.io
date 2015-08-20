@@ -8,6 +8,7 @@ tags: llvm clang
 ### LLVM 是什么
 LLVM 是 low level virtual machine（底层虚拟机）的简称，它是一个开源的编译器架构，已经被成功应用到多个应用领域。LLVM 的主要作用是它可以作为多种语言的后端，它可以提供可编程语言无关的优化和针对很多种CPU的代码生成功能。LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。LLVM是伊利诺伊大学的一个研究项目，提供一个现代化的，基于SSA的编译策略能够同时支持静态和动态的任意编程语言的编译目标。自那时以来，已经成长为LLVM的主干项目，由不同的子项目组成，其中许多正在生产中使用的各种 商业和开源的项目，以及被广泛用于学术研究。
 
+<br/>
 ### LLVM 常用命令工具
 <div class="hblock"><pre>
 llvm-as 将可读的 .ll 文件汇编成字节代码
@@ -32,13 +33,15 @@ tblgen 目标描述阅读器和生成器
 lit    LLVM 集成测试器，用于运行测试 
 <pre></div>
 
-###　LLVM IR
+<br/>
+### LLVM IR
 根据编译原理可知，编译器不是直接将源语言翻译为目标语言，而是翻译为一种“中间语言”，即“IR”。之后再由中间语言，利用后端程序和设备翻译为目标平台的汇编语言。由于中间语言相当于一款编译器前端和后端的“桥梁”，不同编译器的中间语言IR是不一样的，而IR可以说是集中体现了这款编译器的特征。
 
 LLVM IR主要有三种格式：一种是在内存中的编译中间语言；一种是硬盘上存储的二进制中间语言（以.bc结尾），最后一种是可读的中间格式（以.ll结尾）。这三种中间格式是完全相等的。
 
 LLVM IR是LLVM优化和进行代码生成的关键。根据可读的IR，我们可以知道再最终生成目标代码之前，我们已经生成了什么样的代码。而且根据IR，我们可以选择使用不同的后端而生成不同的可执行代码。同时，因为使用了统一的IR，所以我们可以重用LLVM的优化功能，即使我们使用的是自己设计的编程语言。
 
+<br/>
 ### 结构化编译器前端 Clang 介绍
 Clang ( 发音为 /klæŋ/) 是 LLVM 的一个编译器前端，它目前支持 C, C++, Objective-C 以及 Objective-C++ 等编程语言。Clang 对源程序进行词法分析和语义分析，并将分析结果转换为 Abstract Syntax Tree ( 抽象语法树 ) ，最后使用 LLVM 作为后端代码的生成器。
 
@@ -46,6 +49,7 @@ Clang 的开发目标是提供一个可以替代 GCC 的前端编译器。与 GC
 
 由于 GNU 编译器套装 (GCC) 系统庞大，而且 Apple 大量使用的 Objective-C 在 GCC 中优先级较低，同时 GCC 作为一个纯粹的编译系统，与 IDE 配合并不优秀，Apple 决定从零开始写 C family 的前端，也就是基于 LLVM 的 Clang 了。Clang 由 Apple 公司开发，源代码授权使用 BSD 的开源授权。
 
+<br/>
 #### Clang 的特性
 相比于 GCC，Clang 具有如下优点：
 
@@ -63,6 +67,7 @@ Clang 的开发目标是提供一个可以替代 GCC 的前端编译器。与 GC
 
 本段内容参考：[http://www.ibm.com/developerworks/cn/opensource/os-cn-clang/](http://www.ibm.com/developerworks/cn/opensource/os-cn-clang/)
 
+<br/>
 ### Clang 编译选项
 <div class="hblock"><pre>
 clang    [-c|-S|-E] -std=standard -g
@@ -88,6 +93,7 @@ clang    [-c|-S|-E] -std=standard -g
 -L dir 在库文件的搜索路径列表中添加dir目录
 </pre></div>
 
+<br/>
 ### 中间码的创建与转化
 编译生成二进制的 .bc 文件(bitcode file):
 > clang -emit-llvm -c xx.c -o xx.bc
@@ -110,6 +116,7 @@ clang    [-c|-S|-E] -std=standard -g
 
 > llc test.bc -o test.s
 
+<br/>
 ### 即时编译器 JIT 简介
 LLVM 中间码的执行需要用到 Jit。那么，JIT到底是个什么东西呢。其实，JIT 是一个即时编译器，即 Just-in-time Compiler。对于 JIT 的了解我也知之胜少，它的作用大概就是对中间码进行编译作业，像 JAVA 这种跨平台的语言也是通过 JIT 实现的。在执行 LLVM 的 lli 工具时，会去调用 JIT 将中间码编译成本机架构的机器码再执行。
 
