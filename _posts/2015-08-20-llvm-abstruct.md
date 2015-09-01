@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 构架编译器框架系统 LLVM 使用简介
+title: 架构编译器框架系统 LLVM 使用简介
 category: 计算机科学
 tags: llvm clang
 ---
