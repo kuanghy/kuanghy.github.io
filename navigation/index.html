@@ -9,6 +9,7 @@
 <title>旷世的忧伤 | Huoty's Homepage</title>
 <link rel="shortcut icon" href="../assets/imgs/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" href="../assets/css/style.css" type="text/css"/>
+<script type="text/javascript" src="../assets/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../assets/js/main.js"></script>
 </head>
 <body>
@@ -32,30 +33,27 @@
 </div>
 <!-- end header -->
 <div class="content">
-  <div class="willerce">
-    <a href="/">
-    <img class="avatar" src="../assets/imgs/khy_face_130.png" alt="" width="128" height="128"/>
-    </a>
+  <div id="nav_menu">
+    <h1>
+      <img src="../assets/imgs/list3_16px.png">&nbsp;&nbsp;
+      <a href="">全部分类</a>
+    </h1>
+    <h2><a onclick="classify('se')">搜索引擎</a></h2>
+    <h2><a onclick="classify('usual')">常用网址</a></h2>
+    <h2><a onclick="classify('technology')">技术学习</a></h2>
+    <h2><a onclick="classify('tool')">工具资料</a></h2>
+    <h2><a onclick="classify('opensource')">开源世界</a></h2>
+    <h2><a onclick="classify('material')">素材模板</a></h2>
+    <h2><a onclick="classify('resources')">资源搜索</a></h2>
+    <h2><a onclick="classify('collection')">收藏备份</a></h2>
+    <h2><a onclick="classify('flink')">友情链接</a></h2>
+    <h2><a onclick="classify('music')">遇见音乐</a></h2>
+    <h2><a onclick="classify('translation')">在线翻译</a></h2>
+    <h2><a onclick="classify('cloudisk')">网络云盘</a></h2>
+    <h2><a onclick="classify('aboutme')">关于我的</a></h2>
   </div>
-  <div id="search_box">
-    <div class="tab_box">
-      <div id="div_baidu">
-        <form action="http://www.baidu.com/baidu" target="_blank">
-          <input type="text" name="word" id="s" value="请输入一个关键词进行百度搜索" onfocus="if (value =='请输入一个关键词进行百度搜索'){value =''}" onblur="if (value ==''){value='请输入一个关键词进行百度搜索'}"/>
-          <input id="search-submit" class="button" type="submit" value="搜索" name=""/>
-        </form>
-      </div>
-      <div id="div_google">
-        <form method=get action="https://www.google.com/search"  target="_blank">
-          <input type="text" name="q" id="s" value="请输入一个关键词进行谷歌搜索" onfocus="if (value =='请输入一个关键词进行谷歌搜索'){value =''}" onblur="if (value ==''){value='请输入一个关键词进行谷歌搜索'}"/>
-          <input id="search-submit" class="button" type="submit" value="搜索" name=""/>
-        </form>
-      </div>
-    </div>
-    <ul class="tab_menu">
-      <li id="button_baidu" onclick="change_search('baidu')">百度搜索</li>
-      <li id="button_google" onclick="change_search('google')">谷歌搜索</li>
-    </ul>
+  <div id="nav_content">
+    <!-- <div style="height: 50px"></div> --> <!-- 占位用 -->
   </div>
 </div>
 <!-- end content -->
