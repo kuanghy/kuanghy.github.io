@@ -1,0 +1,17 @@
+markdown: rdiscount
+permalink: /:title/
+url: http://kuanghy.github.io 
+name: Huoty's Blog 
+author: Huoty
+qq: 1346632121
+email: sudohuoty@163.com
+duoshuo: huoty
+beian: 浙ICP备12026616号
+cnzz: 119959
+weibo: loveqing2013
+github: kuanghy
+highlighter: pygments
+safe: true
+paginate: 20
+keywords: huoty's blog, huoty, konghy，计算机技术，感悟
+description: huoty's blog，huoty的独立博客。英文全名Huoty Kong，中文简写konghy。专注于各类计算机技术，记录所感所想所思。我们对科技的痴迷，源自对未来的憧憬。

@@ -1,80 +1,154 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="个人主页, 旷世的忧伤, 网址导航">
-<meta name="description" content="旷世的忧伤，个人主页">
-<meta name="author" content="Huoty">
-<meta http-equiv="refresh" content="600">
-<title>旷世的忧伤 | Huoty's Homepage</title>
-<link rel="shortcut icon" href="../assets/imgs/favicon.ico" type="image/x-icon"/>
-<link rel="stylesheet" href="../assets/css/style.css" type="text/css"/>
-<script type="text/javascript" src="../assets/js/main.js"></script>
-</head>
-<body>
-<div class="header">
-  <!-- 页面头部 -->
-  <div class="head-logo">
-    <a href="#" target="_blank"><img src="../assets/imgs/logo.png"/></a>
-    <span>不与夏虫语寒，不与曲人语道，因为生命缺乏言说的条件......</span>
-  </div>
-  <div class="ullicss">
-    <ul>
-      <li><a target="_self" href="../index.html">首页</a></li>
-      <li><a target="_self" href="../search/index.html">搜索引擎</a></li>
-      <li><a target="_self" href="../navigation/index.html">网址导航</a></li>
-      <li><a target="_self" href="../essay/index.html">心情随笔</a></li>
-      <li><a target="_self" href="../weiboshow/index.html">新浪微博</a></li>
-      <li><a target="_blank" href="">个人博客</a></li>
-      <li><a target="" href="">其他</a></li>
-    </ul>
-  </div>
-</div>
-<!-- end header -->
-<div class="content">
-  <div class="willerce">
-    <a href="/">
-    <img class="avatar" src="../assets/imgs/khy_face_130.png" alt="" width="128" height="128"/>
-    </a>
-  </div>
-  <div id="search_box">
-    <div class="tab_box">
-      <div id="div_baidu">
-        <form action="http://www.baidu.com/baidu" target="_blank">
-          <input type="text" name="word" id="s" value="请输入一个关键词进行百度搜索" onfocus="if (value =='请输入一个关键词进行百度搜索'){value =''}" onblur="if (value ==''){value='请输入一个关键词进行百度搜索'}"/>
-          <input id="search-submit" class="button" type="submit" value="搜索" name=""/>
-        </form>
-      </div>
-      <div id="div_google">
-        <form method=get action="https://www.google.com/search"  target="_blank">
-          <input type="text" name="q" id="s" value="请输入一个关键词进行谷歌搜索" onfocus="if (value =='请输入一个关键词进行谷歌搜索'){value =''}" onblur="if (value ==''){value='请输入一个关键词进行谷歌搜索'}"/>
-          <input id="search-submit" class="button" type="submit" value="搜索" name=""/>
-        </form>
-      </div>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="keywords" content="huoty's blog, huoty, konghy，计算机技术，感悟">
+        <meta name="description" content="huoty's blog，专注于各类计算机技术，记录所感所想所思">
+        <meta name="author" content="Huoty">
+        <title>Huoty's Blog-搜索本站</title>
+        <link rel="shortcut icon" href="/assets/imgs/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/assets/media/jquery-ui/jquery-ui.min.css" type="text/css">
+        <style type="text/css" media="screen">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 400 16px/1.62 Georgia, "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+    color: #535353;
+    overflow: hidden;
+    background-color:#EAEAEA;
+}
+
+.willerce {
+    text-align: center;
+    margin: 120px auto auto auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.willerce a {
+    color: #535353;
+    text-decoration: underline;
+}
+
+.willerce a:link,
+.willerce a:visited {
+    color: #535353;
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 26px;
+    color: #424242;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    margin-bottom: 35px;
+    border-radius: 64px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+small {
+    font-size: 13px;
+    color: #AAA;
+}
+
+input[type=text],
+input[type=password] {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 32px;
+    margin: 0;
+    padding: 7px 8px;
+    outline: none;
+    color: #333;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right center;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: all 0.15s ease-in;
+    -webkit-transition: all 0.15s ease-in 0;
+    vertical-align: middle;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    outline: none;
+    border-color: #51a7e8;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075), 0 0 5px rgba(81,167,232,.5);
+}
+
+input[type=text] {
+    font-size: 18px;
+    width: 500px;
+}
+  
+	</style>
+    </head>
+    <body>
+    <div class="willerce">
+        <a href="/">
+            <img class="avatar" src="/assets/imgs/khy_face_130.png" alt="" width="128" height="128"/>
+        </a>
+        <p>
+            <a href="/album/" target="_blank">Album</a>
+            &nbsp;·&nbsp;
+            <a href="http://github.com/kuanghy" target="_blank">Github</a>
+            &nbsp;·&nbsp;
+            <a href="http://git.oschina.net/kuanghy" target="_blank">Git@OSC</a>
+            &nbsp;·&nbsp;
+            <a href="http://weibo.com/loveqing2013" target="_blank">Weibo</a>
+            &nbsp;·&nbsp;
+            <a href="mailto:sudohuoty@163.com">Email</a>
+            &nbsp;·&nbsp;
+            <a href="http://kuanghy.github.io/kswd" target="_blank">KSWD</a>
+        </p>
+        <input type="text"  id="j_search" placeholder="Entering  the  search  keyword" />
+        <br><br>
+        <small>
+        -----------------------------------------------------------------------------------------
+            <br>
+            Copyright &copy; 2015 <a href="/about/" title="关于我"> Huoty </a>
+            All Rights Reserved | <a href="/" title="我的博客"> Huoty's Blog </a>
+        </small>
+
     </div>
-    <ul class="tab_menu">
-      <li id="button_baidu" onclick="change_search('baidu')">百度搜索</li>
-      <li id="button_google" onclick="change_search('google')">谷歌搜索</li>
-    </ul>
-  </div>
-</div>
-<!-- end content -->
-<div class="footer">
-    <!-- 页脚 -->
-    <div class="title">
-        <h2>Huoty's&nbsp;&nbsp;Homepage</h2>
-        <span class="byline">You are uinique and nothing can replace you</span>
-    </div>
-    <ul class="contact">
-        <li><img src="../assets/imgs/social/email_32.png" class="img-responsive" title="Email：sudohuoty@163.com"/></li>
-        <li><img src="../assets/imgs/social/qq_32.png" class="img-responsive" title="QQ：1346632121"/></li>
-        <li><img src="../assets/imgs/social/weixin_32.png" class="img-responsive" title="Weixin: k2010131080"/></li>
-        <li><a href="http://weibo.com/loveqing2013" target="_blank"><img src="../assets/imgs/social/weibo_32.png" class="img-responsive" title="点击查看我的微博"/></a></li>
-    </ul>
-    <p>
-         Design by Huoty @ Github | Copyright &copy; 2015 Huoty - All Rights Reserved | About this site.
-    </p>
-</div>
-<!-- end footer -->
-</body>
-</html>
+    </body>
+
+<script src="/assets/media/js/jqury-1.11.1.js"></script>
+<script src="/assets/media/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function() {
+      $.ajax({
+          url: "datum.xml",
+          dataType: "xml",
+          success: function( xmlResponse ) {
+             var data = $( "article", xmlResponse ).map(function() {
+                  return {
+                      value: $( "title", this ).text() + ", " +
+                          ( $.trim( $( "date", this ).text() ) ),
+                      desc: $("description", this).text(),
+                      url: $("url", this).text()
+                  };
+              }).get();
+
+              $( "#j_search" ).autocomplete({
+                  source: data,
+                  minLength: 0,
+                  select: function( event, ui ) {
+                  window.location.href = ui.item.url;
+                  }
+              });
+          }
+      });
+  });
+</script>
+</html> 
+
