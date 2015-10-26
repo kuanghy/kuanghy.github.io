@@ -9,7 +9,6 @@ tags: python 数据库
 
 Python所有的数据库接口程序都在一定程度上遵守 Python DB-API 规范。DB-API 是一个规范，它定义了一系列必须的对象和数据库存取方式，以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口。由于DB-API 为不同的数据库提供了一致的访问接口， 在不同的数据库之间移植代码成为一件轻松的事情。
 
-<br/>
 ## 模块属性
 DB-API规范规定数据库接口模块必须实现一些全局的属性以保证兼容性。 
  
@@ -68,7 +67,6 @@ ProgrammingError    SQL 执行失败
 NotSupportedError   试图执行数据库不支持的特性  
 </pre></div>
 
-<br/>
 ## 连接对象
 要与数据库进行通信, 必须先和数据库建立连接. 连接对象处理命令如何送往服务器, 以及如何从服务器接收数据等基础功能。 连接成功(或一个连接池)后你就能够向数据库服务器发送请求, 得到响应。
 
@@ -140,7 +138,7 @@ DATETIME      描述日期时间列的对象
 ROWID          描述 “row ID” 列的对象 
 </pre></div>
 
-<br/>
+
 ## DB-API 操作数据库流程
 
 ![db-api works](http://ww4.sinaimg.cn/mw690/c3c88275jw1ev3oaz0xt4j20lm0awjsh.jpg)
@@ -293,7 +291,7 @@ except Exception, e:
 db_conn.close()
 {% endhighlight %}
 
-<br/>
+
 ## 参考资料
 [https://www.python.org/dev/peps/pep-0249/](https://www.python.org/dev/peps/pep-0249/)<br/>
 [https://wiki.python.org/moin/DatabaseProgramming](https://wiki.python.org/moin/DatabaseProgramming)<br/>
