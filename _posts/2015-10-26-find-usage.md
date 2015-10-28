@@ -167,35 +167,47 @@ f - 普通文件
 
 #### 递归修改目录下的所有目录权限（只修改目录，不修改文件）
 
-> 1、 find path -type d -exec chmod 744{} \;    (这句的句末有分号)
+三种方式：
+<div class="hblock"><pre>
+1、 find path -type d -exec chmod 744{} \;    (这句的句末有分号)
 
-> 2、 find path -type d | xargs chmod 744
+2、 find path -type d | xargs chmod 744
 
-> 3、 chmod 755 \`find -type d\`
+3、 chmod 755 `find -type d`
+</pre></div>
 
 #### 递归修改目录下的所有普通文件的权限（只修改文件，不修改目录）
 
-> 1、 find path -type f -exec chmod 644 {} \;
+三种方式：
+<div class="hblock"></pre>
+1、 find path -type f -exec chmod 644 {} \;
 
-> 2、 find path -type f | xargs chmod 644
+2、 find path -type f | xargs chmod 644
 
-> 3、 chmod 755 \`find -type f\`
-
+3、 chmod 755 `find -type f`
+</pre></div>
 
 #### 递归删除所有执行类型的文件
 
 例如，递归删除当前目录下的 `.exe` 普通文件：
 
-> find  . -name  '*.exe' -type  f -print -exec  rm -rf  {} \;
+<div class="hblock"><pre>
+find  . -name  '*.exe' -type  f -print -exec  rm -rf  {} \;
+</pre></div>
 
 除了用 `-exec` 外，还可以利用管道来实现，例如递归删除当前目录下的 `.deb` 文件：
 
-> find . -name *.deb |xargs rm -rf
+<div class="hblock"><pre>
+find . -name *.deb |xargs rm -rf
+ </pre></div>
 
 #### 统计代码行数
-
-> find . -regex ".*\.\(py\|html\|js\|css\)$" | xargs wc -l
+<div class="hblock"><pre>
+find . -regex ".*\.\(py\|html\|js\|css\)$" | xargs wc -l
+</pre></div>
 
 该命令可能在其他平台会失败，那么可以用 grep 来过滤文件：
 
-> wc -l \`find $path | grep ".*\.\(py\|html\|js\|css\)$"\`
+<div class="hblock"><pre>
+wc -l `find $path | grep ".*\.\(py\|html\|js\|css\)$"`
+</pre></div>
