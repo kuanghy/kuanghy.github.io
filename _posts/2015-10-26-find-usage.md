@@ -171,7 +171,7 @@ f - 普通文件
 
 > 2、 find path -type d | xargs chmod 744
 
-> 3、 chmod 755 `find -type d`
+> 3、 chmod 755 \`find -type d\`
 
 #### 递归修改目录下的所有普通文件的权限（只修改文件，不修改目录）
 
@@ -179,7 +179,7 @@ f - 普通文件
 
 > 2、 find path -type f | xargs chmod 644
 
-> 3、 chmod 755 `find -type f`
+> 3、 chmod 755 \`find -type f\`
 
 
 #### 递归删除所有执行类型的文件
@@ -198,4 +198,4 @@ f - 普通文件
 
 该命令可能在其他平台会失败，那么可以用 grep 来过滤文件：
 
-> wc -l `find $path | grep ".*\.\(py\|html\|js\|css\)$"`
+> wc -l \`find $path | grep ".*\.\(py\|html\|js\|css\)$"\`
