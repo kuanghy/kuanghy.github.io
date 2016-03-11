@@ -1,0 +1,17 @@
+<a href="#" title="联系作者">关注作者</a>
+<ul>
+<div>
+ <div style="float:left">
+ <!--Sina Weibo Follow Button -->
+ <html xmlns:wb="http://open.weibo.com/wb">
+ <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+ <wb:follow-button uid="1747720793" type="red_1" width="67" height="24" ></wb:follow-button>
+ </div>
+
+ <div style="float:right">
+ <!--Tencent Weibo Follow Button -->
+ <iframe src="http://follow.v.t.qq.com/index.php?c=follow&a=quick&appkey=801474416&sign=cc0961bc&v=2&name=huanggaowuqiqiang&style=5&t=1390730926221&f=0" frameborder="0" scrolling="auto" width="125" height="24" marginwidth="0" marginheight="0" allowtransparency="true"></iframe>
+ </div>
+</div>
+<br/>
+</ul>

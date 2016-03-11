@@ -4,6 +4,7 @@ title: Python 函数式编程、装饰器以及一些相关概念简介
 category: python
 tags: python 函数式编程 装饰器
 ---
+{% include JB/setup %}
 
 ## 命名空间
 Python中通过提供 namespace 来实现重名函数/方法、变量等信息的识别。其大致可以分为三种 namespace，分别为：
@@ -14,7 +15,6 @@ Python中通过提供 namespace 来实现重名函数/方法、变量等信息�
 
 当函数/方法、变量等信息发生重名时，Python会按照 local namespace -> global namespace -> build-in namespace的顺序搜索用户所需元素，并且以第一个找到此元素的 namespace 为准。
 
-<br/>
 ## 闭包
 闭包（Closure）是词法闭包（Lexical Closure）的简称。简单地说，闭包就是根据不同的配置信息得到不同的结果。对闭包的具体定义有很多种说法，大致可以分为两类：
 

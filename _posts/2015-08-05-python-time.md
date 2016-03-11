@@ -19,12 +19,12 @@ Julian day (day in the year, 1-366)
 DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 </pre></div>
 
-<br/>
+
 ## UTC与DST时间标准简介
 **UTC**（Coordinated Universal Time，世界协调时）亦即格林威治天文时间，世界标准时间。在中国为UTC+8。<br/>
 **DST**（Daylight Saving Time）即夏令时。是一种为节约能源而人为规定地方时间的制度，一般在天亮早的夏季人为将时间提前一小时。
 
-<br/>
+
 ## 模块变量
 #### timezone
 当地时间与标准UTC时间的误差，以秒计
@@ -82,7 +82,6 @@ time.struct_time(tm_year=2015, tm_mon=8, tm_mday=5, tm_hour=22, tm_min=8, tm_sec
 #### tzset()
 改变本地时区。
 
-<br/>
 ## 时间字符串支持的格式
 <div class="hblock"><pre>
 	%a	本地（locale）简化星期名称	 

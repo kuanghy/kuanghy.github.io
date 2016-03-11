@@ -1,0 +1,21 @@
+<a href="#"><i class="icon-fixed-width icon-heart"></i> 与我联系</a>
+<div id="contacts-list">
+  <a href="mailto:liberize@gmail.com" target="_blank" rel="nofollow" title="Gmail">
+    <i class="icon-large icon-fixed-width icon-envelope"></i>
+  </a>
+  <a href="https://github.com/liberize" target="_blank" rel="nofollow" title="Github">
+    <i class="icon-large icon-fixed-width icon-github"></i>
+  </a>
+  <a href="http://weibo.com/liberize" target="_blank" rel="nofollow" title="新浪微博">
+    <i class="icon-large icon-fixed-width icon-weibo"></i>
+  </a>
+  <a href="https://plus.google.com/118314345733357791088/" target="_blank" rel="nofollow" title="Google+">
+    <i class="icon-large icon-fixed-width icon-google-plus"></i>
+  </a>
+  <a href="https://twitter.com/liberize" target="_blank" rel="nofollow" title="Twitter">
+    <i class="icon-large icon-fixed-width icon-twitter"></i>
+  </a>
+  <a href="http://facebook.com/liberize" target="_blank" rel="nofollow" title="Facebook">
+    <i class="icon-large icon-fixed-width icon-facebook"></i>
+  </a>
+</div>

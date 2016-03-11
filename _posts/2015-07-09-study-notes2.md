@@ -4,6 +4,7 @@ title: 学习札记篇二
 category: 学习札记
 tags: ln ps
 ---
+{% include JB/setup %}
 
 ## Linux 文件链接
 （1） 硬链接
@@ -16,7 +17,6 @@ tags: ln ps
 
 > ln -s 源文件 目标文件
 
-<br/>
 ## PS 命令简介
 Linux上进程的5种状态为：
 （1）运行

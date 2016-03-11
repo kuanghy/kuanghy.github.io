@@ -8,9 +8,11 @@ tags: css 盒子模型
 CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素框处理元素内容（element content）、内边距（padding）、边框（border） 和 外边距（margin） 的方式。在HTML文档中，每个元素（element）都有盒子模型，所以说在Web世界里（特别是页面布局），Box Model无处不在。下图是CSS盒子模型的示意图：
 
 ![CSS2.0 盒子模型的层次3D示意图](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel.png)
+
 <div class="mark">图1 CSS2.0盒子模型的层次3D示意图</div>
 
 ![CSS 二维盒子模型示意图](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel2.png)
+
 <div class="mark">图2 CSS 二维盒子模型示意图</div>
 
 元素框的最内部分是实际的内容，直接包围内容的是内边距。内边距呈现了元素的背景。内边距的边缘是边框。边框以外是外边距，外边距默认是透明的，因此不会遮挡其后的任何元素。背景可以应用于由内容和内边距、边框组成的区域。
@@ -40,7 +42,7 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
 **提示：** <span class="emphasis">内边距、边框和外边距可以应用于一个元素的所有边，也可以应用于单独的边。外边距可以是负值，而且在很多情况下都要使用负值的外边距。</span>
 
-<br/>
+
 #### 盒子模型各属性详解：
 ![盒子模型详细图解](http://7xixhp.com1.z0.glb.clouddn.com/boxmodel3.png)
 <div class="mark">图4 盒子模型详细图解</div>
@@ -55,17 +57,14 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
  > 4、边框简写属性格式：border: border-width border-style (required)  border-color
 
-<br/>
 
 *  **padding（内边距）：** padding-top，padding-bottom ，padding-left，padding-rightborder
 
-<br>
 
 *  **margin（外边距）：** margin-top，margin-bottom ，margin-left，margin-right
 
 > 当margin设为负数时，会使被设为负数的块向相反的方向移动，甚至覆盖在另外的块上。当块之间是父子关系时，通过设置子块的margin参数为负数，可以将子块从父块中“分离”出来。
 
-<br/>
 
 *  **盒子的浮动：**
 
@@ -73,7 +72,6 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
 > 2、清除浮动：clear:none|left|right|both
 
-<br/>
 
 *  **属性值的简写形式说明：** 
 
@@ -83,10 +81,9 @@ CSS中， Box Model叫盒子模型（或框模型），Box Model规定了元素�
 
 > 3、如果给出4个属性值，依次表示上、右、下、左的属性，即顺时针排序。
 
-<br/>
+
 注：<span class="emphasis">本文中所引用的图片均收集自网络，内容也整理自各大学习网站，如涉及侵权问题，请留言告知！<span>
 
-<br/>
 #### 参考资料:
 http://www.w3school.com.cn/css/css_border.asp<br/>
 http://www.cnblogs.com/shuz/archive/2010/01/24/1655205.html

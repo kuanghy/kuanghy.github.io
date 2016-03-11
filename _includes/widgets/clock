@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+    <head>
+    </head>
+	<body>
+		<div align='center'>
+			<object classid="clsid:D27CDB6E-AE6D-11CF-96B8-444553540000" id="obj32" border="0" width="160" height="160">
+				<param name="movie" value="clock/clocktop2.swf">
+				<param name="quality" value="High">
+				<param name="wmode" value="transparent">
+				<embed src="/assets/swf/clocktop2.swf" type="application/x-shockwave-flash" name="obj32" width="160" height="160" quality="High" wmode="transparent"></object>
+			</div>
+	</body>
+
+</html>

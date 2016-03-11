@@ -1,0 +1,7 @@
+<a href="{{ site.JB.archive_path }}" title="查看所有文章"><i class="icon-fixed-width icon-file-text"></i> 最近发表</a>
+<span title="文章总数">{{ site.posts | size }}</span>
+<ul>
+{% for post in site.posts limit:10 %}
+  <li><a href="{{ post.url }}" title="查看《{{ post.title }}》">{{ post.title }}</a></li>
+{% endfor %}
+</ul>

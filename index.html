@@ -1,55 +1,83 @@
 ---
-title: 首页
-layout: page
+layout: default
+title: "Huoty's Blog"
+tagline: "Home Page"
+keywords: huoty, konghy, 旷世的忧伤, 计算机技术, 感悟
+description: "Huoty's blog，旷世的忧伤。专注于各类计算机技术，记录所感所想所思。"
+comments: false
 ---
+{% include JB/setup %}
+<section>
+  {% for post in paginator.posts %}
+  <article class="nested">
 
-<ul class="listing">
-{% for post in paginator.posts %}
-  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-  {% if year != y %}
-    {% assign year = y %}
-    <li class="listing-seperator">{{ y }}</li>
-  {% endif %}
-  <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    {% if site.truncate %}
-    <p>{{ post.content | strip_html | truncate: site.truncate }}</p>
-    {% endif%}
-  </li>
-{% endfor %}
-</ul>
+    <header>
+      <h1><a href="{{ post.url }}" title="查看《{{ post.title }}》">{{ post.title }}</a></h1>
+    </header>
 
-<div id="post-pagination" class="paginator">
+    <section>
+      <p>
+        {{ post.content | strip_html | truncate:300 }}
+      </p>
+      <a class="button-link" href="{{ post.url }}" rel="nofollow" title="查看全文">read more</a>
+    </section>
 
-  {% if paginator.previous_page %}
-    {% if paginator.previous_page == 1 %}
-    <a href="/"><前页</a>
+    <footer>
+      <p>
+        发表日期：<a href="{{ site.JB.archive_path }}#{{ post.date | date: '%B-%Y' }}" rel="nofollow" title="查看此月所有文章">{{ post.date | date: "%d %B %Y" }}</a>，
+        作者：<a href="mailto:{{ site.author.email }}" rel="nofollow" title="向作者发送邮件">{{ site.author.name }}</a>，
+        类别：<a href="{{ site.JB.categories_path }}#{{ post.category }}-ref" rel="nofollow" title="查看此类别下的所有文章">{{ post.category }}</a>{% if site.JB.comments.provider == 'duoshuo' %}，
+        评论：<a href="{{ post.url }}#ds-thread" rel="nofollow" title="查看此文章的评论"><span class="ds-thread-count" data-thread-key="{{ post.title }}" data-count-type="comments"></span></a>{% endif %}
+      </p>
+    </footer>
+
+  </article>
+  {% endfor %}
+
+
+</section>
+
+<!-- Pagination Links -->
+<section class="pagination pagination-centered">
+  <ul>
+    <!-- First Page -->
+    {% if paginator.previous_page %}
+    <li><a href="/index.html">&laquo;&laquo;</a></li>
     {% else %}
-    <a href="/page{{paginator.previous_page}}">&lt;前页</a>
+    <li class="disabled"><a href="#">&laquo;&laquo;</a></li>
     {% endif %}
-  {% else %}
-    <span class="previous disabled">&lt;前页</span>
-  {% endif %}
 
-      {% if paginator.page == 1 %}
-      <span class="current-page">1</span>
+    <!-- Previous Page -->
+    {% if paginator.previous_page %}
+    <li>
+      {% if paginator.previous_page == 1 %}
+      <a href="/index.html">&laquo;</a>
       {% else %}
-      <a href="/">1</a>
+      <a href="/page{{ paginator.previous_page }}">&laquo;</a>
       {% endif %}
+    </li>
+    {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    {% endif %}
 
-    {% for count in (2..paginator.total_pages) %}
-      {% if count == paginator.page %}
-      <span class="current-page">{{count}}</span>
-      {% else %}
-      <a href="/page{{count}}">{{count}}</a>
-      {% endif %}
-    {% endfor %}
+    <!-- Current Page -->
+    <li class="active">
+      <span class="page_number ">第 {{ paginator.page }}/{{ paginator.total_pages }} 页</span>
+    </li>
 
-  {% if paginator.next_page %}
-    <a class="next" href="/page{{paginator.next_page}}">后页&gt;</a>
-  {% else %}
-    <span class="next disabled" >后页&gt;</span>
-  {% endif %}
-  (共{{ paginator.total_posts }}篇)
-</div>
+    <!-- Next Page -->
+    {% if paginator.next_page %}
+    <li><a href="/page{{paginator.next_page}}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+    {% endif %}
+
+    <!-- Last Page -->
+    {% if paginator.next_page %}
+    <li><a href="/page{{ paginator.total_pages }}">&raquo;&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&raquo;&raquo;</a></li>
+    {% endif %}
+  </ul>
+</section>
+

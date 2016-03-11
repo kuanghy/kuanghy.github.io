@@ -1,5 +1,4 @@
-# robots.txt generated at http://tool.chinaz.com/robots/ 
+# robots.txt  
 User-agent: *
 Disallow: 
-Disallow: /sitemap/
-Sitemap: http://kuanghy.github.io/sitemap.txt
+Sitemap: http://blog.konghy.cn/sitemap.xml

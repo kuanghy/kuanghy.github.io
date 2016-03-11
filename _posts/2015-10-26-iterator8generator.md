@@ -4,10 +4,10 @@ title:  Python 迭代器、生成器和列表解析
 category: python
 tags: python 迭代器 生成器 列表解析
 ---
+{% include JB/setup %}
 
 ## 迭代器
-迭代器是在版本 2.2 被加入 Python 的, 它为类序列对象提供了一个类序列的接口。 Python 的迭代无缝地支持
-序列对象, 而且它还允许迭代非序列类型, 包括用户定义的对象。即迭代器可以迭代不是序列但表现出序列行为的对象, 例如字典的 key , 一个文件的行, 等等。迭代器有以下特性：
+迭代器是在版本 2.2 被加入 Python 的, 它为类序列对象提供了一个类序列的接口。 Python 的迭代无缝地支持序列对象, 而且它还允许迭代非序列类型, 包括用户定义的对象。即迭代器可以迭代不是序列但表现出序列行为的对象, 例如字典的 key , 一个文件的行, 等等。迭代器有以下特性：
 
 - 提供了可扩展的迭代器接口.
 - 对列表迭代带来了性能上的增强. 
@@ -16,11 +16,11 @@ tags: python 迭代器 生成器 列表解析
 - 与所有已经存在的用户定义的类以及扩展的模拟序列和映射的对象向后兼容 
 - 迭代非序列集合(例如映射和文件)时, 可以创建更简洁可读的代码. 
 
-迭代器对象要求支持迭代器协议的对象，在Python中，支持迭代器协议就是实现对象的__iter__()和next()方法。其中__iter__()方法返回迭代器对象本身；next()方法返回容器的下一个元素，在结尾时引发StopIteration异常。
+迭代器对象要求支持迭代器协议的对象，在Python中，支持迭代器协议就是实现对象的 `__iter__()` 和 `next()` 方法。其中 \_\_iter__() 方法返回迭代器对象本身；next()方法返回容器的下一个元素，在结尾时引发 `StopIteration` 异常。
 
-### __iter__()和next()方法
+### \_\_iter\_\_() 和 next() 方法
 
-这两个方法是迭代器最基本的方法，一个用来获得迭代器对象，一个用来获取容器中的下一个元素。对于可迭代对象，可以使用内建函数iter()来获取它的迭代器对象：
+这两个方法是迭代器最基本的方法，一个用来获得迭代器对象，一个用来获取容器中的下一个元素。对于可迭代对象，可以使用内建函数 `iter()` 来获取它的迭代器对象：
 
 {% highlight python %}
 li = [1, 2]
@@ -34,20 +34,21 @@ print it.next()
 
 结果如下所示:
 
-<div class="hblock"><pre>
-<listiterator object at 0xb708aa6c>
+<pre>
+&lt;listiterator object at 0xb708aa6c>
 1
 2
 Traceback (most recent call last):
-  File "iter.py", line 21, in <module>
+  File "iter.py", line 21, in &lt;module>
     print it.next()
 StopIteration
-</pre></div>
+</pre>
 
 list 本身是可迭代的，通过 iter() 方法可以获得其迭代器对象，然后就可以通过 next() 方法来访问 list 中的元素。当容器中没有可以访问的元素时， next() 方法将会抛出一个 StopIteration 的异常，从而终止迭代器。当我们使用for语句的时候，for语句就会自动的通过__iter__()方法来获得迭代器对象，并且通过next()方法来获取下一个元素，遇到 StopIteration 异常时会自动结束迭代。
 
 ### 自定义迭代器
-自己创建迭代器实际上就是实现一个带有 __iter__() 方法和 next() 方法的类，用该类创建的实例即是可迭代对象。例如我们用迭代器来实现斐波那契数列：
+
+自己创建迭代器实际上就是实现一个带有 \_\_iter__() 方法和 next() 方法的类，用该类创建的实例即是可迭代对象。例如我们用迭代器来实现斐波那契数列：
 
 {% highlight python %}
 class Fibs:
@@ -96,9 +97,10 @@ for i in myRange:
 {% endhighlight %}
 
 ### 可迭代对象和迭代器对象
-可迭代对象即具有 \_\_iter__() 方法的对象，该方法可获取其迭代器对象。迭代器对象即具有 \_\_next__() 方法的对象。也就是说，一个实现了 \_\_iter__() 的对象是可迭代的，一个实现了 next() 方法的对象则是迭代器。可迭代对象也可以是迭代器对象，如文件对象。此时可迭代对象自己有__next__()方法，而其__iter__()方法返回的就是它自己。对于许多内置对象及其派生对象，如list、dict等，由于需要支持多次打开迭代器，因此自己并非迭代器对象，需要用__iter__()方法返回其迭代器对象，并用迭代器对象来访问其它元素。
 
-以上例子中的 myRange 这个对象就是一个可迭代对象，同时它本身也是一个迭代器对象。对于一个可迭代对象，如果它本身又是一个迭代器对象，就会有这样一个问题，其没有办法支持多次迭代。如下所示;
+可迭代对象即具有 `__iter__`() 方法的对象，该方法可获取其迭代器对象。迭代器对象即具有 `next()` 方法的对象。也就是说，一个实现了 `__iter__()` 的对象是可迭代的，一个实现了 `next()` 方法的对象则是迭代器。可迭代对象也可以是迭代器对象，如文件对象。此时可迭代对象自己有 `next()` 方法，而其`__iter__()`方法返回的就是它自己。对于许多内置对象及其派生对象，如 list、dict 等，由于需要支持多次打开迭代器，因此自己并非迭代器对象，需要用`__iter__()` 方法返回其迭代器对象，并用迭代器对象来访问其它元素。
+
+以上例子中的 myRange 这个对象就是一个可迭代对象，同时它本身也是一个迭代器对象。对于一个可迭代对象，如果它本身又是一个迭代器对象，就会有这样一个问题，其没有办法支持多次迭代。如下所示：
 
 {% highlight python %}
 myRange = MyRange(3)
@@ -216,7 +218,7 @@ print "------------"
 
 执行结果：
 
-<div class="hblock"></pre>
+<div class="hblock"><pre>
 --------------------
 beginning of Zrange
 before yield 0
@@ -233,7 +235,7 @@ before yield 2
 after yield 3
 endding of Zrange
 Traceback (most recent call last):
-  File "one.py", line 38, in <module>
+  File "one.py", line 38, in &lt;module>
     print zrange.next()
 StopIteration
 </pre></div>
@@ -303,8 +305,8 @@ print simple_generator()
 运行结果：
 
 <div class="hblock"><pre>
-<function simple_generator at 0xb743d79c>
-<generator object simple_generator at 0xb71c7be4>
+&lt;function simple_generator at 0xb743d79c>
+&lt;generator object simple_generator at 0xb71c7be4>
 </pre></div>
 
 ### 生成器方法

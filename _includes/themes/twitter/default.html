@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="zh-CN"> <!--<![endif]-->
+
+<head>
+  <meta charset="UTF-8">
+  <!--[if IE 8 ]><meta http-equiv="X-UA-Compatible" content="IE=7"><![endif]-->
+
+  <title>{% if page.title %} {{ page.title }} {% else %}{{ site.title }}{% endif %}</title>
+  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: "," }}">{% endif %}
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <meta name="baidu-site-verification" content="fjE6fa4d3J" />
+  <meta name="author" content="{{ site.author.name }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ BASE_PATH }}/favicon.ico">
+
+
+  <!-- Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ site.JB.rss_path }}">
+  <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{ site.JB.atom_path }}">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ ASSET_PATH }}/css/style.css">
+  <link rel="stylesheet" href="{{ ASSET_PATH }}/css/font-awesome.min.css">
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="{{ ASSET_PATH }}/js/jquery-1.10.1.min.js"></script>
+</head>
+
+<body>
+
+  <div id="wrap">
+    <header id="top">
+      <!-- Home Link -->
+      <a id="logo" href="{{ HOME_PATH }}" title="回到首页">
+        <img src="{{ IMAGE_PATH }}/website-logo.png" alt="{{ site.title }}">
+		<!--{% include widgets/japan_clock %} -->
+      </a>
+      <!-- Navigation Bar -->
+      <nav id="navbar">
+        <ul>
+          {% capture home_url %}{{ HOME_PATH | append: '/index.html' | replace: '//', '/' }}{% endcapture %}
+          <li{% if page.url == home_url %} class="active"{% endif %}>
+            <a href="{{ HOME_PATH }}" rel="nofollow" title="首页">首页</a>
+          </li>
+          <li{% if page.url == site.JB.categories_path %} class="active"{% endif %}>
+            <a href="{{ site.JB.categories_path }}" rel="nofollow" title="分类">分类</a>
+          </li>
+          <li{% if page.url == site.JB.tags_path %} class="active"{% endif %}>
+            <a href="{{ site.JB.tags_path }}" rel="nofollow" title="标签">标签</a>
+          </li>
+          <li{% if page.url == site.JB.archive_path %} class="active"{% endif %}>
+            <a href="{{ site.JB.archive_path }}" rel="nofollow" title="归档">归档</a>
+          </li>
+          <li{% if page.url == site.JB.messages_path %} class="active"{% endif %}>
+            <a href="{{ site.JB.messages_path }}" rel="nofollow" title="留言板">留言板</a>
+          </li>
+          <li{% if page.url == site.JB.about_path %} class="active"{% endif %}>
+            <a href="{{ site.JB.about_path }}" rel="nofollow" title="关于我">关于我</a>
+          </li>
+          <li>
+            {% include widgets/rss %}
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="main">
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <section id="search-box">
+          {% include widgets/search_box %}
+        </section>
+        <section id="search-box">
+          {% include widgets/clock %}
+        </section>
+        <section{% if page.date or page.title == '存档' or page.title == site.title %} class="active"{% endif %}>
+          {% include widgets/recent_posts_list %}
+        </section>
+        <section{% if page.title == '分类'  %} class="active"{% endif %}>
+          {% include widgets/categories_list %}
+        </section>
+        <section{% if page.title == '标签'%} class="active"{% endif %}>
+          {% include widgets/tag_cloud %}
+        </section>
+        <section{% if page.title == '代码仓库'%} class="active"{% endif %}>
+          {% include widgets/repos_list %}
+        </section>
+        <section{% if page.title == '友情链接'%} class="active"{% endif %}>
+          {% include widgets/links_list %}
+        </section>
+       </aside>
+      <!-- Main Content -->
+      <div id="main-inner">
+        <div id="loader"><img src="{{ ASSET_PATH }}/img/loading.gif" alt="请稍侯"></div>
+        <div id="main-content">
+          {{ content }}
+        </div>
+      </div>
+
+      {% include widgets/back_top_button %}
+
+    </section>
+
+    <footer id="bottom">
+      <p align="center">
+        Copyright &copy; 2015-{{ site.time | date: '%Y' }} <a href="/kwsite/" title="Huoty's Homepage">Huoty</a> |&nbsp;
+        Based on<a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework"> Jekyll Bootstrap </a>and<a href="http://twitter.github.com/bootstrap/" target="_blank" title="Twitter Bootstrap"> Twitter Bootstrap </a> |&nbsp;
+        Maintaining by <a href="/kwsite/" title="Huoty's Homepage">Huoty</a> @ <a href="https://gitcafe.com/konghy/konghy" target="_blank" title="Project Homepage"> Gitcafe </a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

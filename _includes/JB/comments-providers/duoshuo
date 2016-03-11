@@ -1,0 +1,45 @@
+<style type="text/css">
+#ds-reset .ds-avatar img {
+  width: 54px !important;
+  height: 54px !important;
+  -webkit-border-radius: 27px !important;
+  -moz-border-radius: 27px !important;
+  border-radius: 27px !important;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  -moz-transition: -moz-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+}
+#ds-reset .ds-avatar img:hover {
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
+}
+#ds-reset .ds-powered-by {
+  display: none;
+}
+#ds-thread {
+  clear: none !important;
+  float: left;
+  margin-top: 0;
+  width: 100%;
+}
+</style>
+
+<!-- Duoshuo Comment BEGIN -->
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="{{ page.thread }}" data-title="{{ page.title }}" data-url="{{ site.url }}{{ page.url }}"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"konghy"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+<!-- Duoshuo Comment END -->

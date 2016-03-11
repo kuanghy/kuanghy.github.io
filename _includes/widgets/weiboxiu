@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <meta http-equiv="content-style-type" content="text/css" />
+    </head>
+<body>
+<!--
+<iframe width="302" height="552"  scrolling="no" frameborder="0" src="http://service.weibo.com/staticjs/weiboshow.swf?verifier=5089da68&uid=1747720793&width=300&height=550&fansRow=2&isTitle=1&isWeibo=1&isFans=1&noborder=0&ptype=1&colors=464646,2b2b2b,dcdcdc,558caa"></iframe>
+-->
+<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://service.weibo.com/staticjs/weiboshow.swf?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=4&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=3284697717&verifier=ffce22a7&dpc=1"></iframe>
+</body>
+</html>

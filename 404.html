@@ -1,26 +1,14 @@
----
-title: '404 培鸡诺特方的'
-layout: page
----
-
-<script>
-var posts =
-{
-{% for post in site.posts %} {% if post.thread %}
-"{{ post.thread }}" : "{{ post.url }}",{% endif %}{% endfor %}
-};
-
-var path = location.pathname;
-if(path.charAt(path.length - 1) == '/') path = path.substring(0, path.length - 1);
-var name = path.substring(path.lastIndexOf('/') + 1);
-var url = posts[name];
-if (url)
-{
-	document.write("您访问的文章已经转移到新网址，正在为您转跳到 <a href=" + url + ">" + url + "</a>");
-	location.href = url;
-}
-else
-{
-	document.write("文章或附件未找到，请转到 <a href='/categories'>分类</a> 或返回 <a href='/'>首页</a>。如有问题请联系 <a href='mailto:{{ site.email }}'>{{ site.email }}</a><iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/7349' width='640' height='462' style='display:block;'></iframe>");
-}
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="keywords" content="个人主页, 旷世的忧伤, 网址导航"/>
+<meta name="description" content="旷世的忧伤，个人主页"/>
+<meta name="author" content="Huoty"/>
+<title>旷世的忧伤 | Huoty's Blog</title>
+<link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+    <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="http://blog.konghy.cn/" homePageName="回到首页"></script>
+</body>
+</html>
