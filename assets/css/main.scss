@@ -75,6 +75,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
+
+
 h1 {
   // mobile first
   @include font-size(20px);
@@ -926,4 +928,25 @@ tbody tr:nth-child(odd) th {
 .search button:hover{
     background: #aaa;
     color:#444;
+}
+
+.post h2 {
+  margin-top: 24px;
+  font-weight: 600;
+}
+.post h3 {
+  margin-top: 23px;
+  font-weight: 600;
+}
+.post h4 {
+  margin-top: 22px;
+  font-weight: 600;
+}
+.post h5 {
+  margin-top: 20px;
+  font-weight: 600;
+}
+.post h6 {
+  margin-top: 20px;
+  font-weight: 600;
 }

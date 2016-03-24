@@ -47,9 +47,9 @@ loglevel=info
 
 supervisor 的管理和使用只有两个命令：
 
--  **supervisord : **  supervisor的服务器端部分，用于supervisor启动
+- **supervisord： ** supervisor的服务器端部分，用于supervisor启动
 
--  **supervisorctl：** 启动supervisor的命令行窗口，在该命令行中可执行start、stop、status、reload等操作。
+- **supervisorctl：** 启动supervisor的命令行窗口，在该命令行中可执行start、stop、status、reload等操作。
 
 启动 supervisor 的服务器会默认启动所有应用：
 
@@ -69,11 +69,191 @@ supervisor 的管理和使用只有两个命令：
 
 将配置文件中 `[inet_http_server]` 部分打开并做相应配置，然后重启 supervisor 服务即可用浏览器管理所有应用。
 
+#### 添加开机启动服务
+
+如果用 pip 或者 easy_instal 安装 supervisor，则不会默认将其添加到系统开机启动服务中。但这项工作我们可以自己来做，如果你在 Ubuntu 系统下工作，用 apt-get 来安装则一切工作都会为你做好。
+
+要添加系统服务首先需要在 `/etc/init.d/` 中创建服务脚本：
+
+<pre>
+#! /bin/sh
+#
+# skeleton	example file to build /etc/init.d/ scripts.
+#		This file should be used to construct scripts for /etc/init.d.
+#
+#		Written by Miquel van Smoorenburg <miquels@cistron.nl>.
+#		Modified for Debian
+#		by Ian Murdock <imurdock@gnu.ai.mit.edu>.
+#               Further changes by Javier Fernandez-Sanguino <jfs@debian.org>
+#
+# Version:	@(#)skeleton  1.9  26-Feb-2001  miquels@cistron.nl
+#
+### BEGIN INIT INFO
+# Provides:          supervisor
+# Required-Start:    $remote_fs $network $named
+# Required-Stop:     $remote_fs $network $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop supervisor
+# Description:       Start/stop supervisor daemon and its configured
+#                    subprocesses.
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/bin/supervisord
+NAME=supervisord
+DESC=supervisor
+
+test -x $DAEMON || exit 0
+
+LOGDIR=/var/log/supervisor
+PIDFILE=/var/run/$NAME.pid
+DODTIME=5                   # Time to wait for the server to die, in seconds
+                            # If this value is set too low you might not
+                            # let some servers to die gracefully and
+                            # 'restart' will not work
+
+# Include supervisor defaults if available
+if [ -f /etc/default/supervisor ] ; then
+	. /etc/default/supervisor
+fi
+DAEMON_OPTS="-c /etc/supervisord.conf $DAEMON_OPTS"
+
+set -e
+
+running_pid()
+{
+    # Check if a given process pid's cmdline matches a given name
+    pid=$1
+    name=$2
+    [ -z "$pid" ] && return 1
+    [ ! -d /proc/$pid ] &&  return 1
+    (cat /proc/$pid/cmdline | tr "\000" "\n"|grep -q $name) || return 1
+    return 0
+}
+
+running()
+{
+# Check if the process is running looking at /proc
+# (works for all users)
+
+    # No pidfile, probably no daemon present
+    [ ! -f "$PIDFILE" ] && return 1
+    # Obtain the pid and check it against the binary name
+    pid=`cat $PIDFILE`
+    running_pid $pid $DAEMON || return 1
+    return 0
+}
+
+force_stop() {
+# Forcefully kill the process
+    [ ! -f "$PIDFILE" ] && return
+    if running ; then
+        kill -15 $pid
+        # Is it really dead?
+        [ -n "$DODTIME" ] && sleep "$DODTIME"s
+        if running ; then
+            kill -9 $pid
+            [ -n "$DODTIME" ] && sleep "$DODTIME"s
+            if running ; then
+                echo "Cannot kill $NAME (pid=$pid)!"
+                exit 1
+            fi
+        fi
+    fi
+    rm -f $PIDFILE
+    return 0
+}
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: "
+	start-stop-daemon --start --quiet --pidfile $PIDFILE \
+		--startas $DAEMON -- $DAEMON_OPTS
+	test -f $PIDFILE || sleep 1
+        if running ; then
+            echo "$NAME."
+        else
+            echo " ERROR."
+        fi
+	;;
+  stop)
+	echo -n "Stopping $DESC: "
+	start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE 
+	echo "$NAME."
+	;;
+  force-stop)
+	echo -n "Forcefully stopping $DESC: "
+        force_stop
+        if ! running ; then
+            echo "$NAME."
+        else
+            echo " ERROR."
+        fi
+	;;
+  #reload)
+	#
+	#	If the daemon can reload its config files on the fly
+	#	for example by sending it SIGHUP, do it here.
+	#
+	#	If the daemon responds to changes in its config file
+	#	directly anyway, make this a do-nothing entry.
+	#
+	# echo "Reloading $DESC configuration files."
+	# start-stop-daemon --stop --signal 1 --quiet --pidfile \
+	#	/var/run/$NAME.pid --exec $DAEMON
+  #;;
+  force-reload)
+	#
+	#	If the "reload" option is implemented, move the "force-reload"
+	#	option to the "reload" entry above. If not, "force-reload" is
+	#	just the same as "restart" except that it does nothing if the
+	#   daemon isn't already running.
+	# check wether $DAEMON is running. If so, restart
+	start-stop-daemon --stop --test --quiet --pidfile $PIDFILE \
+        --startas $DAEMON \
+	&& $0 restart \
+	|| exit 0
+	;;
+  restart)
+    echo -n "Restarting $DESC: "
+    start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE
+	[ -n "$DODTIME" ] && sleep $DODTIME
+	start-stop-daemon --start --quiet --pidfile $PIDFILE \
+		--startas $DAEMON -- $DAEMON_OPTS
+	echo "$NAME."
+	;;
+  status)
+    echo -n "$NAME is "
+    if running ;  then
+        echo "running"
+    else
+        echo " not running."
+        exit 1
+    fi
+    ;;
+  *)
+	N=/etc/init.d/$NAME
+	# echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $N {start|stop|restart|force-reload|status|force-stop}" >&2
+	exit 1
+	;;
+esac
+</pre>
+
+记得为脚本添加可执行权限 `chmod a+x /etc/init.d/superviser`。然后为将 supervisor 添加到系统服务中：
+
+> update-rc.d supervisor defaults
+
+这样就 supervisor 就可以随系统开机启动，并且可以像系统服务那样来管理。
+
 #### 配置文件详解
 
 <pre>
 [unix_http_server]            
-file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和supervisord通                                信就是通过它进行的。如果不设置的话，supervisorctl也就不能用了  
+file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和supervisord通信就是通过它进行的。如果不设置的话，supervisorctl也就不能用了  
                           不设置的话，默认为none。 非必须设置        
 ;chmod=0700                 ; 这个简单，就是修改上面的那个socket文件的权限为0700
                           不设置的话，默认为0700。 非必须设置
