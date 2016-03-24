@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python模块简介 -- anydbm, shelve 
-category: python
+category: Python
 tags: python anydbm shelve
 ---
 

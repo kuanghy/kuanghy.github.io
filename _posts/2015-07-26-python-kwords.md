@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 函数参数与可变长参数
-category: python
+category: Python
 tags: python 可变参数
 ---
 

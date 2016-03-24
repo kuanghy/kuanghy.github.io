@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python sys模块参考手册
-category: python
+category: Python
 tags: python sys
 ---
 

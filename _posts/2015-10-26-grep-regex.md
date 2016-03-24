@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 下 grep 命令的正则表达式规范
-category: linux
+category: Linux
 tags: grep linux
 ---
 

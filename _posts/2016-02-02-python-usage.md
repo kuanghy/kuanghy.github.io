@@ -3,10 +3,9 @@ layout: post
 title: "Python 独特用法总结(map、reduce、filter等)"
 keywords: Python map reduce filter lambda
 description: "总结 Python 的一些高级的、独特的用法，例如 map、reduce、filter、lambda、列表推导式等"
-category: python
+category: Python
 tags: Python map reduce filter lambda
 ---
-{% include JB/setup %}
 
 ## Map 函数
 

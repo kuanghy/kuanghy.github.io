@@ -4,7 +4,6 @@ title: 学习札记篇二
 category: 学习札记
 tags: ln ps
 ---
-{% include JB/setup %}
 
 ## Linux 文件链接
 （1） 硬链接

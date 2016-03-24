@@ -1,7 +1,7 @@
 ---
 layout: post
 title: RPM包的简单管理以及包的制作过程简介
-category: linux
+category: Linux
 tags: linux rpm rpm2cpio cpio
 ---
 

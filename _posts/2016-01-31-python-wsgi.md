@@ -3,10 +3,9 @@ layout: post
 title: "Python Web服务网关接口（WSGI）"
 keywords: Python  WSGI wsgiref
 description: "WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种低级别的接口"
-category: python
+category: Python
 tags: Python  WSGI wsgiref
 ---
-{% include JB/setup %}
 
 ## WSGI 简介
 

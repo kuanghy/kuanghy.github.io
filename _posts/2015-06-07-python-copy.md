@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 对象拷贝 -- 浅拷贝与深拷贝
-category: python
+category: Python
 tags: 浅拷贝 深拷贝
 ---
 

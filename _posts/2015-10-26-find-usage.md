@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux find命令用法简介
-category: linux
+category: Linux
 tags: find linux
 ---
 

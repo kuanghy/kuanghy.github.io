@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux系统用户、组以及文件权限简介
-category: linux
+category: Linux
 tags: chmod chgrp chonw
 ---
 

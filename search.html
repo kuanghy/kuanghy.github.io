@@ -1,10 +1,43 @@
 ---
-layout: page
-title: 站内搜索 | Huoty's Blog
-header: Pages
+layout: default
+title: 搜索本站内容
+permalink: /search/
 ---
-<h2><font color='red'>搜索结果</font></h2>
-  <div id="search_results"></div>
+
+<script async src="{{ site.baseurl }}/assets/js/search.js"></script>
 <script>
-	$('#search_results').tapir({'token': '52e20631a042b60200000001'});
+    var baseurl = "{{ site.baseurl }}";
 </script>
+
+<form class="search" action="{{ site.baseurl }}/search">
+<input type="search" id="search" name="q" placeholder="Search here..." required>
+<button type="submit">Search</button>
+</form>
+
+<div id="home" class="page-content wc-container">
+	<div class="posts"><hr>
+        <div id="search-results">
+        {% for post in site.posts %}
+            <div id="{{ post.id | replace: '/', '-' }}" style="display: none;">
+	        <div class="post">
+                <h3 class="post-title">
+                    <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">
+                        {{ post.title }}
+    		        </a>
+		        </h3>
+                <p class="post-meta">
+                {% if (post.categories.size > 0 %}
+                <span class="categories">
+                {{ post.categories | array_to_sentence_string }}
+                </span> |
+                {% endif %}
+                <span class="post-date">
+                {{ post.date | date: "%b %-d, %Y" }}
+                </span>
+                </p>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>

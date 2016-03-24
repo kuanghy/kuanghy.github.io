@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python模块简介 -- hashlib
-category: python
+category: Python
 tags: python hashlib
 ---
 

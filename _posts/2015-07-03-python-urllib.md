@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python模块简介 -- urllib, urllib2
-category: python
+category: Python
 tags: urllib python
 ---
 

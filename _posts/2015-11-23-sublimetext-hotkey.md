@@ -4,7 +4,6 @@ title: "Sublime Text 常用快捷键整理"
 category: 文本编辑
 tags: sublime
 ---
-{% include JB/setup %}
 
 ### 插入
 

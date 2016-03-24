@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python邮件发送方法简介
-category: python
+category: Python
 tags: smtplib email 邮件 python
 ---
 

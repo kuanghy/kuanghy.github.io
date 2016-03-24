@@ -1,10 +1,9 @@
 ---
 layout: post
 title:  Python 迭代器、生成器和列表解析
-category: python
+category: Python
 tags: python 迭代器 生成器 列表解析
 ---
-{% include JB/setup %}
 
 ## 迭代器
 迭代器是在版本 2.2 被加入 Python 的, 它为类序列对象提供了一个类序列的接口。 Python 的迭代无缝地支持序列对象, 而且它还允许迭代非序列类型, 包括用户定义的对象。即迭代器可以迭代不是序列但表现出序列行为的对象, 例如字典的 key , 一个文件的行, 等等。迭代器有以下特性：

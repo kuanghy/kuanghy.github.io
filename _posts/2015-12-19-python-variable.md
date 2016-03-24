@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "Python 类变量与实例变量"
-category: python
+category: Python
 tags: virtualenv
 ---
-{% include JB/setup %}
 
 ### 基本概念
 

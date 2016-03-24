@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 下查看大文件的方法总结
-category: linux
+category: Linux
 tags: vim LargeFile glogg joe
 ---
 

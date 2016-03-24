@@ -1,6 +1,0 @@
-.navbar-search div{position:relative;margin-right:20px;}
-.navbar-inner .navbar-search .search-query:focus,
-.navbar-inner .navbar-search .search-query.focused,
-.navbar-inner .navbar-search .search-query{padding-right:28px;}
-.navbar-search button.icon-search{position:absolute;right:10px;top:7px;border:none;background-color:transparent;}
-.search-hidden{width:0px;overflow:hidden;height:0px;}

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python time模块参考手册
-category: python
+category: Python
 tags: python time
 ---
 

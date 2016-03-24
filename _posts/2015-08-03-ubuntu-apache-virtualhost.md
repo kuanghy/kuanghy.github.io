@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ubuntu下简单配置Apache虚拟主机的方法
-category: linux
+category: Linux
 tags: ubuntu apache 虚拟主机
 ---
 

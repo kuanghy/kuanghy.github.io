@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "PHP向客户端广播信息"
-category: web设计
+category: Web设计
 tags: broadcast socket
 ---
-{% include JB/setup %}
 
 在网络中数据传播分为:Unicast(单播)   ,   Multicast(多播或者组播)  和 Broadcast(广播)。广播和多播仅应用于UDP，它们对需将报文同时传往多个接收者的应用来说十分重要。而 TCP 是一个面向连接的协议，它意味着分别运行于两主机（由IP地址确定）内的两进程（由端口号确定）间存在一条连接。广播地址在默认情况下是不能让路由器转发到别的接口的，广播不能穿越路由器。广播有以下几种形式：
 

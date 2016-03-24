@@ -4,7 +4,6 @@ title: "Windows 下 CodeBlocks 编译记录"
 category: 计算机科学
 tags: codeblocks mingw
 ---
-{% include JB/setup %}
 
 应工作需要在 Windows 上编译 CodeBlocks，在此做下编译记录。
 

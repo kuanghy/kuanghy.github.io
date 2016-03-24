@@ -3,10 +3,9 @@ layout: post
 title: "Python 多环境管理扩展 virtualenvwrapper"
 keywords: Python  virtualenv virtualenvwrapper
 description: "Virtualenvwrapper 只是一个 virtualenv 的辅助工具。"
-category: python
+category: Python
 tags: Python  virtualenv virtualenvwrapper
 ---
-{% include JB/setup %}
 
 `virtualenvwrapper`只是一个 virtualenv 的辅助工具。VirtualEnv 用于在一台机器上创建多个独立的 python 运行环境，VirtualEnvWrapper为前者提供了一些便利的命令行上的封装。使用 virtualenv 的好处是：
 

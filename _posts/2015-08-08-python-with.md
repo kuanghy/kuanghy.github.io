@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python上下文管理器与with语句
-category: python
+category: Python
 tags: python with 上下文管理器
 ---
 

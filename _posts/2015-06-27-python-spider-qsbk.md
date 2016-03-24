@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 简单爬虫程序 -- 抓取糗百段子
-category: python
+category: Python
 tags: python 爬虫
 ---
 

@@ -3,10 +3,9 @@ layout: post
 title: "Python 字典与集合"
 keywords: Python 字典 集合
 description: "字典是 Python 语言中唯一的映射类型。集合类型是由不同的元素组成的集合。"
-category: python
+category: Python
 tags: Python 字典 集合
 ---
-{% include JB/setup %}
 
 ## 字典
 

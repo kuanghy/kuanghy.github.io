@@ -3,10 +3,9 @@ layout: post
 title: "Python 序列：列表、元组"
 keywords: Python 列表 元组
 description: "重点描述列表的特殊特性以及与元组的区别，同时描述为什么要区分列表和元组"
-category: python
+category: Python
 tags: Python 列表 元组
 ---
-{% include JB/setup %}
 
 
 像字符串类型一样，列表类型也是序列式的数据类型，可以通过下标或者切片操作来访问某一个或者某一块连续的元素。然而，相同的方面也就这些，字符串只能由字符组成，而且是不可变的(不能单独改变它的某个值)，而列表则是能保留任意数目的 Python 对象的灵活的容器。

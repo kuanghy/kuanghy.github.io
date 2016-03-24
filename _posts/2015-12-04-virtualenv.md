@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "Linux下使用 virtualenv 虚拟独立 Python 环境"
-category: python
+category: Python
 tags: virtualenv
 ---
-{% include JB/setup %}
 
 ### 简介
 

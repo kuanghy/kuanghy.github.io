@@ -3,10 +3,9 @@ layout: post
 title: "Python 元类简述"
 keywords: Python  元类 metaclass
 description: "在 Python 中，类也是对象，元类就是用来创建类的工具"
-category: python
+category: Python
 tags: Python  元类 metaclass
 ---
-{% include JB/setup %}
 
 在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段，在 Python 中也是如此。但在 Python 中，类也是对象，只要使用 class 关键字，Python 就会创建一个对象，这个对象（类）自身拥有创建对象（类实例）的能力。而且可以对它做如下操作：
 

@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "artDialog 对话框组件使用简介"
-category: web设计
+category: Web设计
 tags: artDialogt
 ---
-{% include JB/setup %}
 
 `artDialog` 是一个轻巧且高度兼容的 javascript 对话框组件，可让你的网页交互拥有桌面软件般的用户体验。其支持锁定屏幕(遮罩)、模拟 alert 和 confirm、多窗口弹出、静止定位、支持 Ese 键关闭对话框、定时关闭、自定义位置、拖动、鼠标调节窗口大小、换肤等。其项目主页为：[http://aui.github.io/artDialog/](http://aui.github.io/artDialog/).
 

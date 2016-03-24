@@ -1,5 +1,11 @@
 ---
 layout: default
 ---
-{% include JB/setup %}
-{% include themes/twitter/page.html %}
+<div class="page-content wc-container">
+	<div class="post">
+		<h1>{{ page.title }}</h1>
+		<div class="post">
+			{{ content }}
+		</div>
+	</div>
+</div>

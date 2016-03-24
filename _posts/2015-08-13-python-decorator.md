@@ -1,10 +1,9 @@
 ---
 layout: post
 title: Python 函数式编程、装饰器以及一些相关概念简介
-category: python
+category: Python
 tags: python 函数式编程 装饰器
 ---
-{% include JB/setup %}
 
 ## 命名空间
 Python中通过提供 namespace 来实现重名函数/方法、变量等信息的识别。其大致可以分为三种 namespace，分别为：
