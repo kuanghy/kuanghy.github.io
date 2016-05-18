@@ -245,7 +245,7 @@ l = range(100000000)
 
 for i in iter(l):
     pass
-{% endhighlihgt %}
+{% endhighlight %}
 
 这里虽然在迭代时把列表转化成了迭代器，但是所有的数据已经放在内存中，并不会带来任何的效益。
 
