@@ -132,7 +132,7 @@ This module exports the following functions:
 **re.X**(全拼：VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。
 
 #### 2. re.match(string[, pos[, endpos]]) | re.match(pattern, string[, flags])
-这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 
+这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
 
 #### 3. Pattern对象属性：
 (1)**string**: 匹配时使用的文本。
@@ -170,7 +170,7 @@ This module exports the following functions:
 将匹配到的分组代入template中然后返回。template中可以使用\id或\g、\g引用分组，但不能使用编号0。\id与\g是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符’0’，只能使用\g0。
 
 #### 5. re.search(string[, pos[, endpos]]) | re.search(pattern, string[, flags])
-这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。 
+这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。
 
 #### 6. re.split(string[, maxsplit]) | re.split(pattern, string[, maxsplit])
 按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。
@@ -179,13 +179,18 @@ This module exports the following functions:
 搜索string，以列表形式返回全部能匹配的子串。
 
 #### 8. re.finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags])
-搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。 
+搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。
 
 #### 9. re.sub(repl, string[, count]) | re.sub(pattern, repl, string[, count])
-使用repl替换string中每一个匹配的子串后返回替换后的字符串。当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。count用于指定最多替换次数，不指定时全部替换。 
+使用repl替换string中每一个匹配的子串后返回替换后的字符串。当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。count用于指定最多替换次数，不指定时全部替换。
 
 #### 9. subn(repl, string[, count]) |re.sub(pattern, repl, string[, count])
 返回 (sub(repl, string[, count]), 替换次数)
+
+<br>
+## Re 模块常用方法总结
+
+![Re 模块常用方法总结](http://ww3.sinaimg.cn/mw690/c3c88275gw1f53scpabgoj20ei0e7dhf.jpg)
 
 <br/>
 ## Python Re模块的另一种使用方式

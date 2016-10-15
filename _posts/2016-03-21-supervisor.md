@@ -21,11 +21,18 @@ tags: Supervisor Python
 
 创建默认的配置文件：
 
-> echo_supervisord_conf > /etc/supervisord.conf
+> echo_supervisord_conf > /etc/supervisor/supervisord.conf
 
-配置文件中的 分号表示注释，可以根据需要修改里面的配置。如果要对某一应用进行管理，则需要在配置文件中添加 `program` 配置项，直接添加到文件尾即可。为了便于管理，这里我们创建一个 Supervisor 的子配置文件目录 `/etc/supervisor.d/`，把应用的配置独立出来放在这里边，这样便于管理。例如添加 Jupyter Notebook 的配置，创建配置文件`vi /etc/supervisor.d/jupyter-notebook.ini`，添加如下内容：
+配置文件中的分号表示注释，可以根据需要修改里面的配置。如果要对某一应用进行管理，则需要在配置文件中添加 `program` 配置项，直接添加到文件尾即可。为了便于管理，这里我们创建一个 Supervisor 的子配置文件目录 `/etc/supervisor/conf.d`，把应用的配置独立出来放在这里边，这样便于管理，但这需要在配置文件中添加如下配置：
 
-<pre>
+```
+[include]
+files = /etc/supervisor/conf.d/*.conf
+```
+
+配置的意思是包含 `/etc/supervisor/conf.d/` 下所有以 `.conf` 结果的文件。例如添加一个  Jupyter Notebook 的配置文件`vi /etc/supervisor/conf.d/jupyter-notebook.conf`，添加如下内容：
+
+```
 [program:notebook]
 command=jupyter notebook --notebook-dir=/home/konghy/JupyterNotebook --no-mathjax --no-browser
 directory=/home/konghy/JupyterNotebook
@@ -40,22 +47,22 @@ stdout_logfile_maxbytes=10MB
 stderr_logfile=/home/konghy/JupyterNotebook/.logs/ipython_check_err.log
 stderr_logfile_maxbytes=10MB
 stderr_logfile_backups=10
-loglevel=info 
-</pre>
+loglevel=info
+```
 
 #### 使用
 
 supervisor 的管理和使用只有两个命令：
 
-- **supervisord： ** supervisor的服务器端部分，用于supervisor启动
+- **supervisord：** supervisor的服务器端部分，用于supervisor启动；
 
 - **supervisorctl：** 启动supervisor的命令行窗口，在该命令行中可执行start、stop、status、reload等操作。
 
 启动 supervisor 的服务器会默认启动所有应用：
 
-> supervisord -c /etc/supervisord.conf 
+> supervisord -c /etc/supervisord.conf
 
-每次修改配置文件后需进入supervisorctl，执行reload， 改动部分才能生效，或者可以重启服务：
+每次修改配置文件后需进入 supervisorctl，执行reload， 改动部分才能生效，或者可以重启服务：
 
 > service supervisor restart
 
@@ -64,6 +71,15 @@ supervisor 的管理和使用只有两个命令：
 > supervisorctl start app
 
 > supervisorctl status
+
+#### Supervisorctl 子命令
+
+- **status:**    查看程序状态
+- **stop:**   关闭程序
+- **start:**  启动程序
+- **restart:**    重启程序
+- **reread:**    读取有更新（增加）的配置文件，不会启动新添加的程序
+- **update:**    重启配置文件修改过的程序
 
 #### Web 管理界面
 
@@ -181,7 +197,7 @@ case "$1" in
 	;;
   stop)
 	echo -n "Stopping $DESC: "
-	start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE 
+	start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE
 	echo "$NAME."
 	;;
   force-stop)
@@ -276,7 +292,7 @@ file=/tmp/supervisor.sock   ; socket文件的路径，supervisorctl用XML_RPC和
                           这个必须设置，不设置，supervisor就不用干活了
 logfile=/tmp/supervisord.log ; 这个是supervisord这个主进程的日志路径，注意和子进程的日志不搭嘎。
                            默认路径$CWD/supervisord.log，$CWD是当前目录。。非必须设置
-logfile_maxbytes=50MB        ; 这个是上面那个日志文件的最大的大小，当超过50M的时候，会生成一个新的日 
+logfile_maxbytes=50MB        ; 这个是上面那个日志文件的最大的大小，当超过50M的时候，会生成一个新的日
                            志文件。当设置为0时，表示不限制文件大小
                            默认值是50M，非必须设置。              
 logfile_backups=10           ; 日志文件保持的数量，上面的日志文件大于50M时，就会生成一个新文件。文件
@@ -308,7 +324,7 @@ minprocs=200                 ; 最小可用的进程描述符，低于这个值s
                            supervisord进程之前，会先切换到这个目录
                            默认不设置。。。非必须设置
 ;nocleanup=true              ; 这个参数当为false的时候，会在supervisord进程启动的时候，把以前子进程
-                           产生的日志文件(路径为AUTO的情况下)清除掉。有时候咱们想要看历史日志，当 
+                           产生的日志文件(路径为AUTO的情况下)清除掉。有时候咱们想要看历史日志，当
                            然不想日志被清除了。所以可以设置为true
                            默认是false，有调试需求的同学可以设置为true。。。非必须设置
 ;childlogdir=/tmp            ; 当子进程日志路径为AUTO的时候，子进程日志文件的存放路径。
@@ -328,9 +344,9 @@ minprocs=200                 ; 最小可用的进程描述符，低于这个值s
 ; the below section must remain in the config file for RPC
 ; (supervisorctl/web interface) to work, additional interfaces may be
 ; added by defining them in separate rpcinterface: sections
-[rpcinterface:supervisor]    ;这个选项是给XML_RPC用的，当然你如果想使用supervisord或者web server 这 
+[rpcinterface:supervisor]    ;这个选项是给XML_RPC用的，当然你如果想使用supervisord或者web server 这
                           个选项必须要开启的
-supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface 
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]              ;这个主要是针对supervisorctl的一些配置  
 serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接supervisord的时候，本地UNIX socket
@@ -381,7 +397,7 @@ serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接superv
                              默认就是true   。。非必须设置
 ;autorestart=unexpected        ; 这个是设置子进程挂掉后自动重启的情况，有三个选项，false,unexpected
                              和true。如果为false的时候，无论什么情况下，都不会被重新启动，
-                             如果为unexpected，只有当进程的退出码不在下面的exitcodes里面定义的退 
+                             如果为unexpected，只有当进程的退出码不在下面的exitcodes里面定义的退
                              出码的时候，才会被自动重启。当为true的时候，只要子进程挂掉，将会被无
                              条件的重启
 ;startsecs=1                   ; 这个选项是子进程启动多少秒之后，此时状态如果是running，则我们认为启
@@ -431,7 +447,7 @@ serverurl=unix:///tmp/supervisor.sock ; 这个是supervisorctl本地连接superv
 ;stderr_capture_maxbytes=1MB   ; 这个一样，和stdout_capture一样。 默认为0，关闭状态
 ;stderr_events_enabled=false   ; 这个也是一样，默认为false
 ;environment=A="1",B="2"       ; 这个是该子进程的环境变量，和别的子进程是不共享的
-;serverurl=AUTO                ; 
+;serverurl=AUTO                ;
 
 ; The below sample eventlistener section shows all possible
 ; eventlistener subsection values, create one or more 'real'

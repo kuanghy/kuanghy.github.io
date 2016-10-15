@@ -62,3 +62,29 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 > drop database 数据库名;
 
 其他对数据库的相应操作使用SQL语句即可。
+
+一个实用的 shell 脚本：
+
+```
+#! /bin/bash
+
+# Filename: _mysql.sh 2015-09-21
+# Author: Huoty <sudohuoty@gmail.com>
+# Script starts from here:
+
+__mysql() {
+    mysql -h localhost -u root --database test --password=123456
+}
+
+if [ "$*" != '' ] ; then
+    echo "$*" | __mysql
+else
+    __mysql
+fi
+```
+
+用该命令可以直接在命令行执行 mysql 命令和 sql 语句，而不用进入 mysql 的交互式解释器。例如：
+
+> _mysql.sh "show tables"
+> 
+> _mysql.sh "select * from users"

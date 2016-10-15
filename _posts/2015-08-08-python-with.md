@@ -100,3 +100,66 @@ class PypixOpen(object):
 with PypixOpen(filename, mode) as writer:
     writer.write("Hello World from our new Context Manager!")
 {% endhighlight %}
+
+<br/>
+## 更加优雅的上下文管理（contextlib模块）
+
+`contextlib`模块提供更易用的上下文管理器。
+
+#### contextlib.closing
+
+`contextlib.closing` 方法在语句块结束后调用对象的 close 方法。
+
+{% highlight python %}
+from contextlib import closing
+import urllib
+
+with closing(urllib.urlopen('http://www.python.org')) as page:
+    for line in page:
+        print line
+{% endhighlight %}
+
+#### contextlib.nested
+
+`contextlib.nested` 方法用于替换嵌套的 with 语句。例如，有两个文件，一个读一个写，即进行拷贝。以下是不提倡的用法：
+
+{% highlight python %}
+with open('toReadFile', 'r') as reader:
+    with open('toWriteFile', 'w') as writer:
+        writer.writer(reader.read())
+{% endhighlight %}
+
+这里可以用 contextlib.nested 进行优化：
+
+{% highlight python %}
+with contextlib.nested(open('fileToRead.txt', 'r'), \
+           open('fileToWrite.txt', 'w')) as (reader, writer):
+    writer.write(reader.read())
+{% endhighlight %}
+
+#### contextlib.contextmanager
+
+`contextlib.contextmanager` 是一个装饰器，它可以用来装饰被 yield 语句分割成两部分的函数，以此进行上下文管理。任何在yield之前的内容都可以看做在代码块执行前的操作，而任何yield之后的操作都可以看做是代码块结束后要做的操作。如果希望在上下文管理器中使用 “as” 关键字，那么就用 yield 返回你需要的值，它将通过 as 关键字赋值给新的变量。
+
+{% highlight python %}
+from contextlib import contextmanager
+
+@contextmanager
+def tag(name):
+    print "<%s>" % name
+    yield
+    print "</%s>" % name
+{% endhighlight %}
+
+使用 contextlib.contextmanager 时，可以大致套用如下的框架：
+
+{% highlight python %}
+from contextlib import contextmanager
+
+@contextmanager
+def closing(thing):
+    try:
+        yield thing
+    finally:
+        thing.close()
+{% endhighlight %}

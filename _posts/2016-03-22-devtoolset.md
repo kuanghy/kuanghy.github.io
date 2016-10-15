@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Centos 5 通过安装 devtoolset 来体验更高版本的 gcc"
+title: "通过安装 devtoolset 来体验更高版本的 gcc"
 keywords: devtoolset
 description: "Devtoolset, 第三方 gcc 版本库"
 category: Linux
