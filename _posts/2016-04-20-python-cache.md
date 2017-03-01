@@ -83,65 +83,31 @@ if __name__ == '__main__':
 
 被 lru_cache 装饰的函数会有 `cache_clear` 和 `cache_info` 两个方法，分别用于清除缓存和查看缓存信息。
 
-这里用一个示例演示 lru_cache 效果：
+这里用一个简单的示例演示 lru_cache 效果：
 
 {% highlight python %}
-#! /usr/bin/env python
-# -*- coding: utf-8 -*-
+from functools import lru_cache
+@lru_cache(None)
+def add(x, y):
+    print("calculating: %s + %s" % (x, y))
+    return x + y
 
-# *************************************************************
-#     Filename @  lru_cache.py
-#       Author @  Huoty
-#  Create date @  2016-04-09 13:54:25
-#  Description @  
-# *************************************************************
-
-import time
-import urllib
-import functools32
-
-def timeit(func):
-    @functools32.wraps(func)
-    def wrapper(*args, **kw):
-        start = time.time()
-        result = func(*args, **kw)
-        end = time.time()
-        print "Total time running %s: %s." % (func.__name__, str(end-start))
-        return result
-    return wrapper
-    
-@functools32.lru_cache(maxsize=24) 
-@timeit
-def get_webpage(num): 
-    """ 
-    获取特定Python模块网络页面 
-    """     
-    webpage = "http://www.python.org/dev/peps/pep-%04d/".format(num) 
-    print webpage
-    try: 
-        with urllib.request.urlopen(webpage) as request: 
-            return request.read() 
-    except Exception:
-        return None 
-
-# Script starts from here
- 
- 
-if __name__ == '__main__': 
-    numt = (8, 290, 308, 320, 8, 218, 320, 279, 289, 320, 9991) 
-    for num in numt: 
-        page = get_webpage(num) 
-        print page
-        if page: 
-            print("{} module page found".format(num)) 
-
-    for i in range(8):
-        print i
-        get_webpage("functools")
-
-    get_webpage("time")
-    print get_webpage.cache_info()
-    get_webpage.cache_clear()
-    print get_webpage.cache_info()
-    print dir(get_webpage)
+print(add(1, 2))
+print(add(1, 2))
+print(add(2, 3))
 {% endhighlight %}
+
+输出结果：
+
+```
+calculating: 1 + 2
+3
+3
+calculating: 2 + 3
+5
+```
+
+从结果可以看出，当第二次调用 add(1, 2) 时，并没有真正执行函数体，而是直接返回缓存的结果。
+
+有一个用 C 实现的，更快的，同时兼容 Python2 和 Python3 的第三方模块 [fastcache](https://github.com/pbrady/fastcache) 能够实现同样的功能。
+

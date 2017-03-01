@@ -293,3 +293,57 @@ Mac 安装：
 
 > expand -t 4 test.txt > test1.txt
 
+### 抓包工具
+
+- [charles](https://www.charlesproxy.com/)
+- [Fiddler](http://www.telerik.com/fiddler)
+- [wireshark](https://www.wireshark.org/)
+- [mitmproxy](https://mitmproxy.org/)
+
+### pwgen
+
+一个生成随机、无特殊含义但可以正常拼读的密码。安装：
+
+> sudo apt-get install pwgen
+
+生成14位不含大写字母的密码：
+
+> pwgen -A 14
+
+参数：
+
+```
+-c 或 --capitalize 生成的密码中至少包含一个大写字母
+-A 或 --no-capitalize 生成的密码中不含大写字母
+-n 或 --numerals 生成的密码中至少包含一个数字
+-0 或 --no-numerals 生成的密码中不含数字
+-y 或 --symbols 生成的密码中至少包含一个特殊字符
+-s 或 --secure 生成一个完全随机的密码
+-B 或 --ambiguous 生成的密码中不含易混淆字符
+-h 或 --help 输出帮助信息
+-H 或 --sha1=path/to/file[#seed] 使用指定文件的 sha1 哈希值作为随机生成器
+-C 按列输出生成的密码
+-1 不按列输出生成的密码
+-v 或 --no-vowels 不使用任何元音，以免意外生成让人讨厌的单词
+```
+
+### Zeal
+
+[Zeal](https://zealdocs.org/) 是一个简单的离线 API 文档浏览器，仿照 [Dash](https://kapeli.com/dash)（一个 OSX 应用） 写成，能在 Linux 和 Windows 上使用。Linux 下安装和使用可以参考: [http://xmodulo.com/browse-search-api-documentation-offline-linux.html](http://xmodulo.com/browse-search-api-documentation-offline-linux.html)
+
+### ack 
+
+[Ack](http://beyondgrep.com/) 是比 grep 更快的文本搜索工具
+
+### Ag
+
+[Ag](https://github.com/ggreer/the_silver_searcher) 是比 grep、ack 更快的搜索工具
+
+### ccat
+
+[Ccat](https://github.com/jingweno/ccat) 是 cat 的着色版本，可以对输出文本进行语法高亮
+
+### Insomnia
+
+[Insomnia](https://insomnia.rest/) 跨平台的、免费的 REST 客户端
+

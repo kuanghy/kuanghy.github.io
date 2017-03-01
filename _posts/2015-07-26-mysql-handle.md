@@ -61,6 +61,14 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 
 > drop database 数据库名;
 
+**查看表结构:**
+
+> desc 表名;
+>
+> show columns from 表名;
+>
+> describe 表名;
+
 其他对数据库的相应操作使用SQL语句即可。
 
 一个实用的 shell 脚本：

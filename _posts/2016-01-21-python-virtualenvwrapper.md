@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python 多环境管理扩展 virtualenvwrapper"
-keywords: Python  virtualenv virtualenvwrapper
+keywords: Python virtualenv virtualenvwrapper
 description: "Virtualenvwrapper 只是一个 virtualenv 的辅助工具。"
 category: Python
-tags: Python  virtualenv virtualenvwrapper
+tags: Python virtualenv virtualenvwrapper
 ---
 
 `virtualenvwrapper`只是一个 virtualenv 的辅助工具。VirtualEnv 用于在一台机器上创建多个独立的 python 运行环境，VirtualEnvWrapper为前者提供了一些便利的命令行上的封装。使用 virtualenv 的好处是：
@@ -44,7 +44,26 @@ Windows下默认虚拟环境是放在用户名下面的Envs中的，与桌面，
 
 > mkvirtualenv [envname]
 
-该命令会帮我们创建一个新环境，默认情况下，环境的目录是 `.virtualenv/enname`,创建过程中它会自动帮我们安装pip，以后我们要安装新依赖时可直接使用pip命令。创建完之后，自动切换到该环境下工作，可看到提示符前边多了像`(envname)$`这样的字符。在这个环境下安装的依赖不会影响到其他的环境。
+该命令会帮我们创建一个新环境，默认情况下，环境的目录是 `.virtualenv/enname`,创建过程中它会自动帮我们安装 pip 等必要的软件，以后我们要安装新依赖时可直接使用 pip 命令。创建完之后，自动切换到该环境下工作，可看到提示符前边多了像`(envname)$`这样的字符。在这个环境下安装的依赖不会影响到其他的环境。
+
+该命令有几个可选参数:
+
+```
+-a project_path
+
+    与一个工程目录建立关联
+
+-i package
+
+    创建环境时安装相应的包.
+    如 -i Flask、-i Flask==0.11.1 或者安装多个包 -i Flask -i locustio
+
+-r requirements_file
+
+    同 pip install -r requirements_file 用法
+```
+
+该命令还支持加入 virtualenv 的参数选项，例如指定环境的 python 版本为 3.5：`mkvirtualenv ttenv --python=python3.5`
 
 > mkproject proname
 

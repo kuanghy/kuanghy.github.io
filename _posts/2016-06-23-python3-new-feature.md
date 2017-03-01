@@ -68,6 +68,30 @@ yield from gen()
 {'x': <class 'int'>, 'return': <class 'float'>}
 ```
 
+## 默认使用绝对导入
+
+绝对导入可以避免导入子包覆盖掉标准库模块。也就是说，如果你编写了一个 string.py 模块，在 Python2 中尝试用 `import string` 时导入的是你自己编写的模块，但是在 Python3 中导入的则是标准库的 string 模块。
+
+## 使用 as 关键字捕获异常信息
+
+在 python2 中可以用以下两种信息捕获异常信息：
+
+```python
+try:
+    do_something()
+except Exception, e:
+    print e
+    
+# or
+
+try:
+    do_something()
+except Exception as e:
+    print e
+```
+
+而在 Python3 中不再支持逗号的形式，只有 as 关键字捕获异常信息。
+
 ## 标准库添加
 
 - 异步IO(asyncio)
