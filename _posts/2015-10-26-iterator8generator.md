@@ -311,7 +311,7 @@ print simple_generator()
 ### 生成器方法
 - send(value)
 
-外部作用域访问生成器的 send 方法，就像访问 next() 方法一样。next()方法可以恢复生成器状态并继续执行，其实 send() 是除 next() 外另一个恢复生成器的方法。Python 2.5中，yield语句变成了yield表达式，也就是说yield可以有一个值，而这个值就是send()方法的参数，所以send(None)和next()是等效的。同样，next()和send()的返回值都是yield语句处的参数（yielded value）。使用 send() 方法只有在生成器挂起之后才有意义，如果真想对刚刚启动的生成器使用 send 方法，则可以将 None 作为参数进行调用。也就是说，第一次调用时，要使用next()语句或send(None)，因为没有yield语句来接收这个值。
+外部作用域访问生成器的 send 方法，就像访问 next() 方法一样。next()方法可以恢复生成器状态并继续执行，其实 send() 是除 next() 外另一个恢复生成器的方法。Python 2.5 中，yield 语句变成了 yield 表达式，也就是说 yield 可以有一个值，而这个值就是send()方法的参数，所以 send(None) 和 next() 是等效的。同样，next()和send()的返回值都是 yield语 句处的参数（yielded value）。使用 send() 方法只有在生成器挂起之后才有意义，如果真想对刚刚启动的生成器使用 send 方法，则可以将 None 作为参数进行调用。也就是说， **第一次调用时，要使用 next() 语句或 send(None)，因为没有 yield 语句来接收这个值**。
 
 - throw()
 
@@ -363,7 +363,7 @@ def flatten(nested):
     return result
 {% endhighlight %}
 
-尽管这个版本可能不使用于所有的生成器，但对大多数生成器来说是可行的。比如，它不是用于一个无限的生成器。
+尽管这个版本可能不适用于所有的生成器，但对大多数生成器来说是可行的。比如，它不适用于一个无限的生成器。
 
 ## 列表解析和生成器表达式
 
