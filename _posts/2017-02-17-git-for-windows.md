@@ -3,7 +3,7 @@ layout: post
 title: "Windows 下 git 的安装与配置"
 keywords: git bash windows
 description: "Windows 下 git 的安装与配置"
-category: Windows
+category: 计算机科学
 tags: windows git
 ---
 
