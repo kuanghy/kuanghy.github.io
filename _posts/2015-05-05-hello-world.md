@@ -2,7 +2,7 @@
 layout: post
 title: 你好，世界
 category: 我的日志
-tags: 博客 HelloWorld
+tags: 博客
 ---
 
 虽然毕业参加工作以来还不到一年的时间，但想想自己现在也已经是奔三的年纪。回想自己开始学编程时，已经18岁了。这岂不是远远的被别人落在了起跑线上。
@@ -16,20 +16,22 @@ tags: 博客 HelloWorld
 我想，不懂编程的人是体会不到 **Hello World** 的伟大的。
 
 我写的第一个程序是这个样子的：
-{% highlight ruby %}
+
+```cpp
 // hello.c
 #include <stdio.h>
 
 int main(void)
 {
   printf("Hello world!\n");
-  
+
   return 0;
 }
-{% endhighlight %}
+```
 
 接着是这样子的：
-{% highlight cpp %}
+
+```cpp
 #include <iostream>
 
 using namespace std;
@@ -40,21 +42,23 @@ int main(void)
 
     return 0;
 }
-{% endhighlight %}
+```
 
 再接着是这样子的：
-{% highlight python %}
+
+```python
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
 if __name__ == '__main__':
     print 'hello world'
-    
+
 # Script starts from here
-{% endhighlight %}
+```
 
 然后是这样子的
-{% highlight html %}
+
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,31 +73,33 @@ if __name__ == '__main__':
     <body>
        	<h1>Hello world!</h1>
     </body>
-</html> 
-{% endhighlight %}
+</html>
+```
 
 再然后是这样子的：
-{% highlight php %}
+
+```php
 <?php  # Script -- php.php
 
-/* 
+/*
  * 2015-05-05 12:49:49
  */
 
 echo "Hello World!";
 
 ?>
-{% endhighlight %}
+```
 
 再再然后是这样子的：
-{% highlight javascript %}
+
+```javascript
 <script type="text/javascript">
 	function button_clicked()
 	{
 		alert("Hello world!");
-	}
+	}s
 </script>
-{% endhighlight %}
+```
 
 啊，搞得好像我满脑子都是 **Hello World** 似的。一下子罗列了不少的代码，就当我是在测试博客的代码语法效果吧。我不确定在以后的生涯中，我还会遇到多少的 **Hello World**，我只觉得见到它，我有一些莫名的感觉。写到这里，突然不知道该说什么了，我明明记得我有很多话要说的。想要搭建独立博客的心郁积了很久，现在终于舒了一口气，当然是应该好好抒发一下心情的。其实，当一切平静下来的时候，很多东西都不在重要了。
 

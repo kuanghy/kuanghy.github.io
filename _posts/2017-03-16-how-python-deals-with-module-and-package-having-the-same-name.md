@@ -4,7 +4,7 @@ title: "Python 如何处理模块和包有相同名字的情况"
 keywords: Python 模块 包 导入 规范
 description: "How python deals with module and package having the same name?"
 category: Python
-tags: Python
+tags: python
 ---
 
 在编程开发中，个人觉得，只要按照规范去做，很少会出问题。刚开始学习一门技术时，的确会遇到很多的坑。踩的坑多了，这是好事，会学到更多东西，也会越来越觉得按照规范做的重要性，规范的制定就是用来规避问题的。有时候确实应该听听有经验人的建议，不要一意孤行。这好像不是本文的重点，其实我重点是想表达，**尽量按规范做事，这样会少走很多弯路**。

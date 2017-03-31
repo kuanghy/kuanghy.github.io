@@ -4,7 +4,7 @@ title: "Python 字符串格式化 str.format 简介"
 keywords: Python 字符串格式化 format str.format
 description: "Python 在 2.6 版本中新加了一个字符串格式化方法 str.format"
 category: Python
-tags: Python format
+tags: python
 ---
 
 Python 在 2.6 版本中新加了一个字符串格式化方法： `str.format()`。它的基本语法是通过 `{}` 和 `:` 来代替以前的 `%.`。格式化时的占位符语法：
@@ -215,4 +215,3 @@ Your email address was sudohuoty@gmail.com
 >>> " The {} set is often represented as { {0} } ".format("empty")
 ' The empty set is often represented as {0} '
 ```
-

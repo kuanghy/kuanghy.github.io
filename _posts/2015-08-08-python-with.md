@@ -8,20 +8,18 @@ tags: python with 上下文管理器
 ## 什么是上下文管理器
 上下文管理器顾名思义是管理上下文的,也就是负责冲锋和垫后,而让主人专心完成自己的事情。我们在编写程序的时候，通常会将一系列操作放到一个语句块中，当某一条件为真时执行该语句快。有时候，我们需要再执行一个语句块时保持某种状态，并且在离开语句块后结束这种状态。例如对文件的操作，我们在打开一个文件进行读写操作时需要保持文件处于打开状态，而等操作完成之后要将文件关闭。所以，上下文管理器的任务是：**代码块执行前准备，代码块执行后收拾**。上下文管理器是在Python2.5加入的功能，它能够让你的代码可读性更强并且错误更少。
 
-<br/>
 ## 需求的产生
 在正常的管理各种系统资源(文件、锁定和连接)，在涉及到异常时通常是个棘手的问题。异常很可能导致控制流跳过负责释放关键资源的语句。例如打开一个文件进行操作时，如果意外情况发生（磁盘已满、特殊的终端信号让其终止等），就会抛出异常，这样可能最后的文件关闭操作就不会执行。如果这样的问题频繁出现，则可能耗尽系统资源。
 
 是的，这样的问题并不是不可避免。在没有接触到上下文管理器之前，我们可以用`“try/finally”`语句来解决这样的问题。或许在有些人看来，“try/finally”语句显得有些繁琐。上下文管理器就是被设计用来简化“try/finally”语句的，这样可以让程序更加简洁。
 
-<br/>
 ## With语句
 With语句用于执行上下文操作，它也是复合语句的一种，其基本语法如下所示：
 
-{% highlight python %}
+```python
 with context_expr [as var]:
     with_suite
-{% endhighlight %}
+```
 
 With 语句仅能工作于支持上下文管理协议(context management
 protocol)的对象。也就是说只有内建了"上下文管理"的对象才能和 with 一起工作。Python内置了一些支持该协议的对象，如下所列是一个简短列表：
@@ -37,17 +35,16 @@ protocol)的对象。也就是说只有内建了"上下文管理"的对象才能
 
 由以上列表可以看出，file 是已经内置了对上下文管理协议的支持。所以我们可以用下边的方法来操作文件：
 
-{% highlight python %}
+```python
 with open('/etc/passwd', 'r') as f:
     for eachLine in f:
         # ...do stuff with eachLine or f...
-{% endhighlight %}
+```
 
 上边的代码试图打开一个文件,如果一切正常,把文件对象赋值给 f。然后用迭代器遍历文件中的每一行,当
 完成时,关闭文件。无论是在这一段代码的开始,中间,还是结束时发生异常,会执行清理的代码,此
 外文件仍会被自动的关闭。
 
-<br/>
 ## 自定义上下文管理器
 要实现上下文管理器，必须实现两个方法：一个负责进入语句块的准备操作，另一个负责离开语句块的善后操作。Python类包含两个特殊的方法，分别名为：`__enter__` 和 `__exit__`。
 
@@ -68,7 +65,7 @@ With 语句的实际执行流程是这样的：
 
 下面我们自己来实现一个支持上下文管理协议的文件操作：
 
-{% highlight python %}
+```python
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -87,19 +84,19 @@ class PypixOpen(object):
     def __init__(self, filename, mode):
         self.filename = filename
         self.mode = mode
- 
+
     def __enter__(self):
         self.openedFile = open(self.filename, self.mode)
         return self.openedFile
- 
+
     def __exit__(self, *unused):
         self.openedFile.close()
 
 # Script starts from here
- 
+
 with PypixOpen(filename, mode) as writer:
     writer.write("Hello World from our new Context Manager!")
-{% endhighlight %}
+```
 
 <br/>
 ## 更加优雅的上下文管理（contextlib模块）
@@ -110,38 +107,38 @@ with PypixOpen(filename, mode) as writer:
 
 `contextlib.closing` 方法在语句块结束后调用对象的 close 方法。
 
-{% highlight python %}
+```python
 from contextlib import closing
 import urllib
 
 with closing(urllib.urlopen('http://www.python.org')) as page:
     for line in page:
         print line
-{% endhighlight %}
+```
 
 #### contextlib.nested
 
 `contextlib.nested` 方法用于替换嵌套的 with 语句。例如，有两个文件，一个读一个写，即进行拷贝。以下是不提倡的用法：
 
-{% highlight python %}
+```python
 with open('toReadFile', 'r') as reader:
     with open('toWriteFile', 'w') as writer:
         writer.writer(reader.read())
-{% endhighlight %}
+```
 
 这里可以用 contextlib.nested 进行优化：
 
-{% highlight python %}
+```python
 with contextlib.nested(open('fileToRead.txt', 'r'), \
            open('fileToWrite.txt', 'w')) as (reader, writer):
     writer.write(reader.read())
-{% endhighlight %}
+```
 
 #### contextlib.contextmanager
 
 `contextlib.contextmanager` 是一个装饰器，它可以用来装饰被 yield 语句分割成两部分的函数，以此进行上下文管理。任何在yield之前的内容都可以看做在代码块执行前的操作，而任何yield之后的操作都可以看做是代码块结束后要做的操作。如果希望在上下文管理器中使用 “as” 关键字，那么就用 yield 返回你需要的值，它将通过 as 关键字赋值给新的变量。
 
-{% highlight python %}
+```python
 from contextlib import contextmanager
 
 @contextmanager
@@ -149,11 +146,11 @@ def tag(name):
     print "<%s>" % name
     yield
     print "</%s>" % name
-{% endhighlight %}
+```
 
 使用 contextlib.contextmanager 时，可以大致套用如下的框架：
 
-{% highlight python %}
+```python
 from contextlib import contextmanager
 
 @contextmanager
@@ -162,4 +159,4 @@ def closing(thing):
         yield thing
     finally:
         thing.close()
-{% endhighlight %}
+```

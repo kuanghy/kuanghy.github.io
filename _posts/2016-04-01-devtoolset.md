@@ -4,7 +4,7 @@ title: "Git rebase 与 master 的区别"
 keywords: git rebase master
 description: "git rebase 与 git merge 的区别在于合并是提交历史处理方式不同"
 category: 计算机科学
-tags: git rebase master
+tags: git
 ---
 
 `git rebase` 与 `git merge` 的区别在于，`merge` 会将不同分支的提交合并成一个新的节点，之前的提交分开显示；而 `rebase` 则是将两个分支的提交融合成一个线性的提交。

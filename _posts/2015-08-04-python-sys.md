@@ -2,38 +2,38 @@
 layout: post
 title: Python sys模块参考手册
 category: Python
-tags: python sys
+tags: python
 ---
 
 #### sys.argv
-命令行参数List，第一个元素是程序本身路径 
+命令行参数List，第一个元素是程序本身路径
 
 #### sys.modules.keys()
-返回所有已经导入的模块列表 
+返回所有已经导入的模块列表
 
 #### sys.exc_info()
-获取当前正在处理的异常类,exc_type、exc_value、exc_traceback当前处理的异常详细信息 
+获取当前正在处理的异常类,exc_type、exc_value、exc_traceback当前处理的异常详细信息
 
 #### sys.exit(n)
-退出程序，正常退出时exit(0) 
+退出程序，正常退出时exit(0)
 
 #### sys.hexversion
-获取Python解释程序的版本值，16进制格式如：0x020403F0 
+获取Python解释程序的版本值，16进制格式如：0x020403F0
 
 #### sys.version
-获取Python解释程序的版本信息 
+获取Python解释程序的版本信息
 
 #### sys.maxint
-最大的Int值 
+最大的Int值
 
 #### sys.maxunicode
-最大的Unicode值 
+最大的Unicode值
 
 #### sys.modules
-返回系统导入的模块字段，key是模块名，value是模块 
+返回系统导入的模块字段，key是模块名，value是模块
 
 #### sys.path
-返回模块的搜索路径，初始化时使用PYTHONPATH环境变量的值 
+返回模块的搜索路径，初始化时使用PYTHONPATH环境变量的值
 
 #### sys.platform
 返回操作系统平台名称，在编写跨平台应用时很有用。
@@ -58,7 +58,7 @@ tags: python sys
 #### sys.api_version
 解释器的C的API版本
 
-#### sys.version_info 
+#### sys.version_info
 Python版本信息，例如：(2, 7, 6, 'final', 0)， 'final'表示最终,也有'candidate'表示候选，表示版本级别，是否有后继的发行
 
 #### sys.displayhook(value)
@@ -74,10 +74,10 @@ Python版本信息，例如：(2, 7, 6, 'final', 0)， 'final'表示最终,也�
 用来设置当前默认的字符编码，如果name和任何一个可用的编码都不匹配，抛出LookupError，这个函数只会被site模块的sitecustomize使用，一旦别site模块使用了，他会从sys模块移除
 
 #### sys.builtin_module_names
-Python解释器导入的模块列表 
+Python解释器导入的模块列表
 
 #### sys.executable
-Python解释程序路径 
+Python解释程序路径
 
 #### sys.getwindowsversion()
 获取Windows的版本，Windows系统中有效

@@ -55,15 +55,15 @@ js压缩后不到8KB (在js内嵌了核心兼容布局CSS的情况下)
 #### 1、使用传统的参数
 > art.dialog(content, ok, cancel)
 
-{% highlight javascript %}
+```javascript
 art.dialog('简单愉悦的接口，强大的表现力，优雅的内部实现', function(){alert('yes');});
-{% endhighlight %}
+```
 
 #### 2、使用字面量传参
 
 > art.dialog(options)
 
-{% highlight javascript %}
+```javascript
 var dialog = art.dialog({
     title: '欢迎',
     content: '欢迎使用artDialog对话框组件！',
@@ -74,13 +74,13 @@ var dialog = art.dialog({
         return false;
     }
 });
-{% endhighlight %}
+```
 
 #### 3、扩展方法
 
 `artDialog` 的扩展方法可以对弹出后的对话框操作。例如在 ajax 异步操作中，我们可以先定义一个变量引用对话框返回的扩展方法：
 
-{% highlight javascript %}
+```javascript
 var myDialog = art.dialog();// 初始化一个带有loading图标的空对话框
 jQuery.ajax({
     url: 'http://web5.qq.com/content?id=1',
@@ -88,7 +88,7 @@ jQuery.ajax({
         myDialog.content(data);// 填充对话框内容
     }
 });
-{% endhighlight %}
+```
 
 如果需要使用程序控制关闭，可以使用"close"方法关闭对话框：
 

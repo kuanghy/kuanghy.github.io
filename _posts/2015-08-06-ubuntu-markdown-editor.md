@@ -1,9 +1,11 @@
 ---
 layout: post
-title: 建议使用Markdown来做日常文档的编辑工作 
+title: 建议使用 Markdown 来做日常文档的编辑工作
+keywords: markdown remarkdown retext discount python-mardown python-pisa
 category: 文本编辑
-tags: markdown remarkdown retext discount python-mardown python-pisa
+tags: markdown
 ---
+
 **Markdown**的语法简洁明了、学习容易，而且功能比纯文本更强。平时用它来编写文档是一个不错的选择，例如记录工作和学习中的笔记、写一些参考文件和帮组手册等等。
 
 Markdown  文档编辑器推荐：*Remarkable*、*Retext*。这两款编辑器都支持将 markdown 文档转换成 html 和 pdf 文档。当然 markdown  文档编辑器有很多，包括在线编辑的也有。
@@ -34,7 +36,8 @@ Markdown  文档编辑器推荐：*Remarkable*、*Retext*。这两款编辑器�
 > xhtml2pdf --html Release-Notes.html Release-Notes.pdf
 
 为了方便，可以编写一个 Makefile 来批量转化 markdown 文档：
-{% highlight makefile %}
+
+```makefile
 MD = markdown
 MDFLAGS = -T
 H2P = xhtml2pdf
@@ -52,16 +55,14 @@ pdf: $(OBJECTS_PDF)
 html: $(OBJECTS)
 
 $(OBJECTS_PDF): %.pdf: %.html
-    $(H2P) $(H2PFLAGS) $< > $@ 
+    $(H2P) $(H2PFLAGS) $< > $@
 
 $(OBJECTS): %.html: %.md
     $(MD) $(MDFLAGS) -o $@ $<
 clean:
     rm -f $(OBJECTS)
-{% endhighlight %}
-    
+```
+
 如果转换的文档出现中文乱码，可以通过在 markdown 文档中嵌入 html 的方法来改变文档的编码方式。即在文档的开头加上meta标记，指明编码格式。如果文档已经编写完成，可以用如下方法批量修改：
+
 > sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' \*.md
-
-
-

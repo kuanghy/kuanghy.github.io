@@ -4,7 +4,7 @@ title: "Python 字典的 setdefault 方法"
 keywords: Python dict setdefault 字典 缺省值
 description: "Python字典的setdefault方法用于设置缺省值并返回"
 category: Python
-tags: Python dict 
+tags: python
 ---
 
 Python 字典的 setdefault 方法原型如下：
@@ -57,4 +57,3 @@ else:
 >>> dct
 {'name': 'huoty', 'fname': 'esenich', 'addr': None}
 ```
-

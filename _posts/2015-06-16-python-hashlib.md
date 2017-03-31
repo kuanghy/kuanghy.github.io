@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Python模块简介 -- hashlib
+keywords: python hashlib
 category: Python
-tags: python hashlib
+tags: python
 ---
 
-Python中的 hashlib 模块用来进行 hash 或者 md5 加密。这里的加密，其实并非我们通常所说的加密，简单的说就是这种加密一般是不可逆的。这种加密算法实际上是被称之为`摘要算法`，包括 MD5，SHA1 等等。MD5的全称是Message-Digest Algorithm 5（信息-摘要算法）。SHA1的全称是Secure Hash Algorithm(安全哈希算法) 。SHA1基于MD5，加密后的数据长度更长。
+Python 中的 hashlib 模块用来进行 hash 或者 md5 加密。这里的加密，其实并非我们通常所说的加密，简单的说就是这种加密一般是不可逆的。这种加密算法实际上是被称之为`摘要算法`，包括 MD5，SHA1 等等。MD5的全称是Message-Digest Algorithm 5（信息-摘要算法）。SHA1的全称是Secure Hash Algorithm(安全哈希算法) 。SHA1基于MD5，加密后的数据长度更长。
 
 那么，什么又是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。摘要算法就是通过摘要函数 `f()` 对任意长度的数据 `data` 计算出固定长度的摘要 `digest`。摘要算法可以用来检验数据是否改变。
 
@@ -13,7 +14,7 @@ Python中的 hashlib 模块用来进行 hash 或者 md5 加密。这里的加密
 
 hashlib是个专门提供hash算法的库，里面包括md5, sha1, sha224, sha256, sha384, sha512。
 
-{% highlight python %}
+```python
 import hashlib
 
 a = "I am huoty"  
@@ -23,12 +24,11 @@ print hashlib.sha224(a).hexdigest()
 print hashlib.sha256(a).hexdigest()  
 print hashlib.sha384(a).hexdigest()  
 print hashlib.sha512(a).hexdigest()
-{% endhighlight %}
+```
 
-<br/>
 #### hashlib 属性和方法简介
 
-<div class="hblock"><pre>
+```python
 hashlib.algorithms    
     列出所有加密算法 ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
 
@@ -54,12 +54,13 @@ hexdigest()
 
 copy()
     复制
-</pre></div>
+```
 
 **摘要算法主要用于保存用户名和密码，以及数据校验等。**
 
 下面是一个增量计算文件 MD5 值的例子：
-{% highlight python %}
+
+```python
 #!/usr/bin/env python
 
 import hashlib
@@ -80,9 +81,8 @@ def main():
 
 if __name__ == '__main__':
     main()
-{% endhighlight %}
+```
 
-<br/>
 #### 参考资料：
 https://docs.python.org/2/library/hashlib.html<br/>
 http://www.cnblogs.com/BeginMan/p/3328172.html<br/>

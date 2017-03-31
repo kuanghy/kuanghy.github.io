@@ -4,7 +4,7 @@ title: "Python 实现斐波那契数列"
 keywords: python 斐波那契数列
 description: "斐波那契数列，又称黄金分割数列"
 category: Python
-tags: python 斐波那契数列
+tags: python
 ---
 
 斐波那契数列，又称黄金分割数列，指的是这样一个数列：0、1、1、2、3、5、8、13、21、……在数学上，斐波纳契数列以如下递归的方法定义：
@@ -15,17 +15,17 @@ tags: python 斐波那契数列
 
 #### 1. 元组实现
 
-{% highlight python %}
+```python
 fibs = [0, 1]
 for i in range(8):
     fibs.append(fibs[-2] + fibs[-1])
-{% endhighlight %}
+```
 
 这能得到一个在指定范围内的斐波那契数列的列表。
 
 #### 2. 迭代器实现
 
-{% highlight python %}
+```python
 class Fibs:
     def __init__(self):
         self.a = 0
@@ -37,11 +37,11 @@ class Fibs:
 
     def __iter__(self):
         return self
-{% endhighlight %}
+```
 
 这将得到一个无穷的数列，可以采用如下方式访问：
 
-{% highlight python %}
+```python
 fibs = Fibs()
 for f in fibs:
     if f > 1000:
@@ -49,11 +49,11 @@ for f in fibs:
         break
     else:
         print f
-{% endhighlight %}
+```
 
 #### 3. 通过定制类实现
 
-{% highlight python %}
+```python
 class Fib(object):
     def __getitem__(self, n):
         if isinstance(n, int):
@@ -73,12 +73,12 @@ class Fib(object):
             return L
         else:
             raise TypeError("Fib indices must be integers")
-{% endhighlight %}
+```
 
 这样可以得到一个类似于序列的数据结构，可以通过下标来访问数据：
 
-{% highlight python %}
+```python
 f = Fib()
 print f[0:5]
 print f[:10]
-{% endhighlight %}
+```

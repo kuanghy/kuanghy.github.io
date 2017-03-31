@@ -4,7 +4,7 @@ title: "Python 变量赋值问题"
 keywords: Python 变量赋值 assign
 description: "如果仅改变对象的属性（或者说成是改变结构），所有指向该对象的变量都会随之改变"
 category: Python
-tags: Python 变量赋值
+tags: python
 ---
 
 我们先看一下如下代码:

@@ -4,7 +4,7 @@ title: "Python 快速统计数据的去重数和去重数据"
 keywords: Python  统计  去重数
 description: "在Python中用numpy和pandas来处理数据，其性能会得到很大的提升"
 category: Python
-tags: Python
+tags: python
 ---
 
 之前用 Python 写过一个脚本，用来处理上千万用户的一些数据，其中有一个需求是统计用户的某一数据的去重数量。为了加快程序的速度，我启用了多进程。但不幸的是，程序跑了近一个星期，还没处理完。这时，我感觉到了不对，于是开始查看程序的性能瓶颈。

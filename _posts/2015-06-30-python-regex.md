@@ -1,15 +1,15 @@
 ---
 layout: post
 title: Python 正则表达式简介
+keywords: regex re 正则表达式
 category: Python
-tags: regex re 正则表达式
+tags: python 正则表达式
 ---
 
 **正则表达式**，又称**正规表示法**、**常规表示法**（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。
 
 应用正则表达式来处理文本信息和数据非常方便，Python 对正则表达式有很好的支持。在学习正则表达式的过程中，可将正则表达式的内容分为几个点来学习，这样便于学习和记忆。
 
-<br/>
 ## 正则表达式规则
 #### 1. 元字符
 <div class="hblock"><pre>
@@ -83,8 +83,8 @@ huoty\b 以huoty结束的内容 <br/>
 **分组的组号可以自定义，也可以为分组指定名字，这里不做详细说明。**
 
 #### 7. 贪婪和非贪婪
-**贪婪模式：**匹配尽可能多的字符 <br/>
-**非贪婪模式：**匹配尽可能少的字符
+**贪婪模式：** 匹配尽可能多的字符 <br/>
+**非贪婪模式：** 匹配尽可能少的字符
 
 默认为贪婪模式，需要用到非贪婪模式时，只需要在限定符后加上“？”即可：
 
@@ -96,11 +96,9 @@ huoty\b 以huoty结束的内容 <br/>
 {n,}? 	重复n次以上，但尽可能少重复
 </pre></div>
 
-<br/>
 ## Python 中比较详细的正则表达式匹配规则（图片资料来自CSDN）
 ![Python regex](http://7xixhp.com1.z0.glb.clouddn.com/python-regex.png)
 
-<br/>
 ## Python的正则表达式 re 模块
 <div class="hblock"><pre>
 This module exports the following functions:
@@ -187,12 +185,10 @@ This module exports the following functions:
 #### 9. subn(repl, string[, count]) |re.sub(pattern, repl, string[, count])
 返回 (sub(repl, string[, count]), 替换次数)
 
-<br>
 ## Re 模块常用方法总结
 
 ![Re 模块常用方法总结](http://ww3.sinaimg.cn/mw690/c3c88275gw1f53scpabgoj20ei0e7dhf.jpg)
 
-<br/>
 ## Python Re模块的另一种使用方式
 以上在介绍 re 模块的方法时，都是采用 re.match，re.search 的方式调用。其实还有另外一种调用方式，可以通过pattern.match，pattern.search调用，这样 调用便不用将pattern作为第一个参数传入了。
 

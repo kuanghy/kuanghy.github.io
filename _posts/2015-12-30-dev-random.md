@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Linux 中的随机数设备文件"
+keywords: Linux 随机数 random urandom
 category: Linux
-tags: random urandom
+tags: linux
 ---
 
 Linux 中的随机数可以从两个特殊的文件中产生，一个是 `/dev/urandom`，另外一个是 `/dev/random`。他们产生随机数的原理是利用当前系统的熵池来计算出固定一定数量的随机比特，然后将这些比特作为字节流返回。熵池就是当前系统的环境噪音，熵指的是一个系统的混乱程度，系统噪音可以通过很多参数来评估，如内存的使用，文件的使用量，不同类型的进程数量等等。如果当前环境噪音变化的不是很剧烈或者当前环境噪音很小，比如刚开机的时候，而当前需要大量的随机比特，这时产生的随机数的随机效果就不是很好了。
@@ -13,9 +14,9 @@ Linux 中的随机数可以从两个特殊的文件中产生，一个是 `/dev/u
 
 可以用如下命令对二者进行简单的性能比较：
 
-> dd if=/dev/random of=random1.dat bs=1024b count=1 
+> dd if=/dev/random of=random1.dat bs=1024b count=1
 
-> dd if=/dev/urandom of=random2.dat bs=1024b count=1 
+> dd if=/dev/urandom of=random2.dat bs=1024b count=1
 
 可以看到使用/dev/random产生随机数的速度很慢，而且产生的量很有限，当然，/dev/urandom的随机效果则好很多。
 

@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Linux系统用户、组以及文件权限简介
+keywords: Linux chmod chgrp chonw
 category: Linux
-tags: chmod chgrp chonw
+tags: linux
 ---
 
 ## Linux 安全性模型概述
@@ -10,7 +11,6 @@ Linux使用User（用户）和Group（组）控制使用者对文件的存取权
 
 ![Linux filesystem](http://ww1.sinaimg.cn/mw690/c3c88275jw1eu3gjg7nb1j20ko0oin0a.jpg)
 
-<br/>
 ## 用户
 Linux系统的每个用户都有一个唯一的 User ID，User的信息存储在 /etc/passwd 中，该文件的格式示例如下：
 
@@ -21,7 +21,7 @@ Linux系统的每个用户都有一个唯一的 User ID，User的信息存储在
 > 用户名:密码:用户ID:组ID:用户全名:主目录:登录shell
 
 在旧的系统中，直接将用户的密码存在第二位。由于 /etc/passwd 文件所有用户都有读权限，出于安全性考虑，后来的系统将密码单独拿出来存放在了 /etc/shadow 文件中， 而 /etc/passwd 文件的第二位只用于存储用户是否需要密码，如果用户存在密码，这该位用 ‘x’ 标记，如果是“!”或者为空则说明此用户不能用密码登录
- 
+
 一般情况下只有拥有 HOME 目录和指定shell的用户才能登录系统。User未经授权将禁止读写或执行其他User的文件。Linux 的 root 用户拥有至高无上的权限，可以无条件的对系统中的所有文件进行访问、修改和删除。一般不要随便用root登录并操作系统 。
 
 有两个命令可以为Linux操作系统添加新的用户，即 `useradd` 和 `adduser`。在root权限下，useradd只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的，为了避免这样的情况出现，可以用 （useradd -m +用户名）的方式创建，它会在/home目录下创建同名文件夹，然后利用（ passwd + 用户名）为指定的用户名设置密码。其参数选项如下：
@@ -62,7 +62,6 @@ visudo     注：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个
 sudoedit   注：和sudo 功能差不多；
 </pre></div>
 
-<br/>
 ## 用户群组概述
 Linux系统的每个User都属于一个Group,具有唯一的标识符gid。Group信息存储于/etc/group中，且可以为group创建密码，密码存放在 /etc/gshadow 文件中，但是一般情况下不需要为用户组创建密码。系统会为每个User关联一个和User同名的Group，每个User至少存在于自己同名的Group中，同时User也可以加入其他的Group。在同一个Group中的成员可以共享其他成员的文件。增加一个新的用户组使用groupadd命令。 其格式如下：
 
@@ -102,8 +101,8 @@ grpconv     注：通过/etc/group和/etc/gshadow 的文件内容来同步或创
 grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
 </pre></div>
 
-<br/>
-## Linux文件和目录权限解读 
+## Linux文件和目录权限解读
+
 #### 1、三种基本权限
 （1）r (read) 读
 
@@ -238,8 +237,7 @@ o 和其他用户拥有相同的权限。
 例如，将一个文件的权限设置为属主可读可写，同组用户可读可写，其他用户可读，则命令为：
 
 > chmod 664 file
-
-
+s
 #### 5、chgrp和chown命令
 **chgrp**命令用于改动文件或目录所属的组。语法格式如下：
 

@@ -4,7 +4,7 @@ title: "Docker 核心技术 -- Linux Namespace"
 keywords: Linux namespace 容器 chroot CGroup
 description: "Namespace 是 Linux 提供的一种内核级别环境隔离的方法。"
 category: 容器技术
-tags: Linux namespace
+tags: linux namespace docker
 ---
 
 Docker 在技术上实际并没有什么创新，而是整合了很多现有的技术。Docker 用到的核心技术包括 `Namespace`、`CGroup`、`UnionFS` 等等。
@@ -157,4 +157,3 @@ int main(int argc, char *argv[])
 - [http://coolshell.cn/articles/17010.html](http://coolshell.cn/articles/17010.html)
 - [http://blog.csdn.net/preterhuman_peak/article/details/40857117](http://blog.csdn.net/preterhuman_peak/article/details/40857117)
 - [https://yeasy.gitbooks.io/docker_practice/content/underly/namespace.html](https://yeasy.gitbooks.io/docker_practice/content/underly/namespace.html)
-

@@ -4,7 +4,7 @@ title: "Gitignore 配置语法"
 keywords: git gitignore
 description: "Git 的 .gitignore 配置文件用于配置不需要加入到版本管理中的文件"
 category: 计算机科学
-tags: git gitignore
+tags: git
 ---
 
 Git 的 `.gitignore` 配置文件用于配置不需要加入到版本管理中的文件，配置好该文件能够为项目的管理带来很大的便利。它的配置与 `.gitconfig` 一样可以分为全局和局部两种。通过修改全局配置 git config 中的 excludesfile 配置向可以指定全局忽略文件。设置方法为：

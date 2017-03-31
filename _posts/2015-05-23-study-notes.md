@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 学习札记篇一
+keywords: adduser vim shell
 category: 学习札记
-tags: adduser vim shell
+tags: 札记
 ---
 
 1、 `Linux`<br/>
@@ -12,15 +13,15 @@ tags: adduser vim shell
 2、`Vim`<br>
 Vim 的信息文件 **viminfo** 用于存储状态信息：
 
-* 命令行和模式搜索的历史记录。 
-* 寄存器内文本 
+* 命令行和模式搜索的历史记录。
+* 寄存器内文本
 * 各种文件标记
 * 缓存器列表
 * 全局变量
 
 应该保证 viminfo 文件对当前用户可读可写才能正常使用。
 
-3、`Windows`<br/>
+3、`Windows`<br>
 **inno setup** 用于 windows 中制作 .exe 可执行程序的安装文件，主要通过编写脚本文件“.iss”文件来实现。
 
 4、`Linux`<br/>

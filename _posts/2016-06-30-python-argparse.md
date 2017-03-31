@@ -4,7 +4,7 @@ title: "Python 模块简介 -- argparse"
 keywords: Python argparse Python参数解析 命令行参数解析
 description: "argparse 是 Python 标准库中用来解析命令行参数和选项的模块"
 category: Python
-tags: Python argparse
+tags: python
 ---
 
 `argparse` 是 Python 标准库中用来解析命令行参数和选项的模块，其是为替代已经过时的 optparse 模块而生的，该模块在 Python2.7 中被引入。argparse模块的作用是用于解析命令行参数。

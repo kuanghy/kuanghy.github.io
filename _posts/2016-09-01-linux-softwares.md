@@ -4,7 +4,7 @@ title: "Linux 下一些有用或者有趣的软件"
 keywords: Linux software gimp retext terminator cmatrix
 description: "收集 Linux 下一些有用或者有趣的软件。"
 category: Linux
-tags: Linux
+tags: linux
 ---
 
 收集 Linux 下一些有用或者有趣的软件。
@@ -223,17 +223,17 @@ lnav 工具是在终端界面看日志的神器
 ### Touchpad Indicator (触摸板开关)
 
 > sudo add-apt-repository ppa:atareao/atareao
-> 
+>
 > sudo apt-get update
-> 
+>
 > sudo apt-get install touchpad-indicator
 
 ### Keylock Application Indicator （显示大写键状态）
 
 > sudo add-apt-repository ppa:tsbarnes/indicator-keylock
-> 
+>
 > sudo apt-get update
-> 
+>
 > sudo apt-get install indicator-keylock
 
 ### apparmor
@@ -331,7 +331,7 @@ Mac 安装：
 
 [Zeal](https://zealdocs.org/) 是一个简单的离线 API 文档浏览器，仿照 [Dash](https://kapeli.com/dash)（一个 OSX 应用） 写成，能在 Linux 和 Windows 上使用。Linux 下安装和使用可以参考: [http://xmodulo.com/browse-search-api-documentation-offline-linux.html](http://xmodulo.com/browse-search-api-documentation-offline-linux.html)
 
-### ack 
+### ack
 
 [Ack](http://beyondgrep.com/) 是比 grep 更快的文本搜索工具
 
@@ -346,4 +346,3 @@ Mac 安装：
 ### Insomnia
 
 [Insomnia](https://insomnia.rest/) 跨平台的、免费的 REST 客户端
-

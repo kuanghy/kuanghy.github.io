@@ -4,7 +4,7 @@ title: "Python2 与 Python3 的编码对比"
 keywords: Python 字符编码 unicode bytes 编码 解码 encode decode
 description: "编码就是将字符串转换成字节码；解码就是将字节码转换为字符串"
 category: Python
-tags: Python 
+tags: python 
 ---
 
 在 Python 中，不论是 Python2 还是 Python3 中，总体上说，字符都只有两大类：
@@ -37,4 +37,3 @@ Python2 中，普通的，用引号括起来的字符，就是 str；此时字�
 这样 Python 解析器才能正确的把文本解析为对应编码的 str。
 
 总体来说，在 Python3 中，字符编码问题得到了极大的优化，不再像 Python2 那么头疼。在 Python3 中，文本总是 Unicode, 由 str 类型进行表示，二进制数据使用 bytes 进行表示，不会将 str 与 bytes 偷偷的混在一起，使得两者的区别更加明显。
-

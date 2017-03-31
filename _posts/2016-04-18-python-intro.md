@@ -4,7 +4,7 @@ title: "Python 自省相关的内建函数和属性"
 keywords: python 自省
 description: "缓存是一种将定量数据加以保存以备迎合后续请求的处理方式，旨在加快数据的检索速度。"
 category: Python
-tags: python 自省
+tags: python
 ---
 
 > 见贤思齐焉，见不贤而内自省也。  --《论语·里仁》
@@ -13,7 +13,7 @@ tags: python 自省
 
 #### issubclass
 
-> issubclass(sub, sup) 
+> issubclass(sub, sup)
 
 如果给出的子类 sub 确定是父类 sup 的一个子类，则返回 True ，反之则返回 False。这个函数也允许“不严格”的子类，意味着，一个类可视为其自身的子类。issubclass() 的第二个参数可以是可能的父类组成的元组（tuple），这时，只要第一个参数是给定元组中任何一个候选类的子类时，就会返回 True。
 

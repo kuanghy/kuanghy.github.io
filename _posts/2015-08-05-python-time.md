@@ -2,10 +2,16 @@
 layout: post
 title: Python time模块参考手册
 category: Python
-tags: python time
+tags: python
 ---
 
-Python的time模块提供了各种操作时间的功能。在大多数的编程语言中，表示时间的方法有两种，一是时间戳。即从1970年1月1日00:00:00开始按秒计算的偏移量；二是该语言自己的数据结构。Python中表示时间的数据结构元组，共有九个元素, 即`(tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec, tm_wday, tm_yday, tm_isdst)`，每个元素分别表示如下含义：
+Python的time模块提供了各种操作时间的功能。在大多数的编程语言中，表示时间的方法有两种，一是时间戳。即从1970年1月1日00:00:00开始按秒计算的偏移量；二是该语言自己的数据结构。Python中表示时间的数据结构元组，共有九个元素, 即：
+
+```
+(tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec, tm_wday, tm_yday, tm_isdst)
+```
+
+每个元素分别表示如下含义：
 
 <div class="hblock"><pre>
 year (four digits, e.g. 1998)
@@ -26,6 +32,7 @@ DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 
 
 ## 模块变量
+
 #### timezone
 当地时间与标准UTC时间的误差，以秒计
 
@@ -38,7 +45,6 @@ DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时
 #### tzname
 关于(标准时区名称, 夏令时时区名称)的元组
 
-<br/>
 ## 模块方法
 #### asctime([tuple])
 将时间元组（默认为本地时间）格式转换为字符串形式。接受一个时间元组，其默认值为localtime()返回值
@@ -95,10 +101,10 @@ time.struct_time(tm_year=2015, tm_mon=8, tm_mday=5, tm_hour=22, tm_min=8, tm_sec
 	%j	一年中的第几天（001 - 366）	 
 	%m	月份（01 - 12）	 
 	%M	分钟数（00 - 59）	 
-	%p	本地am或者pm的相应符	
-	%S	秒（01 - 61）	
-	%U	一年中的星期数。（00 - 53星期天是一个星期的开始。）第一个星期天之前的所有天数都放在第0周。	
-	%w	一个星期中的第几天（0 - 6，0是星期天）	
+	%p	本地am或者pm的相应符
+	%S	秒（01 - 61）
+	%U	一年中的星期数。（00 - 53星期天是一个星期的开始。）第一个星期天之前的所有天数都放在第0周。
+	%w	一个星期中的第几天（0 - 6，0是星期天）
 	%W	和%U基本相同，不同的是%W以星期一为一个星期的开始。	 
 	%x	本地相应日期	 
 	%X	本地相应时间	 

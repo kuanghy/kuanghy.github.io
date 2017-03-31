@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Python模块简介 -- urllib, urllib2
+keywords: urllib python
 category: Python
-tags: urllib python
+tags: python
 ---
 
 Python的urllib和urllib2模块都做与请求URL相关的操作，但他们提供不同的功能。他们两个最显着的差异如下：
@@ -13,7 +14,6 @@ Python的urllib和urllib2模块都做与请求URL相关的操作，但他们提�
 
 可以说urllib2是对urllib的增强 , 下面所列urllib模块的方法对urllib2模块也使用, 只存在微妙的区别。
 
-<br/>
 #### urlopen方法
 
 > urllib.urlopen(url[, data[, proxies]])
@@ -31,7 +31,6 @@ info()：返回一个httplib.HTTPMessage 对象，表示远程服务器返回的
 getcode()：返回Http状态码。如果是http请求，200表示请求成功完成;404表示网址未找到；
 geturl()：返回请求的url；
 
-<br/>
 #### urlretrieve方法
 > urllib.urlretrieve(url[, filename[, reporthook[, data]]])
 
@@ -43,25 +42,20 @@ filename：指定了保存到本地的路径（如果未指定该参数，urllib
 reporthook：是一个回调函数，当连接上服务器、以及相应的数据块传输完毕的时候会触发该回调。我们可以利用这个回调函数来显示当前的下载进度。
 data：指post到服务器的数据。
 
-<br/>
 #### urlcleanup方法
 > urllib.urlcleanup()
 
 清除由于urllib.urlretrieve()所产生的缓存
 
-<br/>
 #### quote和quote_plus
 urllib.quote(url)和urllib.quote_plus(url)将url数据获取之后，并将其编码，从而适用与URL字符串中，使其能被打印和被web服务器接受。
 
-<br/>
 #### unquote和unquote_plus
 urllib.unquote(url)和urllib.unquote_plus(url)与上面两个方法相反
 
-<br/>
 #### urlencode
 urllib.urlencode(query)将URL中的键值对以连接符&划分
 
-<br/>
 ## 参考资料
 http://www.cnblogs.com/wly923/archive/2013/05/07/3057122.html
 http://zeping.blog.51cto.com/6140112/1143722

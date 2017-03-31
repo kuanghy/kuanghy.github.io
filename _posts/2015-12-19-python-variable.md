@@ -2,7 +2,7 @@
 layout: post
 title: "Python 类变量与实例变量"
 category: Python
-tags: virtualenv
+tags: python
 ---
 
 ### 基本概念
@@ -33,7 +33,7 @@ tags: virtualenv
 
 ### 举例说明
 
-{% highlight python %}
+```python
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -54,7 +54,7 @@ class A(object):
         self.va = 40
         print A.va
         print self.va
-        
+
         va = 20
         print va
 
@@ -70,7 +70,7 @@ obj1.foo()
 print A.va
 print obj1.va
 print obj2.va
-{% endhighlight %}
+```
 
 程序的输出结果：
 
@@ -104,6 +104,3 @@ print obj2.va
 - 6、方法内的局部变量会屏蔽掉类变量和实例变量。
 
 - 7、同一实例变量在不同的实例中可能拥有不同的值。
-
-
-

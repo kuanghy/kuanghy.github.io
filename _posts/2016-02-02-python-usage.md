@@ -4,7 +4,7 @@ title: "Python 独特用法总结(map、reduce、filter等)"
 keywords: Python map reduce filter lambda
 description: "总结 Python 的一些高级的、独特的用法，例如 map、reduce、filter、lambda、列表推导式等"
 category: Python
-tags: Python map reduce filter lambda
+tags: python lambda
 ---
 
 ## Map 函数
@@ -18,7 +18,7 @@ tags: Python map reduce filter lambda
 <pre>
 >>> def add100(x):
 ...     return x+100
-... 
+...
 >>> hh = [11,22,33]
 >>> map(add100,hh)
 [111, 122, 133]
@@ -29,7 +29,7 @@ tags: Python map reduce filter lambda
 <pre>
 >>> def abc(a, b, c):
 ...     return a*10000 + b*100 + c
-... 
+...
 >>> list1 = [11,22,33]
 >>> list2 = [44,55,66]
 >>> list3 = [77,88,99]
@@ -65,7 +65,7 @@ tags: Python map reduce filter lambda
 <pre>
 >>> def foo(x, y):
 ...     return x + y
-... 
+...
 >>> l = range(1, 10)
 >>> reduce(foo, l)
 45
@@ -84,12 +84,12 @@ tags: Python map reduce filter lambda
 <pre>
 >>> def foo(x):
 ...     return x % 2 != 0
-... 
+...
 >>> def hoo(x):
 ...     if x > 5 and x < 10:
 ...         return x
 ...     
-... 
+...
 >>> l = range(1, 10)
 >>> filter(foo, l)
 [1, 3, 5, 7, 9]
@@ -111,7 +111,7 @@ tags: Python map reduce filter lambda
 4
 >>> foo(4)
 16
->>> 
+>>>
 </pre>
 
 ##  列表推导式
@@ -141,7 +141,7 @@ tags: Python map reduce filter lambda
 >>> for i in item:
 ...     print i
 ...     
-... 
+...
 1
 9
 25

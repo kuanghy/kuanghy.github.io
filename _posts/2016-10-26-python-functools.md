@@ -4,7 +4,7 @@ title: "Python 模块简介 -- functools"
 keywords: Python functools 装饰器
 description: "Python的functools模块可以说主要是为函数式编程而设计，用于增强函数功能"
 category: Python
-tags: Python functools
+tags: python
 ---
 
 Python 的 functools 模块可以说主要是为函数式编程而设计，用于增强函数功能。
@@ -18,7 +18,7 @@ def partial(func, *args, **keywords):
     def newfunc(*fargs, **fkeywords):
         newkeywords = keywords.copy()
         newkeywords.update(fkeywords)
-        return func(*(args + fargs), **newkeywords) 
+        return func(*(args + fargs), **newkeywords)
     newfunc.func = func
     newfunc.args = args
     newfunc.keywords = keywords
@@ -51,7 +51,7 @@ def json_serial_fallback(obj):
 json_dumps = partial(json.dumps, default=json_serial_fallback)
 ```
 
-可以在 `json_serial_fallback` 函数中添加类型判断来指定如何 json 序列化一个 Python 对象 
+可以在 `json_serial_fallback` 函数中添加类型判断来指定如何 json 序列化一个 Python 对象
 
 #### functools.update_wrapper
 
@@ -64,7 +64,7 @@ def update_wrapper(wrapper,
                    wrapped,
                    assigned = WRAPPER_ASSIGNMENTS,
                    updated = WRAPPER_UPDATES):
-                   
+
     for attr in assigned:
         setattr(wrapper, attr, getattr(wrapped, attr))
     for attr in updated:
@@ -132,7 +132,7 @@ def wrap3(func):
 @wrap3
 def hello3(func):
     print "hello3"
-    
+
 print hello3.__name__  # hello3
 ```
 
@@ -149,7 +149,7 @@ reduce(function, sequence, startValue)
 ```python
 >>> def foo(x, y):
 ...     return x + y
-... 
+...
 >>> l = range(1, 10)
 >>> reduce(foo, l)
 45
@@ -235,5 +235,3 @@ calculating: 2 + 3
 ```
 
 由于该装饰器会将不同的调用结果缓存在内存中，因此需要注意内存占用问题，避免占用过多内存，从而影响系统性能。
-
-

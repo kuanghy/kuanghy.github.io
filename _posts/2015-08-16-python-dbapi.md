@@ -10,19 +10,19 @@ tags: python 数据库
 Python所有的数据库接口程序都在一定程度上遵守 Python DB-API 规范。DB-API 是一个规范，它定义了一系列必须的对象和数据库存取方式，以便为各种各样的底层数据库系统和多种多样的数据库接口程序提供一致的访问接口。由于DB-API 为不同的数据库提供了一致的访问接口， 在不同的数据库之间移植代码成为一件轻松的事情。
 
 ## 模块属性
-DB-API规范规定数据库接口模块必须实现一些全局的属性以保证兼容性。 
- 
+DB-API规范规定数据库接口模块必须实现一些全局的属性以保证兼容性。
+
 #### apilevel
 DB-API 模块兼容的 DB-API 版本号。apilevel 这个字符串(不是浮点数)表示这个 DB-API 模块所兼容的 DB-API 最高版本号。如果 "1.0"，"2.0"，如果未定义，则默认是 "1.0"。
 
 #### threadsafety
 线程安全级别。threadsafety 这是一个整数, 取值范围如下：
 
--  0:不支持线程安全, 多个线程不能共享此模块 
--  1:初级线程安全支持: 线程可以共享模块, 但不能共享连接 
--  2:中级线程安全支持 线程可以共享模块和连接, 但不能共享游标 
--  3:完全线程安全支持 线程可以共享模块, 连接及游标. 
- 
+-  0:不支持线程安全, 多个线程不能共享此模块
+-  1:初级线程安全支持: 线程可以共享模块, 但不能共享连接
+-  2:中级线程安全支持 线程可以共享模块和连接, 但不能共享游标
+-  3:完全线程安全支持 线程可以共享模块, 连接及游标.
+
 如果一个资源被共享, 就必需使用自旋锁或者是信号量这样的同步原语对其进行原子目标锁定。对这个目标来说,  磁盘文件和全局变量都不可靠, 并且有可能妨碍。
 
 #### paramstyle
@@ -34,35 +34,35 @@ DB-API 模块兼容的 DB-API 版本号。apilevel 这个字符串(不是浮点�
 <div class="hblock"><pre>
 user            Username  
 password        Password  
-host            Hostname 
-database        Database name 
-dsn             Data source name 
+host            Hostname
+database        Database name
+dsn             Data source name
 </pre></div>
 
 数据库连接参数可以以一个 DSN 字符串的形式提供, 也可以以多个位置相关参数的形式提供(如果你明确知道参数的顺序的话), 也可以以关键字参数的形式提供。应用示例：
 
-> connect(dsn='myhost:MYDB',user='guido',password='234$') 
+> connect(dsn='myhost:MYDB',user='guido',password='234$')
 
 当然，不同的数据库接口程序可能有些差异，并非都是严格按照规范实现，例如MySQLdb则使用 db 参数而不是规范推荐的 database 参数来表示要访问的数据库：
 
--  MySQLdb.connect(host='dbserv', db='inv', user='smith') 
--  PgSQL.connect(database='sales') 
--  psycopg.connect(database='template1', user='pgsql') 
--  gadfly.dbapi20.connect('csrDB', '/usr/local/database') 
--  sqlite3.connect('marketing/test') 
+-  MySQLdb.connect(host='dbserv', db='inv', user='smith')
+-  PgSQL.connect(database='sales')
+-  psycopg.connect(database='template1', user='pgsql')
+-  gadfly.dbapi20.connect('csrDB', '/usr/local/database')
+-  sqlite3.connect('marketing/test')
 
 #### 异常
 兼容标准的模块也应该提供以下这些异常类：
 
 <div class="hblock"><pre>
-Warning            警告异常基类 
-Error              错误异常基类 
-InterfaceError     数据库接口错误 
-DatabaseError      数据库错误 
-DataError           理数据时出错 
-OperationalError    数据库执行命令时出错 
-IntegrityError      数据完整性错误 
-InternalError      数据库内部出错 
+Warning            警告异常基类
+Error              错误异常基类
+InterfaceError     数据库接口错误
+DatabaseError      数据库错误
+DataError           理数据时出错
+OperationalError    数据库执行命令时出错
+IntegrityError      数据完整性错误
+InternalError      数据库内部出错
 ProgrammingError    SQL 执行失败
 NotSupportedError   试图执行数据库不支持的特性  
 </pre></div>
@@ -74,19 +74,19 @@ NotSupportedError   试图执行数据库不支持的特性
 连接对象没有必须定义的数据属性, 但至少应该以下这些方法：
 
 <div class="hblock"><pre>
-close()         关闭数据库连接 
-commit()        提交当前事务 
-rollback()      取消当前事务 
-cursor()        使用这个连接创建并返回一个游标或类游标的对象 
+close()         关闭数据库连接
+commit()        提交当前事务
+rollback()      取消当前事务
+cursor()        使用这个连接创建并返回一个游标或类游标的对象
 errorhandler (cxn, cur,  errcls, errval)  
 </pre></div>
- 
-一旦执行了 close() 方法, 再试图使用连接对象的方法将会导致异常。
- 
-对不支持事务的数据库或者虽然支持事务, 但设置了自动提交(auto-commit)的数据库系统来说, commit()方法什么也不做。 如果你确实需要, 可以实现一个自定义方法来关闭自动提交行为。由于 DB-API 要求必须实现此方法, 对那些没有事务概念的数据库来说, 这个方法只需要有一条 pass 语句就可以了。 
 
-类似 commit(), rollback() 方法仅对支持事务的数据库有意义。执行完 rollback(), 数据库将恢复到提交事务前的状态. 根据 PEP249, 在提交 commit()之前关闭数据库连接将会自动调用rollback()方法。 
- 
+一旦执行了 close() 方法, 再试图使用连接对象的方法将会导致异常。
+
+对不支持事务的数据库或者虽然支持事务, 但设置了自动提交(auto-commit)的数据库系统来说, commit()方法什么也不做。 如果你确实需要, 可以实现一个自定义方法来关闭自动提交行为。由于 DB-API 要求必须实现此方法, 对那些没有事务概念的数据库来说, 这个方法只需要有一条 pass 语句就可以了。
+
+类似 commit(), rollback() 方法仅对支持事务的数据库有意义。执行完 rollback(), 数据库将恢复到提交事务前的状态. 根据 PEP249, 在提交 commit()之前关闭数据库连接将会自动调用rollback()方法。
+
 对不支持游标的数据库来说, cursor()方法仍然会返回一个尽量模仿游标对象的对象。这些是最低要求。特定数据库接口程序的开发者可以任意为他们的接口程序添加额外的属性。
 
 #### 游标对象
@@ -95,47 +95,47 @@ errorhandler (cxn, cur,  errcls, errval)
 游标对象拥有的属性和方法：
 
 <div class="hblock"><pre>
-arraysize       使用 fechmany()方法一次取出多少条记录, 默认值为 1 
-connectionn     创建此游标对象的连接(可选) 
+arraysize       使用 fechmany()方法一次取出多少条记录, 默认值为 1
+connectionn     创建此游标对象的连接(可选)
 description         返回游标活动状态(一个包含七个元素的元组):  (name,  type_code, display_size, internal_ size, precision, scale, null_ok); 只有 name 和 type_code 是必须提供的  
-lastrowid       返回最后更新行的 id (可选), 如果数据库不支持行 id, 默认返回 None) 
+lastrowid       返回最后更新行的 id (可选), 如果数据库不支持行 id, 默认返回 None)
 rowcount        最后一次 execute() 操作返回或影响的行数.  
-callproc(func[,args])  调用一个存储过程 
-close()             关闭游标对象 
-execute(op[,args])    执行一个数据库查询或命令 
-executemany(op,args)  类似 execute() 和 map() 的结合, 为给定的每一个参数准备并执行一个数据库查询/命令 
-fetchone()      得到结果集的下一行 
-fetchmany([size=cursor.arraysize])      得到结果集的下几行 (几 = size) 
-fetchall()      返回结果集中剩下的所有行 
-__iter__()      创建一个迭代对象 (可选; 参阅 next()) 
-messages        游标执行后数据库返回的信息列表 (元组集合) (可选) 
-next()      使用迭代对象得到结果集的下一行(可选; 类似 fetchone(), 参阅 __iter__()) 
-nextset()       移到下一个结果集 (如果支持的话) 
-rownumber       当前结果集中游标的索引 (以行为单位, 从 0 开始) (可选) 
-setinput- sizes(sizes) 设置输入最大值 (必须有, 但具体实现是可选的) 
-setoutput- size(size[,col]) 设置大列的缓冲区大写(必须有, 但具体实现是可选的) 
+callproc(func[,args])  调用一个存储过程
+close()             关闭游标对象
+execute(op[,args])    执行一个数据库查询或命令
+executemany(op,args)  类似 execute() 和 map() 的结合, 为给定的每一个参数准备并执行一个数据库查询/命令
+fetchone()      得到结果集的下一行
+fetchmany([size=cursor.arraysize])      得到结果集的下几行 (几 = size)
+fetchall()      返回结果集中剩下的所有行
+__iter__()      创建一个迭代对象 (可选; 参阅 next())
+messages        游标执行后数据库返回的信息列表 (元组集合) (可选)
+next()      使用迭代对象得到结果集的下一行(可选; 类似 fetchone(), 参阅 __iter__())
+nextset()       移到下一个结果集 (如果支持的话)
+rownumber       当前结果集中游标的索引 (以行为单位, 从 0 开始) (可选)
+setinput- sizes(sizes) 设置输入最大值 (必须有, 但具体实现是可选的)
+setoutput- size(size[,col]) 设置大列的缓冲区大写(必须有, 但具体实现是可选的)
 </pre></div>
 
 游标对象最重要的属性是 execute*() 和 fetch*() 方法. 所有对数据库服务器的请求都由它们来完成。对fetchmany()方法来说, 设置一个合理的arraysize 属性会很有用。 当然, 在不需要时，最好关掉游标对象。如果数据库支持存储过程, 则可以使用 callproc() 方法。   
 
-#### 类型对象和构造器 
+#### 类型对象和构造器
 通常两个不同系统的接口要求的参数类型是不一致的, 譬如python调用c函数时Python对象和 C 类型之间就需要数据格式的转换, 反之亦然。类似的, 在 Python 对象和原生数据库对象之间也是如此。对于 Python DB-API 的开发者来说, 你传递给数据库的参数是字符串形式的, 但数据库会根据需要将它转换为多种不同的形式. 以确保每次查询能被正确执行。
- 
+
 举例来说, 一个 Python 字符串可能被转换为一个 VARCHAR, 或一个TEXT, 或一个BLOB, 或一个原生 BINARY 对象, 或一个 DATE 或 TIME 对象。一个字符串到底会被转换成什么类型? 必须小心的尽可能以数据库期望的数据类型来提供输入, 因此另一个DB-API的需求是创建一个构造器以生成特殊的对象, 以便能够方便的将 Python 对象转换为合适的数据库对象。以下所列内容描述了可以用于此目的的类。SQL 的 NULL 值被映射为 Pyhton 的 NULL 对象, 也就是 None。  
 
 <div class="hblock"><pre>
-Date(yr,mo,dy)      日期值对象 
-Time(hr,min,sec)   时间值对象 
-Timestamp(yr,mo,dy, hr, min,sec)      时间戳对象 
-DateFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到日期 
-TimeFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到时间值对象 
-TimestampFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到时间戳对象 
-Binary(string)  对应二进制长字符串值的对象 
-STRING        描述字符串列的对象, 比如 VARCHAR 
-BINARY        描述二进制长列的对象 比如 RAW, BLOB 
-NUMBER        描述数字列的对象 
-DATETIME      描述日期时间列的对象 
-ROWID          描述 “row ID” 列的对象 
+Date(yr,mo,dy)      日期值对象
+Time(hr,min,sec)   时间值对象
+Timestamp(yr,mo,dy, hr, min,sec)      时间戳对象
+DateFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到日期
+TimeFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到时间值对象
+TimestampFromTicks(ticks) 通过自 1970-01-01 00:00:01 utc 以来的 ticks 秒数得到时间戳对象
+Binary(string)  对应二进制长字符串值的对象
+STRING        描述字符串列的对象, 比如 VARCHAR
+BINARY        描述二进制长列的对象 比如 RAW, BLOB
+NUMBER        描述数字列的对象
+DATETIME      描述日期时间列的对象
+ROWID          描述 “row ID” 列的对象
 </pre></div>
 
 
@@ -143,9 +143,9 @@ ROWID          描述 “row ID” 列的对象
 
 ![db-api works](http://ww4.sinaimg.cn/mw690/c3c88275jw1ev3oaz0xt4j20lm0awjsh.jpg)
 
-<br/>
 ## 数据库操作示例
-{% highlight python %}
+
+```python
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -176,7 +176,7 @@ connect方法常用参数:
     charset: 数据库编码
 """
 
-# 获取操作游标 
+# 获取操作游标
 cursor = db_conn.cursor()
 
 # 使用 execute 方法执行SQL语句
@@ -214,7 +214,7 @@ sql = """INSERT INTO employee(first_name,
 
 # Sex: Male男, Female女
 
-employees = ( 
+employees = (
         {"first_name": "Mac", "last_name": "Mohan", "age": 20, "sex": "M", "income": 2000},
         {"first_name": "Wei", "last_name": "Zhu", "age": 24, "sex": "M", "income": 7500},
         {"first_name": "Huoty", "last_name": "Kong", "age": 24, "sex": "M", "income": 8000},
@@ -247,9 +247,9 @@ print "Insert rowcount:", cursor.rowcount
 # rowcount 是一个只读属性，并返回执行execute(方法后影响的行数。)
 
 # 数据库查询操作:
-#    fetchone()      得到结果集的下一行 
-#    fetchmany([size=cursor.arraysize])  得到结果集的下几行 
-#    fetchall()      返回结果集中剩下的所有行 
+#    fetchone()      得到结果集的下一行
+#    fetchmany([size=cursor.arraysize])  得到结果集的下几行
+#    fetchall()      返回结果集中剩下的所有行
 try:
     # 执行 SQL
     cursor.execute("select * from employee")
@@ -289,7 +289,7 @@ except Exception, e:
 
 # 关闭数据库连接
 db_conn.close()
-{% endhighlight %}
+```
 
 
 ## 参考资料

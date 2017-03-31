@@ -4,7 +4,7 @@ title: "Python 面向对象编程概要"
 keywords: python class
 description: "面向对象的三大特性是指：封装、继承和多态"
 category: Python
-tags: python class
+tags: python
 ---
 
 ## 面向对象三大特性

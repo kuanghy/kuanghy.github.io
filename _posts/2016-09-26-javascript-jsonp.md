@@ -4,7 +4,7 @@ title: "JavaScript 跨域请求数据(JSONP)"
 keywords: jsonp js javascript 跨域请求
 description: "JavaScript 用 jsonp 跨域请求数据"
 category: Web设计
-tags: jsonp js javascript
+tags: jsonp javascript
 ---
 
 我想要把爱词霸的每日一句引入到页面上，爱词霸向外开放了 [API](http://open.iciba.com/dsapi), 接口返回 json 数据，为了让页面更轻巧，我没有用 jQuery，而是直接纯 js 写了一段代码：
@@ -114,7 +114,7 @@ function jsonp(setting)
     var query = []
     for(var key in setting.data)
     {
-        query.push(key + '=' + encodeURIComponent(setting.data[key])) 
+        query.push(key + '=' + encodeURIComponent(setting.data[key]))
     }
     script.src = setting.url + '?' + query.join('&')
     document.head.appendChild(script)

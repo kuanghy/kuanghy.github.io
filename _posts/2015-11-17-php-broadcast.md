@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "PHP向客户端广播信息"
+keywords: broadcast socket 广播 php
 category: Web设计
-tags: broadcast socket
+tags: php
 ---
 
 在网络中数据传播分为:Unicast(单播)   ,   Multicast(多播或者组播)  和 Broadcast(广播)。广播和多播仅应用于UDP，它们对需将报文同时传往多个接收者的应用来说十分重要。而 TCP 是一个面向连接的协议，它意味着分别运行于两主机（由IP地址确定）内的两进程（由端口号确定）间存在一条连接。广播地址在默认情况下是不能让路由器转发到别的接口的，广播不能穿越路由器。广播有以下几种形式：
@@ -27,7 +28,7 @@ PHP socket 也能实现广播。在 socket 通信中，实现连接的服务器�
 
 - broadcast.php
 
-{% highlight php %}
+```php
 <?php  # Script -- broadcast.php
 
 /* Author @ Huoty
@@ -86,16 +87,16 @@ else
 }
 
 ?>
-{% endhighlight %}
+```
 
 - client.php
 
-{% highlight php %}
+```php
 <?php # Script -- client.php
 
 /* Author @ Huoty
  *   Date @ 2015-11-17 09:58:25
- *  Brief @ 
+ *  Brief @
  */
 
 //error_reporting( E_ALL );
@@ -120,11 +121,11 @@ while ( true ) {
     usleep( 1000 );
 }
 ?>
-{% endhighlight %}
+```
 
 - client.c
 
-{% highlight c %}
+```cpp
 /* client.c */
 #include <stdio.h>
 #include <string.h>
@@ -164,22 +165,22 @@ int main(int argc, char *argv[])
     close(sockfd);
     return 0;
 }
-{% endhighlight %}
+```
 
 通常，广播是需要长时间进行的任务，所以可以创建一个守护进程来完成广播，以避免程序长时间运行对控制终端的占用。如果不使用守护进程，也可以用 Linux 的 `nohup` 命令来实现。然而，PHP 的进程控制不能被应用在 Web 服务器环境。那么，要让 PHP 的进程控制在 Web 环境下得到应用，可以用一个迂回的办法，即用 `cli` 的方式执行包含进程控制的 PHP 文件，所谓 cli 方式是指 shell 的执行方式。还有一个需要注意的问题是，在 Web 环境下，由于 PHP 程序是一个死循环，程序一直运行，所以客户端总是得不到服务器的返回结果。为解决这个问题，可以将用 `&` 让程序在后台运行，同时将输出重定向到 `/dev/null`。于是可以创建了一个新文件以保证广播在 Web 服务器环境下能够被触发：
 
 - startup.php
 
-{% highlight php %}
+```php
 <?php  # Script -- startup.php
 
 /* Author @ Huoty
  *   Date @ 2015-12-02 16:53:43
- *  Brief @ 
+ *  Brief @
  */
 
 exec("php ./broadcast_daemons.php >/dev/null &");
 echo "Finished!";
 
 ?>
-{% endhighlight %}
+```

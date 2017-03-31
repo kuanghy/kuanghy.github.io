@@ -3,8 +3,8 @@ layout: post
 title: "Python 中 Inf 和 Nan 的判断问题"
 keywords: Python Inf Nan 正无穷 负无穷 不是一个数 numpy isnan isinf
 description: "在 Python 中建议不要用 is 和 == 来判断一个对象是否是 inf 和 nan"
-category: Python 
-tags: Python Inf Nan
+category: Python
+tags: python
 ---
 
 Python 中可以用如下方式表示正负无穷：
@@ -77,7 +77,7 @@ True
 ```python
 >>> def isnan(num):
 ...     return num != num
-... 
+...
 >>> isnan(float("nan"))
 True
 ```
@@ -86,7 +86,7 @@ True
 
 ```python
 >>> import numpy as np
->>> 
+>>>
 >>> np.isnan(np.nan)
 True
 >>> np.isnan(float("nan"))
@@ -106,4 +106,3 @@ array([False,  True, False, False,  True, False, False,  True], dtype=bool)
 ```
 
 这里的 np.isnan 返回布尔值数组，如果对应位置为 NaN，返回 True，否则返回 False。
-

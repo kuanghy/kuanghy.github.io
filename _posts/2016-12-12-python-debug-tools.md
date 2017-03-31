@@ -4,7 +4,7 @@ title: "Python 代码调试工具"
 keywords: python debug pdb ipdb pudb 代码调试 Python代码调试
 description: "Python官方提供了内置的代码调试器pdb, 也有一些第三方工具，如ipdb、pudb等"
 category: Python
-tags: Python pdb ipdb pudb
+tags: python pdb debug
 ---
 
 ## pdb
@@ -91,4 +91,3 @@ The Python Debugger(pdb) 是官方调试器，内置在 Python 标准模块中�
 
 - [https://docs.python.org/2/library/pdb.html](https://docs.python.org/2/library/pdb.html)
 - [http://python.jobbole.com/82638/](http://python.jobbole.com/82638/)
-

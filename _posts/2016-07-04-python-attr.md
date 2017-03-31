@@ -4,7 +4,7 @@ title: "Python 对象属性的访问"
 keywords: Python dict attribute 描述符
 description: "Python 访问属性时会按照优先级链的顺序取搜索属性"
 category: Python
-tags: Python 属性
+tags: python
 ---
 
 在 Python 中，解释器将按照如下的优先级顺序在对象中搜索属性:

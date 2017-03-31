@@ -4,7 +4,7 @@ title: "Python 字符编码"
 keywords: python 字符编码 decode encode ASCII GBK UTF-8 Unicode
 description: "Python中的str是字节序列,而unicode则是文本字符串"
 category: Python
-tags: Python
+tags: python
 ---
 
 字符串也是一种数据类型，但比较特殊的是字符串存在一个编码问题，也就是我们怎么用计算机来表示相应的字符并存储。在编程语言中，我们经常会处理文本编码之间的转化问题，因为文本可能存在不同的编码，比如 ASCII、GBK、UTF-8 等等。
@@ -69,4 +69,3 @@ Python 试图在字节串和字符串之间以不为人所察觉的方式进行�
 - [http://www.tuicool.com/articles/2MVRVv7](http://www.tuicool.com/articles/2MVRVv7)
 - [https://gist.github.com/x7hub/178c87f323fbad57ff91](https://gist.github.com/x7hub/178c87f323fbad57ff91)
 - [http://python.jobbole.com/86578/](http://python.jobbole.com/86578/)
-

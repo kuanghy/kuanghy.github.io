@@ -73,7 +73,7 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 
 一个实用的 shell 脚本：
 
-```
+```shell
 #! /bin/bash
 
 # Filename: _mysql.sh 2015-09-21
@@ -94,5 +94,5 @@ fi
 用该命令可以直接在命令行执行 mysql 命令和 sql 语句，而不用进入 mysql 的交互式解释器。例如：
 
 > _mysql.sh "show tables"
-> 
+>
 > _mysql.sh "select * from users"

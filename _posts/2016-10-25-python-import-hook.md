@@ -4,7 +4,7 @@ title: "Python import hook"
 keywords: python import hook 探针 导入 加载 搜索
 description: "Python的import hook被译为探针，利用它可以在模块导入的过程中做一些额外的操作"
 category: Python
-tags: Python import hook
+tags: python
 ---
 
 `import hook` 通常被译为 **探针**。我们可以认为每当导入模块的时候，所触发的操作就是 `import hook`。使用 import 的 hook 机制可以让我们做很多事情，比如加载网络上的模块，在导入模块时对模块进行修改，自动安装缺失模块，上传审计信息，延迟加载等等。

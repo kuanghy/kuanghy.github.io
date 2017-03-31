@@ -4,7 +4,7 @@ title: "Remix OS for PC 使用体验"
 keywords: remix android
 description: "Remix OS for PC 是基于Android-x86 的系统，由安卓5.1 Lollipop深度定制而来"
 category: 计算机科学
-tags: remix android
+tags: linux remix
 ---
 
 Remix OS 是一个由三位前谷歌工程师在回国之后发起的项目。Remix OS是[技德科技](http://www.jide.com)旗下的的基于AOSP开发的深度定制操作系统，目前主要以平板电脑、一体机、智能显示器为载体。Remix OS 基于 Android-x86 项目的创建。这是 Remix OS 的一个新阶段，也将成为安卓电脑的又一座里程碑。

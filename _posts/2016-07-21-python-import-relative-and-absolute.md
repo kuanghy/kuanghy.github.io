@@ -4,7 +4,7 @@ title: "Python 相对导入与绝对导入"
 keywords: Python import 相对导入 绝对导入 包 模块
 description: "Python 相对导入与绝对导入，这两个概念是相对于包内导入而言的，包内导入即是包内的模块导入包内部的模块"
 category: Python
-tags: Python import
+tags: python
 ---
 
 Python 相对导入与绝对导入，这两个概念是相对于包内导入而言的。包内导入即是包内的模块导入包内部的模块。

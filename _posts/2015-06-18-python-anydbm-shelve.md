@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Python模块简介 -- anydbm, shelve 
+title: Python模块简介 -- anydbm, shelve
+keywords: python anydbm shelve
 category: Python
-tags: python anydbm shelve
+tags: python
 ---
 
 anydbm, shelve 是对象持久化保存方法，将对象保存到文件里面，缺省的数据存储文件是二进制的。这两个模块允许我们将一个磁盘上的文件与一个“dict-like”对象（类字典对象）关联起来，操作这个“dict-like”对象，就像操作dict对象一样，最后可以将“dict-like”的数据持久化到文件。对这个"dict-like"对象进行操作的时候，`anydbm`的key和value的类型必须都是是字符串，而`shelve`的key要求必须是字符串，value则可以是任意合法的python数据类型。
@@ -13,10 +14,10 @@ anydbm, shelve 是对象持久化保存方法，将对象保存到文件里面�
 
 shelve模块是anydbm的增强版，它支持在"dict-like"对象中存储任何可以被pickle序列化的对象，其key必须是字符串，而值可以为任意合法的python数据类型。下面为一个使用示例：
 
-{% highlight python %}
+```python
 import shelve
 d = shelve.open(filename) # open, with (g)dbm filename -- no suffix
-    
+
 d[key] = data   # store data at key (overwrites old data if
                             # using an existing key)
 data = d[key]   # retrieve a COPY of the data at key (raise
@@ -26,6 +27,6 @@ del d[key]        # delete data stored at key (raises KeyError
                            # if no such key)
 flag = d.has_key(key)   # true if the key exists; same as "key in d"
 list = d.keys() # a list of all existing keys (slow!)
-    
+
 d.close()       # close it
-{% endhighlight %}
+```

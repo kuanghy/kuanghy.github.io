@@ -4,7 +4,7 @@ title: "Python 性能优化技巧"
 keywords: Python 性能优化 cpython ctypes pypy numpy
 description: "Python 属于解释性语言，性能上可能不是很理想，所以使用 Python 时要注意使用一些效率更高的技巧，以使程序的性能更好"
 category: Python
-tags: Python
+tags: python
 ---
 
 Python 属于解释性语言，性能上可能不是很理想，所以使用 Python 时要注意使用一些效率更高的技巧，以使程序的性能更好。

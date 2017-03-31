@@ -4,7 +4,7 @@ title: "Python3 的一些新特性"
 keywords: Python3  Python3新特性 Python解包 Python迭代器
 description: "Python3 加入了很多新的特性，使得代码更加简洁，以及运行起来更加高效"
 category: Python
-tags: Python
+tags: python
 ---
 
 Python3 加入了很多新的特性，使得代码更加简洁，以及运行起来更加高效。这里收集一些很棒的、用得上的新特性。
@@ -81,7 +81,7 @@ try:
     do_something()
 except Exception, e:
     print e
-    
+
 # or
 
 try:

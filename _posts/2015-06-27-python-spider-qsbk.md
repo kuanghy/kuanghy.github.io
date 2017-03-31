@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Python 简单爬虫程序 -- 抓取糗百段子
+keywords: python 爬虫 糗百 段子
 category: Python
-tags: python 爬虫
+tags: python
 ---
 
 最近在学习 Python，闲来无事就写了个爬虫，用于抓取糗事百科的段子。
@@ -16,6 +17,7 @@ tags: python 爬虫
 代码托管于： [https://git.oschina.net/kuanghy/pyspider.git](https://git.oschina.net/kuanghy/pyspider.git)
 
 该程序所实现的功能：
+
 > 1.抓取糗事百科热门段子
 
 > 2.过滤带有图片的段子，因为程序运行于终端控制台，无法显示图片

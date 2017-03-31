@@ -4,7 +4,7 @@ title: "Python datetime模块参考手册"
 keywords: python datetime
 description: "datetime 模块用于更直观、更容易的操作日期和时间"
 category: Python
-tags: python datetime
+tags: python
 ---
 
 Python提供了多个内置模块用于操作日期时间，像 calendar，time，datetime。`time`模块提供的接口与C标准库 time.h 基本一致。相比于 time 模块，`datetime`模块的接口则更直观、更容易调用。
@@ -48,7 +48,7 @@ Python提供了多个内置模块用于操作日期时间，像 calendar，time�
 
 使用示例：
 
-```
+```python
 >>> datetime.date.max
 datetime.date(9999, 12, 31)
 >>> datetime.date.min
@@ -75,7 +75,7 @@ datetime.date(2016, 5, 12)
 
 使用示例：
 
-```
+```python
 >>> today = datetime.date.today()
 >>> today.year
 2016
@@ -124,7 +124,7 @@ date 允许对日期进行加减和比较：
 
 使用示例：
 
-```
+```python
 >>> now = datetime.date.today()
 >>> now
 datetime.date(2016, 5, 12)
@@ -159,7 +159,7 @@ True
 
 使用示例：
 
-```
+```python
 >>> datetime.time.min
 datetime.time(0, 0)
 >>> datetime.time.max
@@ -178,7 +178,7 @@ datetime.timedelta(0, 0, 1)
 
 使用示例：
 
-```
+```python
 >>> tm = datetime.time(18, 18, 18)
 >>> tm.hour
 18
@@ -221,7 +221,7 @@ datetime 是 date 与 time 的结合体，包括 date 与 time 的所有信息�
 
 使用示例：
 
-```
+```python
 >>> datetime.datetime.min
 datetime.datetime(1, 1, 1, 0, 0)
 >>> datetime.datetime.max
@@ -294,7 +294,7 @@ datetime.timedelta 对象代表两个时间之间的的时间差，两个 date �
 
 使用示例：
 
-```
+```python
 >>> datetime.timedelta.min
 datetime.timedelta(-999999999)
 >>> datetime.timedelta.max
@@ -311,7 +311,7 @@ datetime.timedelta(0, 0, 1)
 
 使用示例：
 
-```
+```python
 >>> datetime.timedelta.resolution.total_seconds()
 1e-06
 ```
@@ -320,7 +320,7 @@ datetime.timedelta(0, 0, 1)
 
 datetime、date、time 都提供了 strftime() 方法，该方法接收一个格式字符串，输出日期时间的字符串表示。支持的转换格式如下：
 
-```
+```python
 %a星期的简写。如 星期三为Web
 %A星期的全写。如 星期三为Wednesday
 %b月份的简写。如4月份为Apr
@@ -349,7 +349,7 @@ datetime、date、time 都提供了 strftime() 方法，该方法接收一个格
 
 使用示例：
 
-```
+```python
 >>> dt = datetime.datetime.now()
 >>> dt.strftime('%Y-%m-%d %H:%M:%S %f')
 '2016-05-12 14:19:22 333943'

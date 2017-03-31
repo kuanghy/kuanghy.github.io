@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Ubuntu下简单配置Apache虚拟主机的方法
+keywords: ubuntu apache 虚拟主机
 category: Linux
-tags: ubuntu apache 虚拟主机
+tags: ubuntu apache
 ---
 
 在Linux下开发Web程序，例如编写html、php等程序时，默认要到/var/www目录下才能工作，而 /var/www 目录必须要有超级用户权限才能访问，还得改这个目录的权限。有的人可能会想到把项目工程目录放到主目录下，然后在 /var/www 目录下做一个软链接。这也不失为一个方法，起码可以在属于当前用户自己的目录下工作。但是，我们在浏览器中对网站进行访问调试的时候需要输入工程目录名。例如：`http://localhost/mysite/`，这样才能访问，如何项目工程名很长很难记的话，是不是感觉很麻烦呢。
@@ -25,20 +26,20 @@ tags: ubuntu apache 虚拟主机
 Listen 80
 Listen 8888
 
-&lt;IfModule ssl_module&gt;
-    Listen 443 
-&lt;/IfModule&gt;
+<IfModule ssl_module>
+    Listen 443
+</IfModule>
 
-&lt;IfModule mod_gnutls.c&gt;
-    Listen 443 
-&lt;/IfModule&gt;
+<IfModule mod_gnutls.c>
+    Listen 443
+</IfModule>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 ```
 
-**【 2 】** 复制/etc/apache2/sites-available目录下的000-default.conf文件： 
+**【 2 】** 复制/etc/apache2/sites-available目录下的000-default.conf文件：
 
-> $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/mysite.conf 
+> $ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/mysite.conf
 
 然后将VirtualHost *:80改为VirtualHost *:8080
 将DocumentRoot /var/www/html 改为自己的目录，例如：DocumentRoot /home/huoty/mysite
@@ -47,7 +48,7 @@ Listen 8888
 
 > $ sudo ln -s /etc/apache2/sites-available/mysite.conf /etc/apache2/sites-enabled/mysite.conf
 
-放在 sites-enabled 目录下的配置文件才是真正有效的配置文件，通常情况下我们会在 sites-available 目录下存放配置好的配置文件，然后将需要启动的站点的配置文件软链接到 sites-enabled 目录下。这样方便我们取消和重设站点。 
+放在 sites-enabled 目录下的配置文件才是真正有效的配置文件，通常情况下我们会在 sites-available 目录下存放配置好的配置文件，然后将需要启动的站点的配置文件软链接到 sites-enabled 目录下。这样方便我们取消和重设站点。
 
 **【 4 】** 重启apache服务
 
@@ -68,7 +69,7 @@ Listen 8888
 
 **【 7 】** 为了保证 apache 由权限访问你所配置的目录，可以将 apache 用户添加到自己的用户组中，apache 的默认用户名为 www-data，修改方法为：
 
-> $ sudo usermod -a -G huoty www-data 
+> $ sudo usermod -a -G huoty www-data
 
 huoty为当前用户的用户组。
 
@@ -82,7 +83,7 @@ huoty为当前用户的用户组。
 Options
 AllowOverride
 Order
-Allow 
+Allow
 Deny
 ```
 
@@ -115,8 +116,8 @@ Allow from 202.96.0.97 202.96.0.98  # 允许来自指定IP地址主机的访问
 **Deny** 用于设定拒绝访问Apache服务器的主机，例如：
 
 ```
-Deny from all  # 拒绝来自所有主机的访问 
+Deny from all  # 拒绝来自所有主机的访问
 Deny from 202.96.0.99 202.96.0.88 # 拒绝指定IP地址主机的访问
 ```
 
-**Order** 用于指定allow和deny的先后次序：Order allow,deny 
+**Order** 用于指定allow和deny的先后次序：Order allow,deny

@@ -4,7 +4,7 @@ title: "Python 解码 Unicode 转义字符串"
 keywords: Python 字符串 unicode escape 解码
 description: "Unicode的转义字符串可以通过解码为escape编码类型来查看其要表示的类型"
 category: Python
-tags: Python unicode escape
+tags: python
 ---
 
 其实，这里要讨论的内容是针对 Python2 的，实际上也是 Python2 中让人头疼的编码问题，而 Python3 则好处理得多。

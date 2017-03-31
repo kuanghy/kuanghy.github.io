@@ -4,7 +4,7 @@ title: "对 Python 迭代的深入研究"
 keywords: 迭代 iterable iterator
 description: "一个实现了 __iter__() 方法的对象是可迭代的，一个实现了 next() 方法的对象则是迭代器。"
 category: Python
-tags: 迭代 iterable iterator
+tags: python 迭代器
 ---
 
 在程序设计中，通常会有 loop、iterate、traversal 和 recursion 等概念，他们各自的含义如下：
@@ -51,12 +51,12 @@ tags: 迭代 iterable iterator
 
 示例：
 
-{% highlight python %}
+```python
 class MyRange(object):
     def __init__(self, n):
         self.idx = 0
         self.n = n
-        
+
     def __iter__(self):
         return self
 
@@ -67,12 +67,12 @@ class MyRange(object):
             return val
         else:
             raise StopIteration()
-            
+
 myRange = MyRange(3)
 
 print [i for i in myRange]
 print [i for i in myRange]
-{% endhighlight %}
+```
 
 运行结果：
 
@@ -84,7 +84,7 @@ True
 
 也就是说一个迭代器无法多次使用。为了解决这个问题，可以将可迭代对象和迭代器分开自定义：
 
-{% highlight python %}
+```python
 class Zrange:
     def __init__(self, n):
         self.n = n
@@ -113,7 +113,7 @@ print zrange is iter(zrange)
 
 print [i for i in zrange]
 print [i for i in zrange]
-{% endhighlight %}
+```
 
 ## for 语句原理
 
@@ -135,25 +135,25 @@ for i in iter(<list, tuple, set, dict>)
 
 既然生成器是一个迭代器，而生成器又是一个包含 yield 语句的函数，同时调用可迭代对象的 `__iter__` 方法时需要返回一个迭代器，那么就可以将 `__iter__` 方法变成一个生成器，从而方便的获得一个迭代器。也就是在 `__iter__` 方法中使用 yield 语句：
 
-{% highlight python %}
+```python
 class Zrange:
     def __init__(self, n):
         self.i = 0
         self.n = n
-        
+
     def __iter__(self):
         while self.i < self.n:
             yield self.i
             self.i += 1
-{% endhighlight %}
+```
 
 当然，这样实现的迭代器仍然只能使用一次。为了得到一个可以重复使用的迭代器，可以采用可迭代对象和迭代器的分开自定义方式，同时使用生成器：
 
-{% highlight python %}
+```python
 class Zrange:
     def __init__(self, n):
         self.n = n
-        
+
     def __iter__(self):
         return self.__generator()
 
@@ -166,7 +166,7 @@ class Zrange:
 zrange = Zrange(10)
 print [i for i in zrange]
 print [i for i in zrange]
-{% endhighlight %}
+```
 
 ## 惰性计算
 
@@ -180,7 +180,7 @@ print [i for i in zrange]
 
 来看一个例子：
 
-{% highlight python%}
+```
 def add(s, x):
     return s + x
 
@@ -193,7 +193,7 @@ for n in [1, 10]:
     base = (add(i, n) for i in base)
 
 print list(base)
-{% endhighlight %}
+```
 
 结果输出是 `[20,21,22,23]`。很多人可能会想不明白，这里确实也很难理解，主要是因为生成器惰性计算的原因。生成器 base 在最后 list(base) 时被检索，此时生成器被赋值并开始计算。但此时 base 生成器一共被创建了三次，而且 n=10，这里注意 `add(i+n)` 绑定的是 n 这个变量而不是它当时的值（因为生成器在被检索时被赋值）。这样，首先通过 gen() 得到 (0, 1, 2, 3)，然后是第一次循环得到 (10 + 0, 10 + 1, 10 + 2, 10 +3)，最后是第二次循环得到 (10 + 10, 11 + 10, 12 + 10, 13 + 10)。
 
@@ -201,7 +201,7 @@ print list(base)
 
 上面的例子就类似与下面这样的简单写法：
 
-{% highlight python %}
+```python
 def gen():
     for i in range(4):
         yield i  #  第一个管道
@@ -210,7 +210,7 @@ base = (add(i, 10) for i in base) #  第二个管道
 base = (add(i, 10) for i in base) #  第三个管道
 
 list(base) #  开关驱动器
-{% endhighlight %}
+```
 
 可以在 [http://pythontutor.com/](http://pythontutor.com/) 上演示程序的执行过程。
 
@@ -220,32 +220,32 @@ list(base) #  开关驱动器
 
 有如下示例：
 
-{% highlight python %}
+```python
 l = range(100000000)
 
 for i in l:
     pass
-{% endhighlight %}
+```
 
 这个例子只是去遍历一个超大的列表，并没有做其他任何多余的操作。但是，在我的机器上运行时内存已经被占满，而且系统几乎卡死。但如果使用迭代器结果就不一样了：
 
-{% highlight python %}
+```python
 l = xrange(100000000)
 
 for i in l:
     pass
-{% endhighlight %}
+```
 
 这样修改后程序只在 4s 左右就执行完成了，并且对系统没有任何影响。
 
 但是，需要注意的一点是：**并非所有的迭代器都能很好的节省内存**。例如：
 
-{% highlight python %}
+```python
 l = range(100000000)
 
 for i in iter(l):
     pass
-{% endhighlight %}
+```
 
 这里虽然在迭代时把列表转化成了迭代器，但是所有的数据已经放在内存中，并不会带来任何的效益。
 

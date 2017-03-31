@@ -4,7 +4,7 @@ title: "Python 几种取整的方法"
 keywords: python trunc 取整 向上取整 向下取整 四舍五入 int round ceil modf
 description: "数据处理是编程中不可避免的, 取整则是最基本的数据处理"
 category: Python
-tags: python trunc
+tags: python
 ---
 
 数据处理是编程中不可避免的，很多时候都需要根据需求把获取到的数据进行处理，取整则是最基本的数据处理。取整的方式则包括向下取整、四舍五入、向上取整等等。

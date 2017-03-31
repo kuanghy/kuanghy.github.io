@@ -4,7 +4,7 @@ title: "Linux 后台进程管理利器 Supervisor"
 keywords: Supervisor Python
 description: "Supervisor 是一个 Python 写的进程管理器。不仅仅可以用来管理进程，还可以用来做开机启动。"
 category: Linux
-tags: Supervisor Python
+tags: supervisor python
 ---
 
 [Supervisor](http://supervisord.org/)，简单来说，就是一个Python写的进程管理器。不仅仅可以用来管理进程，还可以用来做开机启动。Superbvisor 能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。

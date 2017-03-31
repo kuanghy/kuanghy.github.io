@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python 二分查找与 bisect 模块"
-keywords: Python  bisect
+keywords: Python  bisect 二分查找
 description: "Python的bisect模块用于列表的二分法插入，用其实现二分查找效率更高"
 category: Python
-tags: Python  bisect
+tags: python
 ---
 
 Python 的列表（list）内部实现是一个数组，也就是一个线性表。在列表中查找元素可以使用 list.index() 方法，其时间复杂度为O(n)。对于大数据量，则可以用二分查找进行优化。二分查找要求对象必须有序，其基本原理如下：
@@ -17,7 +17,7 @@ Python 的列表（list）内部实现是一个数组，也就是一个线性表
 
 我们分别用递归和循环来实现二分查找：
 
-{% highlight python %}
+```python
 def binary_search_recursion(lst, value, low, high):  
     if high < low:  
         return None
@@ -40,11 +40,11 @@ def binary_search_loop(lst,value):
         else:
             return mid  
     return None
-{% endhighlight %}
+```
 
 接着对这两种实现进行一下性能测试：
 
-{% highlight python %}
+```python
 if __name__ == "__main__":
     import random
     lst = [random.randint(0, 10000) for _ in xrange(100000)]
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     print "Recursion:", t1.timeit()
     print "Loop:", t2.timeit()
-{% endhighlight %}
+```
 
 执行结果如下：
 
@@ -77,7 +77,7 @@ Python 有一个 `bisect` 模块，用于维护有序列表。`bisect` 模块实
 
 下面是一个简单的使用示例：
 
-{% highlight python %}
+```python
 import bisect
 import random
 
@@ -92,7 +92,7 @@ for i in range(1, 15):
     position = bisect.bisect(l, r)
     bisect.insort(l, r)
     print'%3d  %3d' % (r, position), l
-{% endhighlight %}
+```
 
 输出结果：
 
@@ -137,13 +137,13 @@ Bisect模块提供的函数有：
 
 Bisect 模块提供的函数可以分两类： `bisect*` 只用于查找 index， 不进行实际的插入；而 `insort*` 则用于实际插入。该模块比较典型的应用是计算分数等级：
 
-{% highlight python %}
+```python
 def grade(score,breakpoints=[60, 70, 80, 90], grades='FDCBA'):
     i = bisect.bisect(breakpoints, score)
     return grades[i]
 
 print [grade(score) for score in [33, 99, 77, 70, 89, 90, 100]]
-{% endhighlight %}
+```
 
 执行结果：
 
@@ -153,14 +153,14 @@ print [grade(score) for score in [33, 99, 77, 70, 89, 90, 100]]
 
 同样，我们可以用 bisect 模块实现二分查找：
 
-{% highlight python %}
+```python
 def binary_search_bisect(lst, x):
     from bisect import bisect_left
     i = bisect_left(lst, x)
     if i != len(lst) and lst[i] == x:
         return i
     return None
-{% endhighlight %}
+```
 
 我们再来测试一下它与递归和循环实现的二分查找的性能：
 

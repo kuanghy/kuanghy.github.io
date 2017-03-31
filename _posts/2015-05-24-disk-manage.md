@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Linux 磁盘相关命令简介：df、du、hdparm
+keywords: du df hdparm
 category: Linux
-tags: du df hdparm
+tags: linux
 ---
 
 #### 检查文件系统的磁盘受用情况：`df`
@@ -30,7 +31,6 @@ none             2035828     2528  2033300    1% /run/shm
 none              102400       24   102376    1% /run/user
 ```
 
-<br/>
 #### 统计目录或者文件所占磁盘空间大小：`du`
 
 * -a 显示所有指定目录
@@ -52,7 +52,6 @@ none              102400       24   102376    1% /run/user
 80K	桌面
 ```
 
-<br/>
 #### 磁盘维护：`hdparm`
 
 * -a<快取分区>   设定读取文件时，预先存入块区的分区数，若不加上<快取分区>选项，则显示目前的设定。
@@ -89,7 +88,7 @@ none              102400       24   102376    1% /run/user
 
 结果：
 
-```python
+```
 /dev/sda8:
  Timing cached reads:   8466 MB in  2.00 seconds = 4236.29 MB/sec
 ```

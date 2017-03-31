@@ -4,7 +4,7 @@ title: "让一些老的系统支持 ext4 文件系统"
 keywords: ext4
 description: "Ext4文件系统是Linux系统下的日志文件系统，是ext3文件系统的后继版本。"
 category: Linux
-tags: ext4
+tags: linux ext4
 ---
 
 `Ext4` 文件系统（第四扩展文件系统）是Linux系统下的日志文件系统，是ext3文件系统的后继版本。其特点有：大型文件系统、Extents、向下兼容、预留空间、延迟取得空间、突破32000子目录限制、日志校验和、在线磁盘整理、快速文件系统检查。

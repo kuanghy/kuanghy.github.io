@@ -4,7 +4,7 @@ title: "Python Web服务网关接口（WSGI）"
 keywords: Python  WSGI wsgiref
 description: "WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种低级别的接口"
 category: Python
-tags: Python  WSGI wsgiref
+tags: python wsgi
 ---
 
 ## WSGI 简介
@@ -66,14 +66,14 @@ WSGI 应用接口只要是一个可调用的对象就行，例如函数、方法
     这一模块包含了一些工具函数，主要用于对环境变量，URL的处理。
 
 -  validate
- 
+
     这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准
-    
+
 下面是一个简单的 web 服务器示例，主要输出客户端请求信息：
 
 - 服务器 showenv.py：
 
-{% highlight python %}
+```python
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -110,7 +110,7 @@ def application(environ, start_response):
     # Status code and response headers
     status = "200 OK"
     response_headers = [("Content-Type", "text/html"), ("Content-Length", str(content_len))]
-    
+
     # Use callback function to send back status code
     # and response headers
     start_response(status, response_headers)
@@ -127,14 +127,14 @@ if __name__ == "__main__":
     # Print prompting message
     print "Starting http server at http://%s:%s/" % (HOST, str(PORT))
     print "Quit the server with CONTROL-C."
-    
+
     # Listen http request
     httpd.serve_forever()
-{% endhighlight %}
+```
 
 - 模板文件 getenv.tpl：
 
-{% highlight html %}
+```python
 <!DOCTYPE html>
 <html>
     <head>
@@ -197,8 +197,8 @@ table td {
 </table>
 <footer>Based on python and wsgiref, Powered by <a href="http://konghy.cn/">huoty.</footer>
     </body>
-</html> 
-{% endhighlight %}
+</html>
+```
 
 ## 参考资料
 

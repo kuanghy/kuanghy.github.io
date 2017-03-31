@@ -4,7 +4,7 @@ title: "Linux 下的 tempfs 与 /dev/shm"
 keywords: Linux tmpfs /dev/shm Python SharedArray
 description: "tmpfs 是 Linux/Unix 系统上的一种基于内存的文件系统，即 tmpfs 使用内存或 swap 分区来存储文件。"
 category: Linux
-tags: Linux tmpfs Python
+tags: linux 共享内存 shm
 ---
 
 `tmpfs` 是 Linux/Unix 系统上的一种基于内存的文件系统，即 tmpfs 使用内存或 swap 分区来存储文件。
@@ -47,4 +47,3 @@ tmpfs /dev/shm tmpfs defaults,size=4G 0 0
 - [http://blog.ddup.us/2011/04/01/disappearing-var-run-dir/](http://blog.ddup.us/2011/04/01/disappearing-var-run-dir/)
 - [http://blog.csdn.net/guo8113/article/details/28590963?utm_source=tuicool&utm_medium=referral](http://blog.csdn.net/guo8113/article/details/28590963?utm_source=tuicool&utm_medium=referral)
 - [http://www.linuxidc.com/Linux/2014-05/101818.htm](http://www.linuxidc.com/Linux/2014-05/101818.htm)
-

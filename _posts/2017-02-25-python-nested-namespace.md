@@ -4,7 +4,7 @@ title: "Python 内层名字空间访问外层名字空间中的变量"
 keywords: global 作用域 名字空间
 description: "当你发现你的设计思路不符合语言习惯的时候，那说明你的设计是不正确，何不换换别的思路呢"
 category: Python
-tags: global 作用域 名字空间
+tags: python
 ---
 
 某天，一位新来的同事问我，在 Python 的函数中，怎么定义一个像 C 语言中的 static 变量。就像这样：
@@ -13,7 +13,7 @@ tags: global 作用域 名字空间
 void foo(void)
 {
     static int a = 0;
-    
+
     ...
 }
 ```

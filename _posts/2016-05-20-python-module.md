@@ -4,7 +4,7 @@ title: "Python 模块的一些知识点总结"
 keywords: Python  module
 description: "模块支持从逻辑上组织 Python 代码。 当代码量变得相当大的时候, 我们最好把代码分成一些有组织的代码段,前提是保证它们的彼此交互。"
 category: Python
-tags: Python  module
+tags: python
 ---
 
 模块支持从逻辑上组织 Python 代码。 当代码量变得相当大的时候, 我们最好把代码分成一些有组织的代码段,前提是保证它们的彼此交互。 这些代码片段相互间有一定的联系, 可能是一个包含数据成员和方法的类, 也可能是一组相关但彼此独立的操作函数。 这些代码段是共享的,所以Python 允许 "调入" 一个模块, 允许使用其他模块的属性来利用之前的工作成果, 实现代码重用。这个把其他模块中属性附加到你的模块中的操作叫做导入(import) 。那些自我包含并且有组织的代码片断就是模块( module )。
@@ -135,7 +135,7 @@ NameError: name 'josn' is not defined
 
 - a.py
 
-{% highlight python %}
+```python
 import sys
 import time
 
@@ -146,24 +146,24 @@ time.test = "This is test in time."
 
 def foo():
     print "dadada"
-{% endhighlight %}
+```
 
 - b.py
 
-{% highlight python %}
+```python
 from a import *
 print dir()
-{% endhighlight %}
+```
 
 - testsys.py
 
-{% highlight python %}
+```python
 import sys
 from b import *
 
 print sys.test
 print time.test
-{% endhighlight %}
+```
 
 运行 testsys.py 的输出结果为：
 

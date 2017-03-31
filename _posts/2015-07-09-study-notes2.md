@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 学习札记篇二
+keywords: 学习 札记 ln ps
 category: 学习札记
-tags: ln ps
+tags: 札记
 ---
 
 ## Linux 文件链接
@@ -77,5 +78,3 @@ CMD 命令名
 （3）列出类似程序树的程序显示
 
 > ps -axjf
-
-

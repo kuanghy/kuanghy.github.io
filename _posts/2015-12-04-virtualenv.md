@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Linux下使用 virtualenv 虚拟独立 Python 环境"
+keywords: python virtualenv 虚拟环境
 category: Python
-tags: virtualenv
+tags: python virtualenv
 ---
 
 ### 简介
