@@ -9,6 +9,9 @@ url: http://kuanghy.github.io
 # Localhost
 # url: http://127.0.0.1:4000
 
+# Production URL for sitemap
+production_url: http://kuanghy.github.io
+
 # Harmony theme configuration. Please change accordingly.
 harmony:
   name: 旷世的忧伤
