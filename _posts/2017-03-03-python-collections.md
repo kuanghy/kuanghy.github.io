@@ -3,8 +3,8 @@ layout: post
 title: "Python 模块简介 -- collections"
 keywords: Python collections namedtuple deque counter orderdict defaultdict chainmap
 description: "collections模块定义了一些扩展的数据类型"
-category:
-tags: python
+category: Python
+tags: python python模块
 ---
 
 Python 的内置数据数据类型包括 str, int, list, tuple, set, dict 等，有时候这些数据类型可能满足不了我们的需求。不过标准库的 collections 模块在这些内置数据类型的基础上，提供了几个额外的数据类型：

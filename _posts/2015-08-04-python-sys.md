@@ -2,7 +2,7 @@
 layout: post
 title: Python sys模块参考手册
 category: Python
-tags: python
+tags: python python模块
 ---
 
 #### sys.argv

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python 二分查找与 bisect 模块"
-keywords: Python  bisect 二分查找
+keywords: Python  bisect 二分查找 python模块
 description: "Python的bisect模块用于列表的二分法插入，用其实现二分查找效率更高"
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python 的列表（list）内部实现是一个数组，也就是一个线性表。在列表中查找元素可以使用 list.index() 方法，其时间复杂度为O(n)。对于大数据量，则可以用二分查找进行优化。二分查找要求对象必须有序，其基本原理如下：
@@ -18,27 +18,27 @@ Python 的列表（list）内部实现是一个数组，也就是一个线性表
 我们分别用递归和循环来实现二分查找：
 
 ```python
-def binary_search_recursion(lst, value, low, high):  
-    if high < low:  
+def binary_search_recursion(lst, value, low, high):
+    if high < low:
         return None
-    mid = (low + high) / 2  
-    if lst[mid] > value:  
-        return binary_search_recursion(lst, value, low, mid-1)  
-    elif lst[mid] < value:  
-        return binary_search_recursion(lst, value, mid+1, high)  
-    else:  
-        return mid  
+    mid = (low + high) / 2
+    if lst[mid] > value:
+        return binary_search_recursion(lst, value, low, mid-1)
+    elif lst[mid] < value:
+        return binary_search_recursion(lst, value, mid+1, high)
+    else:
+        return mid
 
-def binary_search_loop(lst,value):  
-    low, high = 0, len(lst)-1  
-    while low <= high:  
-        mid = (low + high) / 2  
-        if lst[mid] < value:  
-            low = mid + 1  
-        elif lst[mid] > value:  
+def binary_search_loop(lst,value):
+    low, high = 0, len(lst)-1
+    while low <= high:
+        mid = (low + high) / 2
+        if lst[mid] < value:
+            low = mid + 1
+        elif lst[mid] > value:
             high = mid - 1
         else:
-            return mid  
+            return mid
     return None
 ```
 

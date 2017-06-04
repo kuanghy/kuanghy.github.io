@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Python模块简介 -- urllib, urllib2
-keywords: urllib python
+keywords: urllib python python模块
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python的urllib和urllib2模块都做与请求URL相关的操作，但他们提供不同的功能。他们两个最显着的差异如下：

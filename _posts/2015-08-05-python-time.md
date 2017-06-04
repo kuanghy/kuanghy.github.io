@@ -2,7 +2,7 @@
 layout: post
 title: Python time模块参考手册
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python的time模块提供了各种操作时间的功能。在大多数的编程语言中，表示时间的方法有两种，一是时间戳。即从1970年1月1日00:00:00开始按秒计算的偏移量；二是该语言自己的数据结构。Python中表示时间的数据结构元组，共有九个元素, 即：

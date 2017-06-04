@@ -346,3 +346,7 @@ Mac 安装：
 ### Insomnia
 
 [Insomnia](https://insomnia.rest/) 跨平台的、免费的 REST 客户端
+
+### cloc
+
+[Count Lines of Code](http://cloc.sourceforge.net/)，统计代码行数，用 perl 语言编写，速度还不错

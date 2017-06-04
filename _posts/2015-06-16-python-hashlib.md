@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Python模块简介 -- hashlib
-keywords: python hashlib
+keywords: python hashlib python模块
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python 中的 hashlib 模块用来进行 hash 或者 md5 加密。这里的加密，其实并非我们通常所说的加密，简单的说就是这种加密一般是不可逆的。这种加密算法实际上是被称之为`摘要算法`，包括 MD5，SHA1 等等。MD5的全称是Message-Digest Algorithm 5（信息-摘要算法）。SHA1的全称是Secure Hash Algorithm(安全哈希算法) 。SHA1基于MD5，加密后的数据长度更长。
@@ -17,28 +17,28 @@ hashlib是个专门提供hash算法的库，里面包括md5, sha1, sha224, sha25
 ```python
 import hashlib
 
-a = "I am huoty"  
-print hashlib.md5(a).hexdigest()  
-print hashlib.sha1(a).hexdigest()  
-print hashlib.sha224(a).hexdigest()  
-print hashlib.sha256(a).hexdigest()  
-print hashlib.sha384(a).hexdigest()  
+a = "I am huoty"
+print hashlib.md5(a).hexdigest()
+print hashlib.sha1(a).hexdigest()
+print hashlib.sha224(a).hexdigest()
+print hashlib.sha256(a).hexdigest()
+print hashlib.sha384(a).hexdigest()
 print hashlib.sha512(a).hexdigest()
 ```
 
 #### hashlib 属性和方法简介
 
 ```python
-hashlib.algorithms    
+hashlib.algorithms
     列出所有加密算法 ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
 
-digesti_size    
+digesti_size
     16 产生的散列的字节大小。
 
-block_size    
+block_size
     64 The internal block size of the hash algorithm in bytes.
 
-new(name, string='')  
+new(name, string='')
     创建指定加密模式的hash对象，例如：
 h = hashlib.new('md5')
 h2 = hashlib.new('ripemd160','what')

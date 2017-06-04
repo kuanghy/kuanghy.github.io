@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python 模块简介 -- functools"
-keywords: Python functools 装饰器
+keywords: Python functools 装饰器 python模块
 description: "Python的functools模块可以说主要是为函数式编程而设计，用于增强函数功能"
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python 的 functools 模块可以说主要是为函数式编程而设计，用于增强函数功能。

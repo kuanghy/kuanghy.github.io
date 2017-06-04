@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python 模块简介 -- math"
-keywords: Python  math
+keywords: Python math python模块
 description: "Python 数学处理函数模块简介"
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python 的 math 模块提供了一些基本的数学运行功能，例如求弦、求根、求对数等等。一般情况下，我们能够用上的 math 模块的函数不多，常用的函数应该是 fabs、ceil、floor、factorial 等，对于求幂，用 `**` 效率更高。

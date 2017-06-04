@@ -2,7 +2,7 @@
 layout: post
 title: MySQL数据库操作基本命令简介
 category: 数据库
-tags: mysql
+tags: mysql 数据库
 ---
 
 MySQL是一个非常流行的小型关系型数据库管理系统。在数据库的管理上，我们一般会借住一些工具，常用的是phpMyAdmin。它是一个用PHP开发的基于Web方式架构在网站主机上的MySQL管理工具，支持中文，管理数据库非常方便。但有时候我们可能会无可避免的要用到命令行下的操作。这里记录一些基本的命令行操作命令以参考和备忘。
@@ -13,7 +13,7 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 
 有了数据库服务器的用户名和密码之后，就可以通过命令**登录到服务器**：
 
-> mysql -u root -p
+> mysql -u root -p <password>
 
 需要**启动或者重启**MySQL服务器时，可以采用如下命令：
 
@@ -39,21 +39,25 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 
 > show tables;
 
-**注：**使用该命令前需要使用 use 命令来选择要操作的数据库。
+**注：** 使用该命令前需要使用 use 命令来选择要操作的数据库。
 
 如果要查看数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息，可以使用如下命令：
 
 > show columns from 数据表;
 
-要**查看数据表的详细索引信息**，包括PRIMARY KEY（主键），可以采用如下命令：
+或者使用如下命令查看更加详细的表属性信息(包括字段权限，表注释等)：
+
+> show full columns from 数据表;
+
+要**查看数据表的详细索引信息**，包括 PRIMARY KEY（主键），可以采用如下命令：
 
 > show index from 数据表;
 
-用如下命令可以**输出Mysql数据库管理系统的性能及统计信息：**
+用如下命令可以**输出 Mysql 数据库管理系统的性能及统计信息：**
 
-> show table status like 数据表\G;
+> show table status like '数据表'\G;
 
-**创建数据库：**
+**创建数据库:**
 
 > create databases 数据库名;
 
@@ -69,9 +73,37 @@ MySQL是一个非常流行的小型关系型数据库管理系统。在数据库
 >
 > describe 表名;
 
-其他对数据库的相应操作使用SQL语句即可。
+**清空表:**
 
-一个实用的 shell 脚本：
+> delete from 表名;
+>
+> truncate table 表名;
+
+**删除表:**
+
+> drop table 表名;
+
+**表字段的增删改:**
+
+修改字段属性：
+
+> alter table 表名 modify 字段名称 字段类型 [是否允许非空] comment '字段注释';
+
+改变字段名称：
+
+> alter table 表名 change 字段原名称 字段新名称 字段类型 [是否允许非空] comment '字段注释';
+
+添加字段：
+
+> alter table 表名 add 字段名称 字段类型 [是否允许非空] comment '字段注释';
+
+删除字段：
+
+> alter table 表名 drop column 字段名称;
+
+其他对数据库的相应操作使用 SQL 语句即可。
+
+**一个实用的 shell 脚本：**
 
 ```shell
 #! /bin/bash

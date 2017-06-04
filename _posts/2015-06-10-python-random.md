@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Python模块简介 -- random
-keywords: python random
+keywords: python random python模块
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python中的random模块用于生成随机数，这里主要对该模块中一些常用的函数进行介绍。

@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Python datetime模块参考手册"
-keywords: python datetime
+keywords: python datetime python模块
 description: "datetime 模块用于更直观、更容易的操作日期和时间"
 category: Python
-tags: python
+tags: python python模块
 ---
 
 Python提供了多个内置模块用于操作日期时间，像 calendar，time，datetime。`time`模块提供的接口与C标准库 time.h 基本一致。相比于 time 模块，`datetime`模块的接口则更直观、更容易调用。
