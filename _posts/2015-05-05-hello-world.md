@@ -2,6 +2,7 @@
 layout: post
 title: 你好，世界
 category: 我的日志
+keywords: 日志 hello world 你好 世界
 tags: 博客
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python 序列（字符串、列表、元组）概述"
-keywords: Python 序列
+keywords: Python 序列 str string list tuple
 description: "Python序列类型概述，讲述字符串、列表、元组的通用操作符和内建函数"
 category: Python
 tags: python

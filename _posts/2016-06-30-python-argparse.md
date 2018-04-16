@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 `ArgumentParser` 的原型如下所示：
 
 ```python
-class ArgumentParser(self, prog=None, usage=None, description=None, epilog=None, version=None, parents=[], formatter_class=<class 'argparse.HelpFormatter'>, prefix_chars='-', fromfile_prefix_chars=None, argument_default=None, conflict_handler='error', add_help=True)
+class ArgumentParser(self, prog=None, usage=None, description=None, epilog=None, parents=[], formatter_class=<class 'argparse.HelpFormatter'>, prefix_chars='-', fromfile_prefix_chars=None, argument_default=None, conflict_handler='error', add_help=True)
 ```
 
 ArgumentParser对象的参数都为关键字参数：

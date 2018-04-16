@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python 序列：列表、元组"
-keywords: Python 列表 元组
+keywords: Python list tuple sequence 列表 元组
 description: "重点描述列表的特殊特性以及与元组的区别，同时描述为什么要区分列表和元组"
 category: Python
 tags: python

@@ -2,6 +2,7 @@
 layout: post
 title: Ubuntu 的 APT 工具简介
 category: Linux
+keywords: apt apt-get 软件包管理
 tags: ubuntu
 ---
 

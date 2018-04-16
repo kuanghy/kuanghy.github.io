@@ -3,7 +3,7 @@ layout: post
 title: "Python 编码风格参考"
 keywords: Python 编码 编码风格 风格参考 编码规范
 description: "代码除了用来运行外，更多的是用来读。本文仅是一个 Python 编码风格的参考"
-category: python
+category: Python
 tags: python
 ---
 
@@ -191,7 +191,29 @@ root must be a filesystem path already.
 """
 ```
 
-- 3、如果要在 docstring 中对函数或者方法的参数以及返回值进行说明，可以参考如下形式：
+- 2、函数和方法的 docstring 层次顺序大致为概述、详细描述、参数、返回值、异常，一般不要求描述实现细节，除非其中涉及非常复杂的算法。大致的层次结构如下所示：
+
+```python
+"""函数或方法的概述
+
+详细的描述信息……
+详细的描述信息……
+
+参数说明
+--------
+    参数1：...
+    参数2：...
+
+返回值：
+    ...
+
+异常：
+    异常1：...
+    异常2：...
+"""
+```
+
+一个参考示例：
 
 ```python
 """Start a kernel for a session and return its kernel_id.                                                                                             
@@ -213,6 +235,21 @@ Return a kernel id
 """
 ```
 
+- 3、类的 docstring 的层次顺序大致为概述、详细描述、属性说明。如果类有公开属性值时，应该尽量在 docstring 中进行说明。如下所示：
+
+```python
+"""这里是类的概述。
+
+详细的描述信息……
+详细的描述信息……
+
+属性(Attributes):
+-----------------
+    属性1: ...
+    属性2: ...
+"""
+```
+
 ## 七、命名规范
 
 - 1、模块命名尽量短小，使用全部小写的方式，可以使用下划线。
@@ -225,7 +262,7 @@ Return a kernel id
 - 8、类的属性（方法和变量）命名使用全部小写的方式，使用下划线分割单词。
 - 9、变量、类属性等命令尽量不要使用缩写形式，除了计数器和迭代器，尽量不要使用单字符名称。
 - 10、类的方法第一个参数必须是 self，而静态方法第一个参数必须是 cls。
-- 11、在模块中要表示私有变量或者函数时，可以在变量或者函数前加一个下划线 `_foo`, `_show_msg`
+- 11、在模块中要表示私有变量或者函数时，可以在变量或者函数前加一个下划线 `_foo`, `_show_msg` 来进行访问控制。
 - 12、在 Python 中没有诸如 public、private、protected 等修饰符，而在类的定义中往往会有类似这样的需求，那么可以在属性或者方法前加一个下划线表示 protected，加两个下划线来表示 private。加两个下划线的变量或者方法没法直接访问。比如：类 Foo 中声明 `__a`, 则不能用 `Foo.__a` 的方式访问，但可以用 `Foo._Foo__a` 的方式访问。`
 
 ## 八、程序入口
@@ -244,7 +281,7 @@ if __name__ == '__main__':
 
 ## 九、编码建议
 
-- 1、尽可能使用 'is' 和 'is not' 取代 '=='，比如 if x is not None 要优于 if x。
+- 1、尽可能使用 'is' 和 'is not' 取代 '=='，比如 if x is not None 要优于 if x != None，另外用 if x 效率更高。
 
 - 2、用 "is not" 代替 "not ... is"，前者的可读性更好。
 
@@ -286,6 +323,8 @@ if not len(seq)
 
 - 12、使用迭代器和生成器代替列表等数据结构效率更高，使用列表（字典）解析式和生成器表达式比用循环效率更高。
 
+- 13、避免在循环中用 + 或 += 来连续拼接字符串。因为字符串是不变型，这会毫无必要地建立很多临时对象，从而成为二次方级别的运算量而不是线性运算时间。
+
 ## 参考资料
 
 - [https://www.python.org/dev/peps/pep-0008/](https://www.python.org/dev/peps/pep-0008/)
@@ -293,4 +332,4 @@ if not len(seq)
 - [https://my.oschina.net/u/1433482/blog/464444](https://my.oschina.net/u/1433482/blog/464444)
 - [http://nanshu.wang/post/2015-07-04/](http://nanshu.wang/post/2015-07-04/)
 - [https://zhuanlan.zhihu.com/p/25696847](https://zhuanlan.zhihu.com/p/25696847)
-
+- [https://zhuanlan.zhihu.com/p/25715093](https://zhuanlan.zhihu.com/p/25715093)

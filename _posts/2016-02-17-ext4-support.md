@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "让一些老的系统支持 ext4 文件系统"
-keywords: ext4
+keywords: linux ext4
 description: "Ext4文件系统是Linux系统下的日志文件系统，是ext3文件系统的后继版本。"
 category: Linux
 tags: linux ext4

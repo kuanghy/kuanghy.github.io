@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 正则表达式简介
-keywords: regex re 正则表达式
+keywords: Python regex re 正则表达式
 category: Python
 tags: python 正则表达式
 ---

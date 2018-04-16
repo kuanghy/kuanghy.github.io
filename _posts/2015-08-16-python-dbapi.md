@@ -2,6 +2,7 @@
 layout: post
 title: Python数据库接口规范简介 -- DB-API
 category: Python
+keywords: Python 数据库 MySQLdb
 tags: python 数据库
 ---
 

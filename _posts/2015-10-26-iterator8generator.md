@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Python 迭代器、生成器和列表解析
-keywords: python 迭代器 生成器 列表解析
+keywords: python iterator 迭代器 生成器 列表解析
 category: Python
 tags: python 迭代器
 ---

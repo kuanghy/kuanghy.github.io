@@ -7,13 +7,25 @@ category: Python
 tags: python
 ---
 
-## 工具
+## 基础库和工具
 
+- [six](https://pypi.python.org/pypi/six) Python 2 和 3 的兼容库，用于编写 Python2 和 3 兼容的代码
 - [attrs](https://pypi.python.org/pypi/attrs) Attributes Without Boilerplate
 - [assertpy](https://github.com/ActivisionGameScience/assertpy) assert 语句的替代品
 - [affirm](https://github.com/elifiner/affirm) 用于更好的替换 assert 语句
 - [decorator](https://github.com/micheles/decorator) 简化 decorator 的使用难度而开发的模块
 - [isort](https://github.com/timothycrosley/isort) 可自动对 Python 的 import 语句进行排序和分段。可将大量的 import 结构转成非常适合阅读的排版
+- [fuzzyfinder](https://github.com/amjith/fuzzyfinder) 10 行代码写的模糊查询
+- [interruptingcow](https://pypi.python.org/pypi/interruptingcow) 一个 watchdog，用于中断长时间运行的代码，也就是给代码加上 timeout 功能
+- [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy) 字符串模糊匹配工具
+- [py](https://github.com/pytest-dev/py) 一个开发支持工具
+- [faker](https://github.com/joke2k/faker) 一个假数据生成库
+- [pipenv](https://github.com/pypa/pipenv) Python Development Workflow for Humans,相当于是环境管理和包管理二合一，由 Kenneth Reitz （Requests 的作者 ）编写，现在移交给 Python 官方来维护，提供比 pip 体验更好的开发包管理
+- [flashtext](https://github.com/vi3k6i5/flashtext) 快速进行大规模语料库的文本搜索与替换
+- [Eel](https://github.com/ChrisKnott/Eel) 一个小型库，用于制作简单的类似 [Electron](https://electronjs.org/) 的离线 HTML/JS GUI 应用程序
+- [bidict](https://github.com/jab/bidict) 双向查询字典，可以通过 value 查询 key
+- [tablib](https://github.com/kennethreitz/tablib) 把数据导出为 Excel、JSON、CSV 等格式
+
 
 ## 日志处理
 
@@ -60,6 +72,18 @@ tags: python
 - [termcolor](https://pypi.python.org/pypi/termcolor) 输出着色
 - [blessings](https://pypi.python.org/pypi/blessings) 输出着色
 - [hues](https://github.com/prashnts/hues) 输出着色，同时可以用来代替日志模块
+- [better-exceptions](https://github.com/Qix-/better-exceptions) 以更友好的形式展示异常信息
+- [progressbar](https://github.com/WoLpH/python-progressbar) 控制台进度条，功能完备
+- [tqdm](https://github.com/tqdm/tqdm) 控制台进度条工具，支持命令行直接使用
+- [icecream](https://github.com/gruns/icecream) 一款专用于 print 调试的工具
+
+
+## 算法和设计模式
+
+- [https://github.com/nryoung/algorithms](https://github.com/nryoung/algorithms) 算法和数据结构库
+- [https://github.com/tylerlaberge/PyPattyrn.git](https://github.com/tylerlaberge/PyPattyrn.git) 一个实现了常见设计模式的简单且有效的 Python 库
+- [https://github.com/faif/python-patterns](https://github.com/faif/python-patterns) 设计模式和惯用法收集
+- [https://github.com/grantjenks/sorted_containers](https://github.com/grantjenks/sorted_containers) 高效的，纯 Python 实现的 SortedList、SortedDict 和 SortedSet 类型
 
 
 ## 并行计算、分布式、任务调度
@@ -69,6 +93,7 @@ tags: python
 - [Dispy](https://github.com/pgiri/dispy) 相比起 Celery 和 SCOOP，Dispy 提供更为轻量级的分布式并行服务
 - [PP](http://www.parallelpython.com/) （Parallel Python）是另外一个轻量级的 Python 并行服务
 - [Asyncoro](http://asyncoro.sourceforge.net/) 一个利用 Generator 实现分布式并发的 Python 框架
+- [schedule](https://github.com/dbader/schedule) 一个简单的作业调度工具
 - [APScheduler](http://apscheduler.readthedocs.io/en/latest/) 任务调度模块，一个 Python 定时任务框架
 - [mpi4py](http://pythonhosted.org/mpi4py/) 一个构建在MPI之上的Python库，主要使用Cython编写
 - [pyee](https://pyee.readthedocs.io) 一个 [node.js’s EventEmitter](https://nodejs.org/api/events.html) 的 Python 粗略实现
@@ -89,6 +114,8 @@ tags: python
 - [builtwith](https://pypi.python.org/pypi/builtwith/) 识别网站所使用技术
 - [whois](https://pypi.python.org/pypi/python-whois) 域名公共查询工具：[Whois](http://whois.chinaz.com)
 - [robotparser](https://docs.python.org/3.5/library/urllib.robotparser.html) 标准库，解析 robots.txt 文件
+- [requestium](https://github.com/tryolabs/requestium) 是 Requests, Selenium 和 Parsel 的结合体，结合了 Chrome 59 以后的 headless 无头特性（代替了 phantomjs）
+- [fake-useragent](https://github.com/hellysmile/fake-useragent) 伪造 HTTP 请求头中 User Agent 的值
 
 
 ## HTML/XML
@@ -97,6 +124,7 @@ tags: python
 - [PyQuery](https://pythonhosted.org/pyquery/) 像 JQuery 一样使用
 - [html5lib](http://html5lib.readthedocs.io/en/latest/)
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/) 一个可以从 HTML 或 XML 文件中提取数据的 Python 库
+- [requests-html](https://github.com/kennethreitz/requests-html) HTML 解析库，是对 Requests, PyQuery, lxml 等库的封装
 
 
 ## Web 框架
@@ -152,6 +180,11 @@ tags: python
 
 - [Delorean](http://delorean.readthedocs.io/en/latest/quickstart.html) 用它处理日期和时间非常方便。设置时区，截取到秒、分、小时，甚至使用特定步骤从一个日期进到另一个日期
 - [Arrow](http://crsmithdev.com/arrow/) 提供了合理的、友好的方式来创建、控制、格式化、转换 Python 的日期、时间和时间戳
+- [Pendulum](https://pendulum.eustace.io) 在标准库的基础之上，提供了一个更简洁，更易于使用的 API
+- [dateutil](http://labix.org/python-dateutil) 是 datetime 标准库的一个扩展库，几乎支持以所有字符串格式对日期进行通用解析，日期计算灵活，内部数据更新及时
+- [moment](https://github.com/zachwill/moment) 用于处理日期/时间的 Python 库，设计灵感同样是来源于 moment.js 和 requests ，设计理念源自 Times Python 模块
+- [when.py](http://whenpy.rtfd.org/) 提供对用户非常友好的特性来帮助执行常见的日期和时间操作
+- [maya](https://github.com/kennethreitz/maya) 主要为了解决解析网站时间数据的问题
 
 
 ## Excel
@@ -187,6 +220,17 @@ tags: python
 - [Pinyin2Hanzi](https://github.com/letiantian/Pinyin2Hanzi) 拼音转汉字，可以作为拼音输入法的转换引擎
 - [jieba](https://github.com/fxsjy/jieba)  中文分词组件
 - [thulac](http://thulac.thunlp.org/) 一个高效的中文词法分析工具包
+- [SnowNLP](https://github.com/isnowfy/snownlp) 处理中文文本的库
+
+
+## 代码与性能测试
+
+- [pytest](https://docs.pytest.org/) 一个成熟的全功能的 Python 测试框架
+- [mock](https://pypi.python.org/pypi/mock) 用来创建和管理模拟对象，以完成单元测试，在 Python 3.x 中已被集成到 unittest 标准库
+- [Fudge](https://github.com/fudge-py/fudge) 是一个类似于 Java 中的 JMock 的纯 python 的 mock 测试模块，主要功能就是可以伪造对象，替换代码中真实的对象，来完成测试
+- [HTMLTestRunner](https://pypi.python.org/pypi/HTMLTestRunner) 是 Python 标准库 unittest 单元测试框架的一个扩展，用来生成 HTML 测试报告
+- [Locust](http://locust.io/) 是一个 Python 的性能测试工具，可以通过写 Python 脚本的方式来对 web 接口进行负载测试
+
 
 ## 性能优化
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python 序列： 字符串"
-keywords: Python 字符串
+keywords: Python 字符串 str string
 description: "详细描述 Python 字符串的一些值得注意的特殊特性"
 category: Python
 tags: python 字符串

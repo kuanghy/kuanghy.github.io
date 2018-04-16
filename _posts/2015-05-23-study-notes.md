@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 学习札记篇一
-keywords: adduser vim shell
+keywords: adduser vim shell zenity inno
 category: 学习札记
 tags: 札记
 ---
@@ -44,7 +44,10 @@ shell脚本中屏蔽指令执行的回显信息：
 > $ rm \`find /path -type f`
 
 如果 path 目录下文件过多就会因为“参数列表过长”而报错无法执行。但是用下面的方法就不会报错：
-> $ find /path -type f  | xargs rm
+
+```bash
+$ find /path -type f | xargs rm
+```
 
 这样 xargs 会将 find 产生的长串文件列表拆成多个子串，然后对每个子串调用 rm。
 

@@ -92,10 +92,58 @@ except Exception as e:
 
 而在 Python3 中不再支持逗号的形式，只有 as 关键字捕获异常信息。
 
+## 新的字符串格式化方式
+
+```python
+>>> name = "Huoty"
+>>> f'My name is {name}'
+'My name is Huoty'
+>>> width = 10
+>>> precision = 4
+>>> import decimal
+>>> value = decimal.Decimal("12.34567")
+>>> f"result: {value:{width}.{precision}}"  # nested fields
+'result:      12.35'
+>>> import datetime
+>>> now = datetime.datetime.now()
+>>> f'{now} was on a {now:%A}'
+'2018-01-18 11:21:58.444054 was on a Thursday'
+>>> def foo():
+...     return 18
+...
+>>> f'result={foo()}'
+'result=18'
+```
+
+以上特性在 Python3.6 中添加，参考：[PEP 498: Formatted string literals](https://docs.python.org/3/whatsnew/3.6.html#pep-498-formatted-string-literals)
+
+## 合并字典
+
+在 Python2 中合并两个字段需要使用如下形势：
+
+```python
+>>> x = dict(a=1, b=2)
+>>> y = dict(b=3, d=4)
+>>> dict(x, **y)
+{'a': 1, 'b': 3, 'd': 4}
+```
+
+在 Python3.5 之后的版本可以这样：
+
+```python
+>>> x = dict(a=1, b=2)
+>>> y = dict(b=3, d=4)
+>>> {**x, **y}
+{'a': 1, 'b': 3, 'd': 4}
+```
+
+该功能得益于更高级的解包方式：[PEP 448 - Additional Unpacking Generalizations](https://docs.python.org/3/whatsnew/3.5.html#pep-448-additional-unpacking-generalizations)
+
 ## 标准库添加
 
-- 异步IO(asyncio)
+- asyncio（异步IO）
 - faulthandler
 - ipaddress
 - functools.lru_cache
 - enum
+- pathlib

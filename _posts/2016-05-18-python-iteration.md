@@ -18,6 +18,8 @@ tags: python 迭代器
 
 这里提到两个概念：`可迭代对象`、`迭代器`。本文的主要目的就是研究这两者的区别与联系，同时还讨论与之相关的一些内容。
 
+![relationships](http://ww4.sinaimg.cn/mw690/c3c88275gw1f3zbjmfejfj20zc0fytay.jpg)
+
 ## 可迭代对象（Iterable）
 
 可迭代对象具有`__iter__` 方法，用于返回一个迭代器，或者定义了 `__getitem__` 方法，可以按 index 索引的对象（并且能够在没有值时抛出一个 IndexError 异常），因此，可迭代对象就是能够通过它得到一个迭代器的对象。所以，可迭代对象都可以通过调用内建的 **iter()** 方法返回一个迭代器。
@@ -106,10 +108,10 @@ class ZrangeIterator:
             self.i += 1
             return i
         else:
-            raise StopIteration()    
+            raise StopIteration()
 
 zrange = Zrange(3)
-print zrange is iter(zrange)         
+print zrange is iter(zrange)
 
 print [i for i in zrange]
 print [i for i in zrange]
@@ -119,15 +121,52 @@ print [i for i in zrange]
 
 在 python 中， `for` 语句用于迭代，而 while 语句才是用于真正的循环。它们的意义已完全不同，且有着明显的分工。循环可以通过增加条件跳过不需要的元素，而迭代则只能一个一个的往后取数据。迭代有一个固定的格式，即 `for ... in ...`。
 
-在 for 语句内部，实际是通过调用 `iter()` 方法将可迭代对象转换成迭代器，然后再重复调用 next() 方法实现的。for 语句会自动捕获 `StopIteration` 异常，并在捕获异常后终止迭代。
-
-![relationships](http://ww4.sinaimg.cn/mw690/c3c88275gw1f3zbjmfejfj20zc0fytay.jpg)
-
-所以，对容器对象调用 iter() 方法再使用 for 语句是多余的。也就是如下的使用方法是不必要的：
+在 for 语句内部，实际是通过调用 `iter()` 方法将可迭代对象转换成迭代器，然后再重复调用 next() 方法实现的。for 语句会自动捕获 `StopIteration` 异常，并在捕获异常后终止迭代。所以，对容器对象调用 iter() 方法再使用 for 语句是多余的。也就是如下的使用方法是不必要的：
 
 ```
 for i in iter(<list, tuple, set, dict>)
 ```
+
+例如运行如下代码：
+
+```
+x = [1, 2, 3]
+for i in x:
+    ...
+```
+
+那么，实际的运行情况是这样的：
+
+![for](http://wx2.sinaimg.cn/mw690/c3c88275gy1fgdti6lv8lj20wg0au0sw.jpg)
+
+将类似于以上的代码反编译一下：
+
+```
+>>> import dis
+>>> def foo():
+...     for i in [1, 2, 3]:
+...         print i
+...
+>>> dis.dis(foo)
+  4           0 SETUP_LOOP              28 (to 31)
+              3 LOAD_CONST               1 (1)
+              6 LOAD_CONST               2 (2)
+              9 LOAD_CONST               3 (3)
+             12 BUILD_LIST               3
+             15 GET_ITER
+        >>   16 FOR_ITER                11 (to 30)
+             19 STORE_FAST               0 (i)
+
+  5          22 LOAD_FAST                0 (i)
+             25 PRINT_ITEM
+             26 PRINT_NEWLINE
+             27 JUMP_ABSOLUTE           16
+        >>   30 POP_BLOCK
+        >>   31 LOAD_CONST               0 (None)
+             34 RETURN_VALUE
+```
+
+可以看到有一个 GET_ITER 指令，这就相当于调用 iter 方法将可迭代对象转化为迭代器，然后再不断调用 next 方法来访问元素，直到 StopIteration 异常发生。
 
 ## 生成器与迭代器的关系
 

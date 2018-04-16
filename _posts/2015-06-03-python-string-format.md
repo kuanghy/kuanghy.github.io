@@ -2,6 +2,7 @@
 layout: post
 title: Python 的字符串格式化操作
 category: Python
+keywords: Python string str 字符串 格式化
 tags: python
 ---
 
@@ -61,9 +62,9 @@ format_string为包含 `%` 的格式标记字符串，表1 中列出了可用的
 </tr>
 </table>
 
-Python 支持两种格式的输入参数。第一种是元组(见 2.8 节,6.15 节)，这基本上是一种的 C printf()风格的转换参数集；另一种形式是字典形式，字典其实是一个 哈希键-值对 的集合，这种形式里面，key 是作为格式字符串出现，相对应的 value 值作为参数在进行转化时提供给格式字符串。
+Python 支持两种格式的输入参数。第一种是元组，这基本上是一种的 C printf() 风格的转换参数集；另一种形式是字典形式，字典其实是一个 哈希键-值对 的集合，这种形式里面，key 是作为格式字符串出现，相对应的 value 值作为参数在进行转化时提供给格式字符串。
 
-格式字符串既可以跟 print 语句一起用来向终端用户输出数据，又可以用来合并字符串形成新字符串，而且还可以直接显示到 GUI(Graphical User Interface)界面上去。
+格式字符串既可以跟 print 语句一起用来向终端用户输出数据，又可以用来合并字符串形成新字符串，而且还可以直接显示到 GUI(Graphical User Interface) 界面上去。
 
 表2 是一些其他的格式字符和方法：
 
@@ -180,7 +181,7 @@ There are 3 Python Quotation Symbols
 
 在使用格式化操作符对字符串进行格式化时，有时候可能并不能满足我们的需求。在 Python2.4 之后，更加了新式的字符串模板。新式的字符串模板的优势是不用去记住所有的转换类型相关的细节，而是像现在 shell 风格的脚本语言里面那样使用美元符号($)。
 
-由于新式的字符串 Template 对象的引进使得 string 模块又重新活了过来，Template 对象有两个方法，substitute()和safe_substitute()。前者更为严谨，在key缺少的情况下它会报一个 KeyError 的异常出来，而后者在缺少 key 时，直接原封不动的把字符串显示出来.。
+由于新式的字符串 Template 对象的引进使得 string 模块又重新活了过来，Template 对象有两个方法，substitute() 和 safe_substitute()。前者更为严谨，在key缺少的情况下它会报一个 KeyError 的异常出来，而后者在缺少 key 时，直接原封不动的把字符串显示出来.。
 
 示例：
 
@@ -201,5 +202,4 @@ KeyError: 'howmany'
 There are ${howmany} Python Quotation Symbols
 ```
 
-<br/>
 ***本文内容摘自《Python核心编程》一书，仅供学习参考。***

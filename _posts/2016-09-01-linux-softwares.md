@@ -350,3 +350,11 @@ Mac 安装：
 ### cloc
 
 [Count Lines of Code](http://cloc.sourceforge.net/)，统计代码行数，用 perl 语言编写，速度还不错
+
+### multitail
+
+类似 tail 工具，可同时查看多个日志文件
+
+### lnav
+
+[THE LOG FILE NAVIGATOR](http://lnav.org/) 一个高级的日志查看工具

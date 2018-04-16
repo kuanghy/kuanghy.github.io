@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python 自省相关的内建函数和属性"
-keywords: python 自省
+keywords: python 自省 isinstance hasatrr getattr setattr delattr callable buitins
 description: "缓存是一种将定量数据加以保存以备迎合后续请求的处理方式，旨在加快数据的检索速度。"
 category: Python
 tags: python

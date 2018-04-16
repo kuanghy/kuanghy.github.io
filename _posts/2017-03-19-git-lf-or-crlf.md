@@ -41,17 +41,15 @@ fatal: CRLF would be replaced by LF ...
 用如下命令即可完成配置：
 
 ```
-#提交时转换为LF，检出时转换为CRLF
-git config --global core.autocrlf true   
+# 提交时转换为LF，检出时转换为CRLF
+git config --global core.autocrlf true
 
-#提交时转换为LF，检出时不转换
-git config --global core.autocrlf input   
+# 提交时转换为LF，检出时不转换
+git config --global core.autocrlf input
 
-#提交检出均不转换
+# 提交检出均不转换
 git config --global core.autocrlf false
 ```
-
-在 Windows 上，系统默认配置一般为 true。如果文件编码是 `UTF8` 并且包含中文字符，那最好还是把 autocrlf 设置为 false。否则，就会遇到我所遇到的问题，Git 尝试将 CRLF 转化为 LF 时失败，导致无法  `add` 。
 
 如果把 autocrlf 设置为 false 时，那另一个配置项 `safecrlf` 最好设置为 **ture**。该选项用于检查文件是否包含混合换行符，其有三个可选项：
 
@@ -62,13 +60,13 @@ git config --global core.autocrlf false
 配置方法：
 
 ```
-#拒绝提交包含混合换行符的文件
-git config --global core.safecrlf true   
+# 拒绝提交包含混合换行符的文件
+git config --global core.safecrlf true
 
-#允许提交包含混合换行符的文件
-git config --global core.safecrlf false   
+# 允许提交包含混合换行符的文件
+git config --global core.safecrlf false
 
-#提交包含混合换行符的文件时给出警告
+# 提交包含混合换行符的文件时给出警告
 git config --global core.safecrlf warn
 ```
 
@@ -95,8 +93,18 @@ $ git config --global core.safecrlf false
 
 > find . -type f -exec dos2unix {} +
 
+如果涉及到在多个系统平台上工作，推荐将 git 做如下配置：
+
+```
+$ git config --global core.autocrlf input
+$ git config --global core.safecrlf true
+```
+
+也就是让代码仓库使用统一的换行符(LF)，如果代码中包含 CRLF 类型的文件时将无法提交，需要用 `dos2unix` 或者其他工具手动转换文件类型。当然，可以根据自己的需要进行更为合适的配置！
+
 到此，问题解决。go home！
 
+**参考资料:**
 
-
-参考资料：[http://toub.es/2012/05/28/fatal-crlf-would-be-replaced-lf](http://toub.es/2012/05/28/fatal-crlf-would-be-replaced-lf)
+- [http://toub.es/2012/05/28/fatal-crlf-would-be-replaced-lf](http://toub.es/2012/05/28/fatal-crlf-would-be-replaced-lf)
+- [https://github.com/cssmagic/blog/issues/22](https://github.com/cssmagic/blog/issues/22)
