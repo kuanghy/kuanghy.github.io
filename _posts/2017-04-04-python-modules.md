@@ -7,7 +7,7 @@ category: Python
 tags: python
 ---
 
-## 基础库和工具
+## 基础库与工具
 
 - [six](https://pypi.python.org/pypi/six) Python 2 和 3 的兼容库，用于编写 Python2 和 3 兼容的代码
 - [attrs](https://pypi.python.org/pypi/attrs) Attributes Without Boilerplate
@@ -23,8 +23,13 @@ tags: python
 - [pipenv](https://github.com/pypa/pipenv) Python Development Workflow for Humans,相当于是环境管理和包管理二合一，由 Kenneth Reitz （Requests 的作者 ）编写，现在移交给 Python 官方来维护，提供比 pip 体验更好的开发包管理
 - [flashtext](https://github.com/vi3k6i5/flashtext) 快速进行大规模语料库的文本搜索与替换
 - [Eel](https://github.com/ChrisKnott/Eel) 一个小型库，用于制作简单的类似 [Electron](https://electronjs.org/) 的离线 HTML/JS GUI 应用程序
+- [Pywebview](https://github.com/r0x0r/pywebview) 类似于 Electron 的库, 使用 Web 技术和 Python 相结合来创建GUI应用程序
 - [bidict](https://github.com/jab/bidict) 双向查询字典，可以通过 value 查询 key
 - [tablib](https://github.com/kennethreitz/tablib) 把数据导出为 Excel、JSON、CSV 等格式
+- [glom](https://github.com/mahmoud/glom) 处理嵌套数据结构
+- [envparse](https://github.com/rconradharris/envparse) 简单的环境变量解析库
+- [environs](https://github.com/sloria/environs) 解析环境变量的库。受 envparse 启发，底层使用 marshmallow 验证并序列化值
+- [swig](http://www.swig.org/Doc1.3/Python.html) Python 调用 C/C++ 代码的工具，支持 C++ 的类继承
 
 
 ## 日志处理
@@ -58,9 +63,11 @@ tags: python
 - [adb](https://github.com/ovidiucp/pymysql-benchmarks) 异步 mysql 库
 - [SQLAlchemy](http://www.sqlalchemy.org/) 提供了 SQL 工具包及对象关系映射(ORM)工具
 - [Peewee](http://peewee.readthedocs.io/en/latest/) 超级轻量的一个 ORM 框架
+- [Pony](https://ponyorm.com) ORM 框架，使用生成器实现查询功能
 - [pymongo](http://api.mongodb.com/python/current/index.html) MongoDB 官方支持的驱动程序
 - [motor](http://motor.readthedocs.io/) 为 Tornado 提供了一个基于回调和 Future 机制的非堵塞的 MongoDB 驱动程序
 - [redis-py](https://redis-py.readthedocs.io/en/latest/) Redis 的 Python 接口程序
+- [dataset](https://github.com/pudo/dataset) 一个 SQLAlchemy 的包装器，使得不用直接写 SQL 而操作数据库
 
 
 ## 打印输出
@@ -78,7 +85,7 @@ tags: python
 - [icecream](https://github.com/gruns/icecream) 一款专用于 print 调试的工具
 
 
-## 算法和设计模式
+## 算法与设计模式
 
 - [https://github.com/nryoung/algorithms](https://github.com/nryoung/algorithms) 算法和数据结构库
 - [https://github.com/tylerlaberge/PyPattyrn.git](https://github.com/tylerlaberge/PyPattyrn.git) 一个实现了常见设计模式的简单且有效的 Python 库
@@ -106,6 +113,7 @@ tags: python
 - [Click](http://click.pocoo.org) 用于快速创建命令行工具
 - [clize](http://clize.readthedocs.io/en/stable/) 利用装饰器将函数转换成命令行解析器
 - [python-fire](https://github.com/google/python-fire) Google 开源的一个可从任何 Python 代码自动生成命令行接口（CLI）的库,是开发和调试非常有用的工具，只需将想要在命令行显示的功能写为函数/模块/类，就可以在命令行模式下调用
+- [Plumbum](https://github.com/tomerfiliba/plumbum) 命令行工具包
 
 
 ## HTTP
@@ -151,11 +159,11 @@ tags: python
 
 ## 网络爬虫
 
-- [scrapy](https://scrapy.org/)
-- [mechanize](http://wwwsearch.sourceforge.net/mechanize/)
-- [selenium](http://selenium-python.readthedocs.io/) 一个调用浏览器的driver，通过这个库你可以直接调用浏览器完成某些操作
-- [cola](https://github.com/chineking/cola) 一个分布式爬虫框架。
-- [pyspider](http://docs.pyspider.org/en/latest/)
+- [scrapy](https://scrapy.org/) 一个快速、高层次的屏幕抓取和web抓取框架，用于抓取web站点并从页面中提取结构化的数据
+- [mechanize](http://wwwsearch.sourceforge.net/mechanize/) 是对 urllib2 的部分功能的替换，能够更好的模拟浏览器行为
+- [selenium](http://selenium-python.readthedocs.io/) 一个调用浏览器的 Driver，通过这个库你可以直接调用浏览器完成某些操作。关于其使用，有一个不错的教程：[Free Selenium Tutorials](https://www.guru99.com/selenium-tutorial.html)
+- [cola](https://github.com/chineking/cola) 一个分布式爬虫框架
+- [pyspider](http://docs.pyspider.org/en/latest/) 国人编写的强大的网络爬虫系统并带有强大的WebUI。分布式架构，支持多种数据库后端，支持脚本编辑器，任务监视器，项目管理器以及结果查看器
 
 
 ## 消息队列
@@ -176,7 +184,7 @@ tags: python
 - [YAMI](http://www.inspirel.com/yami4/)
 
 
-## 日期和时间处理
+## 日期与时间处理
 
 - [Delorean](http://delorean.readthedocs.io/en/latest/quickstart.html) 用它处理日期和时间非常方便。设置时区，截取到秒、分、小时，甚至使用特定步骤从一个日期进到另一个日期
 - [Arrow](http://crsmithdev.com/arrow/) 提供了合理的、友好的方式来创建、控制、格式化、转换 Python 的日期、时间和时间戳

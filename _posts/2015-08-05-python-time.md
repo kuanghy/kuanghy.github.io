@@ -121,4 +121,4 @@ time.struct_time(tm_year=2015, tm_mon=8, tm_mday=5, tm_hour=22, tm_min=8, tm_sec
 
 <br/>
 ## 各种时间表示的转化
-![ptyhon time model](http://ww4.sinaimg.cn/mw690/c3c88275jw1eus3jj1zb3j20m20v7dhi.jpg)
+![ptyhon time model](http://wx2.sinaimg.cn/mw690/c3c88275jw1eus3jj1zb3j20m20v7dhi.jpg)

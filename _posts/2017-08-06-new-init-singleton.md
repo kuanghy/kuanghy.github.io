@@ -7,9 +7,11 @@ category: Python
 tags: python
 ---
 
-**Python 中的类都是单例模式？** 有些人肯定会对这个问题感到奇怪，这里先不做回答，我们先来看看 `__new__` 和 `__init__` 方法。
+**“Python 中的类都是单例模式？”** 一天，一同事问我这样一个问题。这是一个奇怪的问题，可能你也这么认为。这里先不做解释，我们先来看看 `__new__` 和 `__init__` 方法。
 
-`__new__` 属于新式类，即属于object 类。它是一个静态方法，但是其第一个参数必须是一个类(cls)，这有点像一个 classmethod。该特殊方法被调用时，会创建类(cls)的一个新实例并返回，实例被创建后解释器会将该实例以及其它的参数传递给该实例的初始化函数 `__init__`，以对实例进行初始化。
+## new 与 init
+
+`__new__` 方法属于新式类，即属于 object 类。它是一个静态方法，但是其第一个参数必须是一个类(cls)，这有点像一个 classmethod，其实将其看成是一个类方法也可以。该特殊方法被调用时，会创建类(cls)的一个新实例并返回，实例被创建后解释器会将该实例以及其它的参数传递给该实例的初始化函数 `__init__`，以对实例进行初始化。
 
 所以，`__new__` 方法是一个类方法，用于创建一个实例，而 `__init__` 方法是一个实例方法，用于初始化一个实例。
 
@@ -18,13 +20,13 @@ tags: python
 ```python
 class A(object):
 
-    def __new__(self, cls, *args, **kwargs)
+    def __new__(cls, *args, **kwargs)
         return super(A, cls).__new__(cls, *args, **kwargs)
 ```
 
-如果 `__new__` 方法不返回 cls 的一个实例，那么新的实例的 `__init__` 方法不会被调用。
+如果 `__new__` 方法不返回 cls 的一个实例，那么新的实例的 `__init__` 方法不会被调用。需要注意的是，**在 Python 3.3 之后，new 方法不再接收额外的参数**，否则会有异常 [TypeError: object() takes no parameters](https://stackoverflow.com/questions/34777773/typeerror-object-takes-no-parameters-after-defining-new)。
 
-`__init__` 方法在实例被创建之后被调用，该方法仅仅是对 `__new__` 方法创建的实例进行一些初始化操作。
+`__init__` 方法在实例被创建之后被调用，该方法仅仅是对 `__new__` 方法创建的实例进行一些初始化操作。注意，**如果 `__new__` 方法返回实例，则 `__init__` 方法总是会被调用（这一点在用 new 方法实现单例时要特别注意）**
 
 可以来做一下验证：
 
@@ -65,7 +67,11 @@ Foo(m=1, n=2)
 - 1、 `__new__` 属于类级别的方法，即使没有被 classmethod 装饰，其决定生成实例的过程。
 - 2、 `__init__` 属于实例级别的方法，决定实例初始化的过程，比如添加属性，对初始化参数进行判断，转换等。
 
+需要注意的是，在重写 `__new__` 方法与 `__init__` 方法的参数应该保持一致，否则会有 **TypeError** 发生。如果直接调用 `object.__new__()` 则在 Python 3.3 及以后的版本中不再支持传入参数，这一点参考自：[https://stackoverflow.com/questions/34777773/typeerror...](https://stackoverflow.com/questions/34777773/typeerror-object-takes-no-parameters-after-defining-new)
+
 `__init__` 方法，在定义一个 class 的时候一般都会涉及到，也是比较常用。而 `__new__` 方法则很少会用到，那么它到底有什么用途呢？
+
+## new 方法作用
 
 `__new__` 方法比较常用的作用大概是：
 
@@ -122,7 +128,38 @@ print Singleton(), Singleton()
 <__main__.Singleton object at 0x10d698650> <__main__.Singleton object at 0x10d698650>
 ```
 
-那么我们再来看一个“奇怪”的现象：
+## 装饰器实现单例
+
+说到单例模式，除了用 `__new__` 方法实现外，还有一些其他的方式，如装饰器、元类等。不同方式的实现有不同的作用，元类属于 Python 中更为高级的特性，本文不做讨论，我们来看一下用装饰器实现单例的方法。
+
+装饰器（decorator）可以动态地修改一个类或函数的功能，即类也可以被装饰器装饰。因此可以使用装饰器来装饰某个类，使其被初始化时只生成一个实例：
+
+```python
+from functools import wraps
+
+def singleton(cls):
+    instances = {}
+    @wraps(cls)
+    def getinstance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return getinstance
+
+@singleton
+class MyClass(object):
+
+    def __init__(self):
+        pass
+```
+
+需要注意的是，**使用装饰器实现单例时，类已经变成了一个函数，而不再是类。** 如上用上例中 MyClass 初始化实例时，实际上调用的是被装饰后返回的 getinstance 函数。
+
+用 `__new__` 实现单例和用装饰实现单例的区别是，前者前者都是会调用 `__init__` 方法，这就意味着每次初始化时用不同的参数，虽然返回的实例时同一个，但是实例的属性却被重新设置了；而后者则总是返回第一次初始化创建的示例和设置的属性，即使后面传入了不同的参数。
+
+## 奇怪现象
+
+接着，我们再来看一个 **“奇怪”** 的现象：
 
 ```python
 >>> class A(object):
@@ -138,9 +175,9 @@ print Singleton(), Singleton()
 
 是不是感觉有些难以置信，print 语句后两次创建的对象应该是不一样的，而他们却莫名奇妙的一样。这就是我讨论本文内容的原因。
 
-一次同事问我，Python 中的类都是单例模式？我当时一脸懵逼，听了他的描述，我自己也试了下，果然存在如上所示的“奇怪”现象。于是我就去了解了 Python 单例模式的实现，在了解到 `__new__` 的实现方式时，就 想对 `__new__` 和 `__init__` 有一个更加深入的了解。于是就有了本文所讨论的内容。
+一次同事问我，Python 中的类都是单例模式？我当时一脸懵逼，听了他的描述，我自己也试了下，果然存在如上所示的“奇怪”现象。于是我就去了解了 Python 单例模式的实现，在了解到 `__new__` 的实现方式时，就想对 `__new__` 和 `__init__` 有一个更加深入的了解。于是就有了本文所讨论的内容。
 
-接着，我想着用 is 来判断下他们是否真的是同一个实例：
+然后，我想着用 is 来判断下他们是否真的是同一个实例：
 
 ```
 >>> A() is A()

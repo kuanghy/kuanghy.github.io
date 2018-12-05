@@ -11,7 +11,7 @@ tags: python
 
 > F（0）=0，F（1）=1，F（n）=F(n-1)+F(n-2)（n≥2，n∈N*）。
 
-![fibonacci](http://ww4.sinaimg.cn/mw690/c3c88275gw1f3rqlz6b76j20ma0dtaei.jpg)
+![fibonacci](http://wx2.sinaimg.cn/mw690/c3c88275gw1f3rqlz6b76j20ma0dtaei.jpg)
 
 #### 1. 元组实现
 

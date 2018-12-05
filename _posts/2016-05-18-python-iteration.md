@@ -18,11 +18,11 @@ tags: python 迭代器
 
 这里提到两个概念：`可迭代对象`、`迭代器`。本文的主要目的就是研究这两者的区别与联系，同时还讨论与之相关的一些内容。
 
-![relationships](http://ww4.sinaimg.cn/mw690/c3c88275gw1f3zbjmfejfj20zc0fytay.jpg)
+![relationships](http://wx2.sinaimg.cn/mw690/c3c88275gw1f3zbjmfejfj20zc0fytay.jpg)
 
 ## 可迭代对象（Iterable）
 
-可迭代对象具有`__iter__` 方法，用于返回一个迭代器，或者定义了 `__getitem__` 方法，可以按 index 索引的对象（并且能够在没有值时抛出一个 IndexError 异常），因此，可迭代对象就是能够通过它得到一个迭代器的对象。所以，可迭代对象都可以通过调用内建的 **iter()** 方法返回一个迭代器。
+可迭代对象具有`__iter__` 方法，用于返回一个迭代器，或者定义了 `__getitem__` 方法，可以按 index 索引的对象（并且能够在没有值时抛出一个 IndexError 异常），因此，可迭代对象就是能够通过它得到一个迭代器的对象。所以，可迭代对象都可以通过调用内建的 `iter()` 方法返回一个迭代器。
 
 可迭代器对象具有如下的特性：
 
@@ -35,26 +35,27 @@ tags: python 迭代器
 
 ## 迭代器对象（Iterator）
 
-迭代器对象是一个含有 `next (Python 2)` 或者 `__next__ (Python 3)` 方法的对象。如果需要自定义迭代器，则需要满足如下迭代器协议：
+迭代器对象是一个含有 `next`(Python 2) 或者 `__next__`(Python 3) 方法的对象。如果需要自定义迭代器，则需要满足如下迭代器协议：
 
-- 定义了`__iter__` 方法，但是必须返回自身
+- 定义了`__iter__` 方法，且必须返回一个迭代器对象，通常返回其自身或者一个生成器(生成器是特殊的迭代器)
 - 定义了 next 方法,在 python3.x 是 `__next__`。用来返回下一个值，并且当没有数据了，抛出 `StopIteration`
 - 可以保持当前的状态
 
 可以通过 `isinstance(obj, collections.Iterator)` 来判断对象是否为迭代器。
 
-**用一句来总结就是，一个实现了 `__iter__()` 方法的对象是可迭代的，一个实现了 `next()` 方法的对象则是迭代器。**
+用一句来总结就是，**一个实现了 `__iter__()` 方法的对象是可迭代的，一个实现了 `next()` 方法的对象则是迭代器。**
 
 ## 可迭代对象和迭代器的分开自定义
 
 使用迭代器时，需要注意的一点是：
 
-> 迭代器只能迭代一次，每次调用调用 next() 方法就会向前一步，不能回退，只能如过河的卒子，不断向前。另外，迭代器也不适合在多线程环境中对可变集合使用。
+> 迭代器只能迭代一次，每次调用 next() 方法就会向前一步，不能回退，只能如过河的卒子，不断向前。另外，迭代器也不适合在多线程环境中对可变集合使用。
 
 示例：
 
 ```python
 class MyRange(object):
+
     def __init__(self, n):
         self.idx = 0
         self.n = n
@@ -88,6 +89,7 @@ True
 
 ```python
 class Zrange:
+
     def __init__(self, n):
         self.n = n
 
@@ -95,6 +97,7 @@ class Zrange:
         return ZrangeIterator(self.n)
 
 class ZrangeIterator:
+
     def __init__(self, n):
         self.i = 0
         self.n = n

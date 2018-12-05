@@ -20,7 +20,7 @@ Python 通常使用 import 语句来实现类库的引用，当然内建的 `__i
 
 那么，一个模块的导入过程大致可以分为三个步骤：**搜索**、**加载** 和 **名字绑定**。
 
-#### 1.1 搜索
+### 1.1 搜索
 
 搜索是整个导入过程的核心，也是最为复杂的一步。这个过程主要是完成查找要引入模块的功能，查找的过程如下：
 
@@ -31,7 +31,7 @@ Python 通常使用 import 语句来实现类库的引用，当然内建的 `__i
 
 查找过程也会检查⼀些隐式的 `finder` 对象，不同的 Python 实现有不同的隐式finder，但是都会有 `sys.path_hooks`, `sys.path_importer_cache` 以及`sys.path`。
 
-#### 1.2 加载
+### 1.2 加载
 
 对于搜索到的模块，如果在缓存 `sys.modules` 中则直接返回模块对象，否则就需要加载模块以创建一个模块对象。加载是对模块的初始化处理，包括以下步骤：
 
@@ -41,7 +41,7 @@ Python 通常使用 import 语句来实现类库的引用，当然内建的 `__i
 
 需要注意的是，加载不只是发生在导入时，还可以发生在 reload 时。
 
-#### 1.3 名字绑定
+### 1.3 名字绑定
 
 加载完模块后，作为最后一步，import 语句会为 **导入的对象** 绑定名字，并把这些名字加入到当前的名字空间中。其中，导入的对象 根据导入语句的不同有所差异：
 
@@ -87,6 +87,7 @@ from __future__ import print_function
 import sys
 
 class Watcher(object):
+
     @classmethod
     def find_module(cls, name, path, target=None):
         print("Importing", name, path, target)
@@ -134,6 +135,7 @@ from importlib import import_module
 
 
 class AutoInstall(object):
+
     _loaded = set()
 
     @classmethod
@@ -164,9 +166,9 @@ Python 还提供了一些模块和函数，可以用来实现简单的 `import h
 - 将 `sys.prefix` 、`sys.exec_prefix` 和 `lib/pythonX.Y/site-packages` 合成 module 的 `search path`。加入sys.path。eg: /home/jay/env/tornado/lib/python2.7/site-packages
 - 在添加的路径下寻找 `pth` 文件。 该文件中描述了添加到 sys.path 的子文件夹路径。
 - `import sitecustomize`， sitecustomize 内部可以做任意的设置。
-- `import usercustomize`， usercustomize 一般放在用户的 path 环境下， 如: `/home/jay/.local/lib/python2.7/site-packagesusercustomize`， 其内部可以做任意的设置。
+- `import usercustomize`， usercustomize 一般放在用户的 path 环境下， 如: `/home/jay/.local/lib/python2.7/site-packages/usercustomize`， 其内部可以做任意的设置。
 
-所以可以设置特殊的 `usercustomize.py` 或者 `usercustomize.py` 文件, 在 python 代码执行之前，添加 `import hook`。
+`site` 模块的本质可以说是补充 sys.path 路径，协助解释器预配置第三方模块目录。所以可以设置特殊的 `sitecustomize.py` 或者 `usercustomize.py` 文件, 在 python 代码执行之前，添加 `import hook`。
 
 ## 六、导入搜索路径
 

@@ -139,6 +139,33 @@ except Exception as e:
 
 该功能得益于更高级的解包方式：[PEP 448 - Additional Unpacking Generalizations](https://docs.python.org/3/whatsnew/3.5.html#pep-448-additional-unpacking-generalizations)
 
+## 列表推导式优化
+
+在 Python2 中，列表推导式会有变量泄露问题：
+
+```python
+>>> x = 1
+>>> [x for x in "abc"]
+['a', 'b', 'c']
+>>> x  # x 变量被推导式修改
+'c'
+```
+
+在 Python3 中该问题得到修复。列表推导、集合推导、字典推导、生成器表达式，在 Python3 中都有自己的局部作用域，就像函数一样。
+
+```python
+>>> x = 1
+>>> [x for x in 'ABC']
+['A', 'B', 'C']
+>>> x
+1
+```
+
+## 名字空间包
+
+从 Pyython 3.3 开始，Python 加入了 **名字空间包** 的概念。此后，包中即使没有 `__init__.py` 文件，也能被导入。
+名字空间包主要应用于导入目录分散的代码。其搜索 sys.path 中所有相同的包名，将它们视为同一个命名空间。名字空间包有一个缺点是导入的模块或包有可能存在冲突。关于名字空间包的详细描述，可以参见 [PEP 420](https://www.python.org/dev/peps/pep-0420/)。
+
 ## 标准库添加
 
 - asyncio（异步IO）

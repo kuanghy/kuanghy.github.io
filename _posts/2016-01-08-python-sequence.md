@@ -9,7 +9,7 @@ tags: python
 
 在 Python 中有六种基本数据类型，即数字（包括整形、长整、浮点）、字符串、列表、元组、字典和布尔类型。其中，字符串、列表、元组被称之为序列。因为它们有着相同的访问模式，它们的每一个元素可以通过指定一个偏移量的方式得到。而多个元素可以通过切片操作的方式一次得到。如下图所示：
 
- ![sequence](http://ww4.sinaimg.cn/mw690/c3c88275jw1ezrv6yk72ij209d01zdfq.jpg)
+ ![sequence](http://wx2.sinaimg.cn/mw690/c3c88275jw1ezrv6yk72ij209d01zdfq.jpg)
 
 - N == 序列的长度 == len(sequence)
 

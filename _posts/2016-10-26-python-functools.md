@@ -235,3 +235,68 @@ calculating: 2 + 3
 ```
 
 由于该装饰器会将不同的调用结果缓存在内存中，因此需要注意内存占用问题，避免占用过多内存，从而影响系统性能。
+
+#### functools.singledispatch
+
+单分发器，Python 3.4 新增，用于实现泛型函数，由一个单一参数的类型来决定调用哪个函数。示例：
+
+```python
+@singledispatch
+def fun(arg, verbose=False):
+    if verbose:
+        print("Let me just say", end=" ")
+    print(arg)
+
+
+@fun.register(int)
+def _(arg, verbose=False):
+    if verbose:
+        print("Strength in numbers, eh?", end=" ")
+    print(arg)
+
+
+@fun.register(list)
+def _(arg, verbose=False):
+    if verbose:
+        print("Enumerate this:")
+    for i, elem in enumerate(arg):
+        print(i, elem)
+
+
+fun("Hello world.")
+fun(18)
+fun(["a", "b"])
+```
+
+输出：
+
+```python
+Hello world.
+18
+0 a
+1 b
+```
+
+一个还可以支持多个泛型：
+
+```python
+@fun.register(float)
+@fun.register(Decimal)
+def _(arg, verbose=False):
+    print(arg)
+```
+
+`fun.registry` 中保存了所有的泛型函数，使用 fun.registry[float] 或者 fun.dispatch(float) 可以获取相应的函数:
+
+```python
+>>> fun.registry
+mappingproxy({int: <function singledispatch._>,
+              float: <function singledispatch._>,
+              list: <function singledispatch._>,
+              object: <function singledispatch.fun>,
+              decimal.Decimal: <function singledispatch._>})
+>>> fun.dispatch(float)
+<function singledispatch._>
+>>> fun.registry[int]
+<function singledispatch._>
+```

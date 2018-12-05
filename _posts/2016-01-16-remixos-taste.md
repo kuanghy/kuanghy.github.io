@@ -15,19 +15,19 @@ Remix OS for PC 是基于Android-x86 的系统，由安卓5.1 Lollipop深度定�
 
 ![Remix OS for PC](http://ww2.sinaimg.cn/mw690/c3c88275gw1f029drq26bj211y0lcjww.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029dmil5zj211y0lcwka.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029dmil5zj211y0lcwka.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029e4di1tj211y0lc46x.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029e4di1tj211y0lc46x.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029dz41pzj211y0lcwls.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029dz41pzj211y0lcwls.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029gsjwcfj211y0lcdq9.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029gsjwcfj211y0lcdq9.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029h15tqwj211y0lc75s.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029h15tqwj211y0lc75s.jpg)
 
 ![Remix OS for PC](http://ww2.sinaimg.cn/mw690/c3c88275gw1f029h4pp70j211y0lcq6u.jpg)
 
-![Remix OS for PC](http://ww4.sinaimg.cn/mw690/c3c88275gw1f029gxijx3j211y0lcdlq.jpg)
+![Remix OS for PC](http://wx2.sinaimg.cn/mw690/c3c88275gw1f029gxijx3j211y0lcdlq.jpg)
 
 Remix OS PC 版的安装方法是，用 Remix OS USB Tool 写入工具，跟随引导项将 Remix OS PC 版镜像烧录至 U 盘，然后让 PC 从 USB 启动。系统有两种运行模式，即“Guest Mode（访客模式）”和“Resident Mode（普通模式）”，访客模式在每次系统退出后都会清楚用户数据，而普通模式则能保存用户数据。进入普通模式要求 U 盘的写入速度要大于 10M/s，由于我的 U 盘已经是要几年前的了，速度跟不上，就只能进入访客模式玩玩了。
 
