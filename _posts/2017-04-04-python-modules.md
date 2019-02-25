@@ -15,13 +15,10 @@ tags: python
 - [affirm](https://github.com/elifiner/affirm) 用于更好的替换 assert 语句
 - [decorator](https://github.com/micheles/decorator) 简化 decorator 的使用难度而开发的模块
 - [isort](https://github.com/timothycrosley/isort) 可自动对 Python 的 import 语句进行排序和分段。可将大量的 import 结构转成非常适合阅读的排版
-- [fuzzyfinder](https://github.com/amjith/fuzzyfinder) 10 行代码写的模糊查询
 - [interruptingcow](https://pypi.python.org/pypi/interruptingcow) 一个 watchdog，用于中断长时间运行的代码，也就是给代码加上 timeout 功能
-- [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy) 字符串模糊匹配工具
 - [py](https://github.com/pytest-dev/py) 一个开发支持工具
 - [faker](https://github.com/joke2k/faker) 一个假数据生成库
 - [pipenv](https://github.com/pypa/pipenv) Python Development Workflow for Humans,相当于是环境管理和包管理二合一，由 Kenneth Reitz （Requests 的作者 ）编写，现在移交给 Python 官方来维护，提供比 pip 体验更好的开发包管理
-- [flashtext](https://github.com/vi3k6i5/flashtext) 快速进行大规模语料库的文本搜索与替换
 - [Eel](https://github.com/ChrisKnott/Eel) 一个小型库，用于制作简单的类似 [Electron](https://electronjs.org/) 的离线 HTML/JS GUI 应用程序
 - [Pywebview](https://github.com/r0x0r/pywebview) 类似于 Electron 的库, 使用 Web 技术和 Python 相结合来创建GUI应用程序
 - [bidict](https://github.com/jab/bidict) 双向查询字典，可以通过 value 查询 key
@@ -83,6 +80,13 @@ tags: python
 - [progressbar](https://github.com/WoLpH/python-progressbar) 控制台进度条，功能完备
 - [tqdm](https://github.com/tqdm/tqdm) 控制台进度条工具，支持命令行直接使用
 - [icecream](https://github.com/gruns/icecream) 一款专用于 print 调试的工具
+
+
+## 命令行界面库
+
+- [curses](https://docs.python.org/3/library/curses.html) 标准库内置模块，是原生的一个封装。Windows 平台不支持，官方推荐了 [the Console module](http://effbot.org/zone/console-index.htm) 和 [UniCurses](https://pypi.org/project/UniCurses/)
+- [Urwid](http://urwid.org/) 一个提供 Event Loop，Widget Classes 的控制台界面库
+- [Blessings](https://github.com/erikrose/blessings) 对 curses 的一个封装，使其更易用，所有函数调用都封装在了 Terminal 类中
 
 
 ## 算法与设计模式
@@ -148,6 +152,7 @@ tags: python
 - [web2py](http://www.web2py.com/) 一种免费的、开源的 web 开发框架，用于敏捷地开发安全的、数据库驱动的 web 应用
 - [Sanic](https://github.com/channelcat/sanic) 一个与 Flask 类似，基于 uvloop 的 web 框架，它能让 Python 更快速
 - [hug](https://github.com/timothycrosley/hug) 旨在简化 Python RESET APIs 的开发，其本身并非一个网络框架，构建在 Falcon 的高性能 HTTP 库之上，意味着可以使用任何 wsgi 兼容的服务器(例如 gunicorn)将其部署到生产环境中
+- [Connexion](https://github.com/zalando/connexion) 一个基于Flask实现的一个框架，它基于以YAML格式描述的API的OpenAPI 2.0规范（以前称为Swagger Spec）自动处理HTTP请求
 
 
 ## Web Server
@@ -193,7 +198,8 @@ tags: python
 - [moment](https://github.com/zachwill/moment) 用于处理日期/时间的 Python 库，设计灵感同样是来源于 moment.js 和 requests ，设计理念源自 Times Python 模块
 - [when.py](http://whenpy.rtfd.org/) 提供对用户非常友好的特性来帮助执行常见的日期和时间操作
 - [maya](https://github.com/kennethreitz/maya) 主要为了解决解析网站时间数据的问题
-
+- [Chronyk](https://github.com/KoffeinFlummi/Chronyk) 用于解析手写格式的时间和日期
+- [delorean](https://github.com/myusuf3/delorean) 一个很方便的日期时间库，可以让人更简单省心的获取时间，不必受困于时间模块中的各种问题
 
 ## Excel
 
@@ -222,13 +228,19 @@ tags: python
 - [joblib](http://pythonhosted.org/joblib/) 为Python函数提供轻量级管道任务(pipeline job)服务的一系列工具，包括透明磁盘IO缓冲、快速序列化、简单并行化运行、日志服务等，为大数据集的快速可靠处理进行了优化，特别针对numpy数组的处理进行了优化
 
 
-## 自然语言处理
+## 文本与自然语言处理
 
+- [Chardet](https://github.com/chardet/chardet) 字符编码探测器，可以自动检测文本、网页、xml的编码
+- [fuzzyfinder](https://github.com/amjith/fuzzyfinder) 10 行代码写的模糊查询
+- [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy) 字符串模糊匹配工具
+- [flashtext](https://github.com/vi3k6i5/flashtext) 快速进行大规模语料库的文本搜索与替换
 - [python-pinyin](https://github.com/mozillazg/python-pinyin) 将汉字转为拼音。可以用于汉字注音、排序、检索
+- [xpinyin](https://github.com/lxneng/xpinyin) 将汉字转换为拼音的函数库
 - [Pinyin2Hanzi](https://github.com/letiantian/Pinyin2Hanzi) 拼音转汉字，可以作为拼音输入法的转换引擎
 - [jieba](https://github.com/fxsjy/jieba)  中文分词组件
 - [thulac](http://thulac.thunlp.org/) 一个高效的中文词法分析工具包
 - [SnowNLP](https://github.com/isnowfy/snownlp) 处理中文文本的库
+- [pkuseg-python](https://github.com/lancopku/pkuseg-python) 北大开源的领域细分的中文分词工具，简单易用
 
 
 ## 代码与性能测试
