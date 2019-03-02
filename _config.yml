@@ -4,30 +4,30 @@
 baseurl:
 
 # Site live URL
-url: http://kuanghy.github.io
+url: http://zhanghengruic.github.io
 
 # Localhost
 # url: http://127.0.0.1:4000
 
 # Production URL for sitemap
-production_url: http://kuanghy.github.io
+production_url: http://zhanghengruic.github.io
 
 # Harmony theme configuration. Please change accordingly.
 harmony:
-  name: 旷世的忧伤
+  name: HenryBeWell
   # Little description about your site
-  description: Huoty's Blog
+  description: Henry's Blog
   # 'meta_description:' Write an awesome description for your new site here.
   # It will appear in your document head meta (for Google search results) and
   # in your feed.xml site description.
   meta_description: > #
-   Huoty's blog，旷世的忧伤。专注于各类计算机技术，记录所感所想所思。
-   分享 Linux 使用技巧，Python 开发技术，以及其他程序设计经验
+   Henry's blog，All Be Well。专注于各类计算机技术，记录所感所想所思。
+   分享 Python 开发技术
   basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
   author: # Author details
-    name: Huoty Kong
-    email: sudohuoty@163.com
-    url: http://konghy.cn
+    name: Henry Zhang
+    email: zhanghengruic@gmail.com
+
 
   # Google Analytics key, leave blank to ignore
   google_analytics_key: UA-xxxx-x
@@ -41,9 +41,9 @@ harmony:
     dribble:
     pinterest:
   social_zh:
-    email: sudohuoty@163.com
-    weibo: loveqing2013
-    github: kuanghy
+    email: zhanghengruic@gmail.com
+    weibo: HenryBeWell
+    github: zhanghengruiC
     qq:
     wechat:
     rss: /feed
