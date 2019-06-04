@@ -6,7 +6,7 @@ category: Linux
 tags: linux
 ---
 
-#### 1、从单个文件中搜索指定的字符串：
+**1、从单个文件中搜索指定的字符串**
 
 > $ grep "literal-string" filename
 
@@ -15,7 +15,7 @@ tags: linux
 加 `-i` 参数可以忽略大小写。
 加 `-u` 参数搜索一个单词而不是搜索含该单词的字符串
 
-#### 2、显示匹配行附近的多行：
+**2、显示匹配行附近的多行**
 
 * -A 显示匹配行之后的n行
 
@@ -29,27 +29,38 @@ tags: linux
 
 > $ grep -C n "string" filename
 
-#### 3、递归搜索：`-r`
+**3、递归搜索：-r**
+
 > $ grep -r "this" *
 
 搜索当前目录以及子目录下含“this”的全部文件。
 
-#### 4、不匹配搜索：`-v`
+**4、不匹配搜索：-v**
+
 > $ grep -v "go" demo_text
 
 显示不含搜索字符串“go”的行。
 
-#### 5、统计匹配的行数：`-c`
+**5、统计匹配的行数：-c**
+
 > $ grep -c "go" filename
 
 统计文件中含“go”字符串的行数。
 
-#### 6、只显示含字符串的文件的文件名：`-l`
+**6、只显示含字符串的文件的文件名：-l**
+
 >  $ grep -l "this" filename
 
 显示含“this”字符串的文件的文件名。
 
-#### 7、输出时显示行号：
+**7、输出时显示行号**
+
 > grep -n "this" filename
 
 显示含文件中含“this”字符串的行的行号。
+
+**8、与 tail 连用，实时过略日志**
+
+> tail -f file | grep --line-buffered <pattern>
+
+`--line-buffered` 表示使用行缓冲

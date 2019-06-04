@@ -358,3 +358,11 @@ Mac 安装：
 ### lnav
 
 [THE LOG FILE NAVIGATOR](http://lnav.org/) 一个高级的日志查看工具
+
+### Albert
+
+类似 Mac Spotlight，一个快速启动器
+
+### alfred
+
+[Alfred](https://github.com/derkomai/alfred) 在 Debian, Ubuntu 及其衍生版本上自动化安装基本应用

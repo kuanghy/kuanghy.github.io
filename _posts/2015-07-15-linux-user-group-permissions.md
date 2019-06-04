@@ -101,9 +101,9 @@ grpconv     注：通过/etc/group和/etc/gshadow 的文件内容来同步或创
 grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
 </pre></div>
 
-## Linux文件和目录权限解读
+## Linux 文件和目录权限解读
 
-#### 1、三种基本权限
+### 1、三种基本权限
 （1）r (read) 读
 
 针对目录，有读（r）权限就代表能对此目录有列表功能，就是可以执行ls命令进行查看，另外还有cp的功能。
@@ -120,6 +120,7 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
 针对文件，有执行（x）权限就代表可以执行此文件。
 
 在 Linux 下每一文件或目录的访问权限都有三组，每组用三位表示，分别为文件属主的读、写和执行权限；和属主同组的用户的读、写和执行权限；系统中其他用户的读、写和执行权限。当用`ls -l`命令显示文件或目录的周详信息时，最左边的一列为文件的访问权限。最左边的一位为文件的类型，例如“-”表示普通文件，“d”表示目录等。`ls -l`所列出的信息各栏含义如下：
+
 <div class="hblock"><pre>
 第一个栏位，表示文件的属性。
 第二个栏位，表示文件个数，即硬链接数。
@@ -130,60 +131,86 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
 第七个栏位，表示文件名。
 </pre></div>
 
-#### 2、特殊位导致权限变化一般有以下两种
-（1）特权位（s）
+### 2、特殊位导致权限变化一般有以下两种
 
-> setuid s位在前三位
+- （1）特权位（s）
 
-> setgid s位在中间三位
+特权位只针对文件有效，并且只能添加在权限位的前三位和中间三位。一个可执行文件拥有s位并且在前三位时，即有 SUID 特殊权限(SETUID)时，当别的用户来执行此文件，使用的权限是此可执行文件属主权限；如果一个可执行文件拥有s位并且在中间三位时，即有 SGID 特殊权限(SETGID) 当别的用户来执行此文件，使用的权限是此可执行文件属组的权限。
 
-特权位只针对文件有效，并且只能添加在权限位的前三位和中间三位；一个可执行文件拥有s位并且在前三位时，当别的用户来执行此文件，使用的权限是此可执行文件属主权限；如果一个可执行文件拥有s位并且在中间三位时，当别人的用户来执行此文件，使用的权限是此可执行文件属组的权限
+例如，有普通用户 user1，当 user1 修改密码时，执行 passwd 命令时，passwd 文件权限为：
 
-（2）粘帖位（t）
+```
+ll /usr/bin/passwd
+-rwsr-xr-x 1 root root 54256 May 17  2017 /usr/bin/passwd
+```
 
-当一个目录共享给其他用户使用并且用户可以上传文件和删除文件，但是只能删除自己的文件，那么就必须用到粘帖位（t），特别用在/tmp目录。只针对目录有效。有t位的目录，任何用户在有权限的情况下是可以创建文件和目录，就算是有权限删除别人的文件或目录也不能删除，同时互相也不能强制保存修改，自己只能删除自己创建的目录，用于一些共享上传的文件服务器场合
+那么：
 
-**注：**s位和t位都是占用x位，那么是否有x位，主要是看s或t的大小写来判别：**大写，表示没有执行权限x位；小写，表示有执行权限x位**
+```
+1. user1 对于 /usr/bin/passwd 这个程序具有 x 权限，表示 user1 能执行 passwd
+2. passwd 文件的所有者是 root 
+3. user1 执行 passwd 的过程中，会暂时获得 root 的权限
+4. /etc/shadow 就可以被  user1 所执行的 passwd 所修改
+```
 
-#### 3、隐藏属性权限
-linux除了9个权限外，还有些隐藏属性， 使用lsattr和chattr命令来查看和设置这些隐藏属性。
-<div class="hblock"><pre>
+- （2）粘帖位（t）
+
+粘帖位只针对目录有效。有t位的目录，任何用户在有权限的情况下是可以创建文件和目录，就算是有权限删除别人的文件或目录也不能删除，同时互相也不能强制保存修改，自己只能删除自己创建的目录，用于一些共享上传的文件服务器场合。
+
+例如 `/tmp` 目录，它的权限为：
+
+```
+$ ll /tmp -d
+drwxrwxrwt 8 root root 4096 Apr  6 15:29 /tmp
+```
+
+这表示任何人都可以在 /tmp 目录内新增、修改文件，但是只有该文件或目录的创建者与 root 用户能够删除自己的文件或目录。
+
+**注：** s位和t位都是占用x位，那么是否有x位，主要是看s或t的大小写来判别：**大写，表示没有执行权限x位；小写，表示有执行权限x位**
+
+### 3、隐藏属性权限
+
+Linux 除了 9 个权限外，还有些隐藏属性，使用 lsattr 和 chattr 命令来查看和设置这些隐藏属性。
+
+```
 lsattr --listfile attributes on a Linux second extended file system
 chattr --change file attributeson a Linux second extended file system
-</pre></div>
+```
 
 chattr命令语法格式：
 
 > chattr [-RVf] [-+=aAcCdDeijsStTu] [-v version] files...
 
 参数说明：
-<div class="hblock"><pre>
+
+```
 －R：递归处理所有的文件及子目录。
 －V：详细显示修改内容，并打印输出。
 －：失效属性。
 ＋：激活属性。
  = ：指定属性。
-</pre></div>
+```
 
 属性:
-<div class="hblock"><pre>
+```
  A    no atime update 不允许修改atime
  D    synchoronous directory updates
- S     synchronous updates 必须sync
- T     top of directory hierarchy
- a     append only只允许append
- c     compressed自动压缩，读取时自动解压缩，哇！好高级！
- d     no dump当dump时，具有d属性的文件不加入dump
- e     extent format
- i       immuttbale 可厉害了，让一个文件不能删除，改名，增加软硬链接，无法写入
- j       data journalling ext3时会将写入记录 journal
- s     secure deletion 可以安全删除
- t       no tail-merging
- u      undeletable 与s相反，删除时数据还会存在磁盘中
-</pre></div>
+ S    synchronous updates 必须sync
+ T    top of directory hierarchy
+ a    append only只允许append
+ c    compressed自动压缩，读取时自动解压缩，哇！好高级！
+ d    no dump 当dump 时，具有 d 属性的文件不加入 dump
+ e    extent format
+ i    immuttbale 可厉害了，让一个文件不能删除，改名，增加软硬链接，无法写入
+ j    data journalling ext3时会将写入记录 journal
+ s    secure deletion 可以安全删除
+ t    no tail-merging
+ u    undeletable 与s相反，删除时数据还会存在磁盘中
+```
 
-#### 4、chmod 命令
- chmod命令是非常重要的，用于改动文件或目录的访问权限。用户用他控制文件或目录的访问权限。该命令有两种用法。一种是包含字母和操作符表达式的文字设定法；另一种是包含数字的数字设定法。
+### 4、chmod 命令
+
+`chmod` 命令是非常重要的，用于改动文件或目录的访问权限。用户用他控制文件或目录的访问权限。该命令有两种用法。一种是包含字母和操作符表达式的文字设定法；另一种是包含数字的数字设定法。
 
 **文字设定法**
 > chmod [who] [+ | - | =] [mode] file...
@@ -237,9 +264,10 @@ o 和其他用户拥有相同的权限。
 例如，将一个文件的权限设置为属主可读可写，同组用户可读可写，其他用户可读，则命令为：
 
 > chmod 664 file
-s
-#### 5、chgrp和chown命令
-**chgrp**命令用于改动文件或目录所属的组。语法格式如下：
+
+### 5、chgrp和chown命令
+
+**chgrp** 命令用于改动文件或目录所属的组。语法格式如下：
 
 > chgrp [-R] group file...
 
@@ -275,3 +303,74 @@ chown将指定文件的拥有者改为指定的用户或组。用户能是用户
 同时改变文件的所有者和所属组：
 
 > chown huoty:huoty test
+
+## getfacl和setfacl命令
+
+`setfacl` 命令可以用来细分 Linux 下的文件权限。chmod 命令可以把文件权限分为 u,g,o 三个组，而 setfacl 可以对每一个文件或目录设置更精确的文件权限。
+即 setfacl 可以更精确的控制权限的分配，如，让某一个用户对某一个文件具有某种权限。这种独立于传统的 u,g,o 的 rwx 权限之外的具体权限设置叫 ACL（Access Control List）。ACL 可以针对单一用户、单一文件或目录来进行 r,w,x 的权限控制，对于需要特殊权限控制的情况是有用的。
+
+```
+setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
+-m,       --modify-acl 更改文件的访问控制列表
+-M,       --modify-file=file 从文件读取访问控制列表条目更改
+-x,       --remove=acl 根据文件中访问控制列表移除条目
+-X,       --remove-file=file 从文件读取访问控制列表条目并删除
+-b,       --remove-all 删除所有扩展访问控制列表条目
+-k,       --remove-default 移除默认访问控制列表
+          --set=acl 设定替换当前的文件访问控制列表
+          --set-file=file 从文件中读取访问控制列表条目设定
+          --mask 重新计算有效权限掩码
+-n,       --no-mask 不重新计算有效权限掩码
+-d,       --default 应用到默认访问控制列表的操作
+-R,       --recursive 递归操作子目录
+-L,       --logical 依照系统逻辑，跟随符号链接
+-P,       --physical 依照自然逻辑，不跟随符号链接
+          --restore=file 恢复访问控制列表，和“getfacl -R”作用相反
+          --test 测试模式，并不真正修改访问控制列表属性
+-v,       --version           显示版本并退出
+-h,       --help              显示本帮助信息
+```
+
+示例：
+
+```
+# 设置用户 user1 对 test 文件的访问权限
+setfacl -m u:user1:r-x test
+
+# 设置用户组 group1 对 test/ 目录的访问权限
+setfacl -m u:user1:rwx test/
+```
+
+`getfacl` 用于获取文件的 acl 权限控制：
+
+```
+
+```
+
+## 使用示例
+
+- （1）管理 opt 目录
+
+创建 readers 组，表示该组中的用户对文件有只读权限
+
+> groupadd readers
+
+创建 writers 组，表示改该组中的用户对文件用写权限
+
+> groupadd writers
+
+让 writers 组的用户对 /opt 目录可读写:
+
+> setfacl -m g:writers:rwx /opt
+
+给 /opt 目录添加 粘帖权限位（t）:
+
+> chmod o+t /opt
+
+把需要的用户添加到 writers 组：
+
+> usermod -a -G writers user1
+
+把需要的用户添加到 readers 组：
+
+> usermod -a -G readers user1

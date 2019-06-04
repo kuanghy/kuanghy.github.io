@@ -219,9 +219,7 @@ for stat in top_stats[:10]:
 - pyderd
 - pyrings
 - pytools
-
 - dtrace、systermtap
-
 - strace （Linux 命令工具）
 
 ## 元编程
@@ -238,12 +236,12 @@ for stat in top_stats[:10]:
 
 有人认为“元编程花哨，破坏抽象封装，降低可维护性和可读性”。
 
-􏱅在 Python􏰕 中存在一些没有元编程就难以解决的问题􏱊􏱅􏰔􏰙􏱇􏱉􏰨􏰷􏰫􏰣􏰍􏰚􏱌􏰬􏰿􏰰􏰻:
+在 Python 中存在一些没有元编程就难以解决的问题:
 
-- 1. 􏱊􏱅􏰔􏰙􏱇􏱉􏰨􏰷􏰫􏰣􏰍􏰚􏱌􏰬􏰿􏰰􏰻代码热更新
-- 2. 􏰠􏰾􏱔􏰿􏱋􏰶􏰜􏰟􏰗􏱃􏰓􏰛􏱈对未知的数据结构做特定优化(regex, json load/dump)􏰵
-- 3. 􏱑􏰡􏱖􏱓􏰿􏰸􏰧􏱆􏰪各种高级的抽象方式(generic, trait)􏰵
-- 4. 􏰌􏰘􏱎􏱍􏰿􏱐􏱕􏱀􏱂􏰯􏱁􏰵更为全面的静态检查支持
+- 1. 代码热更新
+- 2. 对未知的数据结构做特定优化(regex, json load/dump)
+- 3. 各种高级的抽象方式(generic, trait)
+- 4. 更为全面的静态检查支持
 
 **为什么需要安全高效的元编程？**
 
