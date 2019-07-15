@@ -27,21 +27,7 @@ layout: default
 			{{ content }}
 		</div>
 	</div>
-	<div id="gitmentContainer"></div>
-	<link rel="stylesheet" href="https://www.wenjunjiang.win/css/gitment.css">  <!--thanks @jjeejj-->
-	<script src="https://www.wenjunjiang.win/js/gitment.js"></script> <!--thanks @jjeejj-->
-	<script>
-		var gitment = new Gitment({
-			id: '<%= page.date %>',
-			owner: 'zhanghengruiC',  //your own github name
-			repo: 'zhanghengruiC.github.io',  //your own githubpage name
-			oauth: {
-				client_id: '09f7684930cfe4ffdc31',  // changed
-				client_secret: 'dade49349623f87e78908a65c8af614006537f66',  // changed
-			},
-		});
-	gitment.render('gitmentContainer');
-</script>
+
 	{% if site.related_posts %}
 	<div class="related">
 		<h4>近期文章</h2>
