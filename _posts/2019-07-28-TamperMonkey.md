@@ -12,6 +12,9 @@ tags: TemperMonkey
 
 1. 在google chrome应用商店中安装[TamperMonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?utm_source=chrome-ntp-icon),以及[UA](https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg).
 2. 点击油猴图标并获取新脚本，如下图:
+<figure>
+<a><img src="{{site.url}}/article_imgs/tamper_monkey.png"></a>
+</figure>
 
 ![TamperMonkey](../article_imgs/tamper_monkey.png)
 
