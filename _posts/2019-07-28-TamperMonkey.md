@@ -5,7 +5,7 @@ keywords: tool TemperMonkey
 description: 高效使用百度网盘
 category: tool
 tags: TemperMonkey
-typora-root-url: ../article_imgs
+typora-root-url: /article_imgs
 ---
 
 ## 本文仅为记录第一次学习使用油猴过程，若有不足之处，烦请指出，谢谢……
