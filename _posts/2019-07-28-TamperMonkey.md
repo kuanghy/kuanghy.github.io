@@ -14,7 +14,7 @@ typora-root-url: /article_imgs
 
 2. 点击油猴图标并获取新脚本，如下图：
 
-   ![TamperMonkey](/tamper_monkey.png)
+   ![TamperMonkey](/article_imgs/tamper_monkey.png)
 
 3. 搜索安装脚本[BaiduYunEnhancer](https://openuserjs.org/scripts/maoger/BaiduYunEnhancer)
 
