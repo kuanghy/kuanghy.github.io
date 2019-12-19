@@ -31,7 +31,7 @@ tags: docker
 
 Docker 使用客户端-服务器 (C/S) 架构模式。Docker 系统有两个程序：docker 服务端和 docker 客户端。其中 docker 服务端是一个服务进程，管理着所有的容器。docker 客户端则扮演着 docker 服务端的远程控制器，可以用来控制 docker 的服务端进程。Docker 客户端会与 Docker 守护进程进行通信。Docker 守护进程会处理复杂繁重的任务，例如建立、运行、发布你的 Docker 容器。Docker 客户端和守护进程可以运行在同一个系统上，当然你也可以使用 Docker 客户端去连接一个远程的 Docker 守护进程。Docker 客户端和守护进程之间通过 socket 或者 RESTful API 进行通信。
 
-![Docker model](http://ww2.sinaimg.cn/mw690/c3c88275jw1f2x82zduazj20g10djgmg.jpg)
+![Docker model](http://static.konghy.cn/xlwb/imgs/ww2/mw690/c3c88275jw1f2x82zduazj20g10djgmg.jpg)
 
 由上图可知 Docker 系统有三个重要的组件：
 
@@ -57,7 +57,7 @@ Docker 使用以下操作系统的功能来提高容器技术效率：
 -    Docker 仓库 - Docker registeries
 -    Docker 容器 - Docker containers
 
-![Docker 容器文件系统](http://ww1.sinaimg.cn/mw690/c3c88275gw1f9hb481p1oj21kw0z0anj.jpg)
+![Docker 容器文件系统](http://static.konghy.cn/xlwb/imgs/ww1/mw690/c3c88275gw1f9hb481p1oj21kw0z0anj.jpg)
 
 #### 镜像
 

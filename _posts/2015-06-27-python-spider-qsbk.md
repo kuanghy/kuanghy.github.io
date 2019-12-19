@@ -29,5 +29,5 @@ tags: python
 这样，上班无聊的时候，可以打开终端看看笑话，这应该没人知道我在偷懒吧。中午定个餐，打开终端，让程序自动加载段子，然后我就边吃边笑吧......
 
 程序运行效果：
-![drawing 1](http://ww1.sinaimg.cn/mw1024/c3c88275jw1ethmi1ux9ej20od0bsaak.jpg)
-![drawing 2](http://ww3.sinaimg.cn/mw1024/c3c88275jw1ethmi28e9nj20ok0bt40a.jpg)
+![drawing 1](http://static.konghy.cn/xlwb/imgs/ww1/mw1024/c3c88275jw1ethmi1ux9ej20od0bsaak.jpg)
+![drawing 2](http://static.konghy.cn/xlwb/imgs/ww3/mw1024/c3c88275jw1ethmi28e9nj20ok0bt40a.jpg)

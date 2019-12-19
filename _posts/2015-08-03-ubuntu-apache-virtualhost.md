@@ -75,7 +75,7 @@ huoty为当前用户的用户组。
 
 **【 最后 】**对第 6 步的配置做一下说明。在apache中，对目录的访问是由两方面来结合起来共同控制的，一方面是apache本身，另一方面是Linux系统本身。如下图所示：
 
-![apache](http://ww3.sinaimg.cn/mw690/c3c88275jw1euptdkg7g1j20eu0cuab3.jpg)
+![apache](http://static.konghy.cn/xlwb/imgs/ww3/mw690/c3c88275jw1euptdkg7g1j20eu0cuab3.jpg)
 
 也就是说即使指定用户对系统中的文件有访问权限，而 apache 本身对齐没有访问权限，用户也无法正常访问文件。Apache 使用&lt;Directory&gt;… &lt;/Directory&gt;来设置指定目录的访问权限，该设置对子目录同样有效，其中可包含五个属性：
 

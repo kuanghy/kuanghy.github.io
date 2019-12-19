@@ -28,6 +28,8 @@ tags: python
 - [environs](https://github.com/sloria/environs) 解析环境变量的库。受 envparse 启发，底层使用 marshmallow 验证并序列化值
 - [swig](http://www.swig.org/Doc1.3/Python.html) Python 调用 C/C++ 代码的工具，支持 C++ 的类继承
 - [pyperclip](https://github.com/asweigart/pyperclip) 向计算机的剪贴板发送或接收文本
+- [py-setproctitle](https://github.com/dvarrazzo/py-setproctitle) 一个可以改变进程名称的库
+- [hashids](https://github.com/davidaurelio/hashids-python) 数字 ID 混淆库，可将 ID 转成加密字段再还原
 
 
 ## 日志处理
@@ -108,8 +110,9 @@ tags: python
 - [schedule](https://github.com/dbader/schedule) 一个简单的作业调度工具
 - [APScheduler](http://apscheduler.readthedocs.io/en/latest/) 任务调度模块，一个 Python 定时任务框架
 - [mpi4py](http://pythonhosted.org/mpi4py/) 一个构建在MPI之上的Python库，主要使用Cython编写
-- [pyee](https://pyee.readthedocs.io) 一个 [node.js’s EventEmitter](https://nodejs.org/api/events.html) 的 Python 粗略实现
 - [threadpool](https://chrisarndt.de/projects/threadpool/) 一个比较老的线程池库，不太建议使用
+- [pyee](https://pyee.readthedocs.io) 一个 [node.js’s EventEmitter](https://nodejs.org/api/events.html) 的 Python 粗略实现
+- [Blinker](https://pythonhosted.org/blinker/) 强大的进程内信号库，既支持简单的对象到对象通信，也支持针对多个对象进行组播
 
 
 ## 命令行参数解析
@@ -246,6 +249,10 @@ tags: python
 
 ## 代码与性能测试
 
+- [profile/cProfile](https://docs.python.org/3.8/library/profile.html) 标准库提供的性能分析工具
+- [line_profile](https://github.com/rkern/line_profiler) 基于函数的性能分析工具，可测试函数中每一行代码消耗的 CPU 时间
+- [snakeviz](https://jiffyclub.github.io/snakeviz/) 基于 cProfile 的性能分析工具，可将分析结果图形化展示
+- [memory_profiler](https://github.com/pythonprofilers/memory_profiler) 内存占用分析工具，基于函数，可分析函数中每一行代码的内存占用
 - [pytest](https://docs.pytest.org/) 一个成熟的全功能的 Python 测试框架
 - [mock](https://pypi.python.org/pypi/mock) 用来创建和管理模拟对象，以完成单元测试，在 Python 3.x 中已被集成到 unittest 标准库
 - [Fudge](https://github.com/fudge-py/fudge) 是一个类似于 Java 中的 JMock 的纯 python 的 mock 测试模块，主要功能就是可以伪造对象，替换代码中真实的对象，来完成测试

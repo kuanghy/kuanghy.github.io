@@ -7,7 +7,7 @@ category: 数据库
 tags: mysql 数据库
 ---
 
-MySQL 是一个非常流行的小型关系型数据库管理系统。在数据库的管理上，通常会使用一些客户端工具，如果 phpMyAdmin，navicat preminu，HeidiSQL， Sequal Pro，SQLyog，MySQL Workbench 等等。但有时候可能会无可避免的要用到命令行下的操作，本文旨在记录一些 MySQL 的基本使用方法，以及配置等。
+MySQL 是一个非常流行的小型关系型数据库管理系统。在数据库的管理上，通常会使用一些客户端工具，如 phpMyAdmin，navicat preminu，HeidiSQL， Sequal Pro，SQLyog，MySQL Workbench 等等。但有时候可能会无可避免的要用到命令行下的操作，本文旨在记录一些 MySQL 的基本使用方法，以及配置等。
 
 ## 安装与启动
 
@@ -98,6 +98,12 @@ MySQL8 之后使用如下方式修改 root 密码：
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new-password';
 ```
 
+从 MySQL8 开始，用户密码默认使用 `caching_sha2_password` 方式加密，目前大部分客户端还不支持 caching_sha2_password 插件，所以可能需要将密码改成 mysql_native_password 的机密方式：
+
+```
+myql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new-password';
+```
+
 如果忘记了 root 密码，使用 --skip-grant-tables 参数以跳过密码认证方式启动服务器，再修改密码：
 
 ```
@@ -130,10 +136,16 @@ basedir="/home/huoty/.local/mysql"
 该参数指定了 MySQL 的数据库文件的存放路径，即 MySQL data 文件位置。例如：
 
 ```
-datadir=basedir="/home/huoty/.local/mysql/data"
+datadir="/home/huoty/.local/mysql/data"
 ```
 
-set sql_safe_updates=1;
+**sql_safe_updates:**
+
+以完全模式执行 SQL 语句，安全模式打开后，没有限制条件的更新语句(update,delete)将会被拒绝。设置方式为：
+
+```
+set [global] sql_safe_updates=1;
+```
 
 ## 权限管理
 
@@ -155,6 +167,12 @@ CREATE USER 'user'@'192.168.1.101' IDENDIFIED BY '123456';
 CREATE USER 'user'@'%' IDENTIFIED BY '123456';
 CREATE USER 'user'@'%' IDENTIFIED BY '';
 CREATE USER 'user'@'%';
+```
+
+从 MySQL8 开始，如果需要用 mysql_native_password 加密方式，需用如下方式创建用户：
+
+```
+CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 ```
 
 如果需要删除用户，使用 DROP USER 命令：
@@ -192,12 +210,31 @@ GRANT privileges ON databasename.tablename TO 'username'@'host' [WITH GRANT OPTI
 - tablename：表名，如果要授予该用户对所有数据库或表的相应操作权限则可用 * 表示，如 `*.*`
 - [with grant option]：表示该用户可将拥有的权限授予给其他用户（即权限传递）
 
+常用的用户权限说明：
+
+- **CREATE:** 建立新的数据库或数据表
+- **DROP:** 删除数据表或数据库
+- **ALTER:** 修改已存在的数据表(例如增加/删除列)和索引
+- **INDEX:** 建立或删除索引
+- **TRIGGER:** 创建，删除，执行触发器
+- **CREATE VIEW:** 创建视图
+- **CREATE TEMPOARY TABLES:** 创建临时表
+- **INSERT:** 增加表的记录
+- **DELETE:** 删除表的记录
+- **UPDATE:** 修改表中已存在的记录
+- **SELECT:** 显示/搜索表的记录
+- **PROCESS:** 显示或杀死属于其它用户的服务线程
+- **RELOAD:** 重载访问控制表，刷新日志等
+- **SHUTDOWN:** 关闭MySQL服务
+- **ALL:** 允许做任何事(和 root 账户一样)
+- **USAGE:** 只允许登录(其它什么也不允许做)
+
 示例：
 
 ```
 GRANT SELECT, INSERT, UPDATE, CREATE ON *.* TO 'server'@'%';
 GRANT ALL ON *.* TO 'admin'@'%';
-GRANT SECECT ON test.* TO 'reader'@'%';
+GRANT SELECT ON test.* TO 'reader'@'%';
 GRANT SELECT, UPDATE ON test.* TO 'user1'@'%';
 ```
 
@@ -230,11 +267,16 @@ SELECT * FROM mysql.user WHERE user='username' AND host='host' \G;
 **SHOW 语句使用：**
 
 ```
-# 查看所有支持的存储引擎  
+# 查看所有支持的存储引擎
 show engines;
+
+# 查看 InnoDB 存储引擎状态
+show engine innodb status;
 
 # 系统特定资源的信息，如正在运行的线程数量
 show status;
+show status like '%connect%';
+show status where `variable_name`='Threads_connected';
 
 # 显示系统变量的名称和值
 show variables;
@@ -252,8 +294,9 @@ show databases;
 use database; show tables;
 show tables from database_name;
 
-show tables from mysql like 'time%';
-show tables in mysql like 'time%';
+# 列出库中所有以 wp_ 开头的表
+show tables from database_name like 'wp_%';
+show tables in database_name like 'wp_%';
 
 # 查看表中列的定义（表的属性，属性类型，主键信息，默认值等）
 show columns from database_name.table_name;
@@ -261,7 +304,7 @@ show full columns from database_name.table_name;
 
 # 查看当前数据库中表的信息
 show table status;
-show table status like 'tbl%';
+show table status like '%name%';
 
 # 查看表索引
 show index from tablename;
@@ -291,22 +334,33 @@ SHOW CREATE { PROCEDURE | FUNCTION } sp_name
 
 ```
 # 创建数据库
-create databases 数据库名;
+create database 数据库名;
 
 # 删除数据库
 drop database 数据库名;
+drop database if exists 数据库名;
+
+# 选择要操作的数据库
+use database_name;
+
+# 查看当前选中的数据库
+select database();
 
 # 查看表结构
 desc 表名;
-show columns from 表名;
 describe 表名;
+show columns from 表名;
 
 # 清空表
-delete from 表名;
-truncate table 表名;
+delete from 表名;       # 自增 id 不会从 1 开始
+truncate table 表名;    # 自增 id 会重新从 1 开始
 
 # 删除表
 drop table 表名;
+
+# 重命名表
+rename table 旧表 TO 新表
+          [, 旧表 TO 新表] ...
 
 # 修改表字段属性
 alter table 表名 modify 字段名称 字段类型 [是否允许非空] comment '字段注释';
@@ -319,6 +373,20 @@ alter table 表名 add 字段名称 字段类型 [是否允许非空] comment '�
 
 # 删除字段：
 alter table 表名 drop column 字段名称;
+```
+
+**其他操作：**
+
+```
+# 查看 mysql 版本
+status;  # 与 \s; 等价
+select version();
+
+# 同时查看当前时间，用户名，数据库版本
+select now(), user(), version()
+
+# 查看当前连接的ID
+select connection_id();
 ```
 
 **binlog：**
@@ -351,13 +419,69 @@ reset master;
 
 > mysqlbinlog --no-defaults log/mysql-bin.000007
 
+## 线程列表
+
+MySQL 可以使用 `show processlist` 来显示用户正在运行的线程，也可以使用 `show full processlist`。没有 full 时，只显示 SQL 表达式的前 100 个字符。需要注意的是，只有 root 用户能看到所有正在运行的线程，其他用户都只能看到自己正在运行的线程，看不到其它用户正在运行的线程。除非这个用户拥有 PROCESS 权限。
+
+实际上 show processlist 显示的信息都是来自系统库 `information_schema` 中的 `processlist` 表。所以使用下面的查询语句可以获得相同的结果：
+
+```
+select * from information_schema.processlist
+```
+
+输出结果中各列的含义：
+
+- **Id:** 连接标识符，客户端连接 mysql 时系统分配的 ID，可通过 CONNECTION_ID() 函数查看。该 ID 记录在 INFORMATION_SCHEMA.PROCESSLIST 表中。该 ID 可用于 kill 语句中，以用于杀死某一查询语句
+- **User:** 当前连接的用户
+- **Host:** 当前连接的主机，便于确定哪个客户端正在做什么，显示方式为 host_name:client_port 的形式
+- **db:** 当前执行语句对应的默认数据库，如果选择了；否则为 NULL
+- **Command:** 显示这个线程此刻正在执行的命令，如休眠（sleep），查询（query），连接（connect）等
+- **Time:** 表示线程处于当前状态的时间长短，单位为秒
+- **State:** 显示使用当前连接的 SQL 语句的状态，其描述的是语句执行中的某一个状态。一个 SQL 语句，以查询为例，可能需要经过 COPYING to tmp table、sorting result、sending data 等状态才可以完成
+- **Info:** 包含由线程执行的语句的文本，如果连接没有执行任务语句则为 NULL。默认情况下，该列仅包含语句的前 100 个字符，要查看完整的语句，需使用 SHOW FULL PROCESSLIST
+
+线程可以具有以下任何 Command 值（详细内容可见 [Thread Command Values](https://dev.mysql.com/doc/refman/8.0/en/thread-commands.html)）：
+
+- **Binlog Dump：** 这是主服务器上的线程，用于将二进制日志内容发送到从服务器
+- **Table Dump：** 线程将表内容发送到从服务器
+- **Change user：** 线程正在执行改变用户操作
+- **Close stmt：** 线程正在关闭准备好的语句
+- **Connect：** 复制中，从服务器连接到其主服务器
+- **Connect Out：** 复制中，从服务器正在连接到其主服务器
+- **Create DB：** 线程正在执行 create-database 操作
+- **Daemon：** 此线程在服务器内部，而不是服务客户端连接的线程
+- **Debug：** 线程正在生成调试信息
+- **Delayed insert：** 线程是一个延迟插入处理程序
+- **Drop DB：** 线程正在执行 drop-database 操作
+- **Execute：** 线程正在执行一个准备好的语句
+- **Fetch：** 线程正在执行一个准备语句的结果
+- **Field List：** 线程正在检索表列的信息
+- **Init DB：** 线程正在选择默认数据库
+- **Kill：** 线程正在杀死另一个线程
+- **Long Data：** 该线程在执行一个准备语句的结果中检索长数据
+- **Ping：** 线程正在处理服务器 ping 请求
+- **Prepare：** 线程正在为语句生成执行计划
+- **Processlist：** 线程正在生成有关服务器线程的信息
+- **Query：** 该线程正在执行一个语句
+- **Quit：** 线程正在终止
+- **Refresh：** 线程是刷新表，日志或缓存，或重置状态变量或复制服务器信息
+- **Register Slave：** 线程正在注册从服务器
+- **Reset stmt：** 线程正在重置一个准备好的语句
+- **Set option：** 线程正在设置或重置客户端语句执行选项
+- **Shutdown：** 线程正在关闭服务器
+- **Sleep：** 线程正在等待客户端向其发送新的语句
+- **Statistics：** 线程正在生成服务器状态信息
+- **Time：** 未使用
+
+另外，线程的 State 值说明可以参考 [General Thread States](https://dev.mysql.com/doc/refman/8.0/en/general-thread-states.html).
+
 ## 生成测试数据
 
-要生成测试数据可以使用 **存储过程**。存储过程（Stored Procedure）是一组为了完成特定功能的 SQL 语句集。通常的 SQL 语句在执行时需要要先编译，而存储过程是经编译后存储在数据库中，通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行。其语法格式：
+要生成测试数据可以使用 **存储过程**。存储过程（Stored Procedure）是一组为了完成特定功能的 SQL 语句集通常的 SQL 语句在执行时需要要先编译，而存储过程是经编译后存储在数据库中，通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行。其语法格式：
 
 ```
 DELIMITER $$
-CREATE PROCEDURE procedure_name(parameter_list)  
+CREATE PROCEDURE procedure_name(parameter_list)
 BEGIN
     parameter_body
 END $$
@@ -412,6 +536,8 @@ DELIMITER ;
 CALL insert_test_data(1000000);
 DROP PROCEDURE insert_test_data;
 ```
+
+也可以通过一些 Web 工具生成测试数据，如：[http://www.generatedata.com](http://www.generatedata.com)
 
 ## 实用脚本
 

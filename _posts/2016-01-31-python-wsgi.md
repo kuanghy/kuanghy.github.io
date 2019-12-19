@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Web服务网关接口（WSGI）"
+title: "Python Web 服务网关接口（WSGI）"
 keywords: Python  WSGI wsgiref
 description: "WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种低级别的接口"
 category: Python
@@ -15,79 +15,75 @@ WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种�
 
 实现了 WSGI 的模块/库有 wsgiref(python内置)、werkzeug.serving、twisted.web 等，具体可见[Servers which support WSGI](http://wsgi.readthedocs.org/en/latest/servers.html)。
 
-当前运行在 WSGI 之上的 web 框架有`Bottle`、`Flask`、`Django`等，具体可见[Frameworks that run on WSGI](http://wsgi.readthedocs.org/en/latest/frameworks.html)。
+当前运行在 WSGI 之上的 web 框架有 `Bottle`、`Flask`、`Django `等，具体可见 [Frameworks that run on WSGI](http://wsgi.readthedocs.org/en/latest/frameworks.html)。
 
-`WSGI server`所做的工作仅仅是将从客户端收到的请求传递给`WSGI application`，然后将 WSGI application 的返回值作为响应传给客户端。WSGI applications 可以是栈式的，这个栈的中间部分叫做`中间件`，两端是必须要实现的 application 和 server。
+`WSGI Server` 所做的工作仅仅是将从客户端收到的请求传递给 `WSGI application`，然后将 WSGI application 的返回值作为响应传给客户端。WSGI applications 可以是栈式的，这个栈的中间部分叫做`中间件`，两端是必须要实现的 application 和 server。
 
 ## WSGI application 接口
 
-WSGI 应用接口只要是一个可调用的对象就行，例如函数、方法、类、含 \_\_call__ 方法的实例。这个可调用的对象需要：
+WSGI 协议规定，一个基本的 wsgi application，需要实现以下功能：
 
-- 1、 接受两个位置参数：
-    - a、包含 CGI 形式变量的字典，该字典包含了客户端请求的信息以及其他信息，可以认为是请求上下文，一般叫做 environment（编码中多简写为environ、env）；
-    - b、应用调用的回调函数，该回调函数的作用是将HTTP响应的状态码和header返回给server。
+- 必须是一个可调用的对象，如函数、方法、类、实现了 \_\_call__ 方法的对象
+- 接收两个必须的位置参数 environ、start_response，**environ** 一个字典，存放 CGI 规定的变量以及一些别的变量，**start_response** 一个可调用对象，由 application 回调，用以发送 http 的相应头部
+- 必须返回一个可迭代对象，用以发送 http body 数据
 
-- 2、将响应 body 部分的内容作为包裹在一个`可迭代的对象`中的（若干）字符串。
+一个简单的 application 定义大致为：
 
-几点说明：
+```python
+def application(environ, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
+    return ["Hello world!"]
+```
 
-- 1、application 的第一个参数env是一个字典，里面包含了CGI形式的环境变量，该字典是由server基于客户请求填充。
+    - **exc_info** 只有当 start_response 被错误的处理器调用时才被设置
 
-- 2、headers在构建的时候，必须遵循以下规则：
+`application` 的 environ 参数由 HTTP Server 解析客户请求后填充。参数 start_response 必须是一个可调用对象，需由 Server 实现，其需要接收两个必须的位置参数，一个是响应的状态码，一个是响应的头部字段数据，以及一个可选的 exc_info 参数，其定义大致为：
 
-> [(Header name1, Header value1), (Header name2, Header value2),]
+```python
+def start_response(status, response_headers, exc_info=None):
+    if exc_info:
+         try:
+            if headers_sent:
+                reraise(*exc_info)
+         finally:
+             exc_info = None
 
-响应 header 和响应 HTTP 状态码通过应用的第二个参数即回调函数发回给 server。
+    return write
+```
 
-- 3、body 在构建的时候，必须遵循以下规则:
+`response_headers` 需要是一个包含若干 (header_name, header_value) 元组的 list，其必须是一个 Python list 结构。如果 exc_info 被设置, 并且 HTTP Headers 数据已经发送, start_response 必选将 exc_info 异常重新抛出。start_response 需要返回一个 `write()` 回调，用于支持旧式的无缓冲的 application 框架。
 
-> [response_body]
+WSGI 应用必须返回一个可迭代的(iterable)的对象，Server 会迭代其数据发送给客户端。应用也可以调用 `write()` 回调发送 HTTP body 数据，但不建议这个做。即使应用程序使用 write() 发送了全部数据，start_response 也必须返回一个可调用对象。
 
-即响应 body 必须被包裹在可迭代的对象中，同时通过 return 语句返回给 server。当然这里也可以直接为字符串，因为字符串页是可迭代对象，但这会导致WSGI程序的响应变慢。原因是每一次迭代只能得到1 byte的数据量，这也意味着每一次只向客户端发送1 byte的数据，直到发送完毕为止。所以，推荐使用 `return [response_body]`。
+实际上 start_response 也可以返回一个字符串，因为字符串也是可迭代对象，但这是不推荐的。因为这样每次迭代只能得到 1 byte 的数据量，也就意味着每次只向客户端发送 1 byte 的数据，直到发送完毕为止，效率会非常低。所以，即使响应只有一个字符串数据，也推荐使用 `return [response_body]` 的形式返回。
+
+如果应用提供了 **Content-Length** 头，则服务器不应该向客户端发送超过其指定的字节数，并且应在发送了足够的数据后停止对响应的迭代，如果应用尝试调用 write() 也应抛出异常。当然，如果应用没有提供足够的数据来满足其指定的内容长度，服务器应该关闭连接并记录，或以其他方式报告错误。如果没有提供该头部字段指定内容长度，则服务器在发送完所有数据后直接关闭客户端连接即可。
 
 ## Wsgiref 简介
 
-`wsgiref`是采用 WSGI 标准实现的 Python 内置的 HTTP 服务器，使用 wsgiref 可以实现简单的 Web 服务器功能，其包含以下几个模块：
+`wsgiref` 是采用 WSGI 标准实现的 Python 内置的 HTTP 服务器，使用 wsgiref 可以实现简单的 Web 服务器功能，其包含以下几个模块：
 
-- simple_server
-
-    这一模块实现了一个简单的 HTTP 服务器，并给出了一个简单的 demo。
-
-- handlers
-
-    `simple_server`模块将 HTTP 服务器分成了 Server 部分和 Handler 部分，前者负责接收请求，后者负责具体的处理， 其中Handler部分主要在handlers中实现。
-
-- headers
-
-    这一模块主要是为HTTP协议中header部分建立数据结构。
-
-- util
-
-    这一模块包含了一些工具函数，主要用于对环境变量，URL的处理。
-
--  validate
-
-    这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准
+- **simple_server：** 实现了一个简单的 HTTP 服务器，并给出了一个简单的 demo
+- **handlers：** `simple_server` 模块将 HTTP 服务器分成了 Server 部分和 Handler 部分，前者负责接收请求，后者负责具体的处理，其中 Handler 部分主要在 handlers 中实现
+- **headers：** 主要是为 HTTP 协议中 header 部分建立数据结构
+- **util：** 这一模块包含了一些工具函数，主要用于对环境变量，URL的处理
+- **validate：** 这一模块提供了一个验证工具，可以用于验证你的实现是否符合WSGI标准
 
 下面是一个简单的 web 服务器示例，主要输出客户端请求信息：
 
 - 服务器 showenv.py：
 
 ```python
-#! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
-# *************************************************************
-#     Filename @  showenv.py
-#       Author @  Huoty
-#  Create date @  2016-01-30 17:56:23
-#  Description @  Show client request info
-# *************************************************************
 
 from wsgiref.simple_server import make_server
 
+
 PORT = 12018
 HOST = "127.0.0.1"
+
 
 def create_template(filename):
     tpl = ""
@@ -97,6 +93,7 @@ def create_template(filename):
                 tpl = "".join([tpl, line.strip()])
 
     return tpl
+
 
 def application(environ, start_response):
     # Response body
@@ -109,16 +106,18 @@ def application(environ, start_response):
 
     # Status code and response headers
     status = "200 OK"
-    response_headers = [("Content-Type", "text/html"), ("Content-Length", str(content_len))]
+    response_headers = [
+        ("Content-Type", "text/html"),
+        ("Content-Length", str(content_len))
+    ]
 
     # Use callback function to send back status code
     # and response headers
     start_response(status, response_headers)
 
     # return response body through return statement
-    return response_body
+    return [response_body]
 
-# Script starts from here
 
 if __name__ == "__main__":
     # Create web server

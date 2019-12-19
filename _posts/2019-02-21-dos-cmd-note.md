@@ -45,6 +45,7 @@ tags: windows
 - arp 显示、修改局域网的 IP 地址 - 物理地址映射列表
 - netstat 进程网络使用情况统计
 - netsh 显示、修改网络配置
+- nslookup 域名 DNS 查询工具
 
 **系统管理**
 
@@ -243,6 +244,30 @@ set PATH=%PATH%;d:\xxx
 ```
 
 【NOTE】：以命令行方式对环境变量的操作只对当前窗口的应用有效
+
+### 扫描局域网IP
+
+使用 `arp` 可以扫描到同一 WLAN 下的所有主机的 IP 及其 MAC。ARP 是一个重要的 TCP/IP 协议，并且用于确定对应 IP 地址的网卡物理地址。要扫描局域网上的所有 IP，可以使用如下命令：
+
+```
+arp -a
+```
+
+### 域名 DNS 解析
+
+使用 `nslookup` 命令可以查询域名的 DNS 解析。示例：
+
+```
+> nslookup blog.konghy.cn
+服务器:  LEDE.lan
+Address:  fd52:eef0:ad3e::1
+
+非权威应答:
+名称:    blog.konghy.cn
+Address:  104.168.215.21
+```
+
+如果需要刷新本地的 DNS 缓存，则可以使用：`ipconfig /flushdns`
 
 ## 参考资料
 

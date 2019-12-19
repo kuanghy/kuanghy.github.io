@@ -60,6 +60,7 @@ json_dumps = partial(json.dumps, default=json_serial_fallback)
 ```python
 WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__doc__')
 WRAPPER_UPDATES = ('__dict__',)
+
 def update_wrapper(wrapper,
                    wrapped,
                    assigned = WRAPPER_ASSIGNMENTS,
@@ -86,7 +87,9 @@ def wrap(func):
 def hello():
     print "hello"
 
+
 from functools import update_wrapper
+
 def wrap2(func):
     def call_it(*args, **kwargs):
         print "calling", func.__name__
@@ -122,6 +125,7 @@ def wraps(wrapped,
 
 ```python
 from functools import wraps
+
 def wrap3(func):
     @wraps(func)
     def call_it(*args, **kwargs):
@@ -176,6 +180,7 @@ reduce(function, sequence, startValue)
 
 ```python
 from functools import total_ordering
+
 @total_ordering
 class Student:
     def __init__(self, firstname, lastname):
@@ -214,6 +219,7 @@ False
 
 ```python
 from functools import lru_cache
+
 @lru_cache(None)
 def add(x, y):
     print("calculating: %s + %s" % (x, y))

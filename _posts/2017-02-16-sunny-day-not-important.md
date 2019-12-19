@@ -7,7 +7,7 @@ category: 美文收录
 tags: 美文
 ---
 
-![晴](http://wx3.sinaimg.cn/mw690/c3c88275ly1fcsotnmulpj21kw0w0qv7.jpg)
+![晴](http://static.konghy.cn/xlwb/imgs/wx3/mw690/c3c88275ly1fcsotnmulpj21kw0w0qv7.jpg)
 
 *本文选自网络*
 

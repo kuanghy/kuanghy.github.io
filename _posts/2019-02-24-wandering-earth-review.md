@@ -7,7 +7,7 @@ category: 我的日志
 tags: 日志
 ---
 
-![流浪地球](http://wx3.sinaimg.cn/mw690/c3c88275ly1g0hvjj9ddjj20nv0cdq45.jpg)
+![流浪地球](http://static.konghy.cn/xlwb/imgs/wx3/mw690/c3c88275ly1g0hvjj9ddjj20nv0cdq45.jpg)
 
 要不是因为春节，首映当天我就已经去看了电影，毕竟期待了很久。等我有空去看的时候，战斗天使已经上映，但作为科幻迷，不能欠它一张电影票。没有上映的时候就想着，不管好坏都会支持一下，更何况其如今已被冠名为中国科幻电影的里程碑。
 

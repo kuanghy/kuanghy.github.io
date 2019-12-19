@@ -1,18 +1,20 @@
 ---
 layout: post
-title: Linux系统用户、组以及文件权限简介
-keywords: Linux chmod chgrp chonw
+title: Linux 系统用户、组以及文件权限简介
+keywords: Linux chmod chgrp chonw useradd usermod chattr lsattr setfacl getfacl
 category: Linux
 tags: linux
 ---
 
 ## Linux 安全性模型概述
+
 Linux使用User（用户）和Group（组）控制使用者对文件的存取权限，在Linux系统中被创建的用户，可以使用账号和口令登录Linux。Linux系统将一切视为文件，每个文件都有owner,并且owner属于某个Group。
 
-![Linux filesystem](http://ww1.sinaimg.cn/mw690/c3c88275jw1eu3gjg7nb1j20ko0oin0a.jpg)
+![Linux filesystem](http://static.konghy.cn/xlwb/imgs/ww1/mw690/c3c88275jw1eu3gjg7nb1j20ko0oin0a.jpg)
 
 ## 用户
-Linux系统的每个用户都有一个唯一的 User ID，User的信息存储在 /etc/passwd 中，该文件的格式示例如下：
+
+Linux 系统的每个用户都有一个唯一的 User ID，Use r的信息存储在 `/etc/passwd` 中，该文件的格式示例如下：
 
 > root:x:0:0:root:/root:/bin/bash
 
@@ -20,65 +22,76 @@ Linux系统的每个用户都有一个唯一的 User ID，User的信息存储在
 
 > 用户名:密码:用户ID:组ID:用户全名:主目录:登录shell
 
-在旧的系统中，直接将用户的密码存在第二位。由于 /etc/passwd 文件所有用户都有读权限，出于安全性考虑，后来的系统将密码单独拿出来存放在了 /etc/shadow 文件中， 而 /etc/passwd 文件的第二位只用于存储用户是否需要密码，如果用户存在密码，这该位用 ‘x’ 标记，如果是“!”或者为空则说明此用户不能用密码登录
+在旧的系统中，直接将用户的密码存在第二位。由于 /etc/passwd 文件所有用户都有读权限，出于安全性考虑，后来的系统将密码单独拿出来存放在了 `/etc/shadow` 文件中， 而 /etc/passwd 文件的第二位只用于存储用户是否需要密码，如果用户存在密码，这该位用 ‘x’ 标记，如果是 “!” 或者为空则说明此用户不能用密码登录。
 
-一般情况下只有拥有 HOME 目录和指定shell的用户才能登录系统。User未经授权将禁止读写或执行其他User的文件。Linux 的 root 用户拥有至高无上的权限，可以无条件的对系统中的所有文件进行访问、修改和删除。一般不要随便用root登录并操作系统 。
+一般情况下只有拥有 HOME 目录和指定 shell 的用户才能登录系统。User 未经授权将禁止读写或执行其他 User 的文件。Linux 的 root 用户拥有至高无上的权限，可以无条件的对系统中的所有文件进行访问、修改和删除。一般不要随便用 root 登录并操作系统。
 
-有两个命令可以为Linux操作系统添加新的用户，即 `useradd` 和 `adduser`。在root权限下，useradd只是创建了一个用户名，如 （useradd  +用户名 ），它并没有在/home目录下创建同名文件夹，也没有创建密码，因此利用这个用户登录系统，是登录不了的，为了避免这样的情况出现，可以用 （useradd -m +用户名）的方式创建，它会在/home目录下创建同名文件夹，然后利用（ passwd + 用户名）为指定的用户名设置密码。其参数选项如下：
+有两个命令可以用于添加新的用户，即 `useradd` 和 `adduser`。`useradd` 是系统原生命令，而 `adduser` 则是一个 perl 脚本，是对 useradd 的封装，已提供更好的创建用户的接口。`adduser` 命令的参数选项如下：
 
-<div class="hblock"><pre>
--c comment 指定一段注释性描述。
--d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。
--g 用户组 指定用户所属的用户组。
--G 用户组，用户组 指定用户所属的附加组。
--s Shell文件 指定用户的登录Shell。
--u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。
+```
+-b, --base-dir BASE_DIR       指定主目录的基目录，一般默认为 /home
+-c, --comment COMMENT         用户注释，即用户的详细信息（如姓名，年龄，电话等）
+-d, --home-dir HOME_DIR       为用户指定一个 HOME 目录
+-D, --defaults                查看或者改变创建用户时的配置，默认配置在 /etc/default/useradd 中
+-e, --expiredate EXPIRE_DATE  指定账户失效日期，格式为 YYYY-MM-DD
+-f, --inactive INACTIVE       缓冲时间，指定在密码过期后多少天即关闭该帐号
+-g, --gid GROUP               为用户指定一个组或者组 ID
+-G, --groups GROUPS           将用户添加到其它的组，多个组时用逗号分隔
+-k, --skel SKEL_DIR           指定创建 HOME 目录的模板目录，一般默认为 /etc/skel
+-K, --key KEY=VALUE           覆盖 /etc/login.defs 中的缺省配置
+-l, --no-log-init             不要将此用户添加到最近登录和登录失败数据库
+-m, --create-home             创建用户时一并创建用户的主目录
+-M, --no-create-home          不要创建用户主目录
+-N, --no-user-group           不创建与用户同名的组
+-o, --non-unique              允许 UID 与其他用户相同
+-p, --password PASSWORD       指定用户密码
+-r, --system                  创建为一个系统账户
+-s, --shell SHELL             指定用户的登录 Shell
+-u, --uid UID                 为用户指定一个 UID
+-U, --user-group              创建一个与用户同名的组
+`````
 
--m, --create-home
-	如果用户不存在，则创建用户主目录。骨架目录中的文件和目录(可以使用 -k 选项指定)，将会复制到主目录。默认上，如果没有指定此选项并且  CREATE_HOME 没有启用，不会创建主目录。
-</pre></div>
+`userdel` 命令用于删除用户，常用的选项是-r，它的作用是把用户的主目录一起删除。
 
-可以直接利用adduser创建新用户（adduser +用户名），这样在/home目录下会自动创建同名文件夹而不需要提供任何参数。
+`usermod` 命令用于修改账户信息，常用的选项包括 -c, -d, -m, -g, -G, -s, -u 以及 -o 等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。
 
-`userdel`命令用于删除用户，常用的选项是-r，它的作用是把用户的主目录一起删除。
+管理用户相关的命令工具汇总：
 
-`usermod`命令用于修改账户信息，常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。
-
-**管理用户（user）的工具或命令:**
-<div class="hblock"><pre>
-useradd    注：添加用户
-adduser    注：添加用户
-passwd     注：为用户设置密码
-usermod    注：修改用户命令，可以通过usermod 来修改登录名、用户的家目录等等；
-pwcov      注：同步用户从/etc/passwd 到/etc/shadow
-pwck       注：pwck是校验用户配置文件/etc/passwd 和/etc/shadow 文件内容是否合法或完整；
-pwunconv   注：是pwcov 的立逆向操作，是从/etc/shadow和 /etc/passwd 创建/etc/passwd ，然后会删除 /etc/shadow 文件；
-finger     注：查看用户信息工具
-id         注：查看用户的UID、GID及所归属的用户组
-chfn       注：更改用户信息工具
-su         注：用户切换工具
-sudo       注：sudo 是通过另一个用户来执行命令（execute a command as another user），su 是用来切换用户，然后通过切换到的用户来完成相应的任务，但sudo 能后面直接执行命令，比如sudo 不需要root 密码就可以执行root 赋与的执行只有root才能执行相应的命令；但得通过visudo 来编辑/etc/sudoers来实现；
-visudo     注：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个命令，直接用vi 来编辑 /etc/sudoers 的效果是一样的；
-sudoedit   注：和sudo 功能差不多；
-</pre></div>
+```
+useradd   ：添加用户
+adduser   ：添加用户
+passwd    ：为用户设置密码
+usermod   ：修改用户命令，可以通过 usermod 来修改登录名、用户的家目录等等
+pwcov     ：同步用户从 /etc/passwd 到 /etc/shadow
+pwck      ：pwck是校验用户配置文件 /etc/passwd 和/etc/shadow 文件内容是否合法或完整
+pwunconv  ：是 pwcov 的立逆向操作，是从 /etc/shadow 和 /etc/passwd 创建 /etc/passwd ，然后会删除 /etc/shadow 文件
+finger    ：查看用户信息工具
+id        ：查看用户的 UID、GID 及所归属的用户组
+chfn      ：更改用户信息工具
+su        ：用户切换工具
+sudo      ：sudo 是通过另一个用户来执行命令（execute a command as another user）
+visudo    ：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个命令，直接用vi 来编辑 /etc/sudoers 的效果是一样的
+sudoedit  ：和 sudo 功能差不多
+```
 
 ## 用户群组概述
-Linux系统的每个User都属于一个Group,具有唯一的标识符gid。Group信息存储于/etc/group中，且可以为group创建密码，密码存放在 /etc/gshadow 文件中，但是一般情况下不需要为用户组创建密码。系统会为每个User关联一个和User同名的Group，每个User至少存在于自己同名的Group中，同时User也可以加入其他的Group。在同一个Group中的成员可以共享其他成员的文件。增加一个新的用户组使用groupadd命令。 其格式如下：
+
+Linux 系统的每个 User 都属于一个 Group，具有唯一的标识符 GID。Group 信息存储于 /etc/group 中，且可以为 group 创建密码，密码存放在 /etc/gshadow 文件中，但是一般情况下不需要为用户组创建密码。系统默认会为每个 User 关联一个和 User 同名的 Group，每个 User 也至少存在于自己同名的 Group 中，同时 User 也可以加入其他的 Group。在同一个 Group 中的成员可以共享其他成员的文件。增加一个新的用户组使用 groupadd 命令。 其格式如下：
 
 > 用法：groupadd [选项] 组
 
 可以使用的选项有：
-<div class="hblock"><pre>
-  -f, --force		如果组已经存在则成功退出
-			并且如果 GID 已经存在则取消 -g
-  -g, --gid GID                 为新组使用 GID
-  -h, --help                    显示此帮助信息并推出
-  -K, --key KEY=VALUE           不使用 /etc/login.defs 中的默认值
-  -o, --non-unique              允许创建有重复 GID 的组
-  -p, --password PASSWORD       为新组使用此加密过的密码
-  -r, --system                  创建一个系统账户
-  -R, --root CHROOT_DIR         chroot 到的目录
-</pre></div>
+
+```
+-f, --force                如果组已经存在则成功退出，并且如果 GID 已经存在则取消 -g
+-g, --gid GID              为新组使用 GID
+-h, --help                 显示此帮助信息并推出
+-K, --key KEY=VALUE        不使用 /etc/login.defs 中的默认值
+-o, --non-unique           允许创建有重复 GID 的组
+-p, --password PASSWORD    为新组使用此加密过的密码
+-r, --system               创建一个系统账户
+-R, --root CHROOT_DIR      chroot 到的目录
+```
 
 如果要删除一个已有的用户组，使用groupdel命令，其格式为：`groupdel 用户组`。修改用户组的属性使用groupmod命令，其语法为：`groupmod 选项 用户组`
 
@@ -90,31 +103,33 @@ Linux系统的每个User都属于一个Group,具有唯一的标识符gid。Group
 
 > useradd -g 用户组
 
-**管理用户组（group）的工具或命令:**
-<div class="hblock"><pre>
-groupadd    注：添加用户组；
-groupdel    注：删除用户组；
-groupmod    注：修改用户组信息
-groups      注：显示用户所属的用户组
+管理用户组相关的命令工具汇总：
+
+```
+groupadd   ：添加用户组；
+groupdel   ：删除用户组；
+groupmod   ：修改用户组信息
+groups     ：显示用户所属的用户组
 grpck
-grpconv     注：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果/etc/gshadow 不存在则创建；
-grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
-</pre></div>
+grpconv    ：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果/etc/gshadow 不存在则创建；
+grpunconv  ：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
+```
 
 ## Linux 文件和目录权限解读
 
 ### 1、三种基本权限
-（1）r (read) 读
+
+**（1）r (read) 读**
 
 针对目录，有读（r）权限就代表能对此目录有列表功能，就是可以执行ls命令进行查看，另外还有cp的功能。
 针对文件，有读（r）权限就代表能对此文件有阅读功能，可以通过cat等命令查看文件内容。
 
-（2）w (write) 写
+**（2）w (write) 写**
 
 针对目录，有写（w）权限就代表着在此目录下创建文件和目录，可以通过touch，mkdir等命令创建文件和目录，另外还可以删除此目录下的文件。
 针对文件，有写（w）权限就代表着对此文件可以写入新的内容和修改文件内容。
 
-（3）x (execute) 执行
+**（3）x (execute) 执行**
 
 针对目录，有执行（x）权限就代表能进入此目录，利用cd等命令进入此目录
 针对文件，有执行（x）权限就代表可以执行此文件。
@@ -135,7 +150,7 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
 
 - （1）特权位（s）
 
-特权位只针对文件有效，并且只能添加在权限位的前三位和中间三位。一个可执行文件拥有s位并且在前三位时，即有 SUID 特殊权限(SETUID)时，当别的用户来执行此文件，使用的权限是此可执行文件属主权限；如果一个可执行文件拥有s位并且在中间三位时，即有 SGID 特殊权限(SETGID) 当别的用户来执行此文件，使用的权限是此可执行文件属组的权限。
+特权位只针对文件有效，并且只能添加在权限位的前三位和中间三位。一个可执行文件拥有 s 位并且在前三位时，即有 SUID 特殊权限(SETUID)时，当别的用户来执行此文件，使用的权限是此可执行文件属主权限；如果一个可执行文件拥有 s 位并且在中间三位时，即有 SGID 特殊权限(SETGID) 当别的用户来执行此文件，使用的权限是此可执行文件属组的权限。
 
 例如，有普通用户 user1，当 user1 修改密码时，执行 passwd 命令时，passwd 文件权限为：
 
@@ -155,7 +170,7 @@ ll /usr/bin/passwd
 
 - （2）粘帖位（t）
 
-粘帖位只针对目录有效。有t位的目录，任何用户在有权限的情况下是可以创建文件和目录，就算是有权限删除别人的文件或目录也不能删除，同时互相也不能强制保存修改，自己只能删除自己创建的目录，用于一些共享上传的文件服务器场合。
+粘帖位只针对目录有效。有 t 位的目录，任何用户在有权限的情况下是可以创建文件和目录，就算是有权限删除别人的文件或目录也不能删除，同时互相也不能强制保存修改，自己只能删除自己创建的目录，用于一些共享上传的文件服务器场合。粘滞位只能占用后三位权限位。
 
 例如 `/tmp` 目录，它的权限为：
 
@@ -166,15 +181,15 @@ drwxrwxrwt 8 root root 4096 Apr  6 15:29 /tmp
 
 这表示任何人都可以在 /tmp 目录内新增、修改文件，但是只有该文件或目录的创建者与 root 用户能够删除自己的文件或目录。
 
-**注：** s位和t位都是占用x位，那么是否有x位，主要是看s或t的大小写来判别：**大写，表示没有执行权限x位；小写，表示有执行权限x位**
+**注：** s 位和 t 位都是占用 x 位，那么是否有 x 位，主要是看 s 或 t 的大小写来判别：**大写，表示没有执行权限 x 位；小写，表示有执行权限 x 位**。对于不可执行文件来说，SETUID 和 SETGID 没有任何意义。
 
 ### 3、隐藏属性权限
 
 Linux 除了 9 个权限外，还有些隐藏属性，使用 lsattr 和 chattr 命令来查看和设置这些隐藏属性。
 
 ```
-lsattr --listfile attributes on a Linux second extended file system
-chattr --change file attributeson a Linux second extended file system
+lsattr -- listfile attributes on a Linux second extended file system
+chattr -- change file attributeson a Linux second extended file system
 ```
 
 chattr命令语法格式：
@@ -184,28 +199,29 @@ chattr命令语法格式：
 参数说明：
 
 ```
-－R：递归处理所有的文件及子目录。
-－V：详细显示修改内容，并打印输出。
-－：失效属性。
-＋：激活属性。
- = ：指定属性。
+-R :  递归处理所有的文件及子目录
+-V :  详细显示修改内容，并打印输出
+- :  失效属性
++ :  激活属性
+= :  指定属性
 ```
 
 属性:
+
 ```
- A    no atime update 不允许修改atime
- D    synchoronous directory updates
- S    synchronous updates 必须sync
- T    top of directory hierarchy
- a    append only只允许append
- c    compressed自动压缩，读取时自动解压缩，哇！好高级！
- d    no dump 当dump 时，具有 d 属性的文件不加入 dump
- e    extent format
- i    immuttbale 可厉害了，让一个文件不能删除，改名，增加软硬链接，无法写入
- j    data journalling ext3时会将写入记录 journal
- s    secure deletion 可以安全删除
- t    no tail-merging
- u    undeletable 与s相反，删除时数据还会存在磁盘中
+A    no atime update, 不允许修改 atime
+S    synchronous updates, 实时写入文件，不使用缓冲区
+D    synchoronous directory updates, 实时同步到磁盘，针对目录设置
+T    top of directory hierarchy, Orlov 块分配器会将该目录视为目录层次结构的顶部
+a    append only, 只允许以 append 模式打开文件
+c    compressed, 自动压缩文件，读取时自动解压缩
+d    no dump, 当 dump 时，具有 d 属性的文件不加入 dump
+e    extent format, 在 ext 文件系统中，表示该文件使用区段(extents)映射磁盘上的块
+i    immuttbale, 不允许对文件执行删除，改名，增加软硬链接等操作，且无法写入
+j    data journalling, 写入记录 journal
+s    secure deletion, 可以安全删除，即硬盘空间被全部收回，不留痕迹
+t    no tail-merging, 与其它文件合并时末端不会存在局部块碎片
+u    undeletable, 与 s 相反，删除时数据还会存在磁盘中，可恢复
 ```
 
 ### 4、chmod 命令
@@ -213,47 +229,51 @@ chattr命令语法格式：
 `chmod` 命令是非常重要的，用于改动文件或目录的访问权限。用户用他控制文件或目录的访问权限。该命令有两种用法。一种是包含字母和操作符表达式的文字设定法；另一种是包含数字的数字设定法。
 
 **文字设定法**
+
 > chmod [who] [+ | - | =] [mode] file...
 
 命令中各选项的含义为：
 <div class="hblock"><pre>
 操作对象who可是下述字母中的任一个或他们的组合：
-u 表示“用户（user）”，即文件或目录的所有者。
-g 表示“同组（group）用户”，即和文件属主有相同组ID的所有用户。
-o 表示“其他（others）用户”。
-a 表示“所有（all）用户”。他是系统默认值。
+u 表示 “用户（user）”，即文件或目录的所有者
+g 表示 “同组（group）用户”，即和文件属主有相同组 ID 的所有用户
+o 表示 “其他（others）用户”
+a 表示 “所有（all）用户”。此为系统默认值
 </pre></div>
 
 操作符号可以是：
+
 <div class="hblock"><pre>
 + 添加某个权限。
 - 取消某个权限。
 = 赋予给定权限并取消其他所有权限（如果有的话）。
 </pre></div>
 
-设置mode所表示的权限可用下述字母的任意组合：
-<div class="hblock"><pre>
-r 可读。
-w 可写。
-x 可执行。
-</pre></div>
-
-x 只有目标文件对某些用户是可执行的或该目标文件是目录时才追加x 属性。
-
-s 在文件执行时把进程的属主或组ID置为该文件的文件属主。方式“u+s”设置文件的用户ID位，“g+s”设置组ID位。
+设置 mode 所表示的权限可用下述字母的任意组合：
 
 <div class="hblock"><pre>
-t 保存程式的文本到交换设备上。
-u 和文件属主拥有相同的权限。
-g 和和文件属主同组的用户拥有相同的权限。
-o 和其他用户拥有相同的权限。
+r 可读
+w 可写
+x 可执行
 </pre></div>
+
+x 只有目标文件对某些用户是可执行的或该目标文件是目录时才追加 x 属性。
+
+s 在文件执行时把进程的属主或组 ID 置为该文件的文件属主。方式 `u+s` 设置文件的用户 ID 位，`g+s` 设置组 ID 位。
 
 文件可以是以空格分开的要改动权限的文件列表，支持通配符。在一个命令行中可给出多个权限方式，其间用逗号隔开。例如：
 
-> chmod g+r，o+r example
+```
+# 使同组和其他用户对文件有读权限
+chmod g+r, o+r file
+chmod go+r file
 
-这里的意思是使同组和其他用户对文件example 有读权限。
+# 给文件加上 SETUID，并去掉同组和其他人的读权限
+chmod u+s, go-r file
+
+# 给目录加上粘滞位（粘滞位只占用 others 权限位）
+chmod o+t directory
+```
 
 **数字设定法**
 
@@ -271,38 +291,40 @@ o 和其他用户拥有相同的权限。
 
 > chgrp [-R] group file...
 
-该命令改动指定指定文件所属的用户组。其中group能是用户组ID，也能是/etc/group文件中用户组的组名。文件名是以空格分开的要改动属组的文件列表，支持通配符。如果用户不是该文件的属主或终极用户，则不能改动该文件的组。`-R` 参数递归式地改动指定目录及其下的所有子目录和文件的属组。例如改动 /opt/local /book/ 及其子目录下的所有文件的属组为book：
+该命令改动指定文件所属的用户组。其中 group 可以是用户组 ID，也可以是 /etc/group 文件中用户组的组名。文件名是以空格分开的要改动属组的文件列表，支持通配符。如果用户不是该文件的属主或终极用户，则不能改动该文件的组。`-R` 参数递归式地改动指定目录及其下的所有子目录和文件的属组。例如改动 /opt/local /book/ 及其子目录下的所有文件的属组为 book：
 
-> chgrp –R book /opt/local /book
+> chgrp –R book /opt/local/book
 
 
-**chown**命令用于更改某个文件或目录的属主和属组。这个命令也非常常用。例如root用户把自己的一个文件拷贝给用户huoty，为了让用户huoty能够存取这个文件，root用户应该把这个文件的属主设为huoty，否则，用户huoty无法存取这个文件。语法格式如下：
+**chown** 命令用于更改某个文件或目录的属主和属组。这个命令也非常常用。例如 root 用户把自己的一个文件拷贝给用户 huoty，为了让用户 huoty 能够存取这个文件，root 用户应该把这个文件的属主设为 huoty，否则，用户 huoty 无法存取这个文件。语法格式如下：
 
 > chown [选项] 用户或组 文件
 
-chown将指定文件的拥有者改为指定的用户或组。用户能是用户名或用户ID。组能是组名或组ID。文件是以空格分开的要改动权限的文件列表，支持通配符。该命令的各选项含义如下：
+chown 将指定文件的拥有者改为指定的用户或组。用户能是用户名或用户ID。组能是组名或组ID。文件是以空格分开的要改动权限的文件列表，支持通配符。该命令的各选项含义如下：
+
 <div class="hblock"><pre>
---c 显示更改的部分的信息
--f 忽略错误信息
--h 修复符号链接
--R 处理指定目录以及其子目录下的所有文件
--v 显示详细的处理信息
--deference 作用于符号链接的指向，而不是链接文件本身
+-c, --changes          显示更改的部分的信息
+-f, --silent, --quiet  忽略错误信息
+-R, --recursive        递归处理指定目录以及其子目录下的所有文件
+--reference            参考指定文件或目录的用户和组
+-h, --no-dereference   只对符号链接的文件本身做修改，而不更改其他任何相关文件
+--dereference          作用于符号链接的指向，而不是链接文件本身，与 -h 参数相反
+-v, --verbose          显示详细的处理信息
 </pre></div>
 
 **使用例示：**
 
-改变文件的所有者：
+```
+# 改变文件的所有者：
+chown www-data test
+chown www-data: test
 
-> chown www-data: test
+# 改变文件的所属组：
+chown :www-data test
 
-改变文件的所属组：
-
-> chown :www-data test
-
-同时改变文件的所有者和所属组：
-
-> chown huoty:huoty test
+# 同时改变文件的所有者和所属组：
+chown huoty:huoty test
+```
 
 ## getfacl和setfacl命令
 
@@ -311,24 +333,24 @@ chown将指定文件的拥有者改为指定的用户或组。用户能是用户
 
 ```
 setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
--m,       --modify-acl 更改文件的访问控制列表
--M,       --modify-file=file 从文件读取访问控制列表条目更改
--x,       --remove=acl 根据文件中访问控制列表移除条目
--X,       --remove-file=file 从文件读取访问控制列表条目并删除
--b,       --remove-all 删除所有扩展访问控制列表条目
--k,       --remove-default 移除默认访问控制列表
-          --set=acl 设定替换当前的文件访问控制列表
-          --set-file=file 从文件中读取访问控制列表条目设定
-          --mask 重新计算有效权限掩码
--n,       --no-mask 不重新计算有效权限掩码
--d,       --default 应用到默认访问控制列表的操作
--R,       --recursive 递归操作子目录
--L,       --logical 依照系统逻辑，跟随符号链接
--P,       --physical 依照自然逻辑，不跟随符号链接
-          --restore=file 恢复访问控制列表，和“getfacl -R”作用相反
-          --test 测试模式，并不真正修改访问控制列表属性
--v,       --version           显示版本并退出
--h,       --help              显示本帮助信息
+-m, --modify-acl        更改文件的访问控制列表
+-M, --modify-file=file  从文件读取访问控制列表条目更改
+-x, --remove=acl        根据文件中访问控制列表移除条目
+-X, --remove-file=file  从文件读取访问控制列表条目并删除
+-b, --remove-all        删除所有扩展访问控制列表条目
+-k, --remove-default    移除默认访问控制列表
+    --set=acl           设定替换当前的文件访问控制列表
+    --set-file=file     从文件中读取访问控制列表条目设定
+    --mask              重新计算有效权限掩码
+-n, --no-mask           不重新计算有效权限掩码
+-d, --default           应用到默认访问控制列表的操作
+-R, --recursive         递归操作子目录
+-L, --logical           依照系统逻辑，跟随符号链接
+-P, --physical          依照自然逻辑，不跟随符号链接
+    --restore=file      恢复访问控制列表，和 getfacl -R 作用相反
+    --test              测试模式，并不真正修改访问控制列表属性
+-v, --version           显示版本并退出
+-h, --help              显示本帮助信息
 ```
 
 示例：
@@ -344,7 +366,21 @@ setfacl -m u:user1:rwx test/
 `getfacl` 用于获取文件的 acl 权限控制：
 
 ```
-
+getfacl [-aceEsRLPtpndvh] file ...
+-a, --access            仅显示文件访问控制列表
+-d, --default           仅显示默认的访问控制列表
+-c, --omit-header       不显示注释表头
+-e, --all-effective     显示所有的有效权限
+-E, --no-effective      显示无效权限
+-s, --skip-base         跳过只有基条目(base entries)的文件
+-R, --recursive         递归显示子目录
+-L, --logical           逻辑遍历(跟随符号链接)
+-P, --physical          物理遍历(不跟随符号链接)
+-t, --tabular           使用制表符分隔的输出格式
+-n, --numeric           显示数字的用户/组标识
+-p, --absolute-names    不去除路径前的 '/' 符号
+-v, --version           显示版本并退出
+-h, --help              显示本帮助信息
 ```
 
 ## 使用示例

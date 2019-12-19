@@ -9,7 +9,7 @@ tags: 日志
 
 **【导读】** *除了朱自清的《背影》，我觉得这篇是写爸爸最好的文章。初读的时候是在高中，当时喜欢买《读者》这本杂志，有一期上刊登了这篇文章。在后来的差不多十年里，陆陆续续也读过好几遍，几乎每一次都会流泪。作者以一种特殊的手笔来描写爸爸，回忆着过去的点滴，又与现在年过半百的爸爸进行对比，最后疾呼“爸爸，不要老”。特别喜欢这篇文章，今天再翻出来读一遍，依然泪下。*
 
-![Father and daughter](http://wx4.sinaimg.cn/mw690/c3c88275ly1fcx9rul931j20hs0bv74h.jpg)
+![Father and daughter](http://static.konghy.cn/xlwb/imgs/wx4/mw690/c3c88275ly1fcx9rul931j20hs0bv74h.jpg)
 
 *文/落落*
 

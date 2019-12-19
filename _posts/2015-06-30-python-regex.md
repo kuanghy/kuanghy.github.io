@@ -349,7 +349,7 @@ pattern.subn(repl, string[, count]) | re.sub(pattern, repl, string[, count])
 
 ## Re 模块常用方法总结
 
-![Re 模块常用方法总结](http://ww3.sinaimg.cn/mw690/c3c88275gw1f53scpabgoj20ei0e7dhf.jpg)
+![Re 模块常用方法总结](http://static.konghy.cn/xlwb/imgs/ww3/mw690/c3c88275gw1f53scpabgoj20ei0e7dhf.jpg)
 
 
 ## 常用正则表达式

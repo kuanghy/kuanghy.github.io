@@ -184,7 +184,7 @@ string.zfill(width)
 
 ### 字符串常用方法总结
 
-![字符串常用方法](http://ww3.sinaimg.cn/mw690/c3c88275gw1f53sclh1fbj20kk0bd403.jpg)
+![字符串常用方法](http://static.konghy.cn/xlwb/imgs/ww3/mw690/c3c88275gw1f53sclh1fbj20kk0bd403.jpg)
 
 ### 字符串不变性
 

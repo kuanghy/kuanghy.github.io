@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linux 后台运行程序"
-keywords: 后台运行 后台进程 Linux jobs nohup screen
+keywords: 后台运行 后台进程 Linux jobs nohup screen fg bg setsid disown
 description: "在 Linux 系统中的终端工作时，为了让进程让出终端执行其他任务，我们需要将进程放到后台运行"
 category: Linux
 tags: linux screen
@@ -13,17 +13,76 @@ tags: linux screen
 
 `jos` 命令用于显示 Linux 中的任务列表及任务状态，包括后台运行的任务。该命令可以显示任务号及其对应的进程号。其中，任务号是以普通用户的角度进行的，而进程号则是从系统管理员的角度来看的。一个任务可以对应于一个或者多个进程号。
 
+```shell
+$ jobs
+[1]-  stopped  ping -c 10 baidu.com
+[2]+  stopped  ping -c 10 taobao.com
+[3]   running  ping -c 10000 localhost > /dev/null 2>&1 &
+
+$ jobs -l  # 显示进程号
+[1]- 22703 stopped  ping -c 10 baidu.com
+[2]+ 22810 stopped  ping -c 10 taobao.com
+[3]  24148 running  ping -c 10000 localhost > /dev/null 2>&1 &
+
+$ jobs -r  # 仅列出正在运行的进程
+[3]    running    ping -c 10000 localhost > /dev/null 2>&1 &
+
+$ jobs -s  # 仅列出暂停的进程
+[1]  - suspended  ping -c 10 baidu.com
+[2]  + suspended  ping -c 10 taobao.com
+```
+
+输出结果中的 `+` 表示是当前默认作业，`-` 减号表示是下一个默认作业。最前的需要为作业号。
+
+要杀死一些后台作业，可以用 `kill %jobnum`，或者找到进程号，再用 `kill pid` 杀掉。
+
 ## &
 
 如果需要在后台运行一个进程，可以在运行的命令后边加上 `&`。这样做只能让进程让出当前的终端以便做其他的事，但如果后台运行的进程有输出，仍然会打印到屏幕上，这样会干扰当前的工作。而且即使进行在后台运行，如果终端被关闭，该进程仍然会被杀掉。
 
-## 'ctrl-z'  和 'bg' 将进程放入后台
+## 'ctrl-z' 与 'bg'
 
-`bg` 命令用于将作业放到后台运行，使前台可以执行其他任务。该命令的运行效果与在指令后面添加符号 `&` 的效果是相同的，都是将其放到系统后台执行。快捷键 `ctrl-z` 也能将进程放到后台运行，该快捷键用于将正在运行的进程放到后台运行是非常方便的。
+快捷键 `ctrl-z` 能将进程放到后台运行，但进程会先处于暂停状态（suspended）。此时用 `bg` 命令将一个在后台暂停的命令，变成继续执行。所以要将一个前台正在运行的进程放入后台运行的步骤是：
+
+- 先按组合键 `ctrl-z` 将其挂起
+- 再用 `bg` 命名使其基础运行（可以直接使用 bg 命令不加任何参数，最后放入后台的作业会被标记为默认要运行的作业）
+
+需要注意的是，如果挂起可能会影响当前进程的运行结果，需慎用。
+
+```shell
+$ ping baidu.com
+PING baidu.com (39.156.69.79) 56(84) bytes of data.
+64 bytes from 39.156.69.79: icmp_seq=1 ttl=52 time=4.69 ms
+64 bytes from 39.156.69.79: icmp_seq=2 ttl=52 time=4.58 ms
+^Z
+[1]+  stopped  ping -c 10 baidu.com
+
+$ bg
+[2]+ ping -c 10 taobao.com &
+64 bytes from 140.205.220.96: icmp_seq=3 ttl=49 time=20.9 ms
+64 bytes from 140.205.220.96: icmp_seq=4 ttl=49 time=20.7 ms
+
+$ jobs
+[1]+  stopped  ping -c 10 baidu.com
+[3]-  running  ping -c 10 -c 10000 localhost > /dev/null 2>&1 &
+
+$ bg %1
+[1]+ ping -c 10 baidu.com &
+64 bytes from 39.156.69.79: icmp_seq=3 ttl=52 time=4.73 ms
+64 bytes from 39.156.69.79: icmp_seq=4 ttl=52 time=4.56 ms
+
+$ jobs
+[3]+  running  ping -c 10 -c 10000 localhost > /dev/null 2>&1 &
+```
 
 ## fg
 
-`fg` 命令用于将后台作业（在后台运行的或者在后台挂起的作业）放到前台终端运行。与 bg 命令一样，若后台任务中只有一个，则使用该命令时，可以省略任务号。
+`fg` 命令用于将后台作业（在后台运行的或者在后台挂起的作业）放到前台终端运行。
+
+```shell
+$ fg %3
+ping -c 10 -c 10000 localhost > /dev/null 2>&1
+```
 
 ## nohup
 
@@ -58,9 +117,9 @@ nohub du sh /* | sort -h > /tmp/du.log 2>&1 &
 这种情况我们可以用 disown 并配置作业调度来让进程忽略 HUB 信号。使用方法：
 
 ```
-disown -h %1  使某个作业忽略 HUP 信号, 1 为作业号。
-disown -ah  使所有的作业都忽略 HUP 信号。
-disown -rh  使正在运行的作业忽略 HUP 信号。
+disown -h %1  使某个作业忽略 HUP 信号, 1 为作业号
+disown -ah  使所有的作业都忽略 HUP 信号
+disown -rh  使正在运行的作业忽略 HUP 信号
 ```
 
 ## screen
