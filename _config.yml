@@ -1,73 +1,116 @@
-# Harmony Jekyll theme general configurations
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
 
-# Base URL
-baseurl:
+# Site
+title: HenryBeWell
+subtitle: ''
+description: '凡有所学，皆成性格'
+keywords:
+author: HenryBeWell
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
-# Site live URL
+# URL
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://zhanghengruic.github.io
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
-# Localhost
-# url: http://127.0.0.1:4000
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
 
-# Production URL for sitemap
-production_url: http://zhanghengruic.github.io
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
-# Harmony theme configuration. Please change accordingly.
-harmony:
-  name: HenryBeWell
-  # Little description about your site
-  description: Henry's Blog
-  # 'meta_description:' Write an awesome description for your new site here.
-  # It will appear in your document head meta (for Google search results) and
-  # in your feed.xml site description.
-  meta_description: > #
-   Henry's blog，All Be Well。专注于各类计算机技术，记录所感所想所思。
-   分享 Python 开发技术
-  basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
-  author: # Author details
-    name: Henry Zhang
-    email: zhanghengruic@gmail.com
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
 
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
 
-  # Google Analytics key, leave blank to ignore
-  google_analytics_key: UA-xxxx-x
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
 
-  # Profile links, leave blank to ignore
-  social:
-    github:
-    twitter:
-    facebook:
-    gplus:
-    dribble:
-    pinterest:
-  social_zh:
-    email: zhanghengruic@gmail.com
-    weibo: HenryBeWell
-    github: zhanghengruiC
-    qq:
-    wechat:
-    rss: /feed
-  # Toggle disclaimer in footer
-  show_disclaimer: false
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
-# Conversion / Build settings
-markdown:    kramdown
-# This is how you put pygments config in jekyll 2.0 instead of pygments: true
-highlighter: rouge
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
 
-# Permalinks
-permalink: /:year/:month/:day/:title
-
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
 exclude:
-  - CNAME
-  - Gemfile
-  - Rakefile
-  - README.md
-  - .gitignore
-  - .sass-cache
-  - Gemfile.lock
+ignore:
 
-# Sass conversion configs
-sass:
-    sass_dir: assets/css/_sass
-    style: :compressed
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+# theme: landscape
+theme: next
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: ''
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false
+  awl: 4
+  wpm: 275
+  suffix: "mins."
