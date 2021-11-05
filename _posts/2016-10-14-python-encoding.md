@@ -30,7 +30,7 @@ Python 由荷兰人 `Guido van Rossum` 于 1989 年发明，第一个公开发�
 在 Python2 中，字符串的类型有两种，即 str 和 unicode，他们都是 basestring 的子类。`unicode` 表示 Unicode 字符串（文本字符串），`str` 表示**字节**字符串（二进制数据），由 unicode 经过编码后的字节组成。也就是说：
 
 - **str** 存储的是已经编码后的字节序列，输出时看到每个字节用 16 进制表示，以`\x`开头。每个汉字会占用3个字节的长度。
-- **unicode** 是“字符”串，存储的是编码前的字符，输出是看到字符以`\u`开头。每个汉字占用一个长度。定义一个 Unicode 对象时，以 `u` 开头。
+- **unicode** 是“字符”串，存储的是编码前的字符，输出时看到字符以`\u`开头。每个汉字占用一个长度。定义一个 Unicode 对象时，以 `u` 开头。
 
 在 Python 中 `Unicode` 被视为是一种中间码，如果要在不同的编码间进行转化，通常是先将字符串解码（decode）成 Unicode 编码，再从 Unicode 编码（encode）成另一种编码：
 
@@ -40,12 +40,12 @@ Python 由荷兰人 `Guido van Rossum` 于 1989 年发明，第一个公开发�
 我们会在很多 Python 的源码文件的头部看到如下的声明：
 
 ```python
-# coding:utf-8
+# coding: utf-8
 ```
 
 这表示声明源代码中的文本编码为 UTF-8，也就是告诉 Python 解释器将文件中的文本视为 UTF-8 编码的字符串，因此声明的编码应该与文件的编码保持一致。在代码中我们通常会处理一些其他来源的文本，比如网络，它们的编码不一定也是 UTF-8 的，因此就要进行编码转换。
 
-Python 试图在字节串和字符串之间以不为人所察觉的方式进行转化。在不同的转换中，在条件允许的情况下，Python 会试图在字节串和 unicode 字符串直接进行转换。例如将字节串和 unicode 字节串连接到一起时。但是不使用 encoding 就在不同类型之间进行转换是没有意义的。所以 Python 依赖一个 `默认编码`，该编码由 `sys.setdefaultencoding()` 指定。在大多数平台上，默认的是 ASCII 编码。但对于所有转换，使用这种编码几乎都是错误的。如果不手动指定编码就调用 str() 或 unicode() ，或是函数以字符串作为参数，但传递的是其他类型的参数时，都会使用这个默认编码。这就是很多时候出现 ` UnicodeEncodeError` 和 ` UnicodeDecodeError` 错误的原因，也就是**字符串对象互相转化时没有指定字符编码**。
+Python 试图在字节串和字符串之间以不为人所察觉的方式进行转化。在不同的转换中，在条件允许的情况下，Python 会试图在字节串和 unicode 字符串直接进行转换。例如将字节串和 unicode 字节串连接到一起时。但是不使用 encoding 就在不同类型之间进行转换是没有意义的。所以 Python 依赖一个 `默认编码`，该编码由 `sys.setdefaultencoding()` 指定。在大多数平台上，默认的是 ASCII 编码。但对于所有转换，使用这种编码几乎都是错误的。如果不手动指定编码就调用 str() 或 unicode() ，或是函数以字符串作为参数，但传递的是其他类型的参数时，都会使用这个默认编码。这就是很多时候出现 ` UnicodeEncodeError` 和 ` UnicodeDecodeError` 错误的原因，也就是 **字符串对象互相转化时没有指定字符编码**。
 
 例如，如果对 unicode 和 str 类型通过 `+` 拼接时，输出结果是 unicode 类型，相当于先将 str 类型的字符串通过 decode() 方法解码成 unicode 再拼接。此时如果解码时没有明确指明编码类型，可能会出现错误。
 
@@ -63,8 +63,7 @@ Python 试图在字节串和字符串之间以不为人所察觉的方式进行�
 
 以上内容的讨论都仅限于 Python2，在 Python3 中已经修复了这些问题，可以正确的处理 unicode 和字符串。
 
-
-## 参考资料
+**参考资料：**
 
 - [http://www.tuicool.com/articles/2MVRVv7](http://www.tuicool.com/articles/2MVRVv7)
 - [https://gist.github.com/x7hub/178c87f323fbad57ff91](https://gist.github.com/x7hub/178c87f323fbad57ff91)

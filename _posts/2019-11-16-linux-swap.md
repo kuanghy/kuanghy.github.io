@@ -20,7 +20,7 @@ Linux 的交换分区（swap），或者叫内存置换空间（swap space），
 - 内存 16GB~64GB，推荐不少于 8GB 的 swap 空间
 - 内存 64GB~256GB，推荐不少于 16GB 的 swap 空间
 
-创建交换分区需要有一块独立的分区，如果没有多余的分区时，可以用交换分区文件来代替。创建交换文件：
+创建交换分区需要有一块独立的分区，如果没有多余的分区时，可以用交换分区文件来代替。**创建交换文件**：
 
 ```
 dd if=/dev/zero of=/swap bs=1MB count=8192
@@ -43,13 +43,13 @@ chown root:root /swap
 chmod 600 /swap
 ```
 
-格式化文件为 swap 文件系统：
+**格式化文件** 为 swap 文件系统：
 
 ```
 mkswap -L swap /swap
 ```
 
-挂载交换分区：
+**挂载交换分区**：
 
 ```
 swapon /swap
@@ -61,13 +61,13 @@ swapon /swap
 free -h
 ```
 
-编辑 /etc/fstab 文件以便开机自动挂载：
+编辑 /etc/fstab 文件以便 **开机自动挂载**：
 
 ```
 /swap    swap            swap    defaults    0 0
 ```
 
-卸载交换分区：
+**卸载交换分区**：
 
 ```
 swapoff /swap
@@ -96,6 +96,16 @@ vm.swappiness=10
 ```
 sysctl -p
 ```
+
+`swapon` 与 `swapoff` 命令分别用于开启或关闭交换空间（包括交换文件和交换分区）。如果需要 **清空交换空间**，可以使用如下方式：
+
+```
+swapoff -a && swapon -a
+
+# -a 参数表示包含 /etc/fstab 文件中所有设置为 swap 的设备
+```
+
+
 
 参考：
 

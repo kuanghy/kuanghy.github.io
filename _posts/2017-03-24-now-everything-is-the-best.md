@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "现在的一切便是最好的"
-keywords: 日志 博客 WordPress GitHub 多说 Jekyll Hexo
+keywords: 日志 博客 WordPress 多说 Jekyll Hexo
 description: "要相信，现在的一切便是最好的。停下你的脚步，抬头，学会欣赏轻柔的月光"
 category: 我的日志
 tags: 日志

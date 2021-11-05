@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Linux 下的 tempfs 与 /dev/shm"
-keywords: Linux tmpfs /dev/shm Python SharedArray
+title: "Linux 下的 tmpfs 与 /dev/shm"
+keywords: Linux tmpfs tempfs shm /dev/shm Python SharedArray
 description: "tmpfs 是 Linux/Unix 系统上的一种基于内存的文件系统，即 tmpfs 使用内存或 swap 分区来存储文件。"
 category: Linux
 tags: linux 共享内存 shm

@@ -26,7 +26,24 @@ tags: python
 
 函数 `type` 实际上是一个元类。`type` 就是 Python 在背后用来创建所有类的元类。`type` 是 Python 的内建元类，当然，你也可以创建自己的元类。
 
-Python 通过 `__metaclass__` 属性来自定义元类。可以在写一个类的时候为其添加 \_\_metaclass__ 属性，这样 Python 会在内存中通过 \_\_metaclass__ 创建一个类对象。如果 Python 没有找到 \_\_metaclass__ ，它会继续在父类中寻找 \_\_metaclass__ 属性，并尝试做和前面同样的操作。如果Python在任何父类中都找不到 \_\_metaclass__ ，它就会在模块层次中去寻找 \_\_metaclass__ ，并尝试做同样的操作。如果还是找不到 \_\_metaclass__ ，Python就会用内置的 `type` 来创建这个类对象。
+Python 通过 `__metaclass__` 属性来自定义元类。可以在写一个类的时候为其添加 \_\_metaclass__ 属性，这样 Python 会在内存中通过 \_\_metaclass__ 创建一个类对象。如果 Python 没有找到 \_\_metaclass__ ，它会继续在父类中寻找 \_\_metaclass__ 属性，并尝试做和前面同样的操作。如果Python在任何父类中都找不到 \_\_metaclass__ ，它就会在模块层次中去寻找 \_\_metaclass__ ，并尝试做同样的操作。如果还是找不到 \_\_metaclass__ ，Python 就会用内置的 `type` 来创建这个类对象。
+
+**注：** 在 Python 3 中，指定元类的方式发生了变化，需要在定义类时指定 metaclass class 参数。如：
+
+```python
+class NoInstances(type):
+
+    def __call__(self, *args, **kwargs):
+        raise TypeError("Can't instantiate directly")
+
+
+class O(object, metaclass=NoInstances):
+
+    __metaclass__ = NoInstances  # 在 Python 3 中此处无效
+
+    def __init__(self):
+        self.a = 1
+```
 
 元类的主要用途是创建 API。一个典型的例子是 Django ORM。一般情况我们不需要对此作了解，所以这里只是做一个简单的描述。如果实际需要，则必须对其中的原理非常了解。
 

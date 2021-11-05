@@ -38,23 +38,23 @@ class smtplib.LMTP(host='', port=LMTP_PORT, local_hostname=None, source_address=
 
 > SMTP.docmd(cmd[, argstring])
 
-向 smtp 服务器发送指令。可选参数 argstring 表示指令的参数。
+向 SMTP 服务器发送指令。可选参数 argstring 表示指令的参数。
 
 > SMTP.helo([hostname])
 
-使用 "helo" 指令向服务器确认身份。相当于告诉 smtp 服务器 “我是谁”。
+使用 "helo" 指令向服务器确认身份。相当于告诉 SMTP 服务器 “我是谁”。
 
 > SMTP.has_extn(name)
 
-判断指定名称在服务器邮件列表中是否存在。出于安全考虑，smtp 服务器往往屏蔽了该指令。
+判断指定名称在服务器邮件列表中是否存在。出于安全考虑，SMTP 服务器往往屏蔽了该指令。
 
 > SMTP.verify(address)
 
-判断指定邮件地址是否在服务器中存在。出于安全考虑，smtp 服务器往往屏蔽了该指令。
+判断指定邮件地址是否在服务器中存在。出于安全考虑，SMTP 服务器往往屏蔽了该指令。
 
 > SMTP.login(user, password)
 
-登陆到 smtp 服务器。现在几乎所有的 smtp 服务器，都必须在验证用户信息合法之后才允许发送邮件。
+登陆到 SMTP 服务器。现在几乎所有的 SMTP 服务器，都必须在验证用户信息合法之后才允许发送邮件。
 
 > SMTP.starttls([keyfile[, certfile]])
 
@@ -66,9 +66,9 @@ class smtplib.LMTP(host='', port=LMTP_PORT, local_hostname=None, source_address=
 
 > SMTP.quit()
 
-断开与smtp服务器的连接，相当于发送 "quit" 指令。（很多程序中都用到了smtp.close()，具体与quit的区别google了一下，也没找到答案。）
+断开与 SMTP 服务器的连接，相当于发送 "quit" 指令。（很多程序中都用到了 smtp.close()，具体与 quit 的区别 google 了一下，也没找到答案。）
 
-## email模块
+## email 模块
 
 emial 模块用来处理邮件消息，包括 MIME 和其他基于 `RFC 2822` 的消息文档。使用该模块来定义邮件的内容，是非常简单的。其包括的类有（更加详细的介绍可见：[http://docs.python.org/library/email.mime.html](http://docs.python.org/library/email.mime.html)）
 
@@ -80,7 +80,7 @@ email 及其相关子模块的一些常用类：
 class email.mime.base.MIMEBase(_maintype, _subtype, **_params)
 ```
 
-这是 MIME 的一个基类。一般不需要在使用时创建实例。其中 _maintype 是内容类型，如 text 或者 image。_subtype 是内容的 minor type 类型，如 plain 或者 gif。 _params 是一个字典，直接传递给 Message.add_header()。
+这是 MIME 的一个基类。一般不需要在使用时创建实例。其中 `_maintype` 是内容类型，如 text 或者 image。`_subtype` 是内容的 minor type 类型，如 plain 或者 gif。 `_params` 是一个字典，直接传递给 Message.add_header()。
 
 ```python
 class email.mime.multipart.MIMEMultipart([_subtype[, boundary[, _subparts[, _params]]]]
@@ -116,23 +116,21 @@ class email.mime.message.MIMEMessage(_msg[, _subtype])
 msg = mail.Message.Message()    # 一个实例
 msg['to'] = 'XXX@XXX.com'       # 发送到哪里
 msg['from'] = 'YYY@YYYY.com'    # 自己的邮件地址
-msg['date'] = '2012-3-16'       # 时间日期
-msg['subject'] = 'hello world'  # 邮件主题
+msg['date'] = '2012-03-16'       # 时间日期
+msg['subject'] = 'Hello world'  # 邮件主题
 ```
 
 ```python
 class email.mime.text.MIMEText(_text[, _subtype[, _charset]])
 ```
 
-MIME 文本对象，其中_text 是邮件内容，_subtype 邮件类型，可以是 text/plain（普通文本邮件），html/plain(html邮件),  _charset 编码，可以是 gb2312 等等, 如果是中文则需要用 utf-8 编码。
-
-## 参考资料
-
-- [http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html](http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html)
-- [http://www.jb51.net/article/49216.htm](http://www.jb51.net/article/49216.htm)
-- [廖雪峰的官方网站--SMTP发送邮件](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000)
+MIME 文本对象，其中 `_text` 是邮件内容，`_subtype` 邮件类型，可以是 text/plain（普通文本邮件），html/plain (html邮件),  `_charset` 编码，可以是 gb2312 等等, 如果是中文则需要用 utf-8 编码。
 
 ## 使用示例
 
 - [https://github.com/kuanghy/kmailbox](https://github.com/kuanghy/kmailbox)
 
+## 参考资料
+
+- [http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html](http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html)
+- [http://www.jb51.net/article/49216.htm](http://www.jb51.net/article/49216.htm)

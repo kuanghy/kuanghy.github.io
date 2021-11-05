@@ -17,7 +17,7 @@ MySQL 是一个非常流行的小型关系型数据库管理系统。在数据�
 
 使用包管理工具安装的 mysql 一般都会创建系统服务，以便于管理：
 
-```
+```shell
 # 启动
 sudo service mysql start
 
@@ -37,7 +37,7 @@ ps -ef | grep mysqld
 
 登录成功后可以先尝试一些简单的操作：
 
-```
+```sql
 # 列出数据库
 show databases;
 
@@ -72,7 +72,7 @@ scripts/mysql_install_db --defaults-file=my.cnf
 
 如果是编译安装的，首次登陆之后可能需要先修改密码。修改 root 密码的三种方式：
 
-- 用 mysqladmin 命令来改root用户口令
+- 用 mysqladmin 命令来改 root 用户口令
 
 ```
 bin/mysqladmin --defaults-file=my.cnf -h 127.0.0.1 -u root password 'new-password'
@@ -80,13 +80,13 @@ bin/mysqladmin --defaults-file=my.cnf -h 127.0.0.1 -u root password 'new-passwor
 
 - 用 set password 命令来修改密码：
 
-```
+```sql
 mysql> set password for root@localhost=password('new-password');
 ```
 
 - 直接修改 user 表的 root 用户口令：
 
-```
+```sql
 mysql> use mysql;
 mysql> update user set password=password('new-password') where user='root';
 mysql> flush privileges;
@@ -94,13 +94,13 @@ mysql> flush privileges;
 
 MySQL8 之后使用如下方式修改 root 密码：
 
-```
+```sql
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new-password';
 ```
 
 从 MySQL8 开始，用户密码默认使用 `caching_sha2_password` 方式加密，目前大部分客户端还不支持 caching_sha2_password 插件，所以可能需要将密码改成 mysql_native_password 的机密方式：
 
-```
+```sql
 myql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new-password';
 ```
 
@@ -112,7 +112,7 @@ bin/mysqld --defaults-file=my.cnf --skip-grant-tables &
 
 删除默认的数据库和用户，避免应存在漏洞而被注入攻击（test 库在 5.7 版本后默认没删除了）：
 
-```
+```sql
 mysql> drop database test;
 mysql> delete from mysql.db;
 mysql> delete from mysql.user where not(host="localhost" and user="root");
@@ -143,7 +143,7 @@ datadir="/home/huoty/.local/mysql/data"
 
 以完全模式执行 SQL 语句，安全模式打开后，没有限制条件的更新语句(update,delete)将会被拒绝。设置方式为：
 
-```
+```sql
 set [global] sql_safe_updates=1;
 ```
 
@@ -151,7 +151,7 @@ set [global] sql_safe_updates=1;
 
 **创建用户**
 
-```
+```sql
 CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 ```
 
@@ -161,47 +161,75 @@ CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 
 示例：
 
-```
+```sql
 CREATE USER 'user'@'localhost' IDENTIFIED BY '123456';
 CREATE USER 'user'@'192.168.1.101' IDENDIFIED BY '123456';
 CREATE USER 'user'@'%' IDENTIFIED BY '123456';
 CREATE USER 'user'@'%' IDENTIFIED BY '';
 CREATE USER 'user'@'%';
+
+# 指定 mysql_native_password 密码加密方式
+CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 ```
 
-从 MySQL8 开始，如果需要用 mysql_native_password 加密方式，需用如下方式创建用户：
+从 **MySQL 8** 开始，如果需要用 mysql_native_password 加密方式，需用如下方式创建用户：
 
-```
+```sql
 CREATE USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 ```
 
 如果需要删除用户，使用 DROP USER 命令：
 
-```
+```sql
 DROP USER 'username'@'host';
 ```
 
-**用户密码设置**
+**用户密码设置(修改)**
 
-```
+```sql
 SET PASSWORD FOR 'username'@'host' = PASSWORD('new-password');
 ```
 
 示例：
 
-```
+```sql
 SET PASSWORD FOR 'server'@'%' = PASSWORD("12345678");
 ```
 
 如果是当前登录用户，可修改自己的密码：
 
-```
+```sql
 SET PASSWORD = PASSWORD("new-password");
+```
+
+也可以使用 **ALTER USER** 修改用户密码：
+
+```sql
+# 修改用户密码
+ALTER USER 'username'@'host' IDENTIFIED BY '123456';
+
+# 修改当前用户密码
+ALTER USER user() IDENTIFIED BY '123456';
+
+# 修改密码加密规则
+ALTER USER 'username'@'host' IDENTIFIED WITH mysql_native_password BY '123456';
+
+# 使密码过期
+ALTER USER 'username'@'host' IDENTIFIED BY '123456' PASSWORD EXPIRE;
+
+# 设置密码永不过期
+ALTER USER 'username'@'host' IDENTIFIED BY '123456' PASSWORD EXPIRE never;
+
+# 设置过期时间为默认值
+ALTER USER 'username'@'host' IDENTIFIED BY '123456' PASSWORD EXPIRE default;
+
+# 指定过期时间间隔
+ALTER USER 'username'@'host' IDENTIFIED BY '123456' PASSWORD EXPIRE interval 90 day;
 ```
 
 **授权用户**
 
-```
+```sql
 GRANT privileges ON databasename.tablename TO 'username'@'host' [WITH GRANT OPTION]
 ```
 
@@ -231,42 +259,50 @@ GRANT privileges ON databasename.tablename TO 'username'@'host' [WITH GRANT OPTI
 
 示例：
 
-```
+```sql
 GRANT SELECT, INSERT, UPDATE, CREATE ON *.* TO 'server'@'%';
 GRANT ALL ON *.* TO 'admin'@'%';
 GRANT SELECT ON test.* TO 'reader'@'%';
 GRANT SELECT, UPDATE ON test.* TO 'user1'@'%';
 ```
 
-撤销授权：
+**撤销授权**：
 
-```
+```sql
 REVOKE privilege ON databasename.tablename FROM 'username'@'host';
 ```
 
 其中的 privilege, databasename, tablename 需与授权是相同才能生效。示例：
 
-```
+```sql
 REVOKE SECECT ON test.* FROM 'reader'@'%';
 ```
 
-权限查看：
+**权限查看**：
 
-```
+```sql
+# 授权查看语法
 SHOW GRANTS [FOR 'username'@'host'];
 
-# 或者
+# 默认查看当前用户当前机器的权限
+SHOW GRANTS;
 
+# 查看指定用户和机器的权限
+SHOW GRANTS FOR 'reader'@'localhost';
+SHOW GRANTS FOR 'reader'@'192.168.3.%';
+
+# 从 user 表中查看权限
 SELECT * FROM mysql.user WHERE user='username' AND host='host' \G;
-```
 
-命令 `show grants;` 默认查看当前用户权限。
+# 从 db 表中查看权限（可以看到用于对不同库的详细权限）
+SELECT * FROM mysql.db WHERE user='username' AND host='host' \G;
+```
 
 ## 基本操作
 
 **SHOW 语句使用：**
 
-```
+```sql
 # 查看所有支持的存储引擎
 show engines;
 
@@ -330,26 +366,100 @@ SHOW { PROCEDURE | FUNCTION } STATUS [ LIKE 'pattern' ]
 SHOW CREATE { PROCEDURE | FUNCTION } sp_name
 ```
 
-**数据库和表操作：**
+**数据库操作：**
 
+创建数据库语法格式：
+
+```sql
+CREATE DATABASE [IF NOT EXISTS] <数据库名>
+[[DEFAULT] CHARACTER SET <字符集名>]
+[[DEFAULT] COLLATE <校对规则名>];
 ```
+
+字符集（CHARACTER）和校对规则（COLLATION）是两个不同的概念，字符集用来定义 MySQL 存储字符串的方式，校对规则定义了比较字符串的方式。校对规则有 utf8_general_ci, utf8_unicode_ci, utf8_chinese_ci 等，utf8_general_ci 仅能够在字符之间进行逐个比较，所以其比较速度很快，但相对来说比较的正确性较差。
+
+修改数据库全局数据的语法与创建的语法类似（不指定数据库名时操作默认选中的数据库）：
+
+```sql
+ALTER DATABASE [数据库名] {
+[ DEFAULT ] CHARACTER SET <字符集名> |
+[ DEFAULT ] COLLATE <校对规则名>}
+```
+
+示例与其他操作：
+
+```sql
 # 创建数据库
 create database 数据库名;
+create database if exists 数据库名;
+
+# 创建数据库时指定字符集和校对规则
+CREATE DATABASE IF NOT EXISTS 数据库名
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+# 修改数据库
+ALTER DATABASE 数据库名
+DEFAULT CHARACTER SET gb2312
+DEFAULT COLLATE gb2312_chinese_ci;
+
+# 查看数据库定义
+SHOW CREATE DATABASE 数据库名;
+
+# 重命名数据库
+rename database 旧库名 TO 新库名;
 
 # 删除数据库
 drop database 数据库名;
 drop database if exists 数据库名;
 
 # 选择要操作的数据库
-use database_name;
+use 数据库名;
 
 # 查看当前选中的数据库
 select database();
+```
 
+**表操作：**
+
+创建表的语法格式：
+
+```sql
+CREATE TABLE table_name (column_name column_type);
+```
+
+示例：
+
+```
+CREATE TABLE IF NOT EXISTS `test`(
+   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   `name` VARCHAR(100) NOT NULL COMMENT '名字',
+   `age` TINYINT NOT NULL COMMENT '年龄',
+   `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态',
+   `add_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+   UNIQUE KEY `idx_name` (`name`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生信息表';
+```
+
+其他表操作：
+
+```sql
 # 查看表结构
 desc 表名;
 describe 表名;
 show columns from 表名;
+
+# 查看表信息
+select table_name, table_type, engine, version, table_comment
+from information_schema.tables
+where table_schema='database_name' and table_name='table_name';
+
+# 查看表字段信息
+select table_name, column_name, data_type, is_nullable, column_default, column_comment
+from information_schema.columns
+where table_schema='database_name' and table_name='table_name';
 
 # 清空表
 delete from 表名;       # 自增 id 不会从 1 开始
@@ -365,27 +475,77 @@ rename table 旧表 TO 新表
 # 修改表字段属性
 alter table 表名 modify 字段名称 字段类型 [是否允许非空] comment '字段注释';
 
-# 改变表字段名称
+# 改变表字段属性（与 modify 类似，modify 用于微小改动，而 change 主要用于幅度较大的改动）
 alter table 表名 change 字段原名称 字段新名称 字段类型 [是否允许非空] comment '字段注释';
 
 # 添加字段
 alter table 表名 add 字段名称 字段类型 [是否允许非空] comment '字段注释';
 
-# 删除字段：
+# 删除字段
 alter table 表名 drop column 字段名称;
+
+# 优化表（会锁表）
+optimize table 表名
+```
+
+**复制数据库：**
+
+先创建一个新的数据库：
+
+```
+create database newdb;
+```
+
+然后使用 mysqldump 命令工具导出 SQL 语句，再导入新的库
+
+```
+mysqldump -h 127.0.0.1 -u root olddb | mysql -h 127.0.0.1 -u root newdb
+```
+
+**备份数据库：**
+
+一般用 mysqldump 把数据库备份到文件中。示例：
+
+```shell
+mysqldump -uroot -h127.0.0.1 -P3306 -p \
+    --master-data=2 \
+    --single-transaction \
+    --routines \
+    --triggers \
+    --events \
+	database [tables] > backup.sql
+```
+
+参数说明：
+
+```
+--single-transaction
+    指定备份是在一个事务中完成，可以支持 innodb 存储引擎热备功能，对 innodb 可以不锁表进行热备，对于非 innodb 热备进行锁表
+
+--triggers
+    备份触发器
+
+--routines
+    备份存储过程和自定义函数
+
+--events
+    备份事件
+
+--master-data
+    该选项将 binlog 的位置和文件名追加到输出文件中。如果为 1，将会输出 CHANGE MASTER 命令；如果为 2，输出的 CHANGE  MASTER 命令前添加注释信息。该选项将打开 `--lock-all-tables` 选项，除非 `--single-transaction` 也被指定（在这种情况下，全局读锁在开始导出时获得很短的时间）。该选项自动关闭 `--lock-tables` 选项。
 ```
 
 **其他操作：**
 
-```
+```sql
 # 查看 mysql 版本
 status;  # 与 \s; 等价
 select version();
 
 # 同时查看当前时间，用户名，数据库版本
-select now(), user(), version()
+select now(), user(), version();
 
-# 查看当前连接的ID
+# 查看当前连接的 ID
 select connection_id();
 ```
 
@@ -397,7 +557,7 @@ select connection_id();
 
 二进制日志的相关操作：
 
-```
+```sql
 # 查看 binlog 相关配置
 show variables like '%log_bin%';
 
@@ -425,7 +585,7 @@ MySQL 可以使用 `show processlist` 来显示用户正在运行的线程，也
 
 实际上 show processlist 显示的信息都是来自系统库 `information_schema` 中的 `processlist` 表。所以使用下面的查询语句可以获得相同的结果：
 
-```
+```sql
 select * from information_schema.processlist
 ```
 
@@ -479,7 +639,7 @@ select * from information_schema.processlist
 
 要生成测试数据可以使用 **存储过程**。存储过程（Stored Procedure）是一组为了完成特定功能的 SQL 语句集通常的 SQL 语句在执行时需要要先编译，而存储过程是经编译后存储在数据库中，通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行。其语法格式：
 
-```
+```sql
 DELIMITER $$
 CREATE PROCEDURE procedure_name(parameter_list)
 BEGIN
@@ -492,7 +652,7 @@ DELIMITER ;
 
 使用存储过程生成测试数据示例：
 
-```
+```sql
 USE `test`;
 
 CREATE TABLE IF NOT EXISTS `t_user` (
@@ -538,6 +698,26 @@ DROP PROCEDURE insert_test_data;
 ```
 
 也可以通过一些 Web 工具生成测试数据，如：[http://www.generatedata.com](http://www.generatedata.com)
+
+## 命令行客户端
+
+MySQL 提供了命令行客户端 `mysql` 命令也操作数据库，其常用参数如下：
+
+```
+-h, --host=name               指定数据库主机地址
+-P, --port=#                  指定数据库端口
+-u, --user=name               数据库用户名
+-p, --password[=name]         数据库密码
+-D, --database=name           指定数据库
+-A, --no-auto-rehash          不预读数据库信息
+-B, --batch                   不使用历史文件，禁用交互（即不支持自动补全）
+--default-character-set=name  设置数据库的默认字符集
+--column-type-info            结果集返回时，同时显示字段的类型等相关信息
+-C, --compress                在客户端和服务器端传递信息时使用压缩
+-e, --execute=name            直接执行 SQL 语句
+-N, --skip-column-names       不显示列信息
+--prompt=format_str           指定提示符，默认为 mysql>
+```
 
 ## 实用脚本
 

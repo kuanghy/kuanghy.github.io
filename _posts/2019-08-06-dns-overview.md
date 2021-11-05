@@ -11,7 +11,7 @@ tags: DNS
 
 那么，**为什么需要 DNS 解析呢？** 因为目前的大部分网络通信都是基于网络层 IP 协议的，所以要向与远程的机器通信，必须知道其 IP 地址。域名的出现是为了解决 IP 地址难以记忆的问题，而实际使用域名时，还是需要将域名转化为 IP 地址。
 
-DNS 系统采用树状结构进行组织，以 blog.konghy.cn 为例，cn 为顶级域名，konghy 为二级域名，blog 为三级域名。而通常说域名的时候都把名字带上，如说 konghy.cn 是顶级域名，blog.konghy.cn 是二级域名，xxx.blog.konghy.cn 则是三级域名。其实真正的网址在配置中应该是 blog.konghy.cn.（最后有一点），一般在使用时省略了最后的点，而这也已经成为了一种习惯，最后的这个点就是 **根域**。
+DNS 系统采用树状结构进行组织，以 blog.konghy.cn 为例，cn 为 **顶级域名**，konghy 为 **二级域名**，blog 为 **三级域名**。而通常说域名的时候都把名字带上，如说 konghy.cn 是顶级域名，blog.konghy.cn 是二级域名，xxx.blog.konghy.cn 则是三级域名。其实真正的网址在配置中应该是 blog.konghy.cn.（最后有一点），一般在使用时省略了最后的点，而这也已经成为了一种习惯，最后的这个点就是 **根域**。
 
 ## DNS 服务器
 
@@ -67,9 +67,15 @@ DNS 根据域名的层级，进行分级查询。所谓分级查询，就是从�
 
 本地域名服务器把返回的结果保存到缓存，以备下一次使用，同时将该结果返回，于是并可通过这个 IP 地址与 web 服务器建立通信连接。
 
-## 域名解析方式
+如果抛开网络中各节点对 DNS 的缓存，那么 DNS 的查询过程一般只包含三个步骤：
 
-域名解析记录主要分为 A 记录、CNAME 记录、MX 记录、NS 记录和 TXT 记录：
+- 从 根域名服务器 查到 顶级域名服务器 的 NS 记录和 A 记录（IP地址）
+- 从 顶级域名服务器 查到 次级（二级）域名服务器 的 NS 记录和 A 记录（IP地址）
+- 从 次级域名服务器 查出 主机名 的IP地址
+
+## 域名记录类型
+
+域名解析记录主要分为 A 记录、CNAME 记录、MX 记录、NS 记录和 TXT 记录等几种类型：
 
 - **A 记录**
 
@@ -307,7 +313,7 @@ shared          hosts       yes
 max-db-size     hosts       33554432
 ```
 
-如果需要清除响应缓存，可以使用如下命令：
+如果需要清除相应缓存，可以使用如下命令：
 
 ```
 nscd -i passwd
@@ -319,6 +325,18 @@ nscd -i hosts
 
 ```
 service nscd restart
+```
+
+在 Mac 上，如果是 OSX 12 及以后的版本，可以使用如下命令清除 DNS 缓存：
+
+```
+sudo killall -HUP mDNSResponder; sudo killall mDNSResponderHelper; sudo dscacheutil -flushcache
+```
+
+在 Windows 系统上清除 DNS 缓存：
+
+```
+ipconfig /flushdns
 ```
 
 ## 参考资料

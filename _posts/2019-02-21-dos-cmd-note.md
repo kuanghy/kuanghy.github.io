@@ -245,12 +245,32 @@ set PATH=%PATH%;d:\xxx
 
 【NOTE】：以命令行方式对环境变量的操作只对当前窗口的应用有效
 
-### 扫描局域网IP
+### 扫描局域网机器
 
 使用 `arp` 可以扫描到同一 WLAN 下的所有主机的 IP 及其 MAC。ARP 是一个重要的 TCP/IP 协议，并且用于确定对应 IP 地址的网卡物理地址。要扫描局域网上的所有 IP，可以使用如下命令：
 
 ```
-arp -a
+C:\Users\Huoty> arp -a
+
+接口: 192.168.1.118 --- 0xd
+  Internet 地址         物理地址              类型
+  192.168.1.1           58-ef-68-b7-17-00     动态
+  192.168.1.2           b0-95-8e-14-92-27     动态
+  192.168.1.102         00-28-f8-3e-09-db     动态
+  192.168.1.137         f0-18-98-64-84-e4     动态
+  192.168.1.139         e8-b1-fc-5e-92-aa     动态
+  192.168.1.148         ac-e0-10-3e-41-8f     动态
+  192.168.1.149         a4-5e-60-cb-c7-69     动态
+```
+
+也可以安装 [nbtscan](www.unixwiz.net/tools/nbtscan.html) 工具，其可列出主机名:
+
+```
+C:\Users\Huoty>nbtscan 192.168.1.1/24
+192.168.1.160   WORKGROUP\WINDOWS-0UST755       SHARING
+192.168.1.189   WORKGROUP\DESKTOP-DBRPHJ4       SHARING
+192.168.1.215   WORKGROUP\LENOVO-E450C          SHARING
+192.168.1.207   WORKGROUP\HP                    SHARING
 ```
 
 ### 域名 DNS 解析

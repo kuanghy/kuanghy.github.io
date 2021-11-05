@@ -99,7 +99,7 @@ for i in myRange:
 
 ### 可迭代对象和迭代器对象
 
-可迭代对象即具有 \_\_iter\_\_() 方法的对象，该方法可获取其迭代器对象。迭代器对象即具有 `next()` 方法的对象。也就是说，一个实现了 \_\_iter__() 的对象是可迭代的，一个实现了 next() 方法的对象则是迭代器。可迭代对象也可以是迭代器对象，如文件对象。此时可迭代对象自己有 next() 方法，而其 \_\_iter__() 方法返回的就是它自己。对于许多内置对象及其派生对象，如 list、dict 等，由于需要支持多次打开迭代器，因此自己并非迭代器对象，需要用 \_\_iter__() 方法返回其迭代器对象，并用迭代器对象来访问其它元素。
+可迭代对象即具有 `__iter__()` 方法的对象，该方法可获取其迭代器对象。迭代器对象即具有 `next()` 方法的对象。也就是说，一个实现了 `__iter__()` 的对象是可迭代的，一个实现了 `next()` 方法的对象则是迭代器。可迭代对象也可以是迭代器对象，如文件对象。此时可迭代对象自己有 next() 方法，而其 \_\_iter\_\_() 方法返回的就是它自己。对于许多内置对象及其派生对象，如 list、dict 等，由于需要支持多次打开迭代器，因此自己并非迭代器对象，需要用 iter() 方法返回其迭代器对象，并用迭代器对象来访问其它元素。
 
 以上例子中的 myRange 这个对象就是一个可迭代对象，同时它本身也是一个迭代器对象。对于一个可迭代对象，如果它本身又是一个迭代器对象，就会有这样一个问题，其没有办法支持多次迭代。如下所示：
 
@@ -203,19 +203,7 @@ print "------------"
 print zrange.next()
 print "------------"
 
-print zrange.next()def flatten(nested):
-    result = []
-    try:
-        # 不要迭代类似字符串的对象
-        try: nested + ""
-        except TypeError: pass
-        else: raise TypeError
-        for sublist in nested:
-            for element in flatten(sublist):
-                result.append(element)
-    except TypeError:
-        result.append(nested)
-    return result
+print zrange.next()
 print "------------"
 ```
 
@@ -245,10 +233,11 @@ StopIteration
 
 通过结果可以看到：
 
-- 当调用生成器函数的时候，函数只是返回了一个生成器对象，并没有 执行。
-- 当next()方法第一次被调用的时候，生成器函数才开始执行，执行到yield语句处停止
-- next()方法的返回值就是yield语句处的参数（yielded value）
-- 当继续调用next()方法的时候，函数将接着上一次停止的yield语句处继续执行，并到下一个yield处停止；如果后面没有yield就抛出StopIteration异常
+- 当调用生成器函数的时候，函数只是返回了一个生成器对象，并没有 执行；
+- 当 next() 方法第一次被调用的时候，生成器函数才开始执行，执行到 yield 语句处停止
+- next() 方法的返回值就是 yield 语句处的参数（yielded value）
+- 当继续调用 next() 方法的时候，函数将接着上一次停止的 yield 语句处继续执行，并到下一个 yield 处停止；
+- 最后，如果后面没有 yield 语句时，就抛出 StopIteration 异常
 
 ### 递归生成器
 
@@ -262,7 +251,7 @@ def permutations(li):
         yield li
     else:
         for i in range(len(li)):
-            li[0], li[i] = li[i], li[0] #
+            li[0], li[i] = li[i], li[0]
             for item in permutations(li[1:]):
                 yield [li[0]] + item
 
@@ -278,9 +267,12 @@ for item in permutations(range(3)):
 def flatten(nested):
     try:
         # 不要迭代类似于字符串的对象
-        try: nested + ""
-        except TypeError: pass
-        else: raise TypeError
+        try:
+            nested + ""
+        except TypeError:
+            pass
+        else:
+            raise TypeError
         for sublist in nested:
             for element in flatten(sublist):
                 yield element
@@ -293,7 +285,8 @@ print list(flatten([[[1], 2], 3, 4, [5, [6, 7]], 8]))
 这里需要注意的是，不应该在 flatten 函数中对类似于字符串的对象进行迭代，这样会导致无穷递归，因为一个字符串的第一个元素是另一个长度为1的字符串，而长度为一个字符串的第一个元素就是字符串本身。
 
 ### 通用生成器
-生成器可以人为是由两部分组成：生成器的函数和生成器的迭代器。生成器的函数是用 def 语句定义的，包含 yield 部分，生成器的迭代器是这个函数返回的部分。按照一种不是很准确的说法，两个实体经常被当做一个，合起来叫做生成器。如下实例所示：
+
+生成器可以认为是由两部分组成：生成器的函数和生成器的迭代器。生成器的函数是用 def 语句定义的，包含 yield 部分；生成器的迭代器是这个函数返回的部分。按照一种不是很准确的说法，两个实体经常被当做一个，合起来叫做生成器。如下实例所示：
 
 ```python
 def simple_generator():
@@ -305,12 +298,13 @@ print simple_generator()
 
 运行结果：
 
-<div class="hblock"><pre>
-&lt;function simple_generator at 0xb743d79c>
-&lt;generator object simple_generator at 0xb71c7be4>
-</pre></div>
+```
+<function simple_generator at 0xb743d79c>
+<generator object simple_generator at 0xb71c7be4>
+```
 
 ### 生成器方法
+
 - send(value)
 
 外部作用域访问生成器的 send 方法，就像访问 next() 方法一样。next()方法可以恢复生成器状态并继续执行，其实 send() 是除 next() 外另一个恢复生成器的方法。Python 2.5 中，yield 语句变成了 yield 表达式，也就是说 yield 可以有一个值，而这个值就是send()方法的参数，所以 send(None) 和 next() 是等效的。同样，next()和send()的返回值都是 yield语 句处的参数（yielded value）。使用 send() 方法只有在生成器挂起之后才有意义，如果真想对刚刚启动的生成器使用 send 方法，则可以将 None 作为参数进行调用。也就是说， **第一次调用时，要使用 next() 语句或 send(None)，因为没有 yield 语句来接收这个值**。
@@ -321,7 +315,7 @@ print simple_generator()
 
 - close()
 
-用于停止生成器，调用它时，会在 yield 运行出引发一个 GeneratorExit 异常。
+用于停止生成器，调用它时，会在 yield 运行处引发一个 GeneratorExit 异常。
 
 使用示例：
 
@@ -339,14 +333,31 @@ print zrange.next()
 print zrange.next()
 print zrange.send("hello")
 print zrange.next()
-#print zrange.next()
+# print zrange.next()
 
 zrange.close()
 
 print zrange.send("world")
 ```
 
+运行结果：
+
+```
+0
+val is None
+1
+val is hello
+2
+val is None
+3
+Traceback (most recent call last):
+  File "yieldsend.py", line 32, in <module>
+    print zrange.send("world")
+StopIteration
+```
+
 ### 模拟生成器
+
 在旧的 Python 版本中并不支持生成器，那么我们可以用普通的函数来模拟生成器。如下所示：
 
 ```python
@@ -354,9 +365,12 @@ def flatten(nested):
     result = []
     try:
         # 不要迭代类似字符串的对象
-        try: nested + ""
-        except TypeError: pass
-        else: raise TypeError
+        try:
+            nested + ""
+        except TypeError:
+            pass
+        else:
+            raise TypeError
         for sublist in nested:
             for element in flatten(sublist):
                 result.append(element)
@@ -370,11 +384,12 @@ def flatten(nested):
 ## 列表解析和生成器表达式
 
 ### 列表解析
+
 **列表解析**( List comprehensions, 或缩略为 list comps ) 来自函数式编程语言 Haskell . 它是一个非常有用, 简单, 而且灵活的工具, 可以用来动态地创建列表。其语法结构为：
 
 > [expr for iter_var in iterable]
 
-这个语句的核心是 for 循环, 它迭代 iterable 对象的所有条目. 前边的 expr 应用于序列的每个成员, 最后的结果值是该表达式产生的列表。 迭代变量并不需要是表达式的一部分。例如用 lambda 函数计算序列成员的平方的表达是为：
+这个语句的核心是 for 循环, 它迭代 iterable 对象的所有条目. 前边的 expr 应用于序列的每个成员, 最后的结果值是该表达式产生的列表。 迭代变量并不需要是表达式的一部分。例如用 lambda 函数计算序列成员的平方的表达式为：
 
 > map(lambda x: x ** 2, range(6))
 
@@ -386,15 +401,15 @@ def flatten(nested):
 
 > [expr for iter_var in iterable if cond_expr]
 
-这个语法在迭代时会过滤/捕获满足条件表达式 cond_expr 的序列成员。例如挑选出序列中的奇数可以用下边的方法:
+这个语法在迭代时会 过滤/捕获 满足条件表达式 cond_expr 的序列成员。例如挑选出序列中的奇数可以用下边的方法:
 
 > [x for x in seq if x % 2]
 
 列表解析还有很多巧妙的应用：
 
-**迭代一个有三行五列的矩阵:**
+**迭代一个有三行五列的矩阵:** （需要用到嵌套的 for 语句）
 
-> [(x+1,y+1) for x in range(3) for y in range(5)]
+> [(x+1, y+1) for x in range(3) for y in range(5)]
 
 **计算出所有非空白字符的数目:**
 
@@ -402,14 +417,13 @@ def flatten(nested):
 
 > len([word for line in f for word in line.split()])
 
-
 ### 生成器表达式
+
 生成器表达式是列表解析的一个扩展。列表解析的一个不足就是必要生成所有的数据, 用以创建整个列表。这可能对有大量数据的迭代器有负面效应。生成器表达式通过结合列表解析和生成器解决了这个问题。生成器表达式在 Python 2.4 被引入, 它与列表解析非常相似，而且它们的基本语法基本相同; 不过它并不真正创建数字列表, 而是**返回一个生成器**，这个生成器在每次计算出一个条目后，把这个条目“产生”(yield)出来。生成器表达式使用了"延迟计算"(lazy evaluation), 所以它在使用内存上更有效。生成器表达式语法:
 
 > (expr for iter_var in iterable if cond_expr)
 
-生成器并不会让列表解析废弃, 它只是一个内存使用更友好的结构, 基于此, 有很多使用生
-成器地方，如下所示：
+生成器并不会让列表解析废弃, 它只是一个内存使用更友好的结构, 基于此, 有很多使用生成器的地方，如下所示：
 
 **快速地计算文件大小:**
 
@@ -442,10 +456,7 @@ def longest(filename):
     glines = (x.strip() for x in open(filename))
     return max([len(l) for l in glines])
 
-# Script starts from here
-
-if __name__ == "__main__":
-    print longest("/etc/hosts")
+print longest("/etc/hosts")
 ```
 
 这个例子摘自 《Python核心编程》 中生成器表达式一节，作者在原书中只用了一行代码来实现这个功能，即：
@@ -454,10 +465,10 @@ if __name__ == "__main__":
 
 这行代码会报出如下错误：
 
-<div class="hblock"><pre>
+```
 TypeError: object of type 'generator' has no len()
-</pre></div>
+```
 
-也就是说生成器没有 len() 方法，所以这样并不可行，但是用列表解析则可以用一行实现：
+也就是说生成器没有 len() 方法，所以这样并不可行，但是用列表解析则可以一行实现：
 
 > return max([len(x.strip()) for x in open("/etc/motd")])

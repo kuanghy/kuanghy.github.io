@@ -16,11 +16,11 @@ tags: python
 - [decorator](https://github.com/micheles/decorator) 简化 decorator 的使用难度而开发的模块
 - [isort](https://github.com/timothycrosley/isort) 可自动对 Python 的 import 语句进行排序和分段。可将大量的 import 结构转成非常适合阅读的排版
 - [interruptingcow](https://pypi.python.org/pypi/interruptingcow) 一个 watchdog，用于中断长时间运行的代码，也就是给代码加上 timeout 功能
+- [retrying](https://github.com/rholder/retrying) 一个用于实现重试机制的库
+- [tenacity](https://github.com/jd/tenacity) 一个通用的 retry 库，能为任何任务加入重试的功能
 - [py](https://github.com/pytest-dev/py) 一个开发支持工具
 - [faker](https://github.com/joke2k/faker) 一个假数据生成库
 - [pipenv](https://github.com/pypa/pipenv) Python Development Workflow for Humans,相当于是环境管理和包管理二合一，由 Kenneth Reitz （Requests 的作者 ）编写，现在移交给 Python 官方来维护，提供比 pip 体验更好的开发包管理
-- [Eel](https://github.com/ChrisKnott/Eel) 一个小型库，用于制作简单的类似 [Electron](https://electronjs.org/) 的离线 HTML/JS GUI 应用程序
-- [Pywebview](https://github.com/r0x0r/pywebview) 类似于 Electron 的库, 使用 Web 技术和 Python 相结合来创建GUI应用程序
 - [bidict](https://github.com/jab/bidict) 双向查询字典，可以通过 value 查询 key
 - [tablib](https://github.com/kennethreitz/tablib) 把数据导出为 Excel、JSON、CSV 等格式
 - [glom](https://github.com/mahmoud/glom) 处理嵌套数据结构
@@ -30,6 +30,9 @@ tags: python
 - [pyperclip](https://github.com/asweigart/pyperclip) 向计算机的剪贴板发送或接收文本
 - [py-setproctitle](https://github.com/dvarrazzo/py-setproctitle) 一个可以改变进程名称的库
 - [hashids](https://github.com/davidaurelio/hashids-python) 数字 ID 混淆库，可将 ID 转成加密字段再还原
+- [vimdecrypt](https://github.com/nlitsme/vimdecrypt) Vim 加密文件解码工具
+- [setproctitle](https://github.com/dvarrazzo/py-setproctitle) 设置进程名，即改变 ps, top 等工具显示的进程名称
+- [dulwich](https://github.com/dulwich/dulwich) Git 的纯 Python 实现
 
 
 ## 日志处理
@@ -37,6 +40,7 @@ tags: python
 - [logging](https://docs.python.org/2/howto/logging.html) 标准库日志系统
 - [logbook](https://pythonhosted.org/Logbook/) 一个功能完备强大的日志库
 - [Structlog](https://structlog.readthedocs.io/en/stable/) 是一个先进的日志处理器。他可以和任何现存的日志记录工具相集成，并包装了 Python 标准库。你可以构建定制的记录工具，根据你的需要增加上下文，保证你的日志一致、可读
+- [sentry](https://github.com/getsentry/sentry) 一个开源的实时错误追踪系统,可以帮助开发者实时监控并修复异常问题
 
 
 ## 系统工具
@@ -51,6 +55,10 @@ tags: python
 
 - [yagmail](https://github.com/kootenpv/yagmail)
 - [mailer](https://pypi.python.org/pypi/mailer)
+- [imapclient](https://github.com/mjs/imapclient)
+- [imbox](https://github.com/martinrusev/imbox)
+- [imap_tools](https://github.com/ikvk/imap_tools)
+- [outlook](https://github.com/awangga/outlook)
 
 
 ## 数据库
@@ -85,11 +93,32 @@ tags: python
 - [icecream](https://github.com/gruns/icecream) 一款专用于 print 调试的工具
 
 
+## 命令行参数解析
+
+- [Docopt](http://docopt.org/) 忘了 optparse 和 argparse 吧，使用 docstring 来构建优雅的、高可读性、复杂（如果你有这个需要）的命令行界面。在我看来这是2013年诞生的最好的库
+- [Click](http://click.pocoo.org) 用于快速创建命令行工具
+- [clize](http://clize.readthedocs.io/en/stable/) 利用装饰器将函数转换成命令行解析器
+- [python-fire](https://github.com/google/python-fire) Google 开源的一个可从任何 Python 代码自动生成命令行接口（CLI）的库,是开发和调试非常有用的工具，只需将想要在命令行显示的功能写为函数/模块/类，就可以在命令行模式下调用
+- [Plumbum](https://github.com/tomerfiliba/plumbum) 命令行工具包
+
+
 ## 命令行界面库
 
 - [curses](https://docs.python.org/3/library/curses.html) 标准库内置模块，是原生的一个封装。Windows 平台不支持，官方推荐了 [the Console module](http://effbot.org/zone/console-index.htm) 和 [UniCurses](https://pypi.org/project/UniCurses/)
 - [Urwid](http://urwid.org/) 一个提供 Event Loop，Widget Classes 的控制台界面库
 - [Blessings](https://github.com/erikrose/blessings) 对 curses 的一个封装，使其更易用，所有函数调用都封装在了 Terminal 类中
+
+
+## GUI 工具
+
+- [Tkinter](https://docs.python.org/3/library/tkinter.html)
+- [PyQt](https://wiki.python.org/moin/PyQt)
+- [wxPython](https://www.wxpython.org/)
+- [PyGame](https://www.pygame.org/) 是一组用来开发游戏软件的 Python 程序模块，基于 SDL 库的基础上开发，可创建功能丰富的游戏和多媒体程序
+- [Eel](https://github.com/ChrisKnott/Eel) 一个小型库，用于制作简单的类似 [Electron](https://electronjs.org/) 的离线 HTML/JS GUI 应用程序
+- [Pywebview](https://github.com/r0x0r/pywebview) 类似于 Electron 的库, 使用 Web 技术和 Python 相结合来创建GUI应用程序
+- [PyWinauto](https://pywinauto.readthedocs.io/en/latest/) 一组用于自动化 Microsoft Windows GUI 的模块，其能够将鼠标和键盘操作发送到窗口对话框和控件
+- [Streamlit](https://streamlit.io) 快速数据可视化界面工具
 
 
 ## 算法与设计模式
@@ -102,27 +131,18 @@ tags: python
 
 ## 并行计算、分布式、任务调度
 
+- [sched]() 标准库模块，用于定时执行任务
+- [schedule](https://github.com/dbader/schedule) 一个简单的作业调度工具，类似 cron 程序
+- [APScheduler](http://apscheduler.readthedocs.io/en/latest/) 任务调度模块，一个 Python 定时任务框架
 - [Celery](http://www.celeryproject.org/) 一个非常成熟的Python分布式框架，可以在分布式的系统中，异步的执行任务，并提供有效的管理和调度功能。
 - [SCOOP](https://github.com/soravux/scoop/) 提供简单易用的分布式调用接口，使用Future接口来进行并发。
 - [Dispy](https://github.com/pgiri/dispy) 相比起 Celery 和 SCOOP，Dispy 提供更为轻量级的分布式并行服务
 - [PP](http://www.parallelpython.com/) （Parallel Python）是另外一个轻量级的 Python 并行服务
 - [Asyncoro](http://asyncoro.sourceforge.net/) 一个利用 Generator 实现分布式并发的 Python 框架
-- [schedule](https://github.com/dbader/schedule) 一个简单的作业调度工具
-- [APScheduler](http://apscheduler.readthedocs.io/en/latest/) 任务调度模块，一个 Python 定时任务框架
 - [mpi4py](http://pythonhosted.org/mpi4py/) 一个构建在MPI之上的Python库，主要使用Cython编写
 - [threadpool](https://chrisarndt.de/projects/threadpool/) 一个比较老的线程池库，不太建议使用
 - [pyee](https://pyee.readthedocs.io) 一个 [node.js’s EventEmitter](https://nodejs.org/api/events.html) 的 Python 粗略实现
 - [Blinker](https://pythonhosted.org/blinker/) 强大的进程内信号库，既支持简单的对象到对象通信，也支持针对多个对象进行组播
-
-
-## 命令行参数解析
-
-- [Docopt](http://docopt.org/) 忘了 optparse 和 argparse 吧，使用 docstring 来构建优雅的、高可读性、复杂（如果你有这个需要）的命令行界面。在我看来这是2013年诞生的最好的库
-- [Click](http://click.pocoo.org) 用于快速创建命令行工具
-- [clize](http://clize.readthedocs.io/en/stable/) 利用装饰器将函数转换成命令行解析器
-- [python-fire](https://github.com/google/python-fire) Google 开源的一个可从任何 Python 代码自动生成命令行接口（CLI）的库,是开发和调试非常有用的工具，只需将想要在命令行显示的功能写为函数/模块/类，就可以在命令行模式下调用
-- [Plumbum](https://github.com/tomerfiliba/plumbum) 命令行工具包
-
 
 ## HTTP
 
@@ -145,16 +165,19 @@ tags: python
 
 ## Web 框架
 
-- [Bottle](http://bottlepy.org/docs/dev/) 是一个快速、简单、轻量的WSGI微型web框架。利用Bottle构建小型站点和API的时间以秒计算。这个框架只有一个py文件，你可以把它放进任何目录
 - [Django](https://www.djangoproject.com/) 以快速开发和结构整洁著称的高层框架。这个开源免费的框架完全由 Python 编写并且遵循 MVC 的模型
-- [CherryPy](http://cherrypy.org/) 是HTTP协议的一个封装，这样其他软件可以使用它来处理HTTP协议的细节。它是一个低层的框架，它只提供 RFC 2616 定义的功能。接口非常 Pythonic，让 Python 开发者不会感到突兀
 - [Flask](http://flask.pocoo.org/) 基于 WerkzeugWSGI 工具箱和 jinja 模板，适合开发轻量级的 Web 应用，有很多第三方扩展
+- [tornado ](http://www.tornadoweb.org/en/stable/) 一个强大的、可扩展的异步非阻塞 Web 服务器，同时也是一个轻量级 Web 框架
+- [Sanic](https://github.com/channelcat/sanic) 一个与 Flask 类似，基于 uvloop 的 web 框架，它能让 Python 更快速
+- [Quart](https://gitlab.com/pgjones/quart/) 与 Flask 相似，而且与 Flask API 兼容，并添加了添加异步、WebSocket和 HTTP 2 支持
+- [FastAPI](https://github.com/tiangolo/fastapi) 一个高性能 Web 框架，用于构建 API，非常高的性能
+- [Vibora](https://github.com/vibora-io/vibora) 异步快速的 HTTP 客户端/服务器框架
+- [Bottle](http://bottlepy.org/docs/dev/) 是一个快速、简单、轻量的WSGI微型web框架。利用Bottle构建小型站点和API的时间以秒计算。这个框架只有一个py文件，你可以把它放进任何目录
+- [CherryPy](http://cherrypy.org/) 是HTTP协议的一个封装，这样其他软件可以使用它来处理HTTP协议的细节。它是一个低层的框架，它只提供 RFC 2616 定义的功能。接口非常 Pythonic，让 Python 开发者不会感到突兀
 - [Pyramid](http://docs.pylonsproject.org/projects/pyramid/en/latest/) 包含了一些 Python/Perl/Ruby 独有的特性，拥有不依赖平台的 MVC 架构，和最快的启动开发的能力。以执行效率和快速开发的能力著称
 - [TurboGear](http://turbogears.org/) 建立在其他框架基础上的框架，把其他框架优秀的部分集成到一起。由于每个框架都有一些部分做得不好，TurboGear试图解决这个问题．它允许你从一个单文件服务开始，逐步扩展为一个全栈服务
-- [tornado ](http://www.tornadoweb.org/en/stable/) 一个强大的、可扩展的异步非阻塞 Web 服务器，同时也是一个轻量级 Web 框架
 - [web.py](http://webpy.org/) 一款轻量级的 Python web 开发框架，简单、高效
 - [web2py](http://www.web2py.com/) 一种免费的、开源的 web 开发框架，用于敏捷地开发安全的、数据库驱动的 web 应用
-- [Sanic](https://github.com/channelcat/sanic) 一个与 Flask 类似，基于 uvloop 的 web 框架，它能让 Python 更快速
 - [hug](https://github.com/timothycrosley/hug) 旨在简化 Python RESET APIs 的开发，其本身并非一个网络框架，构建在 Falcon 的高性能 HTTP 库之上，意味着可以使用任何 wsgi 兼容的服务器(例如 gunicorn)将其部署到生产环境中
 - [Connexion](https://github.com/zalando/connexion) 一个基于Flask实现的一个框架，它基于以YAML格式描述的API的OpenAPI 2.0规范（以前称为Swagger Spec）自动处理HTTP请求
 
@@ -173,6 +196,7 @@ tags: python
 - [selenium](http://selenium-python.readthedocs.io/) 一个调用浏览器的 Driver，通过这个库你可以直接调用浏览器完成某些操作。关于其使用，有一个不错的教程：[Free Selenium Tutorials](https://www.guru99.com/selenium-tutorial.html)
 - [cola](https://github.com/chineking/cola) 一个分布式爬虫框架
 - [pyspider](http://docs.pyspider.org/en/latest/) 国人编写的强大的网络爬虫系统并带有强大的WebUI。分布式架构，支持多种数据库后端，支持脚本编辑器，任务监视器，项目管理器以及结果查看器
+- [RoboBrowser](https://github.com/jmcarp/robobrowser) 纯 Python 实现的浏览器，可以获取页面，单击链接和按钮，以及填写并提交表单等
 
 
 ## 消息队列
@@ -205,6 +229,7 @@ tags: python
 - [Chronyk](https://github.com/KoffeinFlummi/Chronyk) 用于解析手写格式的时间和日期
 - [delorean](https://github.com/myusuf3/delorean) 一个很方便的日期时间库，可以让人更简单省心的获取时间，不必受困于时间模块中的各种问题
 
+
 ## Excel
 
 - [OpenPyXL](https://openpyxl.readthedocs.io/en/default/)
@@ -224,6 +249,8 @@ tags: python
 - [pandas](http://pandas.pydata.org/)
 - [PyTables](http://www.pytables.org/)  提供了一些用于结构化数组的高级查询功能，而且还能添加列索引以提升查询速度，这跟关系型数据库所提供的表索引功能非常类似。
 - [h5py](http://docs.h5py.org/)  将数据存储为高效且可压缩的HDF5格式
+- [umexpr](https://github.com/pydata/numexpr) 基于 NumPy 的快速数值表达式求值库
+- [dask](https://dask.org/) 一个并行计算库，能在集群中进行分布式计算，能以一种更方便简洁的方式处理大数据量
 - [fastcache](https://github.com/pbrady/fastcache) 用 C 实现的，更快的，兼容 Python2 和 Python3 的缓存模块
 - [PrettyPandas](http://prettypandas.readthedocs.io) 用 pandas Style API 来将DataFrames转换成适合展示的表格
 - [bcolz](https://github.com/Blosc/bcolz) 列式存储的数据持久化方案，压缩率高而且查询速度快
@@ -256,6 +283,9 @@ tags: python
 - [pytest](https://docs.pytest.org/) 一个成熟的全功能的 Python 测试框架
 - [mock](https://pypi.python.org/pypi/mock) 用来创建和管理模拟对象，以完成单元测试，在 Python 3.x 中已被集成到 unittest 标准库
 - [Fudge](https://github.com/fudge-py/fudge) 是一个类似于 Java 中的 JMock 的纯 python 的 mock 测试模块，主要功能就是可以伪造对象，替换代码中真实的对象，来完成测试
+- [httmock](https://github.com/patrys/httmock) 基于 Mock 库，更方便于用 requests 的方式来返回接口的值
+- [HTTPretty](https://github.com/gabrielfalcao/HTTPretty) HTTP 请求的 mock 工具
+- [vcrpy](https://github.com/kevin1024/vcrpy) 自动 mock HTTP 交互
 - [HTMLTestRunner](https://pypi.python.org/pypi/HTMLTestRunner) 是 Python 标准库 unittest 单元测试框架的一个扩展，用来生成 HTML 测试报告
 - [Locust](http://locust.io/) 是一个 Python 的性能测试工具，可以通过写 Python 脚本的方式来对 web 接口进行负载测试
 

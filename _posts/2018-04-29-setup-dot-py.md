@@ -51,7 +51,7 @@ Python 库打包分发的关键在于编写 `setup.py` 文件。`setup.py` 文�
 
 from setuptools import setup
 # or
-# from distutils.core import setup  
+# from distutils.core import setup
 
 setup(
         name='demo',     # 包名字
@@ -94,13 +94,15 @@ setup(
 | ext_modules          | 指定扩展模块                                             |
 | scripts              | 指定可执行脚本,安装时脚本会被安装到系统 PATH 路径下      |
 | package_dir          | 指定哪些目录下的文件被映射到哪个源码包                   |
+| entry_points         | 动态发现服务和插件，下面详细讲                           |
+| python_requires      | 指定运行时需要的Python版本                               |
 | requires             | 指定依赖的其他包                                         |
 | provides             | 指定可以为哪些模块提供依赖                               |
 | install_requires     | 安装时需要安装的依赖包                                   |
-| entry_points         | 动态发现服务和插件，下面详细讲                           |
+| extras_require       | 当前包的高级/额外特性需要依赖的分发包                    |
+| tests_require        | 在测试时需要使用的依赖包                                 |
 | setup_requires       | 指定运行 setup.py 文件本身所依赖的包                     |
 | dependency_links     | 指定依赖包的下载地址                                     |
-| extras_require       | 当前包的高级/额外特性需要依赖的分发包                    |
 | zip_safe             | 不压缩包，而是以目录的形式安装                           |
 
 更多参数可见：[https://setuptools.readthedocs.io/en/latest/setuptools.html](https://setuptools.readthedocs.io/en/latest/setuptools.html#metadata)
@@ -157,7 +159,7 @@ setup(
         'console_scripts': [
             'foo=foo.entry:main',
             'bar=foo.entry:main',
-        ],    
+        ],
     }
 )
 ```
@@ -253,15 +255,38 @@ setup(
 
 ```python
 install_requires=[
-    'requests>=1.0',
+    'requests',
     'flask>=1.0'
+    'setuptools==38.2.4',
+    'django>=1.11, !=1.11.1, <=2',
+    'requests[security, socks]>=2.18.4',
 ]
 ```
 
 指定该参数后，在安装包时会自定从 pypi 仓库中下载指定的依赖包安装。
 
-此外，还支持从指定链接下载依赖，即指定 `dependency_links` 参数，如：
+可能包中的某些特殊的、偏门的功能，大多数情况下不会被用到，那么这些功能的依赖，就不适合放在 install_requires 里。这时就可以用 `extras_require` 来指定可选的功能与依赖。如：
 
+```python
+extras_require={
+    'security': ['pyOpenSSL>=0.14', 'cryptography>=1.3.4', 'idna>=2.0.0'],
+    'socks': ['PySocks>=1.5.6, !=1.5.7'],
+}
+```
+
+还可以指定测试时或者执行 setup.py 时的依赖包。如：
+
+```python
+tests_require=[
+    'pytest>=3.3.1',
+    'pytest-cov>=2.5.1',
+],
+setup_requires=[
+    'pytest-runner>=3.0',
+]
+```
+
+此外，还支持从指定链接下载依赖，即指定 `dependency_links` 参数，如：
 
 ```python
 dependency_links = [
@@ -270,6 +295,11 @@ dependency_links = [
 ]
 ```
 
+可以用 `python_requires` 来指定运行时需要的 Python 版本，如包只支持在 Python 3.6 及机上版本运行，则可以指定：
+
+```python
+python_requires='>=3.6'
+```
 
 #### 分类信息
 
@@ -317,6 +347,10 @@ classifiers = [
 
 构建安装时所需的所有内容
 
+- **build_ext:**
+
+构建扩展，如用 C/C++, Cython 等编写的扩展，在调试时通常加 `--inplace` 参数，表示原地编译，即生成的扩展与源文件在同样的位置。
+
 - **sdist:**
 
 构建源码分发包，在 Windows 下为 zip 格式，Linux 下为 tag.gz 格式 。执行 sdist 命令时，默认会被打包的文件：
@@ -338,6 +372,10 @@ README、README.txt、setup.py 和 setup.cfg文件
 - **bdist_egg:**
 
 构建一个 egg 分发包，经常用来替代基于 bdist 生成的模式
+
+- **bdist_wheel:**
+
+构建一个 wheel 分发包，egg 包是过时的，whl 包是新的标准
 
 - **install:**
 
@@ -402,17 +440,38 @@ pip 相对于 easy_install 进行了以下几个方面的改进:
 index-servers = pypi
 
 [pypi]
-username:xxx
-password:xxx
+username = xxx
+password = xxx
 ```
 
 接着注册项目：
 
-> python setup.py register
+```
+python setup.py register
+```
 
 该命令在 PyPi 上注册项目信息，成功注册之后，可以在 PyPi 上看到项目信息。最后构建源码包发布即可：
 
-> python setup.py sdist upload
+```
+# 发布源码包
+python setup.py sdist upload
+
+# 同时发布源码包和 whl 二进制包
+python setup.py sdist bdist_wheel upload
+```
+
+不过用 upload 命令上传包已经过时，官方提供了 twine 工具专门用来与 PyPI 交互。其特点是：
+
+- 验证 HTTPS 连接
+- 上传不需要执行 setup.py
+- 上传已经创建的文件，允许在发布前测试发行版
+- 支持上传任何包装格式
+
+其包含三个子命令 check, register, upload。上传包时，直接用 upload 命令：
+
+```
+python setup.py sdist bdist_wheel && twine upload dist/*
+```
 
 ## 参考资料
 

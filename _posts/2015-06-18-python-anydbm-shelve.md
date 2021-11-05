@@ -16,17 +16,17 @@ shelve模块是anydbm的增强版，它支持在"dict-like"对象中存储任何
 
 ```python
 import shelve
-d = shelve.open(filename) # open, with (g)dbm filename -- no suffix
+d = shelve.open(filename)  # open, with (g)dbm filename -- no suffix
 
 d[key] = data   # store data at key (overwrites old data if
-                            # using an existing key)
+                # using an existing key)
 data = d[key]   # retrieve a COPY of the data at key (raise
-                            # KeyError if no such key) -- NOTE that this
-                            # access returns a *copy* of the entry!
-del d[key]        # delete data stored at key (raises KeyError
-                           # if no such key)
+                # KeyError if no such key) -- NOTE that this
+                # access returns a *copy* of the entry!
+del d[key]      # delete data stored at key (raises KeyError
+                # if no such key)
 flag = d.has_key(key)   # true if the key exists; same as "key in d"
-list = d.keys() # a list of all existing keys (slow!)
+list = d.keys()         # a list of all existing keys (slow!)
 
 d.close()       # close it
 ```

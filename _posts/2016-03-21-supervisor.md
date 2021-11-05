@@ -76,7 +76,7 @@ priority=999
 ; 如果是 true, 当 supervisor 启动时, 程序将会自动启动
 autostart=true
 
-; * 当检测到程序退出时是否自动重启，可知可以为，false，true，unexpected
+; * 当检测到程序退出时是否自动重启，其值可以为，false，true，unexpected
 autorestart=true
 
 ; 程序启动多长时间后才确定为启动成功, 默认 1 秒
@@ -168,13 +168,32 @@ supervisor 的管理和使用只有两个命令：
 
 管理工具 supervisorctl 常用的子命令：
 
+- **help:** 查看子命令帮助
 - **status:**  查看程序状态
 - **stop:**  关闭程序
 - **start:**  启动程序
 - **restart:**  重启程序
 - **reread:**  读取有更新（增加）的配置文件，不会启动新添加的程序
-- **update:**  重启配置文件修改过的程序
+- **update:**  重新读取所有配置文件并重启配置文件修改过的程序
 - **tail:**  查看进程日志
+
+使用 `help` 子命令可以查看所有子命令，以及子命令的帮助信息：
+
+```shell
+$ supervisorctl help
+
+default commands (type help <topic>):
+=====================================
+add    exit      open  reload  restart   start   tail   
+avail  fg        pid   remove  shutdown  status  update
+clear  maintail  quit  reread  signal    stop    version
+
+$ supervisorctl help status
+status <name>		Get status for a single process
+status <gname>:*	Get status for all processes in a group
+status <name> <name>	Get status for multiple named processes
+status			Get all process status info
+```
 
 每次修改配置文件后需进入 supervisorctl，执行 reload， 改动部分才能生效，或者可以重启服务：
 

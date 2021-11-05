@@ -245,7 +245,6 @@ datetime.datetime(1990, 10, 5, 18, 18, 18)
 datetime.datetime(2010, 4, 7, 1, 48, 16, 234000)
 ```
 
-
 #### datetime 的实例方法与属性
 
 datetime类提供的实例方法与属性大部分功能与 date 和 time 类似，这里仅罗列方法名不再赘述：
@@ -264,6 +263,20 @@ datetime类提供的实例方法与属性大部分功能与 date 和 time 类似
 - **datetime.strftime(format)**
 
 datetime 对象同样可以进行比较，或者相减返回一个时间间隔对象，或者日期时间加上一个间隔返回一个新的日期时间对象。
+
+**注：** 在判断类型时，datetime 类型也属于 date 类型。
+
+```python
+>>> import datetime
+>>> isinstance(datetime.date.today(), datetime.date)
+True
+>>> isinstance(datetime.date.today(), datetime.datetime)
+False
+>>> isinstance(datetime.datetime.now(), datetime.datetime)
+True
+>>> isinstance(datetime.datetime.now(), datetime.date)
+True
+```
 
 ## timedelta 类
 

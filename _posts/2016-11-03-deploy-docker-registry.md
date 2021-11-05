@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "部署 Docker Registry 私有镜像仓库"
-keywords: "Docker Registry"
+keywords: "Docker Registry 容器技术"
 description: "Docker 官方提供一个 registry 镜像来让需要的人自己搭建私有仓库"
-category: 容器技术
+category: 计算机科学
 tags: docker registry
 ---
 

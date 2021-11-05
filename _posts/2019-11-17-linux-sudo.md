@@ -23,6 +23,8 @@ $ sudo update-alternatives --config editor
 $ sudo EDITOR=vim visudo
 ```
 
+通过 visudo 命令编辑配置文件，具有语法检查功能。也可以使用 visudo –c 检查语法。配置文件 /etc/sudoers 可以通过 `#include` 或 `#includedir` 包含其他配置文件，如有的系统就默认包含了 `/etc/sudoers.d/` 目录下的配置文件。
+
 sudo 命令的工作流程：
 
 - sudo 会读取和解析 /etc/sudoers 文件，查找调用命令的用户及其权限
@@ -38,7 +40,7 @@ sudo 命令的工作流程：
 USER/GROUP HOST=(USER[:GROUP]) [NOPASSWD:] COMMANDS
 ```
 
-- `USER/GROUP` 表示需要被授权的用户或者组，如果是组则，需要以 % 开头
+- `USER/GROUP` 表示需要被授权的用户或者组，如果是组，则需要以 % 开头
 - `HOST` 表示允许从哪些主机登录的用户运行 sudo 命令，ALL 表示允许从任何终端、机器访问
 - `(USER[:GROUP])` 表示使用 sudo 可切换的用户或者组，组可以不指定，ALL 表示可以切换到系统的所有用户
 - `NOPASSWD` 如果指定，则该用户或组使用 sudo 时不必输入密码
@@ -51,16 +53,22 @@ USER/GROUP HOST=(USER[:GROUP]) [NOPASSWD:] COMMANDS
 %sudo ALL=(ALL:ALL) ALL
 
 # 允许用户执行所有命令，且无需输入密码
-huoty ALL =(ALL) NOPASSWD: ALL
+huoty ALL=(ALL) NOPASSWD: ALL
 
 # 仅允许用户执行 echo, ls 命令
-huoty ALL =(ALL) NOPASSWD: /bin/echo /bin/ls
+huoty ALL=(ALL) NOPASSWD: /bin/echo,/bin/ls
 
 # 运行本机的用户执行关机命令
 huoty localhost=/sbin/shutdown -h now
 
+# 允许用户执行 /usr/sbin/ 下的所有命令，除了 /usr/sbin/useradd
+huoty ALL=(root) /usr/sbin/,!/usr/sbin/useradd
+
+# 允许用户以另一个指定用户的身份运行命令，且允许切换到另外一个指定的用户
+huoty ALL=(server) NOPASSWD: ALL, (root) NOPASSWD: /bin/su - server
+
 # 允许 users 用户组中的用户像 root 用户一样使用 mount、unmount、chrom 命令
-%users ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom
+%users ALL=/sbin/mount,/mnt/cdrom,/sbin/umount,/mnt/cdrom
 ```
 
 ## Defaults 配置项
@@ -130,7 +138,7 @@ ADMINS ALL = PKGMGMT, SHUTDOWN
 
 以下列举 sudo 命令的一些常用参数：
 
-- `-l` 列出当前用户所拥有的权限
+- `-l` 列出当前用户所拥有的权限，`-ll` 可以展开显示
 - `-E` 保持当前用户的环境变量
 - `-H` 设置 HOME 环境变量为目标用户的主目录
 - `-u` 以指定用户运行命令

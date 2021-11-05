@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Docker 核心技术 -- Linux Namespace"
-keywords: Linux namespace 容器 chroot CGroup
+keywords: Linux namespace 容器 chroot CGroup 容器技术
 description: "Namespace 是 Linux 提供的一种内核级别环境隔离的方法。"
-category: 容器技术
+category: 计算机科学
 tags: linux namespace docker
 ---
 

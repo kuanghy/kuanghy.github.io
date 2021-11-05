@@ -13,13 +13,21 @@ The Python Debugger(pdb) 是官方调试器，内置在 Python 标准模块中�
 
 > pdb scriptfile [arg] ...
 
+执行以上命令会进入 pdb 调试器，并停留在脚本的首行代码处，等待输入指令。
+
+```python
+import pdb; pdb.set_trace()
+```
+
+如果在代码中的某行加入如上代码，并直接用 python 运行脚本，则会运行代码到这一行，然后停止，并进入 pdb 调试器。
+
 基本使用命令：
 
 | 命令           | 解释                                     |
 |:---------------|:-----------------------------------------|
 | help 或 h      | 帮助                                     |
 | list 或 l      | 查看当前行的代码段                       |
-| break 或 b     | 设置断点                                 |
+| break 或 b     | 列出/设置断点                                 |
 | next 或 n      | 执行下一行                               |
 | continue 或 c  | 继续执行程序                             |
 | step 或 s      | 进入函数                                 |
@@ -28,14 +36,15 @@ The Python Debugger(pdb) 是官方调试器，内置在 Python 标准模块中�
 | run            | 重新运行程序                             |
 | restart        | 同 run                                   |
 | p              | 打印变量的值                             |
-| pp             | 以一种更更漂亮的方式打印变量的值         |
+| pp             | 以一种更漂亮的方式打印变量的值           |
 | condition      | 设置条件断点                             |
-| clear 或 cl    | 清除断点，如果没有指定参数则清楚所有断点 |
+| clear 或 cl    | 清除断点，如果没有指定参数则清除所有断点 |
 | disable/enable | 禁用/激活断点                            |
 | ignore         | 忽略断点                                 |
 | jump 或 j      | 跳转到指定的行数                         |
 | args 或 a      | 打印当前函数的参数                       |
 | where 或 w     | 查看当前堆栈跟踪位置                     |
+
 
 ## ipdb
 
@@ -48,6 +57,50 @@ The Python Debugger(pdb) 是官方调试器，内置在 Python 标准模块中�
 > ipython --pdb scriptfile [arg] ...
 
 会自动在异常的地方进入 ipython shell.
+
+加入如下代码可以指定在何处开始调试：
+
+```python
+import ipdb; ipdb.set_trace()
+```
+
+使用示例：
+
+```python
+$ ipdb test.py
+> /home/huoty/temp/test.py(3)<module>()
+      2
+----> 3 from pmod.foo import fib
+      4
+
+ipdb> b /home/huoty/temp/pmod/foo/__init__.py:5
+Breakpoint 1 at /home/huoty/temp/pmod/foo/__init__.py:5
+ipdb> b
+Num Type         Disp Enb   Where
+1   breakpoint   keep yes   at /home/huoty/temp/pmod/foo/__init__.py:5
+ipdb> c
+> /home/huoty/temp/pmod/foo/__init__.py(5)fib()
+      4     if n in (1, 2):
+1---> 5         return n
+      6     return fib(n - 1) + fib(n - 2)
+
+ipdb> l
+      1 # -*- coding: utf-8 -*-
+      2
+      3 def fib(n):
+      4     if n in (1, 2):
+1---> 5         return n
+      6     return fib(n - 1) + fib(n - 2)
+
+ipdb> p n
+2
+ipdb> clear
+Clear all breaks? y
+Deleted breakpoint 1 at /home/huoty/temp/pmod/foo/__init__.py:5
+ipdb> b
+ipdb> c
+8
+```
 
 ## PuDB
 

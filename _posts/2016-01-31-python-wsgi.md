@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Web 服务网关接口（WSGI）"
+title: "Python Web 服务器网关接口（WSGI）"
 keywords: Python  WSGI wsgiref
 description: "WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种低级别的接口"
 category: Python
@@ -9,23 +9,25 @@ tags: python wsgi
 
 ## WSGI 简介
 
-`WSGI` 的全称是 `Web Server Gateway Interface`，即 Web 服务网关接口。这是一个规范，描述了 web server 如何与 web application 交互、web application 如何处理请求。该规范的具体描述在[PEP 3333](https://www.python.org/dev/peps/pep-3333/)。
+`WSGI` 的全称是 `Web Server Gateway Interface`，即 Web 服务器网关接口。这是一个规范，描述了 web server 如何与 web application 交互、web application 如何处理请求。该规范的具体描述在 [PEP 3333](https://www.python.org/dev/peps/pep-3333/)。
 
 WSGI 是作为 Web 服务器与 Web 应用程序或应用框架之间的一种低级别的接口，以提升可移植 Web 应用开发的共同点。WSGI 是基于现存的 CGI 标准而设计的。WSGI 就像是一座桥梁，一边连着 web 服务器，另一边连着用户的应用。
 
-实现了 WSGI 的模块/库有 wsgiref(python内置)、werkzeug.serving、twisted.web 等，具体可见[Servers which support WSGI](http://wsgi.readthedocs.org/en/latest/servers.html)。
+实现了 WSGI 的模块/库有 wsgiref(python内置)、werkzeug.serving、twisted.web 等，具体可见 [Servers which support WSGI](http://wsgi.readthedocs.org/en/latest/servers.html)。
 
 当前运行在 WSGI 之上的 web 框架有 `Bottle`、`Flask`、`Django `等，具体可见 [Frameworks that run on WSGI](http://wsgi.readthedocs.org/en/latest/frameworks.html)。
 
-`WSGI Server` 所做的工作仅仅是将从客户端收到的请求传递给 `WSGI application`，然后将 WSGI application 的返回值作为响应传给客户端。WSGI applications 可以是栈式的，这个栈的中间部分叫做`中间件`，两端是必须要实现的 application 和 server。
+`WSGI Server` 所做的工作仅仅是将从客户端收到的请求传递给 `WSGI Application`，然后将 WSGI Application 的返回值作为响应传给客户端。WSGI Applications 可以是栈式的，这个栈的中间部分叫做`中间件`，两端是必须要实现的 application 和 server。
 
-## WSGI application 接口
+## WSGI Application 接口
+
+![WSGI](https://raw.githubusercontent.com/kuanghy/pichub/master/2020/05/d18f161d2eb9071b829afccd1b5a5552.png)
 
 WSGI 协议规定，一个基本的 wsgi application，需要实现以下功能：
 
-- 必须是一个可调用的对象，如函数、方法、类、实现了 \_\_call__ 方法的对象
-- 接收两个必须的位置参数 environ、start_response，**environ** 一个字典，存放 CGI 规定的变量以及一些别的变量，**start_response** 一个可调用对象，由 application 回调，用以发送 http 的相应头部
-- 必须返回一个可迭代对象，用以发送 http body 数据
+- 必须是一个可调用的对象，如函数、方法、类、实现了 `__call__` 方法的对象
+- 接收两个必须的位置参数 environ、start_response，**environ** 是一个字典，存放 CGI 规定的变量以及一些别的变量（包括 HTTP 的请求头，WSGI 参数，环境变量等），**start_response** 是一个可调用对象，由 application 回调，用以发送 HTTP 的响应头部
+- 必须返回一个可迭代对象，用以发送 HTTP Body 数据
 
 一个简单的 application 定义大致为：
 
@@ -37,9 +39,7 @@ def application(environ, start_response):
     return ["Hello world!"]
 ```
 
-    - **exc_info** 只有当 start_response 被错误的处理器调用时才被设置
-
-`application` 的 environ 参数由 HTTP Server 解析客户请求后填充。参数 start_response 必须是一个可调用对象，需由 Server 实现，其需要接收两个必须的位置参数，一个是响应的状态码，一个是响应的头部字段数据，以及一个可选的 exc_info 参数，其定义大致为：
+`application` 的 environ 参数由 Web Server 解析客户请求后填充。参数 start_response 必须是一个可调用对象，需由 Server 实现，其需要接收两个必须的位置参数，一个是响应的状态码，一个是响应的头部字段数据，以及一个可选的 exc_info 参数，其定义大致为：
 
 ```python
 def start_response(status, response_headers, exc_info=None):
@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
 - 模板文件 getenv.tpl：
 
-```python
+```html
 <!DOCTYPE html>
 <html>
     <head>

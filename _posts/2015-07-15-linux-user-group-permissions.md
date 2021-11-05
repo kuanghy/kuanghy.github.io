@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 系统用户、组以及文件权限简介
-keywords: Linux chmod chgrp chonw useradd usermod chattr lsattr setfacl getfacl
+keywords: linux permission chmod chgrp chonw useradd usermod chattr lsattr setfacl getfacl group
 category: Linux
 tags: linux
 ---
@@ -93,26 +93,26 @@ Linux 系统的每个 User 都属于一个 Group，具有唯一的标识符 GID�
 -R, --root CHROOT_DIR      chroot 到的目录
 ```
 
-如果要删除一个已有的用户组，使用groupdel命令，其格式为：`groupdel 用户组`。修改用户组的属性使用groupmod命令，其语法为：`groupmod 选项 用户组`
+如果要删除一个已有的用户组，使用 groupdel 命令，其格式为：`groupdel 用户组`。修改用户组的属性使用 groupmod 命令，其语法为：`groupmod 选项 用户组`。
 
-如果需要将一个用户添加到某个用户组中，可以采用如下命令：
+如果需要将一个用户添加到某个用户组中，可以 usermod 命令：
 
 > usermod -a -G 用户组 用户名
 
-参数 -a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组，不过需要与 -G 选项配合使用， -G 表示指定用户组。如果仅仅只改变一个用户原有的用户组，则采用如下命令：
+参数 -a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组，不过需要与 -G 选项配合使用， -G 表示指定用户组（注意：如果仅有 -G 没有 -a 参数，则用户原有的组会被覆盖掉，且仅属于 -G 指定的组）。如果想要改变一个用户原有（默认）的用户组，则采用如下命令（这里这里是小写的 -g 参数）：
 
-> useradd -g 用户组
+> usermod -g 用户组 用户名
 
 管理用户组相关的命令工具汇总：
 
 ```
-groupadd   ：添加用户组；
-groupdel   ：删除用户组；
+groupadd   ：添加用户组
+groupdel   ：删除用户组
 groupmod   ：修改用户组信息
 groups     ：显示用户所属的用户组
-grpck
-grpconv    ：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果/etc/gshadow 不存在则创建；
-grpunconv  ：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；
+grpck      : 验证组文件 /etc/group 和 /etc/gshadow 的完整性
+grpconv    ：通过 /etc/group 和 /etc/gshadow 的文件内容来同步或创建 /etc/gshadow ，如果 /etc/gshadow 不存在则创建；
+grpunconv  ：通过 /etc/group 和 /etc/gshadow 文件内容来同步或创建 /etc/group ，然后删除 gshadow 文件；
 ```
 
 ## Linux 文件和目录权限解读
@@ -360,7 +360,7 @@ setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
 setfacl -m u:user1:r-x test
 
 # 设置用户组 group1 对 test/ 目录的访问权限
-setfacl -m u:user1:rwx test/
+setfacl -m g:group1:rwx test/
 ```
 
 `getfacl` 用于获取文件的 acl 权限控制：
@@ -398,6 +398,20 @@ getfacl [-aceEsRLPtpndvh] file ...
 让 writers 组的用户对 /opt 目录可读写:
 
 > setfacl -m g:writers:rwx /opt
+
+如果出现以下错误：
+
+```
+setfacl: /opt: Operation not supported
+```
+
+则可能是挂在的磁盘没有添加 acl 选项，可以修改 /etc/fstab 文件，加入 acl 选项：
+
+```
+LABEL=cloudimg-rootfs   /        ext4   defaults,acl    0 0
+```
+
+然后重新挂载磁盘。
 
 给 /opt 目录添加 粘帖权限位（t）:
 

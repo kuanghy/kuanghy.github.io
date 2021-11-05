@@ -13,7 +13,7 @@ Python 的列表（list）内部实现是一个数组，也就是一个线性表
 - 2.如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。
 - 3.如果在某一步骤数组为空，则代表找不到。
 
-二分查找也成为折半查找，算法每一次比较都使搜索范围缩小一半， 其时间复杂度为 O(logn)。
+二分查找也称为折半查找，算法每一次比较都使搜索范围缩小一半， 其 **时间复杂度为 O(logn)**。
 
 我们分别用递归和循环来实现二分查找：
 
@@ -21,7 +21,7 @@ Python 的列表（list）内部实现是一个数组，也就是一个线性表
 def binary_search_recursion(lst, value, low, high):
     if high < low:
         return None
-    mid = (low + high) / 2
+    mid = (low + high) // 2
     if lst[mid] > value:
         return binary_search_recursion(lst, value, low, mid-1)
     elif lst[mid] < value:
@@ -32,7 +32,7 @@ def binary_search_recursion(lst, value, low, high):
 def binary_search_loop(lst,value):
     low, high = 0, len(lst)-1
     while low <= high:
-        mid = (low + high) / 2
+        mid = (low + high) // 2
         if lst[mid] < value:
             low = mid + 1
         elif lst[mid] > value:

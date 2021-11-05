@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PYCON中国(2018)听讲笔记"
+title: "PYCON中国(2018)大会笔记"
 keywords: python pycon
 description: "简单记录参加2018年PYCON中国大会的听过内容"
 category: Python

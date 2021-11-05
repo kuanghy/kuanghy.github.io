@@ -47,9 +47,13 @@ Python2.x 缺省为相对路径导入，Python3.x 缺省为绝对路径导入。
 from __future__ import absolute_import
 ```
 
-## `from __future__ import absolute_import`
+## 禁止隐式相对导入
 
-这句 import 并不是指将所有的导入视为绝对导入，而是指禁用 `implicit relative import`（隐式相对导入）, 但并不会禁掉 `explicit relative import`（显示相对导入）。
+```python
+from __future__ import absolute_import
+```
+
+这句 import 并不是指将所有的导入视为绝对导入，而是指禁用 **implicit relative import（隐式相对导入）**, 但并不会禁掉 **explicit relative import（显示相对导入）**。
 
 那么到底什么是隐式相对导入，什么又是显示的相对导入呢？我们来看一个例子，假设有如下包结构：
 
