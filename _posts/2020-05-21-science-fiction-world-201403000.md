@@ -8,7 +8,7 @@ tags: 美文
 
 **文/赵亮  摘自《科幻世界》2014 年 3 月刊**
 
-![图/蔡定一]( https://raw.githubusercontent.com/kuanghy/pichub/master/2020/05/f76f4ca1a3e7ec819720561c7e60ce2c.jpg)
+![图/蔡定一](https://raw.githubusercontent.com/kuanghy/pichub/master/2020/05/f76f4ca1a3e7ec819720561c7e60ce2c.jpg)
 
 我不知道该如何向你们说这件事儿——轻描淡写地说吧，估计你们所有人都会扑哧一笑，觉得我一定是嗑药嗑太多脑子坏掉了，多半还患上了轻度妄想症；但要说得言之凿凿，又怕你们执意要我证明给你们看，那我可是一点辙儿都没有，别到时再好死不死落个妖言惑众的名声，自讨没趣。
 
